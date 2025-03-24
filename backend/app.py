@@ -14,15 +14,27 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from flask_caching import Cache
 
 # Add the project root directory to the Python path
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(project_root)
 
 # Import the TestGenerator class
 from ai_modules.test_generation.generator import TestGenerator
 
-app = Flask(__name__, template_folder='../templates', static_folder='../static')
+# Fix the Flask app configuration to properly serve the frontend
+app = Flask(__name__, 
+           template_folder=os.path.join(project_root, 'templates'), 
+           static_folder=os.path.join(project_root, 'static'))
 CORS(app)  # Enable CORS for all routes
+
+# Configure caching
+cache_config = {
+    "CACHE_TYPE": "SimpleCache",
+    "CACHE_DEFAULT_TIMEOUT": 300
+}
+cache = Cache(app, config=cache_config)
 
 # Initialize the test generator
 test_generator = TestGenerator()
@@ -782,3 +794,58 @@ def generate_selenium_test():
 if __name__ == '__main__':
     print("Starting CogniTest API server...")
     app.run(host='0.0.0.0', port=5000, debug=True)
+
+# Add performance optimizations
+from flask_caching import Cache
+import threading
+
+# Configure caching
+cache_config = {
+    "CACHE_TYPE": "SimpleCache",
+    "CACHE_DEFAULT_TIMEOUT": 300
+}
+cache = Cache(app, config=cache_config)
+
+# Use threading for heavy operations
+def background_task(func, *args, **kwargs):
+    thread = threading.Thread(target=func, args=args, kwargs=kwargs)
+    thread.daemon = True
+    thread.start()
+    return thread
+
+# Add caching to expensive operations
+@cache.cached(timeout=60)
+def get_cached_actions():
+    return recorder.actions if recorder else []
+
+@app.route('/api/get-actions', methods=['GET'])
+def get_actions():
+    actions = get_cached_actions()
+    return jsonify({
+        'success': True,
+        'actions': actions
+    })
+
+# Optimize test generation with background processing
+@app.route('/api/generate-selenium-test', methods=['POST'])
+def generate_selenium_test():
+    data = request.json
+    test_name = data.get('test_name', 'RecordedTest')
+    
+    # Generate test code in the background if it's complex
+    if len(recorder.actions) > 20:
+        # For complex tests, return immediately and process in background
+        response = {
+            'success': True,
+            'test_code': "// Generating test code, please wait...\n// This may take a few moments for complex tests.",
+            'processing': True
+        }
+        background_task(recorder.generate_selenium_test, test_name)
+        return jsonify(response)
+    else:
+        # For simple tests, generate immediately
+        test_code = recorder.generate_selenium_test(test_name)
+        return jsonify({
+            'success': True,
+            'test_code': test_code
+        })
