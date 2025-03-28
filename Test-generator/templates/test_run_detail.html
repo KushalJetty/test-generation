@@ -1,0 +1,213 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ test_run.name }} - StreamzAI Test Generator{% endblock %}
+
+{% block header %}Test Run: {{ test_run.name }}{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">Test Run Details</h5>
+                <div>
+                    {% if test_run.status == 'pending' or test_run.status == 'running' %}
+                    <span class="badge bg-primary me-2">{{ test_run.status|capitalize }}</span>
+                    <div class="spinner-border spinner-border-sm text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    {% elif test_run.status == 'completed' %}
+                    <span class="badge bg-success">Completed</span>
+                    {% elif test_run.status == 'failed' %}
+                    <span class="badge bg-danger">Failed</span>
+                    {% else %}
+                    <span class="badge bg-secondary">{{ test_run.status|capitalize }}</span>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Name:</strong> {{ test_run.name }}</p>
+                        <p>
+                            <strong>Test Suite:</strong> 
+                            <a href="{{ url_for('test_suite_detail', suite_id=test_run.test_suite.id) }}">
+                                {{ test_run.test_suite.name }}
+                            </a>
+                        </p>
+                        <p>
+                            <strong>Project:</strong> 
+                            <a href="{{ url_for('project_detail', project_id=test_run.test_suite.project.id) }}">
+                                {{ test_run.test_suite.project.name }}
+                            </a>
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Created:</strong> {{ test_run.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
+                        <p><strong>Start Time:</strong> {{ test_run.start_time.strftime('%Y-%m-%d %H:%M:%S') if test_run.start_time else 'Not started' }}</p>
+                        <p><strong>End Time:</strong> {{ test_run.end_time.strftime('%Y-%m-%d %H:%M:%S') if test_run.end_time else 'Not completed' }}</p>
+                        <p>
+                            <strong>Duration:</strong> 
+                            {% if test_run.start_time and test_run.end_time %}
+                            {{ (test_run.end_time - test_run.start_time).total_seconds()|round(2) }} seconds
+                            {% else %}
+                            N/A
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Test Results Summary</h5>
+            </div>
+            <div class="card-body">
+                <div class="row text-center">
+                    <div class="col-md-3 mb-3">
+                        <div class="p-3 bg-light rounded">
+                            <h3 class="text-primary">{{ summary.total }}</h3>
+                            <p class="mb-0">Total</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="p-3 bg-light rounded">
+                            <h3 class="text-success">{{ summary.passed }}</h3>
+                            <p class="mb-0">Passed</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="p-3 bg-light rounded">
+                            <h3 class="text-danger">{{ summary.failed }}</h3>
+                            <p class="mb-0">Failed</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="p-3 bg-light rounded">
+                            <h3 class="text-warning">{{ summary.skipped + summary.error }}</h3>
+                            <p class="mb-0">Other</p>
+                        </div>
+                    </div>
+                </div>
+                
+                {% if summary.total > 0 %}
+                <div class="progress mt-3" style="height: 20px;">
+                    {% if summary.passed > 0 %}
+                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ (summary.passed / summary.total * 100)|round }}%" aria-valuenow="{{ summary.passed }}" aria-valuemin="0" aria-valuemax="{{ summary.total }}">{{ summary.passed }}</div>
+                    {% endif %}
+                    {% if summary.failed > 0 %}
+                    <div class="progress-bar bg-danger" role="progressbar" style="width: {{ (summary.failed / summary.total * 100)|round }}%" aria-valuenow="{{ summary.failed }}" aria-valuemin="0" aria-valuemax="{{ summary.total }}">{{ summary.failed }}</div>
+                    {% endif %}
+                    {% if summary.skipped > 0 %}
+                    <div class="progress-bar bg-warning" role="progressbar" style="width: {{ (summary.skipped / summary.total * 100)|round }}%" aria-valuenow="{{ summary.skipped }}" aria-valuemin="0" aria-valuemax="{{ summary.total }}">{{ summary.skipped }}</div>
+                    {% endif %}
+                    {% if summary.error > 0 %}
+                    <div class="progress-bar bg-secondary" role="progressbar" style="width: {{ (summary.error / summary.total * 100)|round }}%" aria-valuenow="{{ summary.error }}" aria-valuemin="0" aria-valuemax="{{ summary.total }}">{{ summary.error }}</div>
+                    {% endif %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Results Chart</h5>
+            </div>
+            <div class="card-body text-center">
+                {% if chart_path %}
+                <img src="{{ url_for('static', filename=chart_path.replace('static/', '')) }}" alt="Test Results Chart" class="img-fluid">
+                {% else %}
+                <div class="alert alert-info">
+                    <i class="bi bi-info-circle"></i> No chart available.
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Test Results</h5>
+            </div>
+            <div class="card-body">
+                {% if test_results %}
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Test Case</th>
+                                <th>Original File</th>
+                                <th>Language</th>
+                                <th>Status</th>
+                                <th>Execution Time</th>
+                                <th>Error Message</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for result in test_results %}
+                            <tr>
+                                <td>{{ result.test_case.test_file_path }}</td>
+                                <td>{{ result.test_case.original_file_path }}</td>
+                                <td>{{ result.test_case.language }}</td>
+                                <td>
+                                    {% if result.status == 'passed' %}
+                                    <span class="badge bg-success">Passed</span>
+                                    {% elif result.status == 'failed' %}
+                                    <span class="badge bg-danger">Failed</span>
+                                    {% elif result.status == 'skipped' %}
+                                    <span class="badge bg-warning">Skipped</span>
+                                    {% elif result.status == 'error' %}
+                                    <span class="badge bg-secondary">Error</span>
+                                    {% else %}
+                                    <span class="badge bg-secondary">{{ result.status|capitalize }}</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ result.execution_time|round(3) if result.execution_time else 'N/A' }} s</td>
+                                <td>
+                                    {% if result.error_message %}
+                                    <button class="btn btn-sm btn-outline-danger" type="button" data-bs-toggle="collapse" data-bs-target="#errorMessage{{ result.id }}" aria-expanded="false" aria-controls="errorMessage{{ result.id }}">
+                                        View Error
+                                    </button>
+                                    <div class="collapse mt-2" id="errorMessage{{ result.id }}">
+                                        <div class="card card-body bg-light">
+                                            <pre class="mb-0"><code>{{ result.error_message }}</code></pre>
+                                        </div>
+                                    </div>
+                                    {% else %}
+                                    <span class="text-muted">None</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="alert alert-info">
+                    <i class="bi bi-info-circle"></i> No test results available.
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if test_run.status == 'running' or test_run.status == 'pending' %}
+<script>
+    // Auto-refresh the page every 5 seconds if the test run is still in progress
+    setTimeout(function() {
+        window.location.reload();
+    }, 5000);
+</script>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,200 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ test_suite.name }} - StreamzAI Test Generator{% endblock %}
+
+{% block header %}Test Suite: {{ test_suite.name }}{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">Test Suite Details</h5>
+                <div>
+                    <a href="{{ url_for('edit_test_suite', suite_id=test_suite.id) }}" class="btn btn-sm btn-primary me-2">
+                        <i class="bi bi-pencil"></i> Edit
+                    </a>
+                    <a href="{{ url_for('create_test_run', suite_id=test_suite.id) }}" class="btn btn-sm btn-success">
+                        <i class="bi bi-play"></i> Run Tests
+                    </a>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Name:</strong> {{ test_suite.name }}</p>
+                        <p>
+                            <strong>Project:</strong> 
+                            <a href="{{ url_for('project_detail', project_id=test_suite.project.id) }}">
+                                {{ test_suite.project.name }}
+                            </a>
+                        </p>
+                        <p><strong>Created:</strong> {{ test_suite.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
+                        <p><strong>Last Updated:</strong> {{ test_suite.updated_at.strftime('%Y-%m-%d %H:%M') }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Description:</strong></p>
+                        <p>{{ test_suite.description or 'No description provided.' }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">Test Cases</h5>
+            </div>
+            <div class="card-body">
+                {% if test_cases %}
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Original File</th>
+                                <th>Test File</th>
+                                <th>Language</th>
+                                <th>Status</th>
+                                <th>Created</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for test_case in test_cases %}
+                            <tr>
+                                <td>{{ test_case.original_file_path }}</td>
+                                <td>{{ test_case.test_file_path }}</td>
+                                <td>{{ test_case.language }}</td>
+                                <td>
+                                    {% if test_case.status == 'generated' %}
+                                    <span class="badge bg-info">Generated</span>
+                                    {% elif test_case.status == 'passed' %}
+                                    <span class="badge bg-success">Passed</span>
+                                    {% elif test_case.status == 'failed' %}
+                                    <span class="badge bg-danger">Failed</span>
+                                    {% else %}
+                                    <span class="badge bg-secondary">{{ test_case.status }}</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ test_case.created_at.strftime('%Y-%m-%d') }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="alert alert-info">
+                    <i class="bi bi-info-circle"></i> No test cases found for this test suite.
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">Test Runs</h5>
+                <a href="{{ url_for('create_test_run', suite_id=test_suite.id) }}" class="btn btn-sm btn-success">
+                    <i class="bi bi-play"></i> New Test Run
+                </a>
+            </div>
+            <div class="card-body">
+                {% if test_runs %}
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Status</th>
+                                <th>Start Time</th>
+                                <th>End Time</th>
+                                <th>Duration</th>
+                                <th>Results</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for test_run in test_runs %}
+                            <tr>
+                                <td>
+                                    <a href="{{ url_for('test_run_detail', run_id=test_run.id) }}">
+                                        {{ test_run.name }}
+                                    </a>
+                                </td>
+                                <td>
+                                    {% if test_run.status == 'pending' %}
+                                    <span class="badge bg-secondary">Pending</span>
+                                    {% elif test_run.status == 'running' %}
+                                    <span class="badge bg-primary">Running</span>
+                                    {% elif test_run.status == 'completed' %}
+                                    <span class="badge bg-success">Completed</span>
+                                    {% elif test_run.status == 'failed' %}
+                                    <span class="badge bg-danger">Failed</span>
+                                    {% else %}
+                                    <span class="badge bg-secondary">{{ test_run.status }}</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ test_run.start_time.strftime('%Y-%m-%d %H:%M') if test_run.start_time else 'N/A' }}</td>
+                                <td>{{ test_run.end_time.strftime('%Y-%m-%d %H:%M') if test_run.end_time else 'N/A' }}</td>
+                                <td>
+                                    {% if test_run.start_time and test_run.end_time %}
+                                    {{ (test_run.end_time - test_run.start_time).total_seconds()|round(2) }} seconds
+                                    {% else %}
+                                    N/A
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% set passed = test_run.test_results|selectattr('status', 'equalto', 'passed')|list|length %}
+                                    {% set failed = test_run.test_results|selectattr('status', 'equalto', 'failed')|list|length %}
+                                    {% set skipped = test_run.test_results|selectattr('status', 'equalto', 'skipped')|list|length %}
+                                    {% set error = test_run.test_results|selectattr('status', 'equalto', 'error')|list|length %}
+                                    {% set total = test_run.test_results|length %}
+                                    
+                                    {% if total > 0 %}
+                                    <div class="d-flex align-items-center">
+                                        <div class="progress flex-grow-1" style="height: 10px;">
+                                            {% if passed > 0 %}
+                                            <div class="progress-bar bg-success" role="progressbar" style="width: {{ (passed / total * 100)|round }}%" aria-valuenow="{{ passed }}" aria-valuemin="0" aria-valuemax="{{ total }}"></div>
+                                            {% endif %}
+                                            {% if failed > 0 %}
+                                            <div class="progress-bar bg-danger" role="progressbar" style="width: {{ (failed / total * 100)|round }}%" aria-valuenow="{{ failed }}" aria-valuemin="0" aria-valuemax="{{ total }}"></div>
+                                            {% endif %}
+                                            {% if skipped > 0 %}
+                                            <div class="progress-bar bg-warning" role="progressbar" style="width: {{ (skipped / total * 100)|round }}%" aria-valuenow="{{ skipped }}" aria-valuemin="0" aria-valuemax="{{ total }}"></div>
+                                            {% endif %}
+                                            {% if error > 0 %}
+                                            <div class="progress-bar bg-secondary" role="progressbar" style="width: {{ (error / total * 100)|round }}%" aria-valuenow="{{ error }}" aria-valuemin="0" aria-valuemax="{{ total }}"></div>
+                                            {% endif %}
+                                        </div>
+                                        <span class="ms-2">{{ passed }}/{{ total }}</span>
+                                    </div>
+                                    {% else %}
+                                    <span class="text-muted">No results</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <a href="{{ url_for('test_run_detail', run_id=test_run.id) }}" class="btn btn-sm btn-info">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="alert alert-info">
+                    <i class="bi bi-info-circle"></i> No test runs found for this test suite. 
+                    <a href="{{ url_for('create_test_run', suite_id=test_suite.id) }}" class="alert-link">Create a new test run</a>.
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
