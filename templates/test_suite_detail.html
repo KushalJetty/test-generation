@@ -211,25 +211,37 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                         <div class="recording-status mb-3">
                             <div class="alert alert-info" id="recordingStatus">
-                                Click "Start Recording" to begin capturing browser actions
-                            </div>
-                        </div>
-                        <div class="test-cases-container">
-                            <h6>Test Cases</h6>
-                            <div class="list-group" id="testCasesList">
-                                <!-- Test cases will be added here dynamically -->
+                                <i class="bi bi-info-circle"></i> Click "Start Recording" to begin capturing browser actions
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="selenium-code">
-                            <h6>Generated Selenium Code</h6>
-                            <pre><code id="seleniumCode" class="language-python">
-# Selenium code will appear here
-                            </code></pre>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h6 class="card-title mb-0">Recorded Actions</h6>
+                            </div>
+                            <div class="card-body" style="max-height: 400px; overflow-y: auto;">
+                                <div class="list-group" id="testCasesList">
+                                    <!-- Actions will be added here dynamically -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h6 class="card-title mb-0">Generated Selenium Code</h6>
+                            </div>
+                            <div class="card-body" style="max-height: 400px; overflow-y: auto;">
+                                <pre><code class="language-python" id="seleniumCode">
+# Selenium code will appear here when recording stops
+                                </code></pre>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -247,8 +259,42 @@
     </div>
 </div>
 
+<!-- Add required CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+<style>
+.steps-list {
+    margin-top: 10px;
+    padding-left: 10px;
+    border-left: 2px solid #dee2e6;
+}
+.step-item {
+    margin-bottom: 8px;
+    padding: 8px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+.step-item:hover {
+    background-color: #e9ecef;
+}
+.step-item small {
+    color: #495057;
+}
+#seleniumCode {
+    font-size: 0.9em;
+    line-height: 1.5;
+}
+.recording .modal-content {
+    border-color: #dc3545;
+}
+.recording .modal-header {
+    background-color: #dc3545;
+    color: white;
+}
+</style>
+
 <!-- Add required JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prismjs/1.24.1/prism.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/prismjs/1.24.1/themes/prism.min.css" rel="stylesheet" />
 
@@ -259,16 +305,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const statusDiv = document.getElementById('recordingStatus');
     const testCasesList = document.getElementById('testCasesList');
     const seleniumCode = document.getElementById('seleniumCode');
+    const recordModal = document.getElementById('recordModal');
     let recording = false;
-    let actions = [];
 
     startBtn.addEventListener('click', function() {
         recording = true;
-        actions = [];
         startBtn.disabled = true;
         stopBtn.disabled = false;
         statusDiv.className = 'alert alert-warning';
-        statusDiv.innerHTML = '<i class="bi bi-record-circle"></i> Recording in progress...';
+        statusDiv.innerHTML = '<i class="bi bi-record-circle"></i> Opening Chrome browser and starting recording...';
+        recordModal.classList.add('recording');
+        testCasesList.innerHTML = '';
         
         // Start the recording
         fetch('/api/record/start', {
@@ -277,8 +324,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                suite_id: {{ test_suite.id }}
+                suite_id: {{ test_suite.id }},
+                url: 'https://test.teamstreamz.com/'
             })
+        }).then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                statusDiv.innerHTML = '<i class="bi bi-record-circle"></i> Recording in progress... Chrome browser opened.';
+            } else {
+                statusDiv.className = 'alert alert-danger';
+                statusDiv.innerHTML = '<i class="bi bi-exclamation-circle"></i> Failed to start recording: ' + data.message;
+                startBtn.disabled = false;
+                stopBtn.disabled = true;
+                recordModal.classList.remove('recording');
+            }
         });
     });
 
@@ -286,8 +345,9 @@ document.addEventListener('DOMContentLoaded', function() {
         recording = false;
         startBtn.disabled = false;
         stopBtn.disabled = true;
-        statusDiv.className = 'alert alert-success';
-        statusDiv.innerHTML = '<i class="bi bi-check-circle"></i> Recording completed';
+        statusDiv.className = 'alert alert-info';
+        statusDiv.innerHTML = '<i class="bi bi-hourglass-split"></i> Generating Selenium code...';
+        recordModal.classList.remove('recording');
 
         // Stop the recording and get generated code
         fetch('/api/record/stop', {
@@ -295,17 +355,17 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(response => response.json())
         .then(data => {
-            // Update test cases list
-            testCasesList.innerHTML = data.test_cases.map(tc => `
-                <div class="list-group-item">
-                    <h6 class="mb-1">${tc.name}</h6>
-                    <p class="mb-1">${tc.description}</p>
-                </div>
-            `).join('');
-
-            // Update Selenium code
-            seleniumCode.textContent = data.selenium_code;
-            Prism.highlightElement(seleniumCode);
+            if (data.status === 'success') {
+                statusDiv.className = 'alert alert-success';
+                statusDiv.innerHTML = '<i class="bi bi-check-circle"></i> Recording completed successfully!';
+                
+                // Update Selenium code
+                seleniumCode.textContent = data.selenium_code;
+                Prism.highlightElement(seleniumCode);
+            } else {
+                statusDiv.className = 'alert alert-danger';
+                statusDiv.innerHTML = '<i class="bi bi-exclamation-circle"></i> Failed to stop recording: ' + data.message;
+            }
         });
     });
 });

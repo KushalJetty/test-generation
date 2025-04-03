@@ -15,6 +15,12 @@ import threading
 import uuid
 import io
 import re
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -33,6 +39,7 @@ with app.app_context():
 active_test_runs = {}
 recording_actions = []
 is_recording = False
+driver = None
 
 # Helper functions
 def generate_chart(data, chart_type='pie', filename=None):
@@ -781,18 +788,37 @@ def generate_test_cases(suite_id):
 @app.route('/api/record/start', methods=['POST'])
 def start_recording():
     """Start recording browser actions."""
-    global is_recording, recording_actions
+    global is_recording, recording_actions, driver
     data = request.get_json()
     suite_id = data.get('suite_id')
+    url = data.get('url', 'https://test.teamstreamz.com/')
     
-    # Clear previous actions and start recording
-    recording_actions = []
-    is_recording = True
-    
-    return jsonify({
-        'status': 'success',
-        'message': 'Recording started'
-    })
+    try:
+        # Set up Chrome options
+        chrome_options = Options()
+        chrome_options.add_argument('--start-maximized')
+        
+        # Initialize Chrome driver
+        driver = webdriver.Chrome(options=chrome_options)
+        
+        # Navigate to the specified URL
+        driver.get(url)
+        
+        # Clear previous actions and start recording
+        recording_actions = []
+        is_recording = True
+        
+        return jsonify({
+            'status': 'success',
+            'message': 'Recording started and Chrome browser opened'
+        })
+    except Exception as e:
+        if driver:
+            driver.quit()
+        return jsonify({
+            'status': 'error',
+            'message': str(e)
+        })
 
 @app.route('/api/record/action', methods=['POST'])
 def record_action():
@@ -815,56 +841,83 @@ def record_action():
 @app.route('/api/record/stop', methods=['POST'])
 def stop_recording():
     """Stop recording and generate Selenium code."""
-    global is_recording, recording_actions
+    global is_recording, recording_actions, driver
     is_recording = False
     
-    # Generate Selenium code from recorded actions
-    selenium_code = generate_selenium_code(recording_actions)
-    
-    # Create test cases from recorded actions
-    test_cases = generate_test_cases_from_actions(recording_actions)
-    
-    # Clear recorded actions
-    recording_actions = []
-    
-    return jsonify({
-        'status': 'success',
-        'selenium_code': selenium_code,
-        'test_cases': test_cases
-    })
+    try:
+        if driver:
+            driver.quit()
+            driver = None
+        
+        # Generate Selenium code from recorded actions
+        selenium_code = generate_selenium_code(recording_actions)
+        
+        # Create test cases from recorded actions
+        test_cases = generate_test_cases_from_actions(recording_actions)
+        
+        # Clear recorded actions
+        recording_actions = []
+        
+        return jsonify({
+            'status': 'success',
+            'selenium_code': selenium_code,
+            'test_cases': test_cases
+        })
+    except Exception as e:
+        return jsonify({
+            'status': 'error',
+            'message': str(e)
+        })
 
 def generate_selenium_code(actions):
     """Generate Selenium code from recorded actions."""
     code = [
         "from selenium import webdriver",
         "from selenium.webdriver.common.by import By",
+        "from selenium.webdriver.chrome.options import Options",
         "from selenium.webdriver.support.ui import WebDriverWait",
         "from selenium.webdriver.support import expected_conditions as EC",
         "",
         "def test_recorded_actions():",
+        "    # Set up Chrome options",
+        "    chrome_options = Options()",
+        "    chrome_options.add_argument('--start-maximized')",
+        "",
         "    # Initialize the driver",
-        "    driver = webdriver.Chrome()",
+        "    driver = webdriver.Chrome(options=chrome_options)",
         "    wait = WebDriverWait(driver, 10)",
-        ""
+        "",
+        "    try:",
+        "        # Navigate to the test URL",
+        "        driver.get('https://test.teamstreamz.com/')",
+        "",
+        "        # Clear previous actions and start recording",
+        "        recording_actions = []",
+        "        is_recording = True",
+        "",
+        "        # Record actions",
+        "        # ... (recording logic)",
+        "",
+        "    finally:",
+        "        # Close the browser",
+        "        driver.quit()",
+        "",
+        "if __name__ == '__main__':",
+        "    test_recorded_actions()"
     ]
     
     for action in actions:
         if action['type'] == 'click':
-            code.append(f"    # Click on element {action['selector']}")
-            code.append(f"    wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, '{action['selector']}'))).click()")
+            code.append(f"        # Click on element {action['selector']}")
+            code.append(f"        wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, '{action['selector']}'))).click()")
         elif action['type'] == 'input':
-            code.append(f"    # Input text into {action['selector']}")
-            code.append(f"    element = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, '{action['selector']}')))")
-            code.append(f"    element.send_keys('{action['value']}')")
+            code.append(f"        # Input text into {action['selector']}")
+            code.append(f"        element = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, '{action['selector']}')))")
+            code.append(f"        element.clear()")
+            code.append(f"        element.send_keys('{action['value']}')")
         elif action['type'] == 'navigate':
-            code.append(f"    # Navigate to {action['url']}")
-            code.append(f"    driver.get('{action['url']}')")
-    
-    code.extend([
-        "",
-        "    # Close the browser",
-        "    driver.quit()"
-    ])
+            code.append(f"        # Navigate to {action['url']}")
+            code.append(f"        driver.get('{action['url']}')")
     
     return "\n".join(code)
 
@@ -872,18 +925,18 @@ def generate_test_cases_from_actions(actions):
     """Generate test cases from recorded actions."""
     test_cases = []
     current_test = {
-        'name': 'Recorded Test Case',
-        'description': 'Test case generated from recorded browser actions',
+        'name': 'Recorded Browser Actions',
+        'description': 'Test case generated from recorded browser actions on TeamStreamz',
         'steps': []
     }
     
-    for action in actions:
+    for i, action in enumerate(actions, 1):
         if action['type'] == 'click':
-            current_test['steps'].append(f"Click on element {action['selector']}")
+            current_test['steps'].append(f"Click on element: {action['selector']}")
         elif action['type'] == 'input':
-            current_test['steps'].append(f"Enter '{action['value']}' into {action['selector']}")
+            current_test['steps'].append(f"Enter text '{action['value']}' into: {action['selector']}")
         elif action['type'] == 'navigate':
-            current_test['steps'].append(f"Navigate to {action['url']}")
+            current_test['steps'].append(f"Navigate to: {action['url']}")
     
     test_cases.append(current_test)
     return test_cases
