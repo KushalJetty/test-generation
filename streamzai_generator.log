@@ -1558,3 +1558,787 @@
 2025-04-02 13:49:01,662 - werkzeug - INFO - 127.0.0.1 - - [02/Apr/2025 13:49:01] "GET /test-suite/13 HTTP/1.1" 200 -
 2025-04-02 13:49:01,710 - werkzeug - INFO - 127.0.0.1 - - [02/Apr/2025 13:49:01] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
 2025-04-02 13:49:01,728 - werkzeug - INFO - 127.0.0.1 - - [02/Apr/2025 13:49:01] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 00:10:12,625 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-04-04 00:10:12,625 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-04 00:10:12,646 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 00:10:15,486 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 00:10:15,490 - werkzeug - INFO -  * Debugger PIN: 755-953-328
+2025-04-04 00:10:20,388 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:10:20] "GET / HTTP/1.1" 200 -
+2025-04-04 00:10:20,434 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:10:20] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 00:10:20,442 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:10:20] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 00:10:20,581 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:10:20] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-04-04 00:10:23,138 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:10:23] "GET /test-suites HTTP/1.1" 200 -
+2025-04-04 00:10:23,164 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:10:23] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 00:10:23,168 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:10:23] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 00:10:27,415 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:10:27] "GET /test-suite/9 HTTP/1.1" 200 -
+2025-04-04 00:10:27,447 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:10:27] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 00:10:27,470 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:10:27] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 00:15:06,360 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 00:15:07,254 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 00:15:10,017 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 00:15:10,020 - werkzeug - INFO -  * Debugger PIN: 755-953-328
+2025-04-04 00:22:24,322 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:22:24] "GET /test-suite/9 HTTP/1.1" 200 -
+2025-04-04 00:22:24,337 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:22:24] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 00:22:24,338 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:22:24] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 00:22:36,486 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:22:36] "POST /api/record/start HTTP/1.1" 200 -
+2025-04-04 00:22:44,884 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:22:44] "POST /api/record/stop HTTP/1.1" 200 -
+2025-04-04 00:23:18,976 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:23:18] "GET /test-suite/9 HTTP/1.1" 200 -
+2025-04-04 00:23:19,010 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:23:19] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 00:23:19,021 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:23:19] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 00:23:25,249 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:23:25] "POST /api/record/start HTTP/1.1" 200 -
+2025-04-04 00:23:38,756 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:23:38] "POST /api/record/stop HTTP/1.1" 200 -
+2025-04-04 00:37:14,062 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:37:14] "POST /api/record/start HTTP/1.1" 200 -
+2025-04-04 00:40:09,649 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:40:09] "POST /api/record/stop HTTP/1.1" 200 -
+2025-04-04 00:41:22,708 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:41:22] "GET /test-suite/9 HTTP/1.1" 200 -
+2025-04-04 00:41:22,735 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:41:22] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 00:41:22,738 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:41:22] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 00:41:23,876 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:41:23] "GET /test-suite/9 HTTP/1.1" 200 -
+2025-04-04 00:41:23,904 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:41:23] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 00:41:23,907 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:41:23] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 00:41:34,160 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:41:34] "GET /test-suite/9 HTTP/1.1" 200 -
+2025-04-04 00:41:34,184 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:41:34] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 00:41:34,204 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:41:34] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 00:41:46,256 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:41:46] "POST /api/record/start HTTP/1.1" 200 -
+2025-04-04 00:42:45,274 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:42:45] "POST /api/record/stop HTTP/1.1" 200 -
+2025-04-04 00:43:22,257 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:43:22] "POST /api/record/start HTTP/1.1" 200 -
+2025-04-04 00:43:52,778 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:43:52] "POST /api/record/stop HTTP/1.1" 200 -
+2025-04-04 00:47:28,046 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 00:47:28,057 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 00:47:32,667 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 00:47:35,821 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 00:47:35,825 - werkzeug - INFO -  * Debugger PIN: 755-953-328
+2025-04-04 00:47:53,124 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:47:53] "GET /test-suite/9 HTTP/1.1" 200 -
+2025-04-04 00:47:53,146 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:47:53] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 00:47:53,155 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:47:53] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 00:47:54,090 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:47:54] "GET /test-suite/9 HTTP/1.1" 200 -
+2025-04-04 00:47:54,124 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:47:54] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 00:47:54,142 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:47:54] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 00:47:54,320 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:47:54] "GET /test-suite/9 HTTP/1.1" 200 -
+2025-04-04 00:47:54,354 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:47:54] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 00:47:54,354 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:47:54] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 00:47:54,540 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:47:54] "GET /test-suite/9 HTTP/1.1" 200 -
+2025-04-04 00:47:54,562 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:47:54] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 00:47:54,566 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:47:54] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 00:47:54,802 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:47:54] "GET /test-suite/9 HTTP/1.1" 200 -
+2025-04-04 00:47:54,821 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:47:54] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 00:47:54,831 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:47:54] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 00:48:03,380 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:48:03] "GET /test-suite/9 HTTP/1.1" 200 -
+2025-04-04 00:48:03,408 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:48:03] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 00:48:03,415 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:48:03] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 00:48:16,481 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:48:16] "POST /api/record/start HTTP/1.1" 200 -
+2025-04-04 00:48:33,267 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:48:33] "POST /api/record/stop HTTP/1.1" 200 -
+2025-04-04 00:48:59,863 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:48:59] "POST /api/record/start HTTP/1.1" 200 -
+2025-04-04 00:49:09,806 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:49:09] "POST /api/record/stop HTTP/1.1" 200 -
+2025-04-04 00:49:38,428 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 00:49:38,429 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 00:49:47,003 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 00:49:49,822 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 00:49:49,826 - werkzeug - INFO -  * Debugger PIN: 755-953-328
+2025-04-04 00:53:00,438 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 00:53:00,443 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 00:53:00,443 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 00:53:01,924 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 00:53:05,093 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 00:53:05,096 - werkzeug - INFO -  * Debugger PIN: 755-953-328
+2025-04-04 00:54:10,298 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:54:10] "GET /test-suite/9 HTTP/1.1" 200 -
+2025-04-04 00:54:10,321 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:54:10] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 00:54:10,334 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:54:10] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 00:54:12,103 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:54:12] "GET /test-suite/9 HTTP/1.1" 200 -
+2025-04-04 00:54:12,137 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:54:12] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 00:54:12,151 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:54:12] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 00:54:12,455 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:54:12] "GET /test-suite/9 HTTP/1.1" 200 -
+2025-04-04 00:54:12,483 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:54:12] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 00:54:12,490 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:54:12] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 00:54:12,706 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:54:12] "GET /test-suite/9 HTTP/1.1" 200 -
+2025-04-04 00:54:12,736 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:54:12] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 00:54:12,741 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:54:12] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 00:54:13,936 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:54:13] "GET /test-suite/9 HTTP/1.1" 200 -
+2025-04-04 00:54:13,970 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:54:13] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 00:54:13,982 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:54:13] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 00:54:14,195 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:54:14] "GET /test-suite/9 HTTP/1.1" 200 -
+2025-04-04 00:54:14,221 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:54:14] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 00:54:14,232 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:54:14] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 00:54:14,396 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:54:14] "GET /test-suite/9 HTTP/1.1" 200 -
+2025-04-04 00:54:14,427 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:54:14] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 00:54:14,428 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:54:14] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 00:54:14,653 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:54:14] "GET /test-suite/9 HTTP/1.1" 200 -
+2025-04-04 00:54:14,679 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:54:14] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 00:54:14,680 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:54:14] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 00:54:14,811 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:54:14] "GET /test-suite/9 HTTP/1.1" 200 -
+2025-04-04 00:54:14,832 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:54:14] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 00:54:14,841 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:54:14] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 00:54:15,011 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:54:15] "GET /test-suite/9 HTTP/1.1" 200 -
+2025-04-04 00:54:15,034 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:54:15] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 00:54:15,041 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:54:15] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 00:54:18,225 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:54:18] "GET /test-suite/9 HTTP/1.1" 200 -
+2025-04-04 00:54:18,251 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:54:18] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 00:54:18,260 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:54:18] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 00:54:21,403 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:54:21] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-04-04 00:54:21,425 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:54:21] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 00:54:21,431 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:54:21] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 00:54:34,309 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:54:34] "POST /api/record/start HTTP/1.1" 200 -
+2025-04-04 00:54:46,110 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:54:46] "POST /api/record/start HTTP/1.1" 200 -
+2025-04-04 00:55:57,219 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 00:55:57,219 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 00:56:05,965 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 00:56:09,256 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 00:56:09,272 - werkzeug - INFO -  * Debugger PIN: 755-953-328
+2025-04-04 00:57:25,890 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-04-04 00:57:25,890 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-04 00:57:25,907 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 00:57:29,229 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 00:57:29,236 - werkzeug - INFO -  * Debugger PIN: 755-953-328
+2025-04-04 00:57:29,418 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:57:29] "GET / HTTP/1.1" 200 -
+2025-04-04 00:57:29,451 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:57:29] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 00:57:29,451 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:57:29] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 00:57:35,539 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:57:35] "GET / HTTP/1.1" 200 -
+2025-04-04 00:57:35,567 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:57:35] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 00:57:35,569 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:57:35] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 00:57:37,402 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:57:37] "GET /test-suites HTTP/1.1" 200 -
+2025-04-04 00:57:37,433 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:57:37] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 00:57:37,442 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:57:37] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 00:57:41,180 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:57:41] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-04-04 00:57:41,211 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:57:41] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 00:57:41,222 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:57:41] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 00:58:07,816 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:58:07] "POST /api/record/stop HTTP/1.1" 200 -
+2025-04-04 00:58:14,011 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:58:14] "POST /api/record/stop HTTP/1.1" 200 -
+2025-04-04 00:58:16,532 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:58:16] "POST /api/record/stop HTTP/1.1" 200 -
+2025-04-04 00:58:19,083 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:58:19] "POST /api/record/stop HTTP/1.1" 200 -
+2025-04-04 00:58:21,224 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:58:21] "POST /api/record/stop HTTP/1.1" 200 -
+2025-04-04 00:58:22,926 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:58:22] "POST /api/record/stop HTTP/1.1" 200 -
+2025-04-04 00:58:24,659 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 00:58:24] "POST /api/record/stop HTTP/1.1" 200 -
+2025-04-04 00:59:57,449 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 00:59:57,449 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 00:59:57,456 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 00:59:58,629 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 01:00:01,326 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 01:00:01,326 - werkzeug - INFO -  * Debugger PIN: 755-953-328
+2025-04-04 01:00:05,808 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:00:05] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-04-04 01:00:05,828 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:00:05] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 01:00:05,832 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:00:05] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 01:00:16,223 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:00:16] "POST /api/record/stop HTTP/1.1" 200 -
+2025-04-04 01:00:19,879 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 01:00:19,881 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 01:00:20,916 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 01:00:23,439 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 01:00:23,442 - werkzeug - INFO -  * Debugger PIN: 755-953-328
+2025-04-04 01:00:23,535 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:00:23] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-04-04 01:00:23,562 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:00:23] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 01:00:23,562 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:00:23] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 01:00:30,977 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:00:30] "POST /api/record/stop HTTP/1.1" 200 -
+2025-04-04 01:04:47,268 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 01:04:47,269 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 01:04:48,484 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 01:04:50,923 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 01:04:50,927 - werkzeug - INFO -  * Debugger PIN: 755-953-328
+2025-04-04 01:06:02,505 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 01:06:02,510 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 01:06:02,511 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 01:06:02,989 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 01:06:05,411 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 01:06:05,415 - werkzeug - INFO -  * Debugger PIN: 755-953-328
+2025-04-04 01:06:31,103 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 01:06:31,104 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 01:06:32,066 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 01:06:34,584 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 01:06:34,588 - werkzeug - INFO -  * Debugger PIN: 755-953-328
+2025-04-04 01:09:09,010 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-04-04 01:09:09,010 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-04 01:09:09,022 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 01:09:11,091 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 01:09:11,107 - werkzeug - INFO -  * Debugger PIN: 755-953-328
+2025-04-04 01:09:15,239 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:09:15] "GET / HTTP/1.1" 200 -
+2025-04-04 01:09:15,265 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:09:15] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 01:09:15,268 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:09:15] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 01:09:19,097 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:09:19] "GET / HTTP/1.1" 200 -
+2025-04-04 01:09:19,115 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:09:19] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 01:09:19,115 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:09:19] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 01:09:21,015 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:09:21] "GET /test-suites HTTP/1.1" 200 -
+2025-04-04 01:09:21,050 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:09:21] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 01:09:21,055 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:09:21] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 01:09:25,598 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:09:25] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-04-04 01:09:25,621 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:09:25] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 01:09:25,631 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:09:25] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 01:09:38,456 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:09:38] "POST /api/record/stop HTTP/1.1" 200 -
+2025-04-04 01:10:10,994 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\forms.py', reloading
+2025-04-04 01:10:10,995 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generator_app.py', reloading
+2025-04-04 01:10:10,995 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\models.py', reloading
+2025-04-04 01:10:11,001 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test_runner.py', reloading
+2025-04-04 01:10:11,769 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\run_django_tests.py', reloading
+2025-04-04 01:10:11,774 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\streamzai_gui.py', reloading
+2025-04-04 01:10:11,778 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\streamzai_test_generator.py', reloading
+2025-04-04 01:10:12,191 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 01:10:14,575 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 01:10:14,575 - werkzeug - INFO -  * Debugger PIN: 755-953-328
+2025-04-04 01:11:27,435 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 01:11:27,439 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 01:11:28,689 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 01:11:31,314 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 01:11:31,318 - werkzeug - INFO -  * Debugger PIN: 755-953-328
+2025-04-04 01:11:43,303 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 01:11:43,307 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 01:11:43,308 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 01:11:43,863 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 01:11:46,408 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 01:11:46,413 - werkzeug - INFO -  * Debugger PIN: 755-953-328
+2025-04-04 01:11:57,164 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:11:57] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-04-04 01:11:57,186 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:11:57] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 01:11:57,187 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:11:57] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 01:12:00,195 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:12:00] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-04-04 01:12:00,221 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:12:00] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 01:12:00,221 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:12:00] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 01:12:00,662 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:12:00] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-04-04 01:12:00,689 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:12:00] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 01:12:00,693 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:12:00] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 01:12:12,920 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:12:12] "POST /api/record/stop HTTP/1.1" 200 -
+2025-04-04 01:12:33,402 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 01:12:33,407 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 01:12:33,409 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 01:12:34,181 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 01:12:36,664 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 01:12:36,668 - werkzeug - INFO -  * Debugger PIN: 755-953-328
+2025-04-04 01:12:58,699 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 01:12:58,699 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 01:12:58,701 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 01:12:59,466 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 01:13:02,102 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 01:13:02,111 - werkzeug - INFO -  * Debugger PIN: 755-953-328
+2025-04-04 01:13:07,568 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:13:07] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-04-04 01:13:07,591 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:13:07] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 01:13:07,592 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:13:07] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 01:13:08,163 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:13:08] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-04-04 01:13:08,184 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:13:08] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 01:13:08,185 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:13:08] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 01:13:08,581 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:13:08] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-04-04 01:13:08,598 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:13:08] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 01:13:08,601 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:13:08] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 01:13:08,820 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:13:08] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-04-04 01:13:08,842 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:13:08] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 01:13:08,846 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:13:08] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 01:13:13,177 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:13:13] "POST /api/record/start HTTP/1.1" 200 -
+2025-04-04 01:13:20,726 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:13:20] "POST /api/record/stop HTTP/1.1" 200 -
+2025-04-04 01:14:48,963 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 01:14:48,967 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 01:14:48,967 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 01:14:49,738 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 01:14:52,494 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 01:14:52,499 - werkzeug - INFO -  * Debugger PIN: 755-953-328
+2025-04-04 01:16:51,393 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-04-04 01:16:51,394 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-04 01:16:51,403 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 01:16:53,806 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 01:16:53,809 - werkzeug - INFO -  * Debugger PIN: 755-953-328
+2025-04-04 01:16:59,160 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:16:59] "GET / HTTP/1.1" 200 -
+2025-04-04 01:16:59,185 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:16:59] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 01:16:59,185 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:16:59] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 01:17:05,015 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:17:05] "GET /test-suites HTTP/1.1" 200 -
+2025-04-04 01:17:05,052 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:17:05] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 01:17:05,053 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:17:05] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 01:17:09,340 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:17:09] "GET /test-suite/4 HTTP/1.1" 200 -
+2025-04-04 01:17:09,365 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:17:09] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 01:17:09,374 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:17:09] "GET /static/js/recorder.js HTTP/1.1" 200 -
+2025-04-04 01:17:09,378 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:17:09] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 01:17:25,928 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:17:25] "POST /api/record/start HTTP/1.1" 200 -
+2025-04-04 01:17:55,302 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages\\flask\\app.py', reloading
+2025-04-04 01:17:55,326 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:17:55] "[35m[1mPOST /api/record/action HTTP/1.1[0m" 500 -
+2025-04-04 01:17:55,844 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 01:17:58,193 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 01:17:58,193 - werkzeug - INFO -  * Debugger PIN: 755-953-328
+2025-04-04 01:22:34,552 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generate_code\\selenium_code_generator.py', reloading
+2025-04-04 01:22:34,552 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generate_code\\selenium_code_generator.py', reloading
+2025-04-04 01:22:34,553 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generate_code\\selenium_code_generator.py', reloading
+2025-04-04 01:22:35,154 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 01:22:38,026 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 01:22:38,029 - werkzeug - INFO -  * Debugger PIN: 755-953-328
+2025-04-04 01:22:39,481 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generate_code\\selenium_code_generator.py', reloading
+2025-04-04 01:22:39,487 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generate_code\\selenium_code_generator.py', reloading
+2025-04-04 01:22:39,487 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generate_code\\selenium_code_generator.py', reloading
+2025-04-04 01:22:40,460 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 01:22:42,878 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 01:22:42,882 - werkzeug - INFO -  * Debugger PIN: 755-953-328
+2025-04-04 01:23:11,265 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 01:23:11,265 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 01:23:11,265 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 01:23:12,580 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 01:23:15,005 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 01:23:15,010 - werkzeug - INFO -  * Debugger PIN: 755-953-328
+2025-04-04 01:23:20,675 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 01:23:20,676 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 01:23:20,676 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 01:23:21,533 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 01:23:24,237 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 01:23:24,247 - werkzeug - INFO -  * Debugger PIN: 755-953-328
+2025-04-04 01:24:33,533 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:24:33] "GET /test-suite/4 HTTP/1.1" 200 -
+2025-04-04 01:24:33,558 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:24:33] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 01:24:33,561 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:24:33] "GET /static/js/recorder.js HTTP/1.1" 200 -
+2025-04-04 01:24:33,563 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:24:33] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 01:24:34,361 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:24:34] "GET /test-suite/4 HTTP/1.1" 200 -
+2025-04-04 01:24:34,385 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:24:34] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 01:24:34,387 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:24:34] "[36mGET /static/js/recorder.js HTTP/1.1[0m" 304 -
+2025-04-04 01:24:34,389 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:24:34] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 01:24:34,763 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:24:34] "GET /test-suite/4 HTTP/1.1" 200 -
+2025-04-04 01:24:34,780 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:24:34] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 01:24:34,783 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:24:34] "[36mGET /static/js/recorder.js HTTP/1.1[0m" 304 -
+2025-04-04 01:24:34,784 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:24:34] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 01:24:42,134 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 01:24:42,134 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 01:24:42,134 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 01:24:43,501 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 01:24:45,914 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 01:24:45,918 - werkzeug - INFO -  * Debugger PIN: 755-953-328
+2025-04-04 01:25:04,553 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:25:04] "POST /api/record/start HTTP/1.1" 200 -
+2025-04-04 01:25:42,444 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:25:42] "[35m[1mPOST /api/record/action HTTP/1.1[0m" 500 -
+2025-04-04 01:25:44,647 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generated_tests\\test_recorded_20250404_012544.py', reloading
+2025-04-04 01:25:44,647 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generated_tests\\test_recorded_20250404_012544.py', reloading
+2025-04-04 01:25:44,647 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generated_tests\\test_recorded_20250404_012544.py', reloading
+2025-04-04 01:25:44,674 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:25:44] "POST /api/record/stop HTTP/1.1" 200 -
+2025-04-04 01:25:50,047 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 01:25:52,540 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 01:25:52,544 - werkzeug - INFO -  * Debugger PIN: 755-953-328
+2025-04-04 01:28:40,414 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generate_code\\selenium_code_generator.py', reloading
+2025-04-04 01:28:40,419 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generate_code\\selenium_code_generator.py', reloading
+2025-04-04 01:28:40,419 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generate_code\\selenium_code_generator.py', reloading
+2025-04-04 01:28:41,731 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 01:28:44,167 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 01:28:44,170 - werkzeug - INFO -  * Debugger PIN: 755-953-328
+2025-04-04 01:30:54,746 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 01:30:54,750 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 01:30:54,753 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 01:30:55,884 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 01:30:58,342 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 01:30:58,350 - werkzeug - INFO -  * Debugger PIN: 755-953-328
+2025-04-04 01:31:00,002 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:31:00] "GET /test-suite/4 HTTP/1.1" 200 -
+2025-04-04 01:31:00,036 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:31:00] "GET /static/js/recorder.js HTTP/1.1" 200 -
+2025-04-04 01:31:00,036 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:31:00] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 01:31:00,038 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:31:00] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 01:31:01,339 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:31:01] "GET /test-suite/4 HTTP/1.1" 200 -
+2025-04-04 01:31:01,354 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:31:01] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 01:31:01,366 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:31:01] "[36mGET /static/js/recorder.js HTTP/1.1[0m" 304 -
+2025-04-04 01:31:01,367 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:31:01] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 01:31:14,627 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:31:14] "POST /api/record/start HTTP/1.1" 200 -
+2025-04-04 01:31:34,459 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:31:34] "[35m[1mPOST /api/record/action HTTP/1.1[0m" 500 -
+2025-04-04 01:31:36,660 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generated_tests\\test_recorded_20250404_013136.py', reloading
+2025-04-04 01:31:36,660 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generated_tests\\test_recorded_20250404_013136.py', reloading
+2025-04-04 01:31:36,691 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:31:36] "POST /api/record/stop HTTP/1.1" 200 -
+2025-04-04 01:31:41,410 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 01:31:44,048 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 01:31:44,053 - werkzeug - INFO -  * Debugger PIN: 755-953-328
+2025-04-04 01:32:37,115 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\run_django_tests.py', reloading
+2025-04-04 01:32:37,949 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 01:32:40,810 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 01:32:40,810 - werkzeug - INFO -  * Debugger PIN: 755-953-328
+2025-04-04 01:33:22,837 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\streamzai_gui.py', reloading
+2025-04-04 01:33:23,698 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 01:33:26,352 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 01:33:26,359 - werkzeug - INFO -  * Debugger PIN: 755-953-328
+2025-04-04 01:33:53,203 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\streamzai_test_generator.py', reloading
+2025-04-04 01:33:54,046 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 01:34:12,977 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-04-04 01:34:12,978 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-04 01:34:12,989 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 01:34:15,221 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 01:34:15,238 - werkzeug - INFO -  * Debugger PIN: 755-953-328
+2025-04-04 01:34:18,956 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:34:18] "GET / HTTP/1.1" 200 -
+2025-04-04 01:34:18,986 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:34:18] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 01:34:18,987 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:34:18] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 01:34:32,220 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:34:32] "GET /test-suites HTTP/1.1" 200 -
+2025-04-04 01:34:32,255 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:34:32] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 01:34:32,256 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:34:32] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 01:34:33,931 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:34:33] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-04-04 01:34:33,961 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:34:33] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 01:34:33,971 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:34:33] "GET /static/js/recorder.js HTTP/1.1" 200 -
+2025-04-04 01:34:33,971 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 01:34:33] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 01:38:18,867 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\ai_modules\\main.py', reloading
+2025-04-04 01:38:18,867 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\ai_modules\\main.py', reloading
+2025-04-04 01:38:18,867 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\ai_modules\\main.py', reloading
+2025-04-04 01:38:18,867 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\ai_modules\\main.py', reloading
+2025-04-04 01:38:18,871 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\ai_modules\\__init__.py', reloading
+2025-04-04 01:38:18,871 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\ai_modules\\__init__.py', reloading
+2025-04-04 01:38:18,871 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\ai_modules\\__init__.py', reloading
+2025-04-04 01:38:18,871 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\ai_modules\\__init__.py', reloading
+2025-04-04 01:38:18,871 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\ai_modules\\__init__.py', reloading
+2025-04-04 01:38:18,877 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\ai_modules\\anomaly_detection\\detector.py', reloading
+2025-04-04 01:38:18,879 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\ai_modules\\anomaly_detection\\detector.py', reloading
+2025-04-04 01:38:18,879 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\ai_modules\\anomaly_detection\\detector.py', reloading
+2025-04-04 01:38:18,879 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\ai_modules\\anomaly_detection\\detector.py', reloading
+2025-04-04 01:38:18,879 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\ai_modules\\anomaly_detection\\detector.py', reloading
+2025-04-04 01:38:18,882 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\ai_modules\\predictive_analytics\\prioritizer.py', reloading
+2025-04-04 01:38:18,882 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\ai_modules\\predictive_analytics\\prioritizer.py', reloading
+2025-04-04 01:38:18,882 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\ai_modules\\predictive_analytics\\prioritizer.py', reloading
+2025-04-04 01:38:18,882 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\ai_modules\\predictive_analytics\\prioritizer.py', reloading
+2025-04-04 01:38:18,882 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\ai_modules\\predictive_analytics\\prioritizer.py', reloading
+2025-04-04 01:38:18,898 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\ai_modules\\test_generation\\generator.py', reloading
+2025-04-04 01:38:18,899 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\ai_modules\\test_generation\\generator.py', reloading
+2025-04-04 01:38:18,900 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\ai_modules\\test_generation\\generator.py', reloading
+2025-04-04 01:38:18,900 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\ai_modules\\test_generation\\generator.py', reloading
+2025-04-04 01:38:18,900 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\ai_modules\\test_generation\\generator.py', reloading
+2025-04-04 01:38:18,920 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\ai_modules\\visual_regression\\comparator.py', reloading
+2025-04-04 01:38:18,920 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\ai_modules\\visual_regression\\comparator.py', reloading
+2025-04-04 01:38:18,920 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\ai_modules\\visual_regression\\comparator.py', reloading
+2025-04-04 01:38:18,920 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\ai_modules\\visual_regression\\comparator.py', reloading
+2025-04-04 01:38:18,925 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\ai_modules\\visual_regression\\comparator.py', reloading
+2025-04-04 01:38:18,938 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\automation\\selenium_runner.py', reloading
+2025-04-04 01:38:18,946 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\automation\\selenium_runner.py', reloading
+2025-04-04 01:38:18,947 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\automation\\selenium_runner.py', reloading
+2025-04-04 01:38:18,947 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\automation\\selenium_runner.py', reloading
+2025-04-04 01:38:18,948 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\app.py', reloading
+2025-04-04 01:38:18,948 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\app.py', reloading
+2025-04-04 01:38:18,948 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\app.py', reloading
+2025-04-04 01:38:18,948 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\app.py', reloading
+2025-04-04 01:38:18,958 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\app.py', reloading
+2025-04-04 01:38:18,959 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\config.py', reloading
+2025-04-04 01:38:18,959 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\config.py', reloading
+2025-04-04 01:38:18,959 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\config.py', reloading
+2025-04-04 01:38:18,962 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\config.py', reloading
+2025-04-04 01:38:18,962 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\config.py', reloading
+2025-04-04 01:38:18,966 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\api\\routes.py', reloading
+2025-04-04 01:38:18,966 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\api\\routes.py', reloading
+2025-04-04 01:38:18,966 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\api\\routes.py', reloading
+2025-04-04 01:38:18,966 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\api\\routes.py', reloading
+2025-04-04 01:38:18,966 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\api\\routes.py', reloading
+2025-04-04 01:38:18,973 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\api\\__init__.py', reloading
+2025-04-04 01:38:18,973 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\api\\__init__.py', reloading
+2025-04-04 01:38:18,973 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\api\\__init__.py', reloading
+2025-04-04 01:38:18,975 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\api\\__init__.py', reloading
+2025-04-04 01:38:18,975 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\api\\__init__.py', reloading
+2025-04-04 01:38:18,979 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\core\\recorder.py', reloading
+2025-04-04 01:38:18,979 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\core\\recorder.py', reloading
+2025-04-04 01:38:18,984 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\core\\recorder.py', reloading
+2025-04-04 01:38:18,985 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\core\\recorder.py', reloading
+2025-04-04 01:38:18,985 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\core\\recorder.py', reloading
+2025-04-04 01:38:18,985 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\core\\__init__.py', reloading
+2025-04-04 01:38:18,985 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\core\\__init__.py', reloading
+2025-04-04 01:38:18,985 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\core\\__init__.py', reloading
+2025-04-04 01:38:18,985 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\core\\__init__.py', reloading
+2025-04-04 01:38:18,985 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\core\\__init__.py', reloading
+2025-04-04 01:38:18,996 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\models\\action.py', reloading
+2025-04-04 01:38:18,996 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\models\\action.py', reloading
+2025-04-04 01:38:18,999 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\models\\action.py', reloading
+2025-04-04 01:38:18,999 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\models\\action.py', reloading
+2025-04-04 01:38:18,999 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\models\\action.py', reloading
+2025-04-04 01:38:19,001 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\models\\test_case.py', reloading
+2025-04-04 01:38:19,001 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\models\\test_case.py', reloading
+2025-04-04 01:38:19,001 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\models\\test_case.py', reloading
+2025-04-04 01:38:19,004 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\models\\test_case.py', reloading
+2025-04-04 01:38:19,004 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\models\\test_case.py', reloading
+2025-04-04 01:38:19,004 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\models\\user.py', reloading
+2025-04-04 01:38:19,004 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\models\\user.py', reloading
+2025-04-04 01:38:19,004 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\models\\user.py', reloading
+2025-04-04 01:38:19,004 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\models\\user.py', reloading
+2025-04-04 01:38:19,004 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\models\\user.py', reloading
+2025-04-04 01:38:19,009 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\models\\__init__.py', reloading
+2025-04-04 01:38:19,011 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\models\\__init__.py', reloading
+2025-04-04 01:38:19,013 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\models\\__init__.py', reloading
+2025-04-04 01:38:19,013 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\models\\__init__.py', reloading
+2025-04-04 01:38:19,013 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\services\\recorder_service.py', reloading
+2025-04-04 01:38:19,013 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\services\\recorder_service.py', reloading
+2025-04-04 01:38:19,013 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\services\\recorder_service.py', reloading
+2025-04-04 01:38:19,013 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\services\\recorder_service.py', reloading
+2025-04-04 01:38:19,013 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\services\\recorder_service.py', reloading
+2025-04-04 01:38:19,025 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\services\\__init__.py', reloading
+2025-04-04 01:38:19,026 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\services\\__init__.py', reloading
+2025-04-04 01:38:19,026 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\services\\__init__.py', reloading
+2025-04-04 01:38:19,026 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\services\\__init__.py', reloading
+2025-04-04 01:38:19,033 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\utils\\selector_utils.py', reloading
+2025-04-04 01:38:19,033 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\utils\\selector_utils.py', reloading
+2025-04-04 01:38:19,033 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\utils\\selector_utils.py', reloading
+2025-04-04 01:38:19,038 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\utils\\selector_utils.py', reloading
+2025-04-04 01:38:19,038 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\utils\\selector_utils.py', reloading
+2025-04-04 01:38:19,041 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\utils\\__init__.py', reloading
+2025-04-04 01:38:19,041 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\utils\\__init__.py', reloading
+2025-04-04 01:38:19,041 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\utils\\__init__.py', reloading
+2025-04-04 01:38:19,041 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\utils\\__init__.py', reloading
+2025-04-04 01:38:19,041 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\utils\\__init__.py', reloading
+2025-04-04 01:38:20,048 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 01:38:22,866 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 01:38:22,873 - werkzeug - INFO -  * Debugger PIN: 755-953-328
+2025-04-04 01:42:52,943 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 01:42:52,957 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 01:42:52,961 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 01:42:53,862 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 11:06:04,408 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-04-04 11:06:04,409 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-04 11:06:04,454 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 11:06:06,674 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 11:06:06,678 - werkzeug - INFO -  * Debugger PIN: 984-604-385
+2025-04-04 11:06:09,565 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 11:06:09] "GET / HTTP/1.1" 200 -
+2025-04-04 11:06:09,594 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 11:06:09] "GET /static/css/style.css HTTP/1.1" 200 -
+2025-04-04 11:06:09,596 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 11:06:09] "GET /static/js/main.js HTTP/1.1" 200 -
+2025-04-04 11:06:11,675 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 11:06:11] "GET /test-suites HTTP/1.1" 200 -
+2025-04-04 11:06:11,709 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 11:06:11] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 11:06:11,712 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 11:06:11] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 11:06:15,357 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 11:06:15] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-04-04 11:06:15,393 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 11:06:15] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 11:06:15,402 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 11:06:15] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 11:06:15,402 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 11:06:15] "GET /static/js/recorder.js HTTP/1.1" 200 -
+2025-04-04 11:06:28,695 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 11:06:28] "POST /api/record/start HTTP/1.1" 200 -
+2025-04-04 11:06:40,178 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages\\flask\\app.py', reloading
+2025-04-04 11:06:40,198 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 11:06:40] "[35m[1mPOST /api/record/action HTTP/1.1[0m" 500 -
+2025-04-04 11:06:41,560 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 11:06:43,860 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 11:06:43,860 - werkzeug - INFO -  * Debugger PIN: 984-604-385
+2025-04-04 11:13:45,916 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 11:13:45,916 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\models.py', reloading
+2025-04-04 11:13:45,918 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\forms.py', reloading
+2025-04-04 11:13:45,920 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\streamzai_test_generator.py', reloading
+2025-04-04 11:13:45,920 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generate_code\\selenium_code_generator.py', reloading
+2025-04-04 11:13:47,423 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 11:13:50,296 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 11:13:50,306 - werkzeug - INFO -  * Debugger PIN: 984-604-385
+2025-04-04 11:53:01,805 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-04-04 11:53:01,806 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-04 11:53:01,829 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 11:53:07,767 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 11:53:07,778 - werkzeug - INFO -  * Debugger PIN: 984-604-385
+2025-04-04 11:53:08,001 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 11:53:08] "GET / HTTP/1.1" 200 -
+2025-04-04 11:53:08,040 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 11:53:08] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 11:53:08,042 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 11:53:08] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 11:53:10,729 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 11:53:10] "GET /test-suites HTTP/1.1" 200 -
+2025-04-04 11:53:10,797 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 11:53:10] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 11:53:10,825 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 11:53:10] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 11:53:13,127 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 11:53:13] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-04-04 11:53:13,195 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 11:53:13] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 11:53:13,226 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 11:53:13] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 11:53:13,229 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 11:53:13] "[36mGET /static/js/recorder.js HTTP/1.1[0m" 304 -
+2025-04-04 11:53:25,437 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 11:53:25] "POST /api/record/start HTTP/1.1" 200 -
+2025-04-04 11:53:46,447 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 11:53:46] "[35m[1mPOST /api/record/action HTTP/1.1[0m" 500 -
+2025-04-04 11:53:48,709 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generated_tests\\test_recorded_20250404_115348.py', reloading
+2025-04-04 11:53:48,709 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generated_tests\\test_recorded_20250404_115348.py', reloading
+2025-04-04 11:53:48,709 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generated_tests\\test_recorded_20250404_115348.py', reloading
+2025-04-04 11:53:48,767 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 11:53:48] "POST /api/record/stop HTTP/1.1" 200 -
+2025-04-04 11:53:54,317 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 11:54:00,369 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 11:54:00,378 - werkzeug - INFO -  * Debugger PIN: 984-604-385
+2025-04-04 11:54:31,852 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generator_app.py', reloading
+2025-04-04 11:54:31,852 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\streamzai_gui.py', reloading
+2025-04-04 11:54:31,852 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test_runner.py', reloading
+2025-04-04 11:54:31,870 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generated_tests\\test_recorded_20250404_012544.py', reloading
+2025-04-04 11:54:31,870 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generated_tests\\test_recorded_20250404_013136.py', reloading
+2025-04-04 11:54:31,915 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\ai_modules\\main.py', reloading
+2025-04-04 11:54:31,915 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\ai_modules\\__init__.py', reloading
+2025-04-04 11:54:31,915 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\ai_modules\\anomaly_detection\\detector.py', reloading
+2025-04-04 11:54:31,928 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\ai_modules\\predictive_analytics\\prioritizer.py', reloading
+2025-04-04 11:54:31,928 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\ai_modules\\test_generation\\generator.py', reloading
+2025-04-04 11:54:31,963 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\ai_modules\\visual_regression\\comparator.py', reloading
+2025-04-04 11:54:31,963 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\automation\\selenium_runner.py', reloading
+2025-04-04 11:54:31,963 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\app.py', reloading
+2025-04-04 11:54:32,011 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\config.py', reloading
+2025-04-04 11:54:32,011 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\api\\routes.py', reloading
+2025-04-04 11:54:32,011 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\api\\__init__.py', reloading
+2025-04-04 11:54:32,026 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\core\\recorder.py', reloading
+2025-04-04 11:54:32,026 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\core\\__init__.py', reloading
+2025-04-04 11:54:32,029 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\models\\action.py', reloading
+2025-04-04 11:54:32,029 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\models\\test_case.py', reloading
+2025-04-04 11:54:32,059 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\models\\user.py', reloading
+2025-04-04 11:54:32,059 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\models\\__init__.py', reloading
+2025-04-04 11:54:32,059 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\services\\recorder_service.py', reloading
+2025-04-04 11:54:32,059 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\services\\__init__.py', reloading
+2025-04-04 11:54:32,059 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\utils\\selector_utils.py', reloading
+2025-04-04 11:54:32,059 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\utils\\__init__.py', reloading
+2025-04-04 11:54:33,483 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 11:54:39,043 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 11:54:39,043 - werkzeug - INFO -  * Debugger PIN: 984-604-385
+2025-04-04 12:02:21,579 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generate_code\\selenium_code_generator.py', reloading
+2025-04-04 12:02:21,585 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generate_code\\selenium_code_generator.py', reloading
+2025-04-04 12:02:21,585 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generate_code\\selenium_code_generator.py', reloading
+2025-04-04 12:02:22,416 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 12:02:30,909 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 12:02:30,920 - werkzeug - INFO -  * Debugger PIN: 984-604-385
+2025-04-04 12:02:35,770 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 12:02:35,772 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 12:02:35,774 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 12:02:36,498 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 12:02:42,661 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 12:02:42,672 - werkzeug - INFO -  * Debugger PIN: 984-604-385
+2025-04-04 12:02:46,527 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 12:02:46,531 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 12:02:46,534 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-04 12:02:47,357 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 12:02:54,674 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 12:02:54,688 - werkzeug - INFO -  * Debugger PIN: 984-604-385
+2025-04-04 12:03:41,019 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 12:03:41] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-04-04 12:03:41,079 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 12:03:41] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 12:03:41,081 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 12:03:41] "GET /static/js/recorder.js HTTP/1.1" 200 -
+2025-04-04 12:03:41,083 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 12:03:41] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 12:03:43,636 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 12:03:43] "GET /test-suites HTTP/1.1" 200 -
+2025-04-04 12:03:43,663 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 12:03:43] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 12:03:43,665 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 12:03:43] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 12:03:54,050 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 12:03:54] "GET /test-suites HTTP/1.1" 200 -
+2025-04-04 12:03:54,105 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 12:03:54] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 12:03:54,109 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 12:03:54] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 12:14:36,754 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 12:14:36] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-04-04 12:14:36,859 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 12:14:36] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 12:14:36,860 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 12:14:36] "[36mGET /static/js/recorder.js HTTP/1.1[0m" 304 -
+2025-04-04 12:14:36,864 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 12:14:36] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 12:27:33,702 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 12:27:33] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-04-04 12:27:33,755 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 12:27:33] "[36mGET /static/js/recorder.js HTTP/1.1[0m" 304 -
+2025-04-04 12:27:33,757 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 12:27:33] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 12:27:33,759 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 12:27:33] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 12:27:43,713 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 12:27:43] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-04-04 12:27:43,743 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 12:27:43] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 12:27:43,762 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 12:27:43] "[36mGET /static/js/recorder.js HTTP/1.1[0m" 304 -
+2025-04-04 12:27:43,763 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 12:27:43] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 12:33:41,831 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 12:33:41] "POST /api/record/start HTTP/1.1" 200 -
+2025-04-04 12:33:55,797 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 12:33:55] "POST /api/record/action HTTP/1.1" 200 -
+2025-04-04 12:33:59,753 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generated_tests\\test_recorded_20250404_123359.py', reloading
+2025-04-04 12:33:59,753 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generated_tests\\test_recorded_20250404_123359.py', reloading
+2025-04-04 12:33:59,800 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 12:33:59] "POST /api/record/stop HTTP/1.1" 200 -
+2025-04-04 12:34:05,306 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 12:34:10,947 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 12:34:10,958 - werkzeug - INFO -  * Debugger PIN: 984-604-385
+2025-04-04 12:37:47,430 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 12:37:47] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-04-04 12:37:47,455 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 12:37:47] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 12:37:47,461 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 12:37:47] "[36mGET /static/js/recorder.js HTTP/1.1[0m" 304 -
+2025-04-04 12:37:47,463 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 12:37:47] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 14:20:48,836 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-04-04 14:20:48,845 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-04 14:20:48,867 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 14:20:54,946 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 14:20:54,957 - werkzeug - INFO -  * Debugger PIN: 984-604-385
+2025-04-04 14:20:55,182 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 14:20:55] "GET / HTTP/1.1" 200 -
+2025-04-04 14:20:55,217 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 14:20:55] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 14:20:55,217 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 14:20:55] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 14:21:04,765 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 14:21:04] "GET /test-suites HTTP/1.1" 200 -
+2025-04-04 14:21:04,865 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 14:21:04] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 14:21:04,891 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 14:21:04] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 14:21:08,494 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 14:21:08] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-04-04 14:21:08,529 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 14:21:08] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-04 14:21:08,544 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 14:21:08] "[36mGET /static/js/recorder.js HTTP/1.1[0m" 304 -
+2025-04-04 14:21:08,546 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 14:21:08] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-04 14:25:08,722 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 14:25:08] "POST /api/record/start HTTP/1.1" 200 -
+2025-04-04 14:25:57,716 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 14:25:57] "POST /api/record/action HTTP/1.1" 200 -
+2025-04-04 14:26:00,181 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generated_tests\\test_recorded_20250404_142600.py', reloading
+2025-04-04 14:26:00,189 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generated_tests\\test_recorded_20250404_142600.py', reloading
+2025-04-04 14:26:00,191 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generated_tests\\test_recorded_20250404_142600.py', reloading
+2025-04-04 14:26:00,232 - werkzeug - INFO - 127.0.0.1 - - [04/Apr/2025 14:26:00] "POST /api/record/stop HTTP/1.1" 200 -
+2025-04-04 14:26:05,182 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 14:26:11,526 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 14:26:11,536 - werkzeug - INFO -  * Debugger PIN: 984-604-385
+2025-04-04 14:27:47,338 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\forms.py', reloading
+2025-04-04 14:27:47,338 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generator_app.py', reloading
+2025-04-04 14:27:47,338 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\models.py', reloading
+2025-04-04 14:27:47,341 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\streamzai_gui.py', reloading
+2025-04-04 14:27:47,342 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\streamzai_test_generator.py', reloading
+2025-04-04 14:27:47,343 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test_runner.py', reloading
+2025-04-04 14:27:47,343 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generated_tests\\test_recorded_20250404_012544.py', reloading
+2025-04-04 14:27:47,348 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generated_tests\\test_recorded_20250404_013136.py', reloading
+2025-04-04 14:27:47,348 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generated_tests\\test_recorded_20250404_115348.py', reloading
+2025-04-04 14:27:47,348 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generated_tests\\test_recorded_20250404_123359.py', reloading
+2025-04-04 14:27:47,350 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generate_code\\selenium_code_generator.py', reloading
+2025-04-04 14:27:47,353 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\ai_modules\\main.py', reloading
+2025-04-04 14:27:47,353 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\ai_modules\\__init__.py', reloading
+2025-04-04 14:27:47,355 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\ai_modules\\anomaly_detection\\detector.py', reloading
+2025-04-04 14:27:47,357 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\ai_modules\\predictive_analytics\\prioritizer.py', reloading
+2025-04-04 14:27:47,359 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\ai_modules\\test_generation\\generator.py', reloading
+2025-04-04 14:27:47,360 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\ai_modules\\visual_regression\\comparator.py', reloading
+2025-04-04 14:27:47,362 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\automation\\selenium_runner.py', reloading
+2025-04-04 14:27:47,363 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\app.py', reloading
+2025-04-04 14:27:47,365 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\config.py', reloading
+2025-04-04 14:27:47,368 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\api\\routes.py', reloading
+2025-04-04 14:27:47,371 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\api\\__init__.py', reloading
+2025-04-04 14:27:47,371 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\core\\recorder.py', reloading
+2025-04-04 14:27:47,373 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\core\\__init__.py', reloading
+2025-04-04 14:27:47,376 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\models\\action.py', reloading
+2025-04-04 14:27:47,380 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\models\\test_case.py', reloading
+2025-04-04 14:27:47,382 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\models\\user.py', reloading
+2025-04-04 14:27:47,384 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\models\\__init__.py', reloading
+2025-04-04 14:27:47,385 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\services\\recorder_service.py', reloading
+2025-04-04 14:27:47,389 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\services\\__init__.py', reloading
+2025-04-04 14:27:47,391 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\utils\\selector_utils.py', reloading
+2025-04-04 14:27:47,391 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\test-generation\\backend\\utils\\__init__.py', reloading
+2025-04-04 14:27:48,183 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 14:27:53,779 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 14:27:53,779 - werkzeug - INFO -  * Debugger PIN: 984-604-385
+2025-04-04 14:59:53,557 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generated_tests\\test_recorded_20250404_142600.py', reloading
+2025-04-04 14:59:54,504 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-04 14:59:59,653 - werkzeug - WARNING -  * Debugger is active!
+2025-04-04 14:59:59,663 - werkzeug - INFO -  * Debugger PIN: 984-604-385
+2025-04-07 10:34:08,949 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-04-07 10:34:08,951 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-07 10:34:08,960 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-07 10:34:11,431 - werkzeug - WARNING -  * Debugger is active!
+2025-04-07 10:34:11,435 - werkzeug - INFO -  * Debugger PIN: 755-953-328
+2025-04-07 10:34:13,955 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 10:34:13] "GET / HTTP/1.1" 200 -
+2025-04-07 10:34:13,987 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 10:34:13] "GET /static/css/style.css HTTP/1.1" 200 -
+2025-04-07 10:34:13,989 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 10:34:13] "GET /static/js/main.js HTTP/1.1" 200 -
+2025-04-07 10:34:15,704 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 10:34:15] "GET /test-suites HTTP/1.1" 200 -
+2025-04-07 10:34:15,725 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 10:34:15] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-07 10:34:15,733 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 10:34:15] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-07 10:34:18,125 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 10:34:18] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-04-07 10:34:18,143 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 10:34:18] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-07 10:34:18,158 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 10:34:18] "GET /static/js/recorder.js HTTP/1.1" 200 -
+2025-04-07 10:34:18,158 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 10:34:18] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-07 10:34:33,369 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 10:34:33] "POST /api/record/start HTTP/1.1" 200 -
+2025-04-07 10:35:20,578 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 10:35:20] "POST /api/record/action HTTP/1.1" 200 -
+2025-04-07 10:35:22,852 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generated_tests\\test_recorded_20250407_103522.py', reloading
+2025-04-07 10:35:22,854 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generated_tests\\test_recorded_20250407_103522.py', reloading
+2025-04-07 10:35:22,883 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 10:35:22] "POST /api/record/stop HTTP/1.1" 200 -
+2025-04-07 10:35:27,780 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-07 10:35:30,515 - werkzeug - WARNING -  * Debugger is active!
+2025-04-07 10:35:30,519 - werkzeug - INFO -  * Debugger PIN: 755-953-328
+2025-04-07 10:39:14,604 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 10:39:14] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-04-07 10:39:14,624 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 10:39:14] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-07 10:39:14,629 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 10:39:14] "[36mGET /static/js/recorder.js HTTP/1.1[0m" 304 -
+2025-04-07 10:39:14,633 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 10:39:14] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-07 10:44:41,173 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 10:44:41] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-04-07 10:44:41,189 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 10:44:41] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-07 10:44:41,204 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 10:44:41] "[36mGET /static/js/recorder.js HTTP/1.1[0m" 304 -
+2025-04-07 10:44:41,212 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 10:44:41] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-07 10:44:54,479 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 10:44:54] "POST /api/record/start HTTP/1.1" 200 -
+2025-04-07 10:45:10,351 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 10:45:10] "POST /api/record/action HTTP/1.1" 200 -
+2025-04-07 10:45:12,726 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generated_tests\\test_recorded_20250407_104512.py', reloading
+2025-04-07 10:45:12,728 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generated_tests\\test_recorded_20250407_104512.py', reloading
+2025-04-07 10:45:12,729 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generated_tests\\test_recorded_20250407_104512.py', reloading
+2025-04-07 10:45:12,752 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 10:45:12] "POST /api/record/stop HTTP/1.1" 200 -
+2025-04-07 10:45:17,535 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-07 10:45:20,465 - werkzeug - WARNING -  * Debugger is active!
+2025-04-07 10:45:20,470 - werkzeug - INFO -  * Debugger PIN: 755-953-328
+2025-04-07 10:49:12,299 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generated_tests\\test_recorded_20250404_012544.py', reloading
+2025-04-07 10:49:12,443 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generated_tests\\test_recorded_20250404_013136.py', reloading
+2025-04-07 10:49:12,591 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generated_tests\\test_recorded_20250404_115348.py', reloading
+2025-04-07 10:49:13,059 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-07 10:49:15,759 - werkzeug - WARNING -  * Debugger is active!
+2025-04-07 10:49:15,766 - werkzeug - INFO -  * Debugger PIN: 755-953-328
+2025-04-07 10:51:04,697 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-07 10:51:04,699 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-07 10:51:05,805 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-07 10:51:09,799 - werkzeug - WARNING -  * Debugger is active!
+2025-04-07 10:51:09,802 - werkzeug - INFO -  * Debugger PIN: 755-953-328
+2025-04-07 10:51:19,389 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-07 10:51:20,517 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-07 10:51:24,355 - werkzeug - WARNING -  * Debugger is active!
+2025-04-07 10:51:24,360 - werkzeug - INFO -  * Debugger PIN: 755-953-328
+2025-04-07 10:52:01,927 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generate_code\\selenium_code_generator.py', reloading
+2025-04-07 10:52:01,930 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generate_code\\selenium_code_generator.py', reloading
+2025-04-07 10:52:03,345 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-07 10:52:06,746 - werkzeug - WARNING -  * Debugger is active!
+2025-04-07 10:52:06,750 - werkzeug - INFO -  * Debugger PIN: 755-953-328
+2025-04-07 10:52:27,022 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-07 10:52:27,026 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\app.py', reloading
+2025-04-07 10:52:27,725 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-07 10:52:31,509 - werkzeug - WARNING -  * Debugger is active!
+2025-04-07 10:52:31,515 - werkzeug - INFO -  * Debugger PIN: 755-953-328
+2025-04-07 10:52:38,544 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 10:52:38] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-04-07 10:52:38,564 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 10:52:38] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-07 10:52:38,569 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 10:52:38] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-07 10:52:38,571 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 10:52:38] "[36mGET /static/js/recorder.js HTTP/1.1[0m" 304 -
+2025-04-07 10:52:41,189 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 10:52:41] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-04-07 10:52:41,212 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 10:52:41] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-07 10:52:41,227 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 10:52:41] "[36mGET /static/js/recorder.js HTTP/1.1[0m" 304 -
+2025-04-07 10:52:41,233 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 10:52:41] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-07 10:52:54,799 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 10:52:54] "POST /api/record/start HTTP/1.1" 200 -
+2025-04-07 10:53:07,273 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generated_tests\\test_recorded_20250407_105307.py', reloading
+2025-04-07 10:53:07,273 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Downloads\\Test-cases-generator\\generated_tests\\test_recorded_20250407_105307.py', reloading
+2025-04-07 10:53:07,301 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 10:53:07] "POST /api/record/stop HTTP/1.1" 200 -
+2025-04-07 10:53:13,011 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-07 10:53:16,647 - werkzeug - WARNING -  * Debugger is active!
+2025-04-07 10:53:16,651 - werkzeug - INFO -  * Debugger PIN: 755-953-328

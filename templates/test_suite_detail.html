@@ -210,38 +210,36 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="recording-status mb-3">
-                            <div class="alert alert-info" id="recordingStatus">
-                                <i class="bi bi-info-circle"></i> Click "Start Recording" to begin capturing browser actions
-                            </div>
-                        </div>
-                    </div>
+                <div class="alert alert-info mb-3">
+                    <i class="bi bi-info-circle"></i> When you click "Start Recording", a Chrome browser window will open. 
+                    All actions you perform in that window will be recorded and converted to Selenium code.
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h6 class="card-title mb-0">Recorded Actions</h6>
+                    <div class="col-md-8">
+                        <div class="recording-status mb-3">
+                            <div class="alert alert-info" id="recordingStatus">
+                                Click "Start Recording" to begin capturing browser actions
                             </div>
-                            <div class="card-body" style="max-height: 400px; overflow-y: auto;">
-                                <div class="list-group" id="testCasesList">
-                                    <!-- Actions will be added here dynamically -->
-                                </div>
+                        </div>
+                        <div class="recorded-actions mb-3">
+                            <h6>Recorded Actions</h6>
+                            <div class="list-group" id="recordedActionsList">
+                                <!-- Recorded actions will be added here dynamically -->
+                            </div>
+                        </div>
+                        <div class="test-cases-container">
+                            <h6>Generated Test Cases</h6>
+                            <div class="list-group" id="testCasesList">
+                                <!-- Test cases will be added here dynamically -->
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h6 class="card-title mb-0">Generated Selenium Code</h6>
-                            </div>
-                            <div class="card-body" style="max-height: 400px; overflow-y: auto;">
-                                <pre><code class="language-python" id="seleniumCode">
-# Selenium code will appear here when recording stops
-                                </code></pre>
-                            </div>
+                    <div class="col-md-4">
+                        <div class="selenium-code">
+                            <h6>Generated Selenium Code</h6>
+                            <pre><code id="seleniumCode" class="language-python">
+# Selenium code will appear here
+                            </code></pre>
                         </div>
                     </div>
                 </div>
@@ -259,42 +257,9 @@
     </div>
 </div>
 
-<!-- Add required CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-
-<style>
-.steps-list {
-    margin-top: 10px;
-    padding-left: 10px;
-    border-left: 2px solid #dee2e6;
-}
-.step-item {
-    margin-bottom: 8px;
-    padding: 8px;
-    background-color: #f8f9fa;
-    border-radius: 4px;
-    transition: all 0.3s ease;
-}
-.step-item:hover {
-    background-color: #e9ecef;
-}
-.step-item small {
-    color: #495057;
-}
-#seleniumCode {
-    font-size: 0.9em;
-    line-height: 1.5;
-}
-.recording .modal-content {
-    border-color: #dc3545;
-}
-.recording .modal-header {
-    background-color: #dc3545;
-    color: white;
-}
-</style>
-
 <!-- Add required JavaScript -->
+<script src="{{ url_for('static', filename='js/recorder.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prismjs/1.24.1/prism.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/prismjs/1.24.1/themes/prism.min.css" rel="stylesheet" />
 
@@ -303,19 +268,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const startBtn = document.getElementById('startRecording');
     const stopBtn = document.getElementById('stopRecording');
     const statusDiv = document.getElementById('recordingStatus');
+    const actionsList = document.getElementById('recordedActionsList');
     const testCasesList = document.getElementById('testCasesList');
     const seleniumCode = document.getElementById('seleniumCode');
-    const recordModal = document.getElementById('recordModal');
-    let recording = false;
 
     startBtn.addEventListener('click', function() {
-        recording = true;
         startBtn.disabled = true;
         stopBtn.disabled = false;
         statusDiv.className = 'alert alert-warning';
-        statusDiv.innerHTML = '<i class="bi bi-record-circle"></i> Opening Chrome browser and starting recording...';
-        recordModal.classList.add('recording');
-        testCasesList.innerHTML = '';
+        statusDiv.innerHTML = '<i class="bi bi-record-circle"></i> Recording in progress... <br>A Chrome browser window has opened. Perform your actions in that window.';
+        actionsList.innerHTML = ''; // Clear previous actions
         
         // Start the recording
         fetch('/api/record/start', {
@@ -327,27 +289,29 @@ document.addEventListener('DOMContentLoaded', function() {
                 suite_id: {{ test_suite.id }},
                 url: 'https://test.teamstreamz.com/'
             })
-        }).then(response => response.json())
+        })
+        .then(response => response.json())
         .then(data => {
             if (data.status === 'success') {
-                statusDiv.innerHTML = '<i class="bi bi-record-circle"></i> Recording in progress... Chrome browser opened.';
+                // Recording started successfully
+                console.log('Recording started in Chrome browser');
             } else {
-                statusDiv.className = 'alert alert-danger';
-                statusDiv.innerHTML = '<i class="bi bi-exclamation-circle"></i> Failed to start recording: ' + data.message;
-                startBtn.disabled = false;
-                stopBtn.disabled = true;
-                recordModal.classList.remove('recording');
+                throw new Error(data.message);
             }
+        })
+        .catch(error => {
+            statusDiv.className = 'alert alert-danger';
+            statusDiv.innerHTML = `<i class="bi bi-exclamation-triangle"></i> Error: ${error.message}`;
+            startBtn.disabled = false;
+            stopBtn.disabled = true;
         });
     });
 
     stopBtn.addEventListener('click', function() {
-        recording = false;
         startBtn.disabled = false;
         stopBtn.disabled = true;
-        statusDiv.className = 'alert alert-info';
-        statusDiv.innerHTML = '<i class="bi bi-hourglass-split"></i> Generating Selenium code...';
-        recordModal.classList.remove('recording');
+        statusDiv.className = 'alert alert-success';
+        statusDiv.innerHTML = '<i class="bi bi-check-circle"></i> Recording completed';
 
         // Stop the recording and get generated code
         fetch('/api/record/stop', {
@@ -356,16 +320,35 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => response.json())
         .then(data => {
             if (data.status === 'success') {
-                statusDiv.className = 'alert alert-success';
-                statusDiv.innerHTML = '<i class="bi bi-check-circle"></i> Recording completed successfully!';
-                
+                // Update recorded actions list
+                actionsList.innerHTML = data.actions.map(action => `
+                    <div class="list-group-item">
+                        <small class="text-muted">${action.timestamp}</small>
+                        <p class="mb-1">${action.description}</p>
+                    </div>
+                `).join('');
+
+                // Update test cases list
+                testCasesList.innerHTML = data.test_cases.map(tc => `
+                    <div class="list-group-item">
+                        <h6 class="mb-1">${tc.name}</h6>
+                        <p class="mb-1">${tc.description}</p>
+                        <div class="steps">
+                            ${tc.steps.map(step => `<small class="d-block text-muted">• ${step}</small>`).join('')}
+                        </div>
+                    </div>
+                `).join('');
+
                 // Update Selenium code
                 seleniumCode.textContent = data.selenium_code;
                 Prism.highlightElement(seleniumCode);
             } else {
-                statusDiv.className = 'alert alert-danger';
-                statusDiv.innerHTML = '<i class="bi bi-exclamation-circle"></i> Failed to stop recording: ' + data.message;
+                throw new Error(data.message);
             }
+        })
+        .catch(error => {
+            statusDiv.className = 'alert alert-danger';
+            statusDiv.innerHTML = `<i class="bi bi-exclamation-triangle"></i> Error: ${error.message}`;
         });
     });
 });

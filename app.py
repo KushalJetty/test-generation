@@ -21,6 +21,8 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import time
+from generate_code.selenium_code_generator import generate_test_file
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -794,11 +796,16 @@ def start_recording():
     url = data.get('url', 'https://test.teamstreamz.com/')
     
     try:
-        # Set up Chrome options
+        # Initialize Chrome driver with appropriate options
         chrome_options = Options()
         chrome_options.add_argument('--start-maximized')
+        chrome_options.add_argument('--disable-extensions')  # Disable extensions that might interfere
+        chrome_options.add_argument('--disable-popup-blocking')  # Allow popups
+        chrome_options.add_argument('--disable-infobars')  # Disable infobars
+        chrome_options.add_argument('--disable-notifications')  # Disable notifications
+        chrome_options.add_experimental_option('excludeSwitches', ['enable-automation'])  # Disable automation info bar
+        chrome_options.add_experimental_option('useAutomationExtension', False)  # Disable automation extension
         
-        # Initialize Chrome driver
         driver = webdriver.Chrome(options=chrome_options)
         
         # Navigate to the specified URL
@@ -808,9 +815,140 @@ def start_recording():
         recording_actions = []
         is_recording = True
         
+        # Inject the recorder script into the browser
+        recorder_script = """
+        window.recordingActions = [];
+        
+        function recordAction(action) {
+            window.recordingActions.push(action);
+            fetch('/api/record/action', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(action)
+            }).catch(error => console.error('Failed to record action:', error));
+        }
+        
+        // Set up event listeners
+        document.addEventListener('click', function(event) {
+            const element = event.target;
+            const selector = getSelector(element);
+            if (selector) {
+                recordAction({
+                    type: 'click',
+                    selector: selector,
+                    description: 'Clicked on ' + element.tagName.toLowerCase() + (element.id ? '#' + element.id : '')
+                });
+            }
+        }, true);
+        
+        document.addEventListener('input', function(event) {
+            const element = event.target;
+            const selector = getSelector(element);
+            if (selector) {
+                recordAction({
+                    type: 'input',
+                    selector: selector,
+                    value: element.value,
+                    description: 'Entered text in ' + element.tagName.toLowerCase() + (element.id ? '#' + element.id : '')
+                });
+            }
+        }, true);
+        
+        document.addEventListener('submit', function(event) {
+            const form = event.target;
+            const selector = getSelector(form);
+            if (selector) {
+                recordAction({
+                    type: 'submit',
+                    selector: selector,
+                    description: 'Submitted form' + (form.id ? ' #' + form.id : '')
+                });
+            }
+        }, true);
+        
+        document.addEventListener('keydown', function(event) {
+            const specialKeys = ['Enter', 'Tab', 'Escape'];
+            if (specialKeys.includes(event.key)) {
+                recordAction({
+                    type: 'keypress',
+                    key: event.key,
+                    description: 'Pressed ' + event.key + ' key'
+                });
+            }
+        }, true);
+        
+        function getSelector(element) {
+            if (!element) return null;
+            
+            // Try ID first
+            if (element.id) {
+                return '#' + element.id;
+            }
+            
+            // Try name attribute
+            if (element.name) {
+                return '[name="' + element.name + '"]';
+            }
+            
+            // Try data attributes
+            const dataAttrs = Array.from(element.attributes)
+                .filter(attr => attr.name.startsWith('data-'));
+            if (dataAttrs.length > 0) {
+                return '[' + dataAttrs[0].name + '="' + dataAttrs[0].value + '"]';
+            }
+            
+            // Try type and name combination for inputs
+            if (element.type && element.name) {
+                return 'input[type="' + element.type + '"][name="' + element.name + '"]';
+            }
+            
+            // Try classes
+            if (element.className) {
+                const classes = Array.from(element.classList)
+                    .filter(cls => !cls.includes(' '))
+                    .join('.');
+                if (classes) {
+                    const similar = document.querySelectorAll('.' + classes);
+                    if (similar.length === 1) {
+                        return '.' + classes;
+                    }
+                }
+            }
+            
+            // Try parent context with nth-child
+            let path = [];
+            let current = element;
+            
+            while (current && current !== document.body) {
+                let selector = current.tagName.toLowerCase();
+                let parent = current.parentElement;
+                
+                if (parent) {
+                    let children = Array.from(parent.children);
+                    let index = children.filter(child => child.tagName === current.tagName).indexOf(current);
+                    if (index > 0) {
+                        selector += ':nth-of-type(' + (index + 1) + ')';
+                    }
+                }
+                
+                path.unshift(selector);
+                current = parent;
+            }
+            
+            return path.join(' > ');
+        }
+        
+        console.log('Recorder script injected successfully');
+        """
+        
+        # Execute the script in the browser
+        driver.execute_script(recorder_script)
+        
         return jsonify({
             'status': 'success',
-            'message': 'Recording started and Chrome browser opened'
+            'message': 'Recording started'
         })
     except Exception as e:
         if driver:
@@ -818,7 +956,7 @@ def start_recording():
         return jsonify({
             'status': 'error',
             'message': str(e)
-        })
+        }), 500
 
 @app.route('/api/record/action', methods=['POST'])
 def record_action():
@@ -831,7 +969,11 @@ def record_action():
         })
     
     action = request.get_json()
+    action['timestamp'] = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     recording_actions.append(action)
+    
+    # Log the action for debugging
+    print(f"Recorded action: {action}")
     
     return jsonify({
         'status': 'success',
@@ -845,98 +987,80 @@ def stop_recording():
     is_recording = False
     
     try:
+        # Get recorded actions from the browser
         if driver:
+            # Execute script to get recorded actions
+            browser_actions = driver.execute_script("return window.recordingActions || [];")
+            
+            # Add browser actions to our recording_actions list
+            if browser_actions:
+                for action in browser_actions:
+                    action['timestamp'] = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                    recording_actions.append(action)
+            
+            # Close the browser
             driver.quit()
             driver = None
         
-        # Generate Selenium code from recorded actions
-        selenium_code = generate_selenium_code(recording_actions)
+        # Generate test file
+        test_file = generate_test_file(recording_actions)
+        
+        # Read the generated code
+        with open(test_file, 'r', encoding='utf-8') as f:
+            selenium_code = f.read()
         
         # Create test cases from recorded actions
         test_cases = generate_test_cases_from_actions(recording_actions)
         
+        # Prepare response with recorded actions
+        response = {
+            'status': 'success',
+            'selenium_code': selenium_code,
+            'test_cases': test_cases,
+            'actions': [{
+                'timestamp': action.get('timestamp', ''),
+                'description': action.get('description', ''),
+                'type': action.get('type', ''),
+                'selector': action.get('selector', ''),
+                'value': action.get('value', '')
+            } for action in recording_actions]
+        }
+        
         # Clear recorded actions
         recording_actions = []
         
-        return jsonify({
-            'status': 'success',
-            'selenium_code': selenium_code,
-            'test_cases': test_cases
-        })
+        return jsonify(response)
     except Exception as e:
+        if driver:
+            driver.quit()
+            driver = None
         return jsonify({
             'status': 'error',
             'message': str(e)
-        })
-
-def generate_selenium_code(actions):
-    """Generate Selenium code from recorded actions."""
-    code = [
-        "from selenium import webdriver",
-        "from selenium.webdriver.common.by import By",
-        "from selenium.webdriver.chrome.options import Options",
-        "from selenium.webdriver.support.ui import WebDriverWait",
-        "from selenium.webdriver.support import expected_conditions as EC",
-        "",
-        "def test_recorded_actions():",
-        "    # Set up Chrome options",
-        "    chrome_options = Options()",
-        "    chrome_options.add_argument('--start-maximized')",
-        "",
-        "    # Initialize the driver",
-        "    driver = webdriver.Chrome(options=chrome_options)",
-        "    wait = WebDriverWait(driver, 10)",
-        "",
-        "    try:",
-        "        # Navigate to the test URL",
-        "        driver.get('https://test.teamstreamz.com/')",
-        "",
-        "        # Clear previous actions and start recording",
-        "        recording_actions = []",
-        "        is_recording = True",
-        "",
-        "        # Record actions",
-        "        # ... (recording logic)",
-        "",
-        "    finally:",
-        "        # Close the browser",
-        "        driver.quit()",
-        "",
-        "if __name__ == '__main__':",
-        "    test_recorded_actions()"
-    ]
-    
-    for action in actions:
-        if action['type'] == 'click':
-            code.append(f"        # Click on element {action['selector']}")
-            code.append(f"        wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, '{action['selector']}'))).click()")
-        elif action['type'] == 'input':
-            code.append(f"        # Input text into {action['selector']}")
-            code.append(f"        element = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, '{action['selector']}')))")
-            code.append(f"        element.clear()")
-            code.append(f"        element.send_keys('{action['value']}')")
-        elif action['type'] == 'navigate':
-            code.append(f"        # Navigate to {action['url']}")
-            code.append(f"        driver.get('{action['url']}')")
-    
-    return "\n".join(code)
+        }), 500
 
 def generate_test_cases_from_actions(actions):
     """Generate test cases from recorded actions."""
     test_cases = []
     current_test = {
-        'name': 'Recorded Browser Actions',
-        'description': 'Test case generated from recorded browser actions on TeamStreamz',
+        'name': 'Recorded Test Case',
+        'description': 'Test case generated from recorded browser actions',
         'steps': []
     }
     
-    for i, action in enumerate(actions, 1):
+    for action in actions:
+        description = None
         if action['type'] == 'click':
-            current_test['steps'].append(f"Click on element: {action['selector']}")
+            description = f"Click on element {action['selector']}"
         elif action['type'] == 'input':
-            current_test['steps'].append(f"Enter text '{action['value']}' into: {action['selector']}")
+            description = f"Enter '{action['value']}' into {action['selector']}"
         elif action['type'] == 'navigate':
-            current_test['steps'].append(f"Navigate to: {action['url']}")
+            description = f"Navigate to {action['url']}"
+        elif action['type'] == 'keypress':
+            description = f"Press {action['key']} key"
+            
+        if description:
+            current_test['steps'].append(description)
     
     test_cases.append(current_test)
     return test_cases
