@@ -1,0 +1,107 @@
+{
+  "total_files": 20,
+  "successful": 20,
+  "failed": 0,
+  "test_files": [
+    {
+      "original_file": "C:\\Users\\kusha\\Desktop\\Classroom\\Projects\\Portfolio\\portfolio\\manage.py",
+      "test_file": "generated_tests\\..\\..\\..\\..\\..\\Desktop\\Classroom\\Projects\\Portfolio\\portfolio\\test_manage.py",
+      "status": "success"
+    },
+    {
+      "original_file": "C:\\Users\\kusha\\Desktop\\Classroom\\Projects\\Portfolio\\portfolio\\base\\admin.py",
+      "test_file": "generated_tests\\..\\..\\..\\..\\..\\Desktop\\Classroom\\Projects\\Portfolio\\portfolio\\base\\test_admin.py",
+      "status": "success"
+    },
+    {
+      "original_file": "C:\\Users\\kusha\\Desktop\\Classroom\\Projects\\Portfolio\\portfolio\\base\\apps.py",
+      "test_file": "generated_tests\\..\\..\\..\\..\\..\\Desktop\\Classroom\\Projects\\Portfolio\\portfolio\\base\\test_apps.py",
+      "status": "success"
+    },
+    {
+      "original_file": "C:\\Users\\kusha\\Desktop\\Classroom\\Projects\\Portfolio\\portfolio\\base\\models.py",
+      "test_file": "generated_tests\\..\\..\\..\\..\\..\\Desktop\\Classroom\\Projects\\Portfolio\\portfolio\\base\\test_models.py",
+      "status": "success"
+    },
+    {
+      "original_file": "C:\\Users\\kusha\\Desktop\\Classroom\\Projects\\Portfolio\\portfolio\\base\\urls.py",
+      "test_file": "generated_tests\\..\\..\\..\\..\\..\\Desktop\\Classroom\\Projects\\Portfolio\\portfolio\\base\\test_urls.py",
+      "status": "success"
+    },
+    {
+      "original_file": "C:\\Users\\kusha\\Desktop\\Classroom\\Projects\\Portfolio\\portfolio\\base\\views.py",
+      "test_file": "generated_tests\\..\\..\\..\\..\\..\\Desktop\\Classroom\\Projects\\Portfolio\\portfolio\\base\\test_views.py",
+      "status": "success"
+    },
+    {
+      "original_file": "C:\\Users\\kusha\\Desktop\\Classroom\\Projects\\Portfolio\\portfolio\\base\\__init__.py",
+      "test_file": "generated_tests\\..\\..\\..\\..\\..\\Desktop\\Classroom\\Projects\\Portfolio\\portfolio\\base\\test___init__.py",
+      "status": "success"
+    },
+    {
+      "original_file": "C:\\Users\\kusha\\Desktop\\Classroom\\Projects\\Portfolio\\portfolio\\base\\migrations\\0001_initial.py",
+      "test_file": "generated_tests\\..\\..\\..\\..\\..\\Desktop\\Classroom\\Projects\\Portfolio\\portfolio\\base\\migrations\\test_0001_initial.py",
+      "status": "success"
+    },
+    {
+      "original_file": "C:\\Users\\kusha\\Desktop\\Classroom\\Projects\\Portfolio\\portfolio\\base\\migrations\\__init__.py",
+      "test_file": "generated_tests\\..\\..\\..\\..\\..\\Desktop\\Classroom\\Projects\\Portfolio\\portfolio\\base\\migrations\\test___init__.py",
+      "status": "success"
+    },
+    {
+      "original_file": "C:\\Users\\kusha\\Desktop\\Classroom\\Projects\\Portfolio\\portfolio\\lecture7\\admin.py",
+      "test_file": "generated_tests\\..\\..\\..\\..\\..\\Desktop\\Classroom\\Projects\\Portfolio\\portfolio\\lecture7\\test_admin.py",
+      "status": "success"
+    },
+    {
+      "original_file": "C:\\Users\\kusha\\Desktop\\Classroom\\Projects\\Portfolio\\portfolio\\lecture7\\apps.py",
+      "test_file": "generated_tests\\..\\..\\..\\..\\..\\Desktop\\Classroom\\Projects\\Portfolio\\portfolio\\lecture7\\test_apps.py",
+      "status": "success"
+    },
+    {
+      "original_file": "C:\\Users\\kusha\\Desktop\\Classroom\\Projects\\Portfolio\\portfolio\\lecture7\\models.py",
+      "test_file": "generated_tests\\..\\..\\..\\..\\..\\Desktop\\Classroom\\Projects\\Portfolio\\portfolio\\lecture7\\test_models.py",
+      "status": "success"
+    },
+    {
+      "original_file": "C:\\Users\\kusha\\Desktop\\Classroom\\Projects\\Portfolio\\portfolio\\lecture7\\views.py",
+      "test_file": "generated_tests\\..\\..\\..\\..\\..\\Desktop\\Classroom\\Projects\\Portfolio\\portfolio\\lecture7\\test_views.py",
+      "status": "success"
+    },
+    {
+      "original_file": "C:\\Users\\kusha\\Desktop\\Classroom\\Projects\\Portfolio\\portfolio\\lecture7\\__init__.py",
+      "test_file": "generated_tests\\..\\..\\..\\..\\..\\Desktop\\Classroom\\Projects\\Portfolio\\portfolio\\lecture7\\test___init__.py",
+      "status": "success"
+    },
+    {
+      "original_file": "C:\\Users\\kusha\\Desktop\\Classroom\\Projects\\Portfolio\\portfolio\\lecture7\\migrations\\__init__.py",
+      "test_file": "generated_tests\\..\\..\\..\\..\\..\\Desktop\\Classroom\\Projects\\Portfolio\\portfolio\\lecture7\\migrations\\test___init__.py",
+      "status": "success"
+    },
+    {
+      "original_file": "C:\\Users\\kusha\\Desktop\\Classroom\\Projects\\Portfolio\\portfolio\\portfolio\\asgi.py",
+      "test_file": "generated_tests\\..\\..\\..\\..\\..\\Desktop\\Classroom\\Projects\\Portfolio\\portfolio\\portfolio\\test_asgi.py",
+      "status": "success"
+    },
+    {
+      "original_file": "C:\\Users\\kusha\\Desktop\\Classroom\\Projects\\Portfolio\\portfolio\\portfolio\\settings.py",
+      "test_file": "generated_tests\\..\\..\\..\\..\\..\\Desktop\\Classroom\\Projects\\Portfolio\\portfolio\\portfolio\\test_settings.py",
+      "status": "success"
+    },
+    {
+      "original_file": "C:\\Users\\kusha\\Desktop\\Classroom\\Projects\\Portfolio\\portfolio\\portfolio\\urls.py",
+      "test_file": "generated_tests\\..\\..\\..\\..\\..\\Desktop\\Classroom\\Projects\\Portfolio\\portfolio\\portfolio\\test_urls.py",
+      "status": "success"
+    },
+    {
+      "original_file": "C:\\Users\\kusha\\Desktop\\Classroom\\Projects\\Portfolio\\portfolio\\portfolio\\wsgi.py",
+      "test_file": "generated_tests\\..\\..\\..\\..\\..\\Desktop\\Classroom\\Projects\\Portfolio\\portfolio\\portfolio\\test_wsgi.py",
+      "status": "success"
+    },
+    {
+      "original_file": "C:\\Users\\kusha\\Desktop\\Classroom\\Projects\\Portfolio\\portfolio\\portfolio\\__init__.py",
+      "test_file": "generated_tests\\..\\..\\..\\..\\..\\Desktop\\Classroom\\Projects\\Portfolio\\portfolio\\portfolio\\test___init__.py",
+      "status": "success"
+    }
+  ]
+}
