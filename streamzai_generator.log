@@ -2342,3 +2342,53 @@
 2025-04-07 10:53:13,011 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
 2025-04-07 10:53:16,647 - werkzeug - WARNING -  * Debugger is active!
 2025-04-07 10:53:16,651 - werkzeug - INFO -  * Debugger PIN: 755-953-328
+2025-04-07 11:04:33,034 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-04-07 11:04:33,034 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-07 11:04:33,066 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-07 11:04:37,684 - werkzeug - WARNING -  * Debugger is active!
+2025-04-07 11:04:37,691 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-07 11:04:37,873 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 11:04:37] "GET / HTTP/1.1" 200 -
+2025-04-07 11:04:37,909 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 11:04:37] "GET /static/css/style.css HTTP/1.1" 200 -
+2025-04-07 11:04:37,917 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 11:04:37] "GET /static/js/main.js HTTP/1.1" 200 -
+2025-04-07 11:04:40,803 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 11:04:40] "GET /projects HTTP/1.1" 200 -
+2025-04-07 11:04:40,829 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 11:04:40] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-07 11:04:40,838 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 11:04:40] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-07 11:04:42,991 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 11:04:42] "GET /test-suites HTTP/1.1" 200 -
+2025-04-07 11:04:43,033 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 11:04:43] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-07 11:04:43,068 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 11:04:43] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-07 11:04:46,714 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 11:04:46] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-04-07 11:04:46,747 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 11:04:46] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-07 11:04:46,764 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 11:04:46] "GET /static/js/recorder.js HTTP/1.1" 200 -
+2025-04-07 11:04:46,766 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 11:04:46] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-07 11:04:58,849 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 11:04:58] "POST /api/record/start HTTP/1.1" 200 -
+2025-04-07 11:05:40,318 - werkzeug - INFO -  * Detected change in 'c:\\Users\\kusha\\Documents\\StreamzAI\\downloads\\testing\\test-generation1\\test-generation\\generated_tests\\test_recorded_20250407_110540.py', reloading
+2025-04-07 11:05:40,319 - werkzeug - INFO -  * Detected change in 'c:\\Users\\kusha\\Documents\\StreamzAI\\downloads\\testing\\test-generation1\\test-generation\\generated_tests\\test_recorded_20250407_110540.py', reloading
+2025-04-07 11:05:40,319 - werkzeug - INFO -  * Detected change in 'c:\\Users\\kusha\\Documents\\StreamzAI\\downloads\\testing\\test-generation1\\test-generation\\generated_tests\\test_recorded_20250407_110540.py', reloading
+2025-04-07 11:05:40,332 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 11:05:40] "POST /api/record/stop HTTP/1.1" 200 -
+2025-04-07 11:05:40,833 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-07 11:05:45,113 - werkzeug - WARNING -  * Debugger is active!
+2025-04-07 11:05:45,117 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-07 11:06:11,096 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\selenium\\webdriver\\common\\keys.py', reloading
+2025-04-07 11:06:12,137 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-07 11:06:17,424 - werkzeug - WARNING -  * Debugger is active!
+2025-04-07 11:06:17,429 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-07 11:07:45,127 - werkzeug - INFO -  * Detected change in 'c:\\Users\\kusha\\Documents\\StreamzAI\\downloads\\testing\\test-generation1\\test-generation\\test_runner.py', reloading
+2025-04-07 11:07:45,932 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-07 11:07:50,676 - werkzeug - WARNING -  * Debugger is active!
+2025-04-07 11:07:50,681 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-07 11:08:03,464 - werkzeug - INFO -  * Detected change in 'c:\\Users\\kusha\\Documents\\StreamzAI\\downloads\\testing\\test-generation1\\test-generation\\test_runner.py', reloading
+2025-04-07 11:08:03,464 - werkzeug - INFO -  * Detected change in 'c:\\Users\\kusha\\Documents\\StreamzAI\\downloads\\testing\\test-generation1\\test-generation\\test_runner.py', reloading
+2025-04-07 11:08:04,362 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-07 11:08:09,848 - werkzeug - WARNING -  * Debugger is active!
+2025-04-07 11:08:09,852 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-07 11:08:15,831 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\pip\\_internal\\utils\\logging.py', reloading
+2025-04-07 11:08:15,867 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\pip\\_vendor\\rich\\console.py', reloading
+2025-04-07 11:08:15,869 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\pip\\_vendor\\rich\\_windows_renderer.py', reloading
+2025-04-07 11:08:15,898 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\pip\\_vendor\\rich\\_win32_console.py', reloading
+2025-04-07 11:08:15,931 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\encodings\\cp1252.py', reloading
+2025-04-07 11:08:15,976 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\pip\\_internal\\utils\\misc.py', reloading
+2025-04-07 11:08:16,004 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\pip\\_internal\\commands\\show.py', reloading
+2025-04-07 11:08:16,637 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-07 11:08:21,264 - werkzeug - WARNING -  * Debugger is active!
+2025-04-07 11:08:21,268 - werkzeug - INFO -  * Debugger PIN: 128-588-271
