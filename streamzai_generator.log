@@ -2392,3 +2392,28 @@
 2025-04-07 11:08:16,637 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
 2025-04-07 11:08:21,264 - werkzeug - WARNING -  * Debugger is active!
 2025-04-07 11:08:21,268 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-07 11:19:33,653 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-04-07 11:19:33,653 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-07 11:19:33,667 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-07 11:19:36,059 - werkzeug - WARNING -  * Debugger is active!
+2025-04-07 11:19:36,064 - werkzeug - INFO -  * Debugger PIN: 755-953-328
+2025-04-07 11:19:38,662 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 11:19:38] "GET / HTTP/1.1" 200 -
+2025-04-07 11:19:38,686 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 11:19:38] "GET /static/css/style.css HTTP/1.1" 200 -
+2025-04-07 11:19:38,688 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 11:19:38] "GET /static/js/main.js HTTP/1.1" 200 -
+2025-04-07 11:19:38,793 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 11:19:38] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-04-07 11:19:51,155 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 11:19:51] "GET / HTTP/1.1" 200 -
+2025-04-07 11:19:51,197 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 11:19:51] "GET /static/css/style.css HTTP/1.1" 200 -
+2025-04-07 11:19:51,200 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 11:19:51] "GET /static/js/main.js HTTP/1.1" 200 -
+2025-04-07 11:36:54,998 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 11:36:54] "GET / HTTP/1.1" 200 -
+2025-04-07 11:36:55,016 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 11:36:55] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-07 11:36:55,017 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 11:36:55] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-07 11:36:57,299 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 11:36:57] "GET /test-suites HTTP/1.1" 200 -
+2025-04-07 11:36:57,320 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 11:36:57] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-07 11:36:57,326 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 11:36:57] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-07 11:46:25,759 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Desktop\\streamz framework\\final_testing_framework\\test-generation\\generated_tests\\test_recorded_20250407_105307.py', reloading
+2025-04-07 11:46:25,762 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Desktop\\streamz framework\\final_testing_framework\\test-generation\\generated_tests\\test_recorded_20250407_105307.py', reloading
+2025-04-07 11:46:25,762 - werkzeug - INFO -  * Detected change in 'C:\\Users\\DELL\\Desktop\\streamz framework\\final_testing_framework\\test-generation\\generated_tests\\test_recorded_20250407_105307.py', reloading
+2025-04-07 11:46:26,430 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-07 11:46:28,978 - werkzeug - WARNING -  * Debugger is active!
+2025-04-07 11:46:28,978 - werkzeug - INFO -  * Debugger PIN: 755-953-328
