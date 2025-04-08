@@ -2417,3 +2417,284 @@
 2025-04-07 11:46:26,430 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
 2025-04-07 11:46:28,978 - werkzeug - WARNING -  * Debugger is active!
 2025-04-07 11:46:28,978 - werkzeug - INFO -  * Debugger PIN: 755-953-328
+2025-04-07 17:14:36,523 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-04-07 17:14:36,523 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-07 17:14:36,538 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-07 17:14:38,778 - werkzeug - WARNING -  * Debugger is active!
+2025-04-07 17:14:38,782 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-07 17:17:46,015 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 17:17:46] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-04-07 17:17:46,073 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 17:17:46] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-07 17:17:46,089 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 17:17:46] "GET /static/js/recorder.js HTTP/1.1" 200 -
+2025-04-07 17:17:46,095 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 17:17:46] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-07 17:17:55,140 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 17:17:55] "POST /api/record/start HTTP/1.1" 200 -
+2025-04-07 17:18:14,513 - werkzeug - INFO -  * Detected change in 'c:\\Users\\kusha\\Documents\\StreamzAI\\downloads\\testing\\test-generation1\\test-generation\\generated_tests\\test_recorded_20250407_171814.py', reloading
+2025-04-07 17:18:14,513 - werkzeug - INFO -  * Detected change in 'c:\\Users\\kusha\\Documents\\StreamzAI\\downloads\\testing\\test-generation1\\test-generation\\generated_tests\\test_recorded_20250407_171814.py', reloading
+2025-04-07 17:18:14,523 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 17:18:14] "POST /api/record/stop HTTP/1.1" 200 -
+2025-04-07 17:18:15,518 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-07 17:18:18,933 - werkzeug - WARNING -  * Debugger is active!
+2025-04-07 17:18:18,936 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-07 17:18:32,237 - werkzeug - INFO -  * Detected change in 'c:\\Users\\kusha\\Documents\\StreamzAI\\downloads\\testing\\test-generation1\\test-generation\\generated_tests\\test_recorded_20250407_105307.py', reloading
+2025-04-07 17:18:33,575 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-07 17:18:36,782 - werkzeug - WARNING -  * Debugger is active!
+2025-04-07 17:18:36,785 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-07 17:18:38,323 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\selenium\\__init__.py', reloading
+2025-04-07 17:18:38,347 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\selenium\\webdriver\\__init__.py', reloading
+2025-04-07 17:18:38,358 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\selenium\\webdriver\\common\\__init__.py', reloading
+2025-04-07 17:18:38,372 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\selenium\\webdriver\\common\\by.py', reloading
+2025-04-07 17:18:38,377 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\selenium\\webdriver\\support\\__init__.py', reloading
+2025-04-07 17:18:38,393 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\selenium\\webdriver\\support\\ui.py', reloading
+2025-04-07 17:18:38,414 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\selenium\\webdriver\\support\\wait.py', reloading
+2025-04-07 17:18:38,436 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\selenium\\webdriver\\support\\expected_conditions.py', reloading
+2025-04-07 17:18:38,448 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\selenium\\webdriver\\common\\keys.py', reloading
+2025-04-07 17:18:39,243 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-07 17:18:42,493 - werkzeug - WARNING -  * Debugger is active!
+2025-04-07 17:18:42,497 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-07 17:20:03,291 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 17:20:03] "GET / HTTP/1.1" 200 -
+2025-04-07 17:20:03,328 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 17:20:03] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-07 17:20:03,338 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 17:20:03] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-07 17:25:32,835 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 17:25:32] "GET /test-suites HTTP/1.1" 200 -
+2025-04-07 17:25:32,869 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 17:25:32] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-07 17:25:32,877 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 17:25:32] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-07 17:26:11,888 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\typing.py', reloading
+2025-04-07 17:26:11,912 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\selenium\\webdriver\\chrome\\__init__.py', reloading
+2025-04-07 17:26:11,924 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\selenium\\webdriver\\chrome\\webdriver.py', reloading
+2025-04-07 17:26:11,938 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\selenium\\webdriver\\chromium\\__init__.py', reloading
+2025-04-07 17:26:11,963 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\selenium\\webdriver\\chromium\\webdriver.py', reloading
+2025-04-07 17:26:11,975 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\selenium\\webdriver\\remote\\__init__.py', reloading
+2025-04-07 17:26:12,005 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\selenium\\webdriver\\remote\\webdriver.py', reloading
+2025-04-07 17:26:12,057 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\selenium\\webdriver\\remote\\webelement.py', reloading
+2025-04-07 17:26:12,589 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-07 17:26:15,957 - werkzeug - WARNING -  * Debugger is active!
+2025-04-07 17:26:15,964 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-07 17:47:18,886 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 17:47:18] "GET /test-suite/4 HTTP/1.1" 200 -
+2025-04-07 17:47:18,924 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 17:47:18] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-07 17:47:18,928 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 17:47:18] "[36mGET /static/js/recorder.js HTTP/1.1[0m" 304 -
+2025-04-07 17:47:18,928 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 17:47:18] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-07 17:47:42,746 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 17:47:42] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-04-07 17:47:42,770 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 17:47:42] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-07 17:47:42,787 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 17:47:42] "[36mGET /static/js/recorder.js HTTP/1.1[0m" 304 -
+2025-04-07 17:47:42,787 - werkzeug - INFO - 127.0.0.1 - - [07/Apr/2025 17:47:42] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:08:26,624 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-04-08 20:08:26,625 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-08 20:08:26,656 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-08 20:08:30,480 - werkzeug - WARNING -  * Debugger is active!
+2025-04-08 20:08:30,552 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-08 20:08:33,901 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:08:33] "GET / HTTP/1.1" 200 -
+2025-04-08 20:08:35,950 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:08:35] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:08:35,966 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:08:35] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:08:36,155 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:08:36] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-04-08 20:08:41,541 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:08:41] "GET / HTTP/1.1" 200 -
+2025-04-08 20:08:41,561 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:08:41] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:08:41,572 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:08:41] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:08:42,948 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:08:42] "GET / HTTP/1.1" 200 -
+2025-04-08 20:08:42,967 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:08:42] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:08:42,976 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:08:42] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:08:43,411 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:08:43] "GET /projects HTTP/1.1" 200 -
+2025-04-08 20:08:43,431 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:08:43] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:08:43,438 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:08:43] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:08:44,315 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:08:44] "GET /test-suites HTTP/1.1" 200 -
+2025-04-08 20:08:44,350 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:08:44] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:08:44,365 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:08:44] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:08:45,166 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:08:45] "GET /test-runs HTTP/1.1" 200 -
+2025-04-08 20:08:45,199 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:08:45] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:08:45,217 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:08:45] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:08:45,760 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:08:45] "GET /reports HTTP/1.1" 200 -
+2025-04-08 20:08:45,780 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:08:45] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:08:45,788 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:08:45] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:08:46,460 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:08:46] "GET /test-runs HTTP/1.1" 200 -
+2025-04-08 20:08:46,490 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:08:46] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:08:46,503 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:08:46] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:08:47,421 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:08:47] "GET /test-suites HTTP/1.1" 200 -
+2025-04-08 20:08:47,441 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:08:47] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:08:47,449 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:08:47] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:08:48,235 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:08:48] "GET /projects HTTP/1.1" 200 -
+2025-04-08 20:08:48,262 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:08:48] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:08:48,274 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:08:48] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:08:50,384 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:08:50] "GET /test-suites HTTP/1.1" 200 -
+2025-04-08 20:08:50,405 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:08:50] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:08:50,412 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:08:50] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:08:52,453 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:08:52] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-04-08 20:08:52,480 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:08:52] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:08:52,491 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:08:52] "[36mGET /static/js/recorder.js HTTP/1.1[0m" 304 -
+2025-04-08 20:08:52,494 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:08:52] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:28:31,831 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-04-08 20:28:31,831 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-08 20:28:31,852 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-08 20:28:34,883 - werkzeug - WARNING -  * Debugger is active!
+2025-04-08 20:28:34,893 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-08 20:28:37,087 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:28:37] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-04-08 20:28:37,120 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:28:37] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:28:37,124 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:28:37] "[36mGET /static/js/recorder.js HTTP/1.1[0m" 304 -
+2025-04-08 20:28:37,126 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:28:37] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:28:40,213 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:28:40] "GET / HTTP/1.1" 200 -
+2025-04-08 20:28:40,237 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:28:40] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:28:40,248 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:28:40] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:28:40,800 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:28:40] "GET / HTTP/1.1" 200 -
+2025-04-08 20:28:40,815 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:28:40] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:28:40,819 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:28:40] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:28:41,588 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:28:41] "GET /projects HTTP/1.1" 200 -
+2025-04-08 20:28:41,615 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:28:41] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:28:41,628 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:28:41] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:28:42,400 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:28:42] "GET /test-suites HTTP/1.1" 200 -
+2025-04-08 20:28:42,424 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:28:42] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:28:42,435 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:28:42] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:28:42,924 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:28:42] "GET /test-runs HTTP/1.1" 200 -
+2025-04-08 20:28:42,948 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:28:42] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:28:42,958 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:28:42] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:28:43,527 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\jinja2\\environment.py', reloading
+2025-04-08 20:28:43,555 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\werkzeug\\routing\\map.py', reloading
+2025-04-08 20:28:43,563 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:28:43] "[35m[1mGET /reports HTTP/1.1[0m" 500 -
+2025-04-08 20:28:43,622 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:28:43] "[36mGET /reports?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:28:43,642 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:28:43] "[36mGET /reports?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-04-08 20:28:43,698 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:28:43] "GET /reports?__debugger__=yes&cmd=resource&f=console.png&s=iLIFd5VFk76G8bE3XqPj HTTP/1.1" 200 -
+2025-04-08 20:28:43,722 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:28:43] "[36mGET /reports?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-04-08 20:28:44,360 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-08 20:28:47,595 - werkzeug - WARNING -  * Debugger is active!
+2025-04-08 20:28:47,598 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-08 20:28:47,680 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:28:47] "[35m[1mGET /reports HTTP/1.1[0m" 500 -
+2025-04-08 20:28:47,708 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:28:47] "[36mGET /reports?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:28:47,718 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:28:47] "[36mGET /reports?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-04-08 20:28:47,746 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:28:47] "GET /reports?__debugger__=yes&cmd=resource&f=console.png&s=LL6AxNMQIGdbbbIV5E1p HTTP/1.1" 200 -
+2025-04-08 20:28:51,881 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:28:51] "GET /test-runs HTTP/1.1" 200 -
+2025-04-08 20:28:51,898 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:28:51] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:28:51,903 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:28:51] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:28:52,793 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:28:52] "GET /test-suites HTTP/1.1" 200 -
+2025-04-08 20:28:52,821 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:28:52] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:28:52,833 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:28:52] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:28:53,383 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:28:53] "GET /projects HTTP/1.1" 200 -
+2025-04-08 20:28:53,400 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:28:53] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:28:53,408 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:28:53] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:28:53,879 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:28:53] "GET / HTTP/1.1" 200 -
+2025-04-08 20:28:53,897 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:28:53] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:28:53,906 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:28:53] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:28:54,537 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:28:54] "[35m[1mGET /reports HTTP/1.1[0m" 500 -
+2025-04-08 20:28:54,566 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:28:54] "[36mGET /reports?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:28:54,577 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:28:54] "[36mGET /reports?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-04-08 20:28:54,589 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:28:54] "[36mGET /reports?__debugger__=yes&cmd=resource&f=console.png&s=LL6AxNMQIGdbbbIV5E1p HTTP/1.1[0m" 304 -
+2025-04-08 20:30:30,058 - werkzeug - INFO -  * Detected change in 'c:\\Users\\kusha\\Documents\\StreamzAI\\downloads\\testing\\test-generation1\\test-generation\\routes.py', reloading
+2025-04-08 20:30:30,058 - werkzeug - INFO -  * Detected change in 'c:\\Users\\kusha\\Documents\\StreamzAI\\downloads\\testing\\test-generation1\\test-generation\\routes.py', reloading
+2025-04-08 20:30:30,058 - werkzeug - INFO -  * Detected change in 'c:\\Users\\kusha\\Documents\\StreamzAI\\downloads\\testing\\test-generation1\\test-generation\\routes.py', reloading
+2025-04-08 20:30:30,514 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-08 20:30:34,706 - werkzeug - WARNING -  * Debugger is active!
+2025-04-08 20:30:34,719 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-08 20:30:42,633 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:30:42] "GET /reports HTTP/1.1" 200 -
+2025-04-08 20:30:42,663 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:30:42] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:30:42,675 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:30:42] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:30:54,882 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:30:54] "GET / HTTP/1.1" 200 -
+2025-04-08 20:30:54,906 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:30:54] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:30:54,916 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:30:54] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:30:55,603 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:30:55] "GET /projects HTTP/1.1" 200 -
+2025-04-08 20:30:55,621 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:30:55] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:30:55,628 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:30:55] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:30:56,144 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:30:56] "GET /test-suites HTTP/1.1" 200 -
+2025-04-08 20:30:56,183 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:30:56] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:30:56,194 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:30:56] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:30:56,939 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:30:56] "GET /test-runs HTTP/1.1" 200 -
+2025-04-08 20:30:56,959 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:30:56] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:30:56,967 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:30:56] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:30:57,809 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:30:57] "GET /test-suites HTTP/1.1" 200 -
+2025-04-08 20:30:57,834 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:30:57] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:30:57,847 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:30:57] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:30:59,167 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:30:59] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-04-08 20:30:59,200 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:30:59] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:30:59,214 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:30:59] "[36mGET /static/js/recorder.js HTTP/1.1[0m" 304 -
+2025-04-08 20:30:59,216 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:30:59] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:31:02,237 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:31:02] "GET / HTTP/1.1" 200 -
+2025-04-08 20:31:02,264 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:31:02] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:31:02,279 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:31:02] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:31:03,966 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:31:03] "GET /project/create HTTP/1.1" 200 -
+2025-04-08 20:31:03,990 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:31:03] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:31:03,999 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:31:03] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:31:10,639 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\wtforms\\form.py', reloading
+2025-04-08 20:31:10,675 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\wtforms\\fields\\core.py', reloading
+2025-04-08 20:31:11,866 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-08 20:31:15,401 - werkzeug - WARNING -  * Debugger is active!
+2025-04-08 20:31:15,405 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-08 20:57:46,354 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-04-08 20:57:46,356 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-08 20:57:46,396 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-08 20:57:50,098 - werkzeug - WARNING -  * Debugger is active!
+2025-04-08 20:57:50,103 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-08 20:57:56,711 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:57:56] "GET / HTTP/1.1" 200 -
+2025-04-08 20:57:56,872 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:57:56] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:57:57,116 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:57:57] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:57:57,355 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:57:57] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-04-08 20:58:33,837 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:58:33] "GET /projects HTTP/1.1" 200 -
+2025-04-08 20:58:33,860 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:58:33] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:58:33,872 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:58:33] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:58:35,696 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:58:35] "GET / HTTP/1.1" 200 -
+2025-04-08 20:58:35,717 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:58:35] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:58:35,724 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:58:35] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:58:36,288 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:58:36] "GET /projects HTTP/1.1" 200 -
+2025-04-08 20:58:36,323 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:58:36] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:58:36,368 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:58:36] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:58:36,807 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:58:36] "GET /test-suites HTTP/1.1" 200 -
+2025-04-08 20:58:36,861 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:58:36] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:58:36,905 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:58:36] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:58:37,483 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:58:37] "GET /test-runs HTTP/1.1" 200 -
+2025-04-08 20:58:37,504 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:58:37] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:58:37,514 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:58:37] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:58:37,976 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:58:37] "GET /reports HTTP/1.1" 200 -
+2025-04-08 20:58:38,002 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:58:38] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:58:38,027 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:58:38] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:58:38,849 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:58:38] "GET /test-runs HTTP/1.1" 200 -
+2025-04-08 20:58:38,892 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:58:38] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:58:38,915 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:58:38] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:58:39,380 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:58:39] "GET /test-suites HTTP/1.1" 200 -
+2025-04-08 20:58:39,413 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:58:39] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:58:39,425 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:58:39] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:58:40,773 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:58:40] "GET /test-runs HTTP/1.1" 200 -
+2025-04-08 20:58:40,811 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:58:40] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:58:40,828 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:58:40] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:58:42,244 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:58:42] "GET /test-suites HTTP/1.1" 200 -
+2025-04-08 20:58:42,285 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:58:42] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:58:42,302 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:58:42] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:58:43,245 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:58:43] "GET /projects HTTP/1.1" 200 -
+2025-04-08 20:58:43,268 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:58:43] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:58:43,278 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:58:43] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:58:44,641 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:58:44] "GET / HTTP/1.1" 200 -
+2025-04-08 20:58:44,666 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:58:44] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:58:44,674 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:58:44] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:58:45,163 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:58:45] "GET /projects HTTP/1.1" 200 -
+2025-04-08 20:58:45,181 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:58:45] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:58:45,190 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:58:45] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 20:58:46,634 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:58:46] "GET /test-suites HTTP/1.1" 200 -
+2025-04-08 20:58:46,664 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:58:46] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 20:58:46,678 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 20:58:46] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 21:24:04,342 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 21:24:04] "GET / HTTP/1.1" 200 -
+2025-04-08 21:24:04,805 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 21:24:04] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 21:24:04,844 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 21:24:04] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 21:24:04,892 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 21:24:04] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-04-08 21:24:07,832 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 21:24:07] "GET /projects HTTP/1.1" 200 -
+2025-04-08 21:24:07,850 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 21:24:07] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 21:24:07,859 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 21:24:07] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 21:24:08,324 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 21:24:08] "GET /test-suites HTTP/1.1" 200 -
+2025-04-08 21:24:08,347 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 21:24:08] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 21:24:08,355 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 21:24:08] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 21:24:09,086 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 21:24:09] "GET /test-runs HTTP/1.1" 200 -
+2025-04-08 21:24:09,103 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 21:24:09] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 21:24:09,111 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 21:24:09] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 21:24:09,787 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 21:24:09] "GET /reports HTTP/1.1" 200 -
+2025-04-08 21:24:09,804 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 21:24:09] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 21:24:09,810 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 21:24:09] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 21:24:10,998 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 21:24:10] "GET / HTTP/1.1" 200 -
+2025-04-08 21:24:11,014 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 21:24:11] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 21:24:11,023 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 21:24:11] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 21:24:12,193 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 21:24:12] "GET /reports HTTP/1.1" 200 -
+2025-04-08 21:24:12,209 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 21:24:12] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-08 21:24:12,216 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 21:24:12] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-08 21:24:13,970 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flask\\app.py', reloading
+2025-04-08 21:24:13,981 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flask_wtf\\form.py', reloading
+2025-04-08 21:24:14,019 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\wtforms\\fields\\choices.py', reloading
+2025-04-08 21:24:14,024 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 21:24:14] "[35m[1mPOST /export-results HTTP/1.1[0m" 500 -
+2025-04-08 21:24:14,067 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 21:24:14] "GET /export-results?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2025-04-08 21:24:14,083 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 21:24:14] "GET /export-results?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2025-04-08 21:24:14,122 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 21:24:14] "GET /export-results?__debugger__=yes&cmd=resource&f=console.png&s=7tsamLINjZeic4nGV4h4 HTTP/1.1" 200 -
+2025-04-08 21:24:14,138 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 21:24:14] "GET /export-results?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+2025-04-08 21:24:14,838 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-08 21:24:17,125 - werkzeug - WARNING -  * Debugger is active!
+2025-04-08 21:24:17,126 - werkzeug - INFO -  * Debugger PIN: 128-588-271
