@@ -2392,6 +2392,7 @@
 2025-04-07 11:08:16,637 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
 2025-04-07 11:08:21,264 - werkzeug - WARNING -  * Debugger is active!
 2025-04-07 11:08:21,268 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+<<<<<<< HEAD
 2025-04-07 11:19:33,653 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
  * Running on http://127.0.0.1:5000
 2025-04-07 11:19:33,653 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
@@ -2698,3 +2699,5 @@
 2025-04-08 21:24:14,838 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
 2025-04-08 21:24:17,125 - werkzeug - WARNING -  * Debugger is active!
 2025-04-08 21:24:17,126 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+=======
+>>>>>>> parent of 7e919c1 (Add files via upload)
