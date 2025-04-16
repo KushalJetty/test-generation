@@ -2701,3 +2701,979 @@
 2025-04-08 21:24:17,126 - werkzeug - INFO -  * Debugger PIN: 128-588-271
 =======
 >>>>>>> parent of 7e919c1 (Add files via upload)
+2025-04-15 11:05:30,290 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-04-15 11:05:30,290 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-15 11:05:30,310 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-15 11:05:33,328 - werkzeug - WARNING -  * Debugger is active!
+2025-04-15 11:05:33,328 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-15 11:05:40,963 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flask_wtf\\__init__.py', reloading
+2025-04-15 11:05:41,127 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flask_wtf\\form.py', reloading
+2025-04-15 11:05:41,267 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\wtforms\\__init__.py', reloading
+2025-04-15 11:05:41,294 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\wtforms\\form.py', reloading
+2025-04-15 11:05:41,677 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\collections\\__init__.py', reloading
+2025-04-15 11:05:43,081 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-15 11:05:48,765 - werkzeug - WARNING -  * Debugger is active!
+2025-04-15 11:05:48,769 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-15 11:05:48,866 - werkzeug - INFO - 127.0.0.1 - - [15/Apr/2025 11:05:48] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-04-15 11:05:48,887 - werkzeug - INFO - 127.0.0.1 - - [15/Apr/2025 11:05:48] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-04-15 11:05:48,904 - werkzeug - INFO - 127.0.0.1 - - [15/Apr/2025 11:05:48] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-04-15 11:05:48,957 - werkzeug - INFO - 127.0.0.1 - - [15/Apr/2025 11:05:48] "GET / HTTP/1.1" 200 -
+2025-04-15 11:05:49,125 - werkzeug - INFO - 127.0.0.1 - - [15/Apr/2025 11:05:49] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-15 11:05:49,125 - werkzeug - INFO - 127.0.0.1 - - [15/Apr/2025 11:05:49] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-15 11:05:50,797 - werkzeug - INFO - 127.0.0.1 - - [15/Apr/2025 11:05:50] "GET /projects HTTP/1.1" 200 -
+2025-04-15 11:05:50,830 - werkzeug - INFO - 127.0.0.1 - - [15/Apr/2025 11:05:50] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-15 11:05:50,845 - werkzeug - INFO - 127.0.0.1 - - [15/Apr/2025 11:05:50] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-15 11:05:51,702 - werkzeug - INFO - 127.0.0.1 - - [15/Apr/2025 11:05:51] "GET /test-suites HTTP/1.1" 200 -
+2025-04-15 11:05:51,741 - werkzeug - INFO - 127.0.0.1 - - [15/Apr/2025 11:05:51] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-15 11:05:51,749 - werkzeug - INFO - 127.0.0.1 - - [15/Apr/2025 11:05:51] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-15 11:05:53,128 - werkzeug - INFO - 127.0.0.1 - - [15/Apr/2025 11:05:53] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-04-15 11:05:53,147 - werkzeug - INFO - 127.0.0.1 - - [15/Apr/2025 11:05:53] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-15 11:05:53,159 - werkzeug - INFO - 127.0.0.1 - - [15/Apr/2025 11:05:53] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-15 11:05:53,184 - werkzeug - INFO - 127.0.0.1 - - [15/Apr/2025 11:05:53] "GET /static/js/recorder.js HTTP/1.1" 200 -
+2025-04-15 11:06:01,606 - werkzeug - INFO - 127.0.0.1 - - [15/Apr/2025 11:06:01] "POST /api/record/start HTTP/1.1" 200 -
+2025-04-15 11:07:16,130 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\Documents\\StreamzAI\\downloads\\testing\\test-generation1\\test-generation\\generated_tests\\test_recorded_20250415_110716.py', reloading
+2025-04-15 11:07:16,131 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\Documents\\StreamzAI\\downloads\\testing\\test-generation1\\test-generation\\generated_tests\\test_recorded_20250415_110716.py', reloading
+2025-04-15 11:07:16,144 - werkzeug - INFO - 127.0.0.1 - - [15/Apr/2025 11:07:16] "POST /api/record/stop HTTP/1.1" 200 -
+2025-04-15 11:07:17,495 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-15 11:07:20,378 - werkzeug - WARNING -  * Debugger is active!
+2025-04-15 11:07:20,381 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-15 11:07:31,630 - werkzeug - INFO - 127.0.0.1 - - [15/Apr/2025 11:07:31] "POST /api/record/start HTTP/1.1" 200 -
+2025-04-15 11:08:09,848 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\Documents\\StreamzAI\\downloads\\testing\\test-generation1\\test-generation\\generated_tests\\test_recorded_20250415_110809.py', reloading
+2025-04-15 11:08:09,849 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\Documents\\StreamzAI\\downloads\\testing\\test-generation1\\test-generation\\generated_tests\\test_recorded_20250415_110809.py', reloading
+2025-04-15 11:08:09,851 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\Documents\\StreamzAI\\downloads\\testing\\test-generation1\\test-generation\\generated_tests\\test_recorded_20250415_110809.py', reloading
+2025-04-15 11:08:09,863 - werkzeug - INFO - 127.0.0.1 - - [15/Apr/2025 11:08:09] "POST /api/record/stop HTTP/1.1" 200 -
+2025-04-15 11:08:10,807 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-15 11:08:13,652 - werkzeug - WARNING -  * Debugger is active!
+2025-04-15 11:08:13,656 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-15 12:15:03,141 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\playwright\\_impl\\_connection.py', reloading
+2025-04-15 12:15:03,154 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\events.py', reloading
+2025-04-15 12:15:03,168 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\base_events.py', reloading
+2025-04-15 12:15:03,181 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\windows_events.py', reloading
+2025-04-15 12:15:03,705 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-15 12:15:06,373 - werkzeug - WARNING -  * Debugger is active!
+2025-04-15 12:15:06,376 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-15 12:15:06,917 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\playwright\\_impl\\_browser.py', reloading
+2025-04-15 12:15:06,954 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\playwright\\_impl\\_browser_context.py', reloading
+2025-04-15 12:15:07,193 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\playwright\\_impl\\_page.py', reloading
+2025-04-15 12:15:07,414 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\playwright\\_impl\\_frame.py', reloading
+2025-04-15 12:15:07,885 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-15 12:15:10,442 - werkzeug - WARNING -  * Debugger is active!
+2025-04-15 12:15:10,444 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-15 12:15:44,350 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\playwright\\async_api\\__init__.py', reloading
+2025-04-15 12:15:44,418 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\playwright\\_impl\\_api_structures.py', reloading
+2025-04-15 12:15:44,428 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\playwright\\async_api\\_context_manager.py', reloading
+2025-04-15 12:15:44,431 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\playwright\\_impl\\_async_base.py', reloading
+2025-04-15 12:15:44,432 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\playwright\\_impl\\_impl_to_api_mapping.py', reloading
+2025-04-15 12:15:44,443 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\signal.py', reloading
+2025-04-15 12:15:45,815 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-15 12:15:50,110 - werkzeug - WARNING -  * Debugger is active!
+2025-04-15 12:15:50,114 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-15 12:15:53,538 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\proactor_events.py', reloading
+2025-04-15 12:15:53,541 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\windows_utils.py', reloading
+2025-04-15 12:15:53,553 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\base_subprocess.py', reloading
+2025-04-15 12:15:54,619 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-15 12:15:57,622 - werkzeug - WARNING -  * Debugger is active!
+2025-04-15 12:15:57,626 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-15 12:17:06,834 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\tkinter\\__init__.py', reloading
+2025-04-15 12:17:08,590 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-15 12:17:12,552 - werkzeug - WARNING -  * Debugger is active!
+2025-04-15 12:17:12,557 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-15 12:21:03,803 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\pip\\_vendor\\pyparsing\\core.py', reloading
+2025-04-15 12:21:04,713 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-15 12:21:11,154 - werkzeug - WARNING -  * Debugger is active!
+2025-04-15 12:21:11,161 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-15 12:25:26,158 - werkzeug - INFO - 127.0.0.1 - - [15/Apr/2025 12:25:26] "POST /api/record/start HTTP/1.1" 200 -
+2025-04-15 12:33:55,919 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\pip\\_internal\\utils\\logging.py', reloading
+2025-04-15 12:33:55,935 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\pip\\_vendor\\rich\\console.py', reloading
+2025-04-15 12:33:55,947 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\pip\\_vendor\\rich\\_windows_renderer.py', reloading
+2025-04-15 12:33:55,962 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\pip\\_vendor\\rich\\_win32_console.py', reloading
+2025-04-15 12:33:55,974 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\encodings\\cp1252.py', reloading
+2025-04-15 12:33:55,976 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\logging\\__init__.py', reloading
+2025-04-15 12:33:55,995 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\pip\\_internal\\utils\\misc.py', reloading
+2025-04-15 12:33:56,012 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\pip\\_internal\\commands\\show.py', reloading
+2025-04-15 12:33:56,028 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\pip\\_internal\\cli\\base_command.py', reloading
+2025-04-15 12:33:56,046 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\pip\\_internal\\cli\\main.py', reloading
+2025-04-15 12:33:59,004 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-15 12:34:03,110 - werkzeug - WARNING -  * Debugger is active!
+2025-04-15 12:34:03,115 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-15 12:37:54,006 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\Documents\\StreamzAI\\downloads\\testing\\test-generation1\\test-generation\\generated_tests\\test_recorded_20250415_123754.py', reloading
+2025-04-15 12:37:54,009 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\Documents\\StreamzAI\\downloads\\testing\\test-generation1\\test-generation\\generated_tests\\test_recorded_20250415_123754.py', reloading
+2025-04-15 12:37:54,027 - werkzeug - INFO - 127.0.0.1 - - [15/Apr/2025 12:37:54] "POST /api/record/stop HTTP/1.1" 200 -
+2025-04-15 12:37:54,745 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-15 12:37:57,914 - werkzeug - WARNING -  * Debugger is active!
+2025-04-15 12:37:57,916 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-15 12:38:03,096 - werkzeug - INFO - 127.0.0.1 - - [15/Apr/2025 12:38:03] "POST /api/record/start HTTP/1.1" 200 -
+2025-04-15 12:40:07,764 - werkzeug - INFO - 127.0.0.1 - - [15/Apr/2025 12:40:07] "[35m[1mPOST /api/record/stop HTTP/1.1[0m" 500 -
+2025-04-15 19:38:02,176 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\tkinter\\__init__.py', reloading
+2025-04-15 19:38:03,123 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-15 19:38:07,201 - werkzeug - WARNING -  * Debugger is active!
+2025-04-15 19:38:07,201 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-15 20:15:09,923 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\playwright\\_impl\\_connection.py', reloading
+2025-04-15 20:15:09,936 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\events.py', reloading
+2025-04-15 20:15:09,942 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\base_events.py', reloading
+2025-04-15 20:15:09,958 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\windows_events.py', reloading
+2025-04-15 20:15:09,981 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\threading.py', reloading
+2025-04-15 20:15:10,526 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-15 20:15:14,337 - werkzeug - WARNING -  * Debugger is active!
+2025-04-15 20:15:14,349 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-15 20:15:14,524 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\playwright\\_impl\\_browser.py', reloading
+2025-04-15 20:15:14,548 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\playwright\\_impl\\_browser_context.py', reloading
+2025-04-15 20:15:14,852 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\playwright\\_impl\\_frame.py', reloading
+2025-04-15 20:15:14,868 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\playwright\\_impl\\_page.py', reloading
+2025-04-15 20:15:15,756 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-15 20:15:18,329 - werkzeug - WARNING -  * Debugger is active!
+2025-04-15 20:15:18,332 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-15 20:16:44,213 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\playwright\\async_api\\__init__.py', reloading
+2025-04-15 20:16:44,247 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\playwright\\_impl\\_api_structures.py', reloading
+2025-04-15 20:16:44,259 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\playwright\\async_api\\_context_manager.py', reloading
+2025-04-15 20:16:44,269 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\playwright\\_impl\\_async_base.py', reloading
+2025-04-15 20:16:44,286 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\playwright\\_impl\\_impl_to_api_mapping.py', reloading
+2025-04-15 20:16:44,300 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\signal.py', reloading
+2025-04-15 20:16:44,315 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\google\\oauth2\\__init__.py', reloading
+2025-04-15 20:16:44,331 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\google\\oauth2\\service_account.py', reloading
+2025-04-15 20:16:44,342 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\googleapiclient\\discovery.py', reloading
+2025-04-15 20:16:44,353 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\argparse.py', reloading
+2025-04-15 20:16:44,406 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\googleapiclient\\_helpers.py', reloading
+2025-04-15 20:16:44,422 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\googleapiclient\\http.py', reloading
+2025-04-15 20:16:45,043 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-15 20:16:47,483 - werkzeug - WARNING -  * Debugger is active!
+2025-04-15 20:16:47,483 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-15 20:19:39,669 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\re\\__init__.py', reloading
+2025-04-15 20:19:40,222 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-15 20:19:43,588 - werkzeug - WARNING -  * Debugger is active!
+2025-04-15 20:19:43,597 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-15 22:08:27,486 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\playwright\\_impl\\_connection.py', reloading
+2025-04-15 22:08:27,499 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\events.py', reloading
+2025-04-15 22:08:27,514 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\base_events.py', reloading
+2025-04-15 22:08:27,523 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\windows_events.py', reloading
+2025-04-15 22:08:28,801 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-15 22:08:37,860 - werkzeug - WARNING -  * Debugger is active!
+2025-04-15 22:08:37,870 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-15 22:11:38,677 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\tasks.py', reloading
+2025-04-15 22:11:39,122 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-15 22:11:41,804 - werkzeug - WARNING -  * Debugger is active!
+2025-04-15 22:11:41,804 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-15 22:12:00,056 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Roaming\\Python\\Python311\\site-packages\\psutil\\__init__.py', reloading
+2025-04-15 22:12:00,574 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-15 22:12:04,527 - werkzeug - WARNING -  * Debugger is active!
+2025-04-15 22:12:04,535 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-15 22:12:22,284 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\_pytest\\cacheprovider.py', reloading
+2025-04-15 22:12:22,363 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\_pytest\\fixtures.py', reloading
+2025-04-15 22:12:22,469 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\_pytest\\config\\__init__.py', reloading
+2025-04-15 22:12:22,586 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\_pytest\\capture.py', reloading
+2025-04-15 22:12:22,680 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\_pytest\\doctest.py', reloading
+2025-04-15 22:12:22,749 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\_pytest\\compat.py', reloading
+2025-04-15 22:12:22,804 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\_pytest\\junitxml.py', reloading
+2025-04-15 22:12:23,291 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-15 22:12:26,632 - werkzeug - WARNING -  * Debugger is active!
+2025-04-15 22:12:26,635 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-15 22:12:36,960 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\os.py', reloading
+2025-04-15 22:12:38,158 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-15 22:12:41,173 - werkzeug - WARNING -  * Debugger is active!
+2025-04-15 22:12:41,179 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-15 22:14:10,254 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\_pytest\\legacypath.py', reloading
+2025-04-15 22:14:10,313 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\_pytest\\logging.py', reloading
+2025-04-15 22:14:10,374 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\_pytest\\monkeypatch.py', reloading
+2025-04-15 22:14:10,412 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\_pytest\\recwarn.py', reloading
+2025-04-15 22:14:10,443 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\_pytest\\tmpdir.py', reloading
+2025-04-15 22:14:10,919 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-15 22:14:14,676 - werkzeug - WARNING -  * Debugger is active!
+2025-04-15 22:14:14,682 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-15 22:14:42,790 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\__init__.py', reloading
+2025-04-15 22:14:42,848 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\coroutines.py', reloading
+2025-04-15 22:14:42,860 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\exceptions.py', reloading
+2025-04-15 22:14:42,872 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\futures.py', reloading
+2025-04-15 22:14:42,891 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\locks.py', reloading
+2025-04-15 22:14:42,916 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\protocols.py', reloading
+2025-04-15 22:14:42,930 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\runners.py', reloading
+2025-04-15 22:14:42,940 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\queues.py', reloading
+2025-04-15 22:14:42,954 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\streams.py', reloading
+2025-04-15 22:14:42,981 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\subprocess.py', reloading
+2025-04-15 22:14:42,995 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\taskgroups.py', reloading
+2025-04-15 22:14:43,003 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\timeouts.py', reloading
+2025-04-15 22:14:43,021 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\threads.py', reloading
+2025-04-15 22:14:43,036 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\transports.py', reloading
+2025-04-15 22:14:43,549 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-15 22:14:46,107 - werkzeug - WARNING -  * Debugger is active!
+2025-04-15 22:14:46,113 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-15 22:14:49,073 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\pip\\_vendor\\pyparsing\\core.py', reloading
+2025-04-15 22:14:49,190 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\pip\\_vendor\\packaging\\markers.py', reloading
+2025-04-15 22:14:49,789 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-15 22:14:53,748 - werkzeug - WARNING -  * Debugger is active!
+2025-04-15 22:14:53,750 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-15 22:18:21,569 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\signal.py', reloading
+2025-04-15 22:18:22,716 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-15 22:18:26,721 - werkzeug - WARNING -  * Debugger is active!
+2025-04-15 22:18:26,729 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-15 22:18:32,702 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\pyee\\asyncio.py', reloading
+2025-04-15 22:18:32,722 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\pyee\\base.py', reloading
+2025-04-15 22:18:33,429 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-15 22:18:37,163 - werkzeug - WARNING -  * Debugger is active!
+2025-04-15 22:18:37,169 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-15 22:25:17,088 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\pip\\_internal\\utils\\logging.py', reloading
+2025-04-15 22:25:17,112 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\pip\\_vendor\\rich\\console.py', reloading
+2025-04-15 22:25:17,126 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\pip\\_vendor\\rich\\_windows_renderer.py', reloading
+2025-04-15 22:25:17,145 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\pip\\_vendor\\rich\\_win32_console.py', reloading
+2025-04-15 22:25:17,159 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\encodings\\cp1252.py', reloading
+2025-04-15 22:25:17,178 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\logging\\__init__.py', reloading
+2025-04-15 22:25:17,193 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\pip\\_internal\\utils\\misc.py', reloading
+2025-04-15 22:25:17,209 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\pip\\_internal\\commands\\show.py', reloading
+2025-04-15 22:25:17,668 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-15 22:25:21,076 - werkzeug - WARNING -  * Debugger is active!
+2025-04-15 22:25:21,076 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-15 22:33:00,703 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\proactor_events.py', reloading
+2025-04-15 22:33:00,719 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\windows_utils.py', reloading
+2025-04-15 22:33:00,739 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\base_subprocess.py', reloading
+2025-04-15 22:33:01,684 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-15 22:33:04,457 - werkzeug - WARNING -  * Debugger is active!
+2025-04-15 22:33:04,458 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-15 22:46:18,272 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\playwright\\async_api\\__init__.py', reloading
+2025-04-15 22:46:18,277 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\playwright\\_impl\\_api_structures.py', reloading
+2025-04-15 22:46:18,282 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\playwright\\async_api\\_context_manager.py', reloading
+2025-04-15 22:46:18,285 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\playwright\\_impl\\_async_base.py', reloading
+2025-04-15 22:46:18,285 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\playwright\\_impl\\_impl_to_api_mapping.py', reloading
+2025-04-15 22:46:18,321 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\re\\__init__.py', reloading
+2025-04-15 22:46:18,845 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-15 22:46:21,745 - werkzeug - WARNING -  * Debugger is active!
+2025-04-15 22:46:21,745 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-15 22:46:21,936 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\csv.py', reloading
+2025-04-15 22:46:23,291 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-15 22:46:26,707 - werkzeug - WARNING -  * Debugger is active!
+2025-04-15 22:46:26,711 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-15 22:46:44,620 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\tkinter\\filedialog.py', reloading
+2025-04-15 22:46:45,403 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-15 22:46:48,720 - werkzeug - WARNING -  * Debugger is active!
+2025-04-15 22:46:48,722 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-15 22:50:32,900 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\tkinter\\__init__.py', reloading
+2025-04-15 22:50:33,705 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-15 22:50:36,620 - werkzeug - WARNING -  * Debugger is active!
+2025-04-15 22:50:36,624 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-15 22:56:22,581 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\playwright\\sync_api\\__init__.py', reloading
+2025-04-15 22:56:22,619 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\playwright\\sync_api\\_context_manager.py', reloading
+2025-04-15 22:56:22,763 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\playwright\\sync_api\\_generated.py', reloading
+2025-04-15 22:56:22,932 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\playwright\\_impl\\_sync_base.py', reloading
+2025-04-15 22:56:23,097 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\playwright\\_impl\\_errors.py', reloading
+2025-04-15 22:56:24,071 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-15 22:56:27,280 - werkzeug - WARNING -  * Debugger is active!
+2025-04-15 22:56:27,280 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-15 23:24:56,635 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\_pytest\\cacheprovider.py', reloading
+2025-04-15 23:24:57,426 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-15 23:25:00,370 - werkzeug - WARNING -  * Debugger is active!
+2025-04-15 23:25:00,373 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-15 23:25:02,313 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\_pytest\\fixtures.py', reloading
+2025-04-15 23:25:02,347 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\_pytest\\config\\__init__.py', reloading
+2025-04-15 23:25:02,400 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\_pytest\\capture.py', reloading
+2025-04-15 23:25:02,816 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-15 23:25:05,764 - werkzeug - WARNING -  * Debugger is active!
+2025-04-15 23:25:05,767 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-15 23:25:34,509 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\subprocess.py', reloading
+2025-04-15 23:25:35,484 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-15 23:25:37,665 - werkzeug - WARNING -  * Debugger is active!
+2025-04-15 23:25:37,668 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-15 23:26:14,517 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\requests\\__init__.py', reloading
+2025-04-15 23:26:15,810 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-15 23:26:18,713 - werkzeug - WARNING -  * Debugger is active!
+2025-04-15 23:26:18,719 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-16 15:48:37,066 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-04-16 15:48:37,067 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-16 15:48:37,090 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-16 15:48:40,936 - werkzeug - WARNING -  * Debugger is active!
+2025-04-16 15:48:40,943 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-16 15:48:44,126 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 15:48:44] "GET / HTTP/1.1" 200 -
+2025-04-16 15:48:45,927 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 15:48:45] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-16 15:48:46,127 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 15:48:46] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-16 15:48:46,759 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 15:48:46] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-04-16 15:48:50,042 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 15:48:50] "GET /test-suites HTTP/1.1" 200 -
+2025-04-16 15:48:50,080 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 15:48:50] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-16 15:48:50,106 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 15:48:50] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-16 15:48:51,768 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 15:48:51] "GET /test-suite/4 HTTP/1.1" 200 -
+2025-04-16 15:48:51,813 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 15:48:51] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-16 15:48:51,829 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 15:48:51] "[36mGET /static/js/recorder.js HTTP/1.1[0m" 304 -
+2025-04-16 15:48:51,836 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 15:48:51] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-16 15:49:05,887 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 15:49:05] "POST /api/record/start HTTP/1.1" 200 -
+2025-04-16 15:51:42,023 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\re\\__init__.py', reloading
+2025-04-16 15:51:45,185 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-16 15:51:49,983 - werkzeug - WARNING -  * Debugger is active!
+2025-04-16 15:51:49,986 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-16 15:52:10,661 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\Documents\\StreamzAI\\downloads\\testing\\test-generation1\\test-generation\\generated_tests\\test_recorded_20250416_155210.py', reloading
+2025-04-16 15:52:10,661 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\Documents\\StreamzAI\\downloads\\testing\\test-generation1\\test-generation\\generated_tests\\test_recorded_20250416_155210.py', reloading
+2025-04-16 15:52:10,685 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 15:52:10] "POST /api/record/stop HTTP/1.1" 200 -
+2025-04-16 15:52:12,082 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-16 15:52:15,498 - werkzeug - WARNING -  * Debugger is active!
+2025-04-16 15:52:15,502 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-16 15:55:20,946 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 15:55:20] "POST /api/record/start HTTP/1.1" 200 -
+2025-04-16 15:55:46,730 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 15:55:46] "[35m[1mPOST /api/record/stop HTTP/1.1[0m" 500 -
+2025-04-16 17:59:59,728 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-04-16 17:59:59,728 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-16 17:59:59,753 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-16 18:00:05,099 - werkzeug - WARNING -  * Debugger is active!
+2025-04-16 18:00:05,107 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-16 18:00:05,223 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:00:05] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:00:05,233 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:00:05] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:00:05,342 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:00:05] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-04-16 18:00:05,351 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:00:05] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-04-16 18:00:05,929 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:00:05] "GET /static/css/style.css HTTP/1.1" 200 -
+2025-04-16 18:00:05,939 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:00:05] "GET /static/js/recorder.js HTTP/1.1" 200 -
+2025-04-16 18:00:05,965 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:00:05] "GET /static/js/main.js HTTP/1.1" 200 -
+2025-04-16 18:00:09,899 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:00:09] "GET /test-suite/13/test-run/create HTTP/1.1" 200 -
+2025-04-16 18:00:09,959 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:00:09] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-16 18:00:09,979 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:00:09] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-16 18:00:45,053 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:00:45] "GET /test-suite/13/test-run/create HTTP/1.1" 200 -
+2025-04-16 18:00:45,109 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:00:45] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-16 18:00:45,126 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:00:45] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-16 18:01:01,263 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:01:01] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:01:01,266 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:01:01] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:01:47,830 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:01:47] "GET /test-suites HTTP/1.1" 200 -
+2025-04-16 18:01:47,879 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:01:47] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-16 18:01:47,891 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:01:47] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-16 18:01:50,391 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:01:50] "GET / HTTP/1.1" 200 -
+2025-04-16 18:01:50,433 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:01:50] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-16 18:01:50,444 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:01:50] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-16 18:01:53,379 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:01:53] "GET /test-runs HTTP/1.1" 200 -
+2025-04-16 18:01:53,417 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:01:53] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-16 18:01:53,422 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:01:53] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-16 18:01:55,241 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:01:55] "GET /test-run/create HTTP/1.1" 200 -
+2025-04-16 18:01:55,289 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:01:55] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-16 18:01:55,302 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:01:55] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-16 18:02:01,268 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:02:01] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:02:01,269 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:02:01] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:02:58,826 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:02:58] "GET /test-run/create HTTP/1.1" 200 -
+2025-04-16 18:02:58,875 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:02:58] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-16 18:02:58,891 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:02:58] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-16 18:03:01,265 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:03:01] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:03:01,268 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:03:01] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:03:10,773 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:03:10] "[32mPOST /test-run/create HTTP/1.1[0m" 302 -
+2025-04-16 18:03:10,833 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:03:10] "GET /test-run/4 HTTP/1.1" 200 -
+2025-04-16 18:03:10,891 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:03:10] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-16 18:03:10,899 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:03:10] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-16 18:03:15,928 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:03:15] "GET /test-run/4 HTTP/1.1" 200 -
+2025-04-16 18:03:15,964 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:03:15] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-16 18:03:15,985 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:03:15] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-16 18:03:19,189 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:03:19] "GET /test-runs HTTP/1.1" 200 -
+2025-04-16 18:03:19,227 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:03:19] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-16 18:03:19,243 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:03:19] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-16 18:03:22,243 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:03:22] "GET /test-run/4 HTTP/1.1" 200 -
+2025-04-16 18:03:22,290 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:03:22] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-16 18:03:22,299 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:03:22] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-16 18:03:37,004 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:03:37] "GET /test-run/4 HTTP/1.1" 200 -
+2025-04-16 18:03:37,043 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:03:37] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-16 18:03:37,059 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:03:37] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-16 18:03:42,590 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:03:42] "GET /test-suites HTTP/1.1" 200 -
+2025-04-16 18:03:42,631 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:03:42] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-16 18:03:42,649 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:03:42] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-16 18:03:47,599 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:03:47] "GET /test-runs HTTP/1.1" 200 -
+2025-04-16 18:03:47,637 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:03:47] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-16 18:03:47,653 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:03:47] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-16 18:03:51,689 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:03:51] "GET /projects HTTP/1.1" 200 -
+2025-04-16 18:03:51,721 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:03:51] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-16 18:03:51,739 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:03:51] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-16 18:03:53,048 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:03:53] "GET /test-suites HTTP/1.1" 200 -
+2025-04-16 18:03:53,079 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:03:53] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-16 18:03:53,090 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:03:53] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-16 18:03:54,942 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:03:54] "GET /test-runs HTTP/1.1" 200 -
+2025-04-16 18:03:54,979 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:03:54] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-16 18:03:54,992 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:03:54] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-16 18:03:56,949 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:03:56] "GET /projects HTTP/1.1" 200 -
+2025-04-16 18:03:56,984 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:03:56] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-16 18:03:56,992 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:03:56] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-16 18:03:57,780 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:03:57] "GET /test-suites HTTP/1.1" 200 -
+2025-04-16 18:03:57,827 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:03:57] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-16 18:03:57,846 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:03:57] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-16 18:04:01,280 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:04:01] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:04:01,287 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:04:01] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:04:05,112 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:04:05] "GET /test-runs HTTP/1.1" 200 -
+2025-04-16 18:04:05,159 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:04:05] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-16 18:04:05,174 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:04:05] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-16 18:04:07,549 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:04:07] "GET /test-suites HTTP/1.1" 200 -
+2025-04-16 18:04:07,593 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:04:07] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-16 18:04:07,604 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:04:07] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-16 18:04:11,419 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:04:11] "[32mPOST /test-suite/1/delete HTTP/1.1[0m" 302 -
+2025-04-16 18:04:11,441 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:04:11] "GET /test-suites HTTP/1.1" 200 -
+2025-04-16 18:04:11,467 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:04:11] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-16 18:04:11,473 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:04:11] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-16 18:04:13,252 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:04:13] "GET /test-runs HTTP/1.1" 200 -
+2025-04-16 18:04:13,289 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:04:13] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-16 18:04:13,289 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:04:13] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-16 18:04:21,417 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:04:21] "GET /projects HTTP/1.1" 200 -
+2025-04-16 18:04:21,460 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:04:21] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-16 18:04:21,473 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:04:21] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-16 18:04:22,332 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:04:22] "GET /test-suites HTTP/1.1" 200 -
+2025-04-16 18:04:22,379 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:04:22] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-16 18:04:22,390 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:04:22] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-16 18:04:23,661 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:04:23] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-04-16 18:04:23,695 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:04:23] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-16 18:04:23,715 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:04:23] "[36mGET /static/js/recorder.js HTTP/1.1[0m" 304 -
+2025-04-16 18:04:23,715 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:04:23] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-16 18:04:26,768 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:04:26] "GET /test-run/4 HTTP/1.1" 200 -
+2025-04-16 18:04:26,805 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:04:26] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-16 18:04:26,824 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:04:26] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-16 18:04:57,497 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:04:57] "GET /test-suite/13/test-run/create HTTP/1.1" 200 -
+2025-04-16 18:04:57,537 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:04:57] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-16 18:04:57,553 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:04:57] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-16 18:05:01,264 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:01] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:01,267 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:01] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:05:02,980 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:02] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:02,986 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:02] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:05:03,688 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:03] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:04,188 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:04] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:05:04,701 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:04] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:06,266 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:06] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:06,268 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:06] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:05:07,268 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:07] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:07,270 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:07] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:05:08,309 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:08] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:09,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:09] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:09,265 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:09] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:05:10,267 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:10] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:10,271 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:10] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:05:11,262 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:11] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:12,264 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:12] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:12,264 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:12] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:05:13,269 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:13] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:13,273 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:13] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:05:14,278 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:14] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:15,262 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:15] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:15,262 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:15] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:05:16,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:16] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:16,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:16] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:05:17,264 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:17] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:18,270 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:18] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:18,270 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:18] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:05:19,269 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:19] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:19,274 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:19] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:05:20,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:20] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:21,262 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:21] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:21,264 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:21] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:05:22,260 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:22] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:22,260 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:22] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:05:23,263 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:23] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:24,270 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:24] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:24,274 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:24] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:05:25,272 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:25] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:25,272 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:25] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:05:26,269 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:26] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:27,258 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:27] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:27,263 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:27] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:05:28,267 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:28] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:28,269 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:28] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:05:29,271 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:29] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:30,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:30] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:30,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:30] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:05:31,261 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:31] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:31,266 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:31] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:05:32,263 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:32] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:33,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:33] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:33,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:33] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:05:34,262 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:34] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:34,268 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:34] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:05:35,258 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:35] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:36,258 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:36] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:36,264 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:36] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:05:37,265 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:37] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:37,269 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:37] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:05:38,267 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:38] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:39,258 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:39] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:39,260 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:39] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:05:40,258 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:40] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:40,267 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:40] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:05:41,265 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:41] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:42,262 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:42] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:42,262 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:42] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:05:43,271 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:43] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:43,272 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:43] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:05:44,267 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:44] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:45,260 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:45] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:45,260 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:45] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:05:46,268 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:46] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:46,268 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:46] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:05:47,260 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:47] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:48,269 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:48] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:48,271 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:48] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:05:49,263 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:49] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:49,268 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:49] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:05:50,265 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:50] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:51,262 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:51] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:51,262 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:51] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:05:52,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:52] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:52,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:52] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:05:53,265 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:53] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:54,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:54] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:54,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:54] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:05:55,281 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:55] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:55,340 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:55] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:05:56,273 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:56] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:57,263 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:57] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:57,269 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:57] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:05:58,269 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:58] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:05:58,273 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:58] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:05:59,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:05:59] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:06:00,269 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:06:00] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:06:00,271 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:06:00] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:06:01,274 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:06:01] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:06:01,277 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:06:01] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:06:02,263 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:06:02] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:06:03,269 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:06:03] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:06:03,272 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:06:03] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:06:04,262 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:06:04] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:06:04,262 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:06:04] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:06:51,949 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:06:51] "GET /test-suite/13/test-run/create HTTP/1.1" 200 -
+2025-04-16 18:06:51,972 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:06:51] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-16 18:06:51,994 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:06:51] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-16 18:06:53,011 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:06:53] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:06:53,512 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:06:53] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:06:54,019 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:06:54] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:06:55,024 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:06:55] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:06:55,024 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:06:55] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:06:56,018 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:06:56] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:06:56,513 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:06:56] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:06:57,009 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:06:57] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:06:58,009 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:06:58] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:06:58,009 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:06:58] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:06:59,261 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:06:59] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:00,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:00] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:07:00,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:00] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:01,274 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:01] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:01,276 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:01] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:07:01,286 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:01] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:01,286 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:01] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:07:02,269 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:02] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:02,511 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:02] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:07:03,008 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:03] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:04,009 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:04] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:04,015 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:04] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:07:05,009 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:05] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:05,519 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:05] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:07:06,019 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:06] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:07,012 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:07] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:07,022 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:07] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:07:08,010 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:08] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:09,268 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:09] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:07:09,268 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:09] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:10,009 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:10] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:10,009 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:10] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:07:11,009 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:11] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:12,272 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:12] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:07:12,272 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:12] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:13,284 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:13] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:13,287 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:13] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:07:14,262 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:14] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:15,266 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:15] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:07:15,266 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:15] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:16,262 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:16] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:16,262 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:16] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:07:17,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:17] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:18,261 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:18] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:07:18,266 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:18] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:19,268 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:19] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:19,272 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:19] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:07:20,269 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:20] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:21,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:21] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:07:21,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:21] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:22,261 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:22] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:22,261 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:22] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:07:23,265 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:23] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:24,262 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:24] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:07:24,262 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:24] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:25,261 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:25] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:25,261 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:25] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:07:26,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:26] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:27,264 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:27] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:07:27,269 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:27] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:28,276 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:28] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:28,280 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:28] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:07:29,015 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:29] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:29,104 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:29] "GET /test-suite/13/test-run/create HTTP/1.1" 200 -
+2025-04-16 18:07:29,146 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:29] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-16 18:07:29,168 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:29] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-16 18:07:29,377 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:29] "GET /test-suite/13/test-run/create HTTP/1.1" 200 -
+2025-04-16 18:07:29,445 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:29] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-16 18:07:29,457 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:29] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-16 18:07:30,484 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:30] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:30,984 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:30] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:07:31,479 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:31] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:32,521 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:32] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:32,526 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:32] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:07:34,265 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:34] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:34,270 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:34] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:07:35,269 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:35] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:36,258 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:36] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:36,266 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:36] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:07:37,270 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:37] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:37,273 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:37] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:07:38,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:38] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:39,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:39] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:39,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:39] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:07:40,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:40] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:40,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:40] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:07:41,258 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:41] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:42,268 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:42] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:42,268 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:42] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:07:43,262 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:43] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:43,262 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:43] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:07:44,261 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:44] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:45,258 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:45] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:45,258 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:45] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:07:46,275 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:46] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:46,281 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:46] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:07:46,716 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:46] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:47,501 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:47] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:47,510 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:47] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:07:49,269 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:49] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:49,272 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:49] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:07:50,534 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:50] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:50,539 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:50] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:07:52,277 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:52] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:52,282 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:52] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:07:53,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:53] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:54,269 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:54] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:54,272 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:54] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:07:55,262 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:55] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:55,270 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:55] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:07:56,271 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:56] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:57,268 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:57] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:57,268 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:57] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:07:58,264 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:58] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:07:58,266 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:58] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:07:59,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:07:59] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:00,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:00] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:00,264 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:00] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:08:01,269 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:01] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:01,274 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:01] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:08:01,276 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:01] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:01,278 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:01] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:08:02,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:02] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:03,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:03] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:03,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:03] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:08:04,264 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:04] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:04,264 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:04] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:08:05,263 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:05] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:06,272 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:06] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:06,272 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:06] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:08:07,253 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:07] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:07,258 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:07] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:08:07,490 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:07] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:08,481 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:08] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:08,486 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:08] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:08:10,268 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:10] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:10,268 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:10] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:08:11,264 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:11] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:12,263 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:12] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:12,267 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:12] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:08:13,269 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:13] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:13,270 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:13] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:08:14,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:14] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:15,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:15] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:15,266 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:15] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:08:16,262 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:16] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:16,262 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:16] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:08:17,264 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:17] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:18,262 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:18] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:18,262 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:18] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:08:19,275 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:19] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:19,278 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:19] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:08:20,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:20] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:21,264 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:21] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:21,264 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:21] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:08:22,280 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:22] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:22,284 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:22] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:08:23,273 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:23] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:24,261 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:24] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:24,267 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:24] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:08:25,265 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:25] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:25,269 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:25] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:08:26,263 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:26] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:27,272 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:27] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:27,274 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:27] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:08:28,263 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:28] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:28,263 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:28] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:08:28,765 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\datetime.py', reloading
+2025-04-16 18:08:28,859 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\types.py', reloading
+2025-04-16 18:08:28,961 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\selenium\\webdriver\\chrome\\webdriver.py', reloading
+2025-04-16 18:08:28,970 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\selenium\\webdriver\\chromium\\__init__.py', reloading
+2025-04-16 18:08:28,988 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\selenium\\webdriver\\chromium\\webdriver.py', reloading
+2025-04-16 18:08:29,018 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\selenium\\webdriver\\remote\\__init__.py', reloading
+2025-04-16 18:08:29,047 - werkzeug - INFO -  * Detected change in 'C:\\Users\\kusha\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\selenium\\webdriver\\remote\\webdriver.py', reloading
+2025-04-16 18:08:29,760 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-16 18:08:34,005 - werkzeug - WARNING -  * Debugger is active!
+2025-04-16 18:08:34,009 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-16 18:08:34,061 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:34] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:34,062 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:34] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:08:34,068 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:34] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:34,075 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:34] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:08:34,079 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:34] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:34,083 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:34] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:08:34,087 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:34] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:34,093 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:34] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:34,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:34] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:34,261 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:34] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:08:35,266 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:35] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:36,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:36] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:36,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:36] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:08:37,264 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:37] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:37,269 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:37] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:08:38,265 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:38] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:39,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:39] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:39,264 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:39] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:08:40,270 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:40] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:40,274 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:40] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:08:41,262 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:41] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:42,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:42] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:42,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:42] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:08:43,217 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:43] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:43,247 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:43] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:08:43,485 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:43] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:44,538 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:44] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:44,545 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:44] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:08:46,268 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:46] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:46,271 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:46] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:08:47,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:47] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:47,483 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:47] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:47,492 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:47] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:08:48,489 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:48] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:48,982 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:48] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:08:49,483 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:49] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:51,263 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:51] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:51,263 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:51] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:08:52,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:52] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:52,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:52] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:08:53,034 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:53] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:53,489 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:53] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:53,490 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:53] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:08:55,261 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:55] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:55,261 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:55] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:08:56,265 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:56] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:57,271 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:57] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:57,281 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:57] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:08:58,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:58] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:08:58,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:58] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:08:59,262 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:08:59] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:00,265 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:00] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:00,270 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:00] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:09:01,268 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:01] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:01,285 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:01] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:09:01,337 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:01] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:01,343 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:01] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:09:02,279 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:02] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:03,258 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:03] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:03,258 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:03] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:09:04,261 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:04] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:04,269 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:04] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:09:05,260 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:05] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:06,260 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:06] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:06,260 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:06] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:09:07,277 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:07] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:07,280 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:07] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:09:08,270 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:08] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:09,268 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:09] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:09,268 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:09] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:09:10,278 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:10] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:10,287 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:10] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:09:11,261 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:11] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:12,265 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:12] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:12,268 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:12] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:09:13,261 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:13] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:13,264 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:13] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:09:14,270 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:14] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:15,265 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:15] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:15,269 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:15] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:09:16,258 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:16] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:16,258 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:16] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:09:17,266 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:17] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:18,268 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:18] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:18,274 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:18] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:09:19,262 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:19] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:19,262 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:19] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:09:19,395 - werkzeug - INFO -  * Detected change in 'c:\\Users\\kusha\\Documents\\StreamzAI\\downloads\\testing\\test-generation1\\test-generation\\app.py', reloading
+2025-04-16 18:09:19,395 - werkzeug - INFO -  * Detected change in 'c:\\Users\\kusha\\Documents\\StreamzAI\\downloads\\testing\\test-generation1\\test-generation\\app.py', reloading
+2025-04-16 18:09:19,395 - werkzeug - INFO -  * Detected change in 'c:\\Users\\kusha\\Documents\\StreamzAI\\downloads\\testing\\test-generation1\\test-generation\\app.py', reloading
+2025-04-16 18:09:20,542 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-16 18:09:24,439 - werkzeug - WARNING -  * Debugger is active!
+2025-04-16 18:09:24,440 - werkzeug - INFO -  * Debugger PIN: 128-588-271
+2025-04-16 18:09:24,482 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:24] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:24,482 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:24] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:09:24,490 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:24] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:24,495 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:24] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:09:24,495 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:24] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:24,501 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:24] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:09:24,501 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:24] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:24,508 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:24] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:25,268 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:25] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:25,268 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:25] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:09:26,264 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:26] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:27,268 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:27] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:27,273 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:27] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:09:28,270 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:28] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:28,271 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:28] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:09:29,261 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:29] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:30,270 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:30] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:30,270 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:30] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:09:31,258 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:31] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:31,263 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:31] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:09:32,264 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:32] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:33,263 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:33] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:33,268 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:33] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:09:34,272 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:34] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:34,275 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:34] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:09:35,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:35] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:36,264 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:36] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:36,267 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:36] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:09:37,279 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:37] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:37,279 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:37] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:09:37,493 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:37] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:38,485 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:38] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:38,485 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:38] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:09:39,491 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:39] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:39,989 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:39] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:09:40,482 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:40] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:41,489 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:41] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:41,491 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:41] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:09:42,487 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:42] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:42,987 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:42] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:09:43,484 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:43] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:45,263 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:45] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:45,263 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:45] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:09:46,258 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:46] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:46,258 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:46] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:09:46,918 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:46] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:47,494 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:47] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:47,498 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:47] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:09:48,480 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:48] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:49,270 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:49] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:09:50,264 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:50] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:51,262 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:51] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:51,268 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:51] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:09:52,263 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:52] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:52,263 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:52] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:09:53,268 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:53] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:54,274 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:54] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:54,274 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:54] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:09:55,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:55] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:55,265 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:55] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:09:56,261 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:56] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:57,269 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:57] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:57,269 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:57] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:09:58,258 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:58] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:09:58,263 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:58] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:09:59,263 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:09:59] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:00,276 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:00] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:00,283 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:00] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:10:01,264 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:01] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:01,271 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:01] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:10:01,273 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:01] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:01,278 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:01] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:10:02,269 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:02] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:02,940 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:02] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:02,965 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:02] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:10:03,492 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:03] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:04,269 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:04] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:10:05,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:05] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:06,282 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:06] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:06,296 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:06] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:10:07,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:07] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:07,268 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:07] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:10:08,260 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:08] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:09,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:09] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:09,266 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:09] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:10:10,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:10] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:10,262 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:10] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:10:11,272 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:11] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:12,277 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:12] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:12,279 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:12] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:10:13,271 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:13] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:13,278 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:13] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:10:14,268 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:14] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:15,266 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:15] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:15,269 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:15] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:10:16,263 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:16] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:16,263 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:16] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:10:17,268 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:17] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:18,269 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:18] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:18,269 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:18] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:10:19,258 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:19] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:19,258 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:19] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:10:20,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:20] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:21,269 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:21] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:21,270 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:21] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:10:22,265 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:22] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:22,266 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:22] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:10:23,263 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:23] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:24,284 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:24] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:24,289 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:24] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:10:25,261 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:25] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:25,269 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:25] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:10:26,269 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:26] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:27,267 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:27] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:27,272 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:27] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:10:28,262 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:28] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:28,262 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:28] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:10:29,262 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:29] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:30,268 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:30] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:30,270 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:30] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:10:31,267 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:31] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:31,269 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:31] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:10:32,276 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:32] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:33,264 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:33] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:33,268 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:33] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:10:34,262 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:34] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:34,269 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:34] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:10:35,258 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:35] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:36,258 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:36] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:36,258 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:36] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:10:37,270 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:37] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:37,276 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:37] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:10:38,263 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:38] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:39,271 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:39] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:39,271 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:39] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:10:40,277 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:40] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:40,280 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:40] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:10:41,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:41] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:42,263 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:42] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:42,263 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:42] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:10:43,265 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:43] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:43,265 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:43] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:10:44,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:44] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:45,272 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:45] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:45,272 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:45] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:10:46,267 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:46] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:46,269 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:46] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:10:47,264 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:47] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:48,275 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:48] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:48,278 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:48] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:10:49,282 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:49] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:49,288 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:49] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:10:50,277 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:50] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:51,263 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:51] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:51,266 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:51] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:10:52,271 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:52] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:52,280 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:52] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:10:53,277 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:53] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:54,264 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:54] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:54,267 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:54] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:10:55,275 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:55] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:55,309 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:55] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:10:56,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:56] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:57,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:57] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:57,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:57] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:10:58,266 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:58] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:10:58,274 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:58] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:10:59,269 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:10:59] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:11:00,272 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:11:00] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:11:00,274 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:11:00] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:11:01,268 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:11:01] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:11:01,274 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:11:01] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:11:01,277 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:11:01] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:11:01,279 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:11:01] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:11:02,259 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:11:02] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:11:03,262 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:11:03] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:11:03,268 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:11:03] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:12:01,269 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:12:01] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:12:01,271 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:12:01] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:12:01,275 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:12:01] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:12:01,278 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:12:01] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:13:01,270 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:13:01] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:13:01,273 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:13:01] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
+2025-04-16 18:13:01,280 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:13:01] "[33mGET /log HTTP/1.1[0m" 404 -
+2025-04-16 18:13:01,283 - werkzeug - INFO - 127.0.0.1 - - [16/Apr/2025 18:13:01] "[33mGET /awaiting_input HTTP/1.1[0m" 404 -
