@@ -4,12 +4,15 @@ import datetime
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib
+from playwright.sync_api import sync_playwright
+import queue
+from validators import url as validate_url
 matplotlib.use('Agg')  # Use non-interactive backend for server environment
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify, send_file
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
 from models import db, Project, TestSuite, TestCase, TestRun, TestResult
-from forms import ProjectForm, TestSuiteForm, TestRunForm, FilterForm, ExportForm
+from forms import ProjectForm, TestSuiteForm, TestRunForm, FilterForm, ExportForm, TestExecutionForm
 from streamzai_test_generator import StreamzAITestGenerator, logger
 import threading
 import uuid
@@ -23,6 +26,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 from generate_code.selenium_code_generator import generate_test_file
+from playwright.async_api import async_playwright
+import asyncio
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -32,18 +37,231 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Initialize database
 db.init_app(app)
-
+app.config['UPLOAD_FOLDER'] = 'uploads'
+os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 # Create database tables if they don't exist
 with app.app_context():
     db.create_all()
 
 # Global variables
 active_test_runs = {}
+execution_state = {
+    'running': False,
+    'paused': False,
+    'current_step': 0,
+    'log': [],
+    'test_steps': [],
+    'target_url': '',
+    'headless': True,
+    'input_queue': queue.Queue(),
+    'awaiting_input': None
+}
 recording_actions = []
 is_recording = False
 driver = None
 
-# Helper functions
+@app.route('/test-case/upload', methods=['GET', 'POST'])
+def upload_test_case():
+    """Handle test case file upload."""
+    form = TestExecutionForm()
+    if request.method == 'POST':
+        if 'file' not in request.files:
+            return jsonify({'error': 'No file provided'}), 400
+            
+        file = request.files['file']
+        if file.filename == '':
+            return jsonify({'error': 'No file selected'}), 400
+            
+        if file and file.filename.endswith('.json'):
+            filename = secure_filename(file.filename)
+            filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            
+            # Ensure upload directory exists
+            os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+            
+            try:
+                file.save(filepath)
+                with open(filepath) as f:
+                    test_steps = json.load(f)
+                    execution_state['test_steps'] = test_steps
+                return jsonify({'message': 'Test case uploaded successfully'})
+            except json.JSONDecodeError:
+                os.remove(filepath)
+                return jsonify({'error': 'Invalid JSON file'}), 400
+            except Exception as e:
+                return jsonify({'error': f'Error processing file: {str(e)}'}), 500
+        else:
+            return jsonify({'error': 'Invalid file type. Please upload a JSON file'}), 400
+    
+    # Handle GET request
+    return render_template('test_run_form.html', form=form)
+
+@app.route('/test-case/execute', methods=['POST'])
+def execute_test():
+    """Execute a test case using Playwright."""
+    try:
+        data = request.get_json()
+        if not data:
+            return jsonify({'error': 'No data provided'}), 400
+
+        target_url = data.get('target_url', '').strip()
+        if not target_url:
+            return jsonify({'error': 'Target URL is required'}), 400
+
+        if not validate_url(target_url):
+            return jsonify({'error': 'Invalid URL format'}), 400
+
+        execution_state['target_url'] = target_url
+        execution_state['headless'] = data.get('headless', True)
+        execution_state['running'] = True
+        execution_state['paused'] = False
+        execution_state['log'] = []
+
+        thread = threading.Thread(target=execute_test_case)
+        thread.daemon = True
+        thread.start()
+
+        return jsonify({'message': 'Test execution started'})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/test-case/pause', methods=['POST'])
+def pause_test():
+    """Pause or resume test execution."""
+    execution_state['paused'] = not execution_state['paused']
+    status = 'paused' if execution_state['paused'] else 'resumed'
+    return jsonify({'status': f'Test execution {status}'})
+
+@app.route('/test-case/stop', methods=['POST'])
+def stop_test():
+    """Stop test execution."""
+    execution_state['running'] = False
+    execution_state['paused'] = False
+    return jsonify({'status': 'Test execution stopped'})
+
+@app.route('/test-case/status')
+def get_test_status():
+    """Get current test execution status."""
+    return jsonify({
+        'running': execution_state['running'],
+        'paused': execution_state['paused'],
+        'current_step': execution_state['current_step'],
+        'log': execution_state['log']
+    })
+
+@app.route('/test-case/awaiting_input')
+def check_awaiting_input():
+    """Check if test execution is waiting for input."""
+    var_name = execution_state['awaiting_input']
+    if var_name:
+        return jsonify({'awaiting': True, 'var_name': var_name})
+    return jsonify({'awaiting': False})
+
+@app.route('/test-case/submit_input', methods=['POST'])
+def submit_input():
+    """Submit input for test execution."""
+    data = request.json
+    value = data.get('value')
+    execution_state['input_queue'].put(value)
+    return jsonify({'success': True})
+
+def log_message(msg):
+    execution_state['log'].append(msg)
+
+def execute_test_case():
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=False)  # Keep browser visible
+        context = browser.new_context()
+        page = context.new_page()
+        
+        try:
+            # Navigate to the target URL
+            page.goto(execution_state['target_url'])
+            log_message(f"Navigated to {execution_state['target_url']}")
+            
+            # Wait for page load
+            page.wait_for_load_state('networkidle')
+            
+            # Execute each test step
+            for idx, step in enumerate(execution_state['test_steps']):
+                if not execution_state['running']:
+                    break
+                    
+                while execution_state['paused']:
+                    continue
+                    
+                execution_state['current_step'] = idx
+                log_message(f"Executing step {idx + 1}")
+                
+                # Get step details
+                action = step.get('action', '')
+                selector = step.get('selector', '')
+                value = step.get('value', '')
+                
+                try:
+                    # Wait for element to be visible before any action
+                    if selector:
+                        page.wait_for_selector(selector, state='visible', timeout=10000)
+                    
+                    if action == 'click':
+                        # For login button, wait for navigation after click
+                        if 'signin-btn' in selector:
+                            with page.expect_navigation():
+                                page.click(selector)
+                            log_message("Clicked login button and waiting for navigation")
+                        else:
+                            page.click(selector)
+                            log_message(f"Clicked element: {selector}")
+                        
+                    elif action == 'fill' or action == 'input':
+                        if value.startswith('{') and value.endswith('}'):
+                            var_name = value[1:-1]
+                            execution_state['awaiting_input'] = var_name
+                            log_message(f"Waiting for user input for {var_name}...")
+                            
+                            # Wait for input from the queue
+                            input_value = execution_state['input_queue'].get()
+                            if input_value is None:
+                                log_message("User cancelled input")
+                                break
+                                
+                            value = input_value
+                            execution_state['awaiting_input'] = None
+                            
+                        # For password field, use type instead of fill for security
+                        if 'Password' in selector:
+                            page.type(selector, value, delay=100)
+                            log_message("Entered password")
+                        else:
+                            page.fill(selector, value)
+                            log_message(f"Filled {selector} with value")
+                        
+                    elif action == 'wait':
+                        wait_time = int(value) if value else 1000
+                        page.wait_for_timeout(wait_time)
+                        log_message(f"Waited for {wait_time}ms")
+                        
+                    elif action == 'navigate':
+                        page.goto(value)
+                        log_message(f"Navigated to: {value}")
+                        page.wait_for_load_state('networkidle')
+                    
+                    # Add delay between steps
+                    page.wait_for_timeout(1000)
+                    
+                except Exception as e:
+                    log_message(f"Error in step {idx + 1}: {str(e)}")
+                    continue
+            
+            log_message("All test steps completed")
+            
+        except Exception as e:
+            log_message(f"Error during test execution: {str(e)}")
+        finally:
+            if not execution_state['awaiting_input']:
+                browser.close()
+            execution_state['running'] = False
+
 def generate_chart(data, chart_type='pie', filename=None):
     """Generate a chart based on test results data.
     
