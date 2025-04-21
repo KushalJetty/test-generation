@@ -27,6 +27,7 @@ import time
 from generate_code.selenium_code_generator import generate_test_file
 from playwright.async_api import async_playwright
 import asyncio
+from folder_analyser.streamzai_test_generator import StreamzAITestGenerator
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -632,75 +633,48 @@ def create_test_suite(project_id=None):
         form.project_id.data = project_id
     
     if form.validate_on_submit():
-        test_suite = TestSuite(
-            name=form.name.data,
-            description=form.description.data,
-            project_id=form.project_id.data
-        )
-        db.session.add(test_suite)
-        db.session.commit()
-        
-        # Generate test cases for this test suite
-        project = Project.query.get(form.project_id.data)
-        
-        # Create a generator instance
-        generator = StreamzAITestGenerator()
-        
-        # Get ignore patterns from form
-        ignore_patterns = []
-        if form.ignore_patterns.data is not None:
-            ignore_patterns = [p.strip() for p in form.ignore_patterns.data.split('\n') if p.strip()]
-        if ignore_patterns:
-            generator.ignore_patterns = [f"^{re.escape(p)}$" for p in ignore_patterns]
-        
-        # Find all supported files
-        supported_files = generator.traverse_directory(project.path)
-        
-        # Generate test cases for each file
-        for file_path in supported_files:
-            # Analyze file
-            file_analysis = generator.analyze_file(file_path)
+        try:
+            # Get the project
+            project = Project.query.get(form.project_id.data)
+            if not project:
+                flash('Project not found.', 'error')
+                return redirect(url_for('test_suites'))
+
+            # Create test suite
+            test_suite = TestSuite(
+                name=form.name.data,
+                description=form.description.data,
+                project_id=form.project_id.data
+            )
+            db.session.add(test_suite)
+            db.session.commit()
+
+            # Initialize test generator
+            generator = StreamzAITestGenerator()
             
-            # Generate test case
-            test_case_result = generator.generate_test_case(file_analysis)
+            # Generate test cases
+            results = generator.generate_tests(project.path, os.path.join('generated_tests', str(test_suite.id)))
             
-            if "error" not in test_case_result:
-                # Create test case in database
-                rel_path = os.path.relpath(file_path, start=project.path)
-                file_name = os.path.basename(file_path)
-                file_base, file_ext = os.path.splitext(file_name)
-                
-                # Create appropriate test file name based on language
-                language = file_analysis["language"]
-                if language == "python":
-                    test_file_name = f"test_{file_base}{file_ext}"
-                else:
-                    test_file_name = f"{file_base}.test{file_ext}"
-                
-                # Create directory structure in output directory
-                rel_dir = os.path.dirname(rel_path)
-                test_dir = os.path.join("generated_tests", project.name, rel_dir)
-                os.makedirs(test_dir, exist_ok=True)
-                
-                # Save test content to file
-                test_file_path = os.path.join(test_dir, test_file_name)
-                with open(test_file_path, 'w', encoding='utf-8') as f:
-                    f.write(test_case_result["test_content"])
-                
-                # Create test case in database
-                test_case = TestCase(
-                    original_file_path=file_path,
-                    test_file_path=test_file_path,
-                    language=language,
-                    test_suite_id=test_suite.id
-                )
-                db.session.add(test_case)
-        
-        db.session.commit()
-        
-        flash('Test suite created successfully!', 'success')
-        return redirect(url_for('test_suite_detail', suite_id=test_suite.id))
-    
+            # Create test cases in database
+            for test_file in results.get('test_files', []):
+                if test_file['status'] == 'success':
+                    test_case = TestCase(
+                        name=os.path.basename(test_file['test_file']),
+                        description=f"Generated from {test_file['original_file']}",
+                        test_file_path=test_file['test_file'],
+                        test_suite_id=test_suite.id
+                    )
+                    db.session.add(test_case)
+            
+            db.session.commit()
+            flash('Test suite created successfully!', 'success')
+            return redirect(url_for('test_suites'))
+            
+        except Exception as e:
+            db.session.rollback()
+            flash(f'Error creating test suite: {str(e)}', 'error')
+            return redirect(url_for('test_suites'))
+
     return render_template('test_suite_form.html', form=form, title='Create Test Suite')
 
 @app.route('/test-suite/<int:suite_id>')
