@@ -83,6 +83,9 @@ def upload_test_case():
                 with open(filepath) as f:
                     test_steps = json.load(f)
                     execution_state['test_steps'] = test_steps
+                    # Add a log message about the upload
+                    log_message(f"Test case file '{filename}' uploaded successfully")
+                    log_message(f"Loaded {len(test_steps)} test steps")
                 return jsonify({'message': 'Test case uploaded successfully'})
             except json.JSONDecodeError:
                 os.remove(filepath)
@@ -110,11 +113,19 @@ def execute_test():
         if not validate_url(target_url):
             return jsonify({'error': 'Invalid URL format'}), 400
 
+        # Check if test steps are loaded
+        if not execution_state['test_steps']:
+            return jsonify({'error': 'No test steps loaded. Please upload a test case file first.'}), 400
+
         execution_state['target_url'] = target_url
         execution_state['headless'] = data.get('headless', True)
         execution_state['running'] = True
         execution_state['paused'] = False
         execution_state['log'] = []
+        
+        # Add log message about starting execution
+        log_message(f"Starting test execution with target URL: {target_url}")
+        log_message(f"Running in {'headless' if execution_state['headless'] else 'visible'} mode")
 
         thread = threading.Thread(target=execute_test_case)
         thread.daemon = True
@@ -153,44 +164,62 @@ def check_awaiting_input():
     """Check if test execution is waiting for input."""
     var_name = execution_state['awaiting_input']
     if var_name:
-        return jsonify({'awaiting': True, 'var_name': var_name})
+        return jsonify({
+            'awaiting': True,
+            'var_name': var_name,
+            'timestamp': time.time()  # Add timestamp to prevent caching
+        })
     return jsonify({'awaiting': False})
 
 @app.route('/test-case/submit_input', methods=['POST'])
 def submit_input():
     """Submit input for test execution."""
-    data = request.json
-    value = data.get('value')
-    execution_state['input_queue'].put(value)
-    return jsonify({'success': True})
+    try:
+        data = request.get_json()
+        if data is None:
+            return jsonify({'error': 'No data provided'}), 400
+            
+        value = data.get('value')
+        # Put the value in the queue
+        execution_state['input_queue'].put(value)
+        log_message(f"Received input value from user")
+        return jsonify({'success': True})
+    except Exception as e:
+        log_message(f"Error processing input: {str(e)}")
+        return jsonify({'error': str(e)}), 500
 
 def log_message(msg):
     execution_state['log'].append(msg)
 
 def execute_test_case():
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=False)  # Keep browser visible
+        # Launch browser based on headless setting
+        browser = p.chromium.launch(headless=execution_state['headless'])
         context = browser.new_context()
         page = context.new_page()
         
         try:
             # Navigate to the target URL
+            log_message(f"Opening browser and navigating to {execution_state['target_url']}")
             page.goto(execution_state['target_url'])
             log_message(f"Navigated to {execution_state['target_url']}")
             
             # Wait for page load
             page.wait_for_load_state('networkidle')
+            log_message("Page loaded successfully")
             
             # Execute each test step
             for idx, step in enumerate(execution_state['test_steps']):
                 if not execution_state['running']:
+                    log_message("Test execution stopped by user")
                     break
                     
                 while execution_state['paused']:
+                    time.sleep(0.5)  # Add a small delay to prevent CPU hogging
                     continue
                     
                 execution_state['current_step'] = idx
-                log_message(f"Executing step {idx + 1}")
+                log_message(f"Executing step {idx + 1}: {step.get('action', 'unknown')} on {step.get('selector', 'N/A')}")
                 
                 # Get step details
                 action = step.get('action', '')
@@ -200,11 +229,16 @@ def execute_test_case():
                 try:
                     # Wait for element to be visible before any action
                     if selector:
-                        page.wait_for_selector(selector, state='visible', timeout=10000)
+                        log_message(f"Waiting for element: {selector}")
+                        element = page.wait_for_selector(selector, state='visible', timeout=10000)
+                        if not element:
+                            log_message(f"Element not found: {selector}")
+                            continue
+                        log_message(f"Found element: {selector}")
                     
                     if action == 'click':
                         # For login button, wait for navigation after click
-                        if 'signin-btn' in selector:
+                        if 'signin-btn' in selector or 'login' in selector.lower():
                             with page.expect_navigation():
                                 page.click(selector)
                             log_message("Clicked login button and waiting for navigation")
@@ -215,25 +249,62 @@ def execute_test_case():
                     elif action == 'fill' or action == 'input':
                         if value.startswith('{') and value.endswith('}'):
                             var_name = value[1:-1]
+                            # Clear the input queue before waiting for new input
+                            while not execution_state['input_queue'].empty():
+                                execution_state['input_queue'].get()
+                                
                             execution_state['awaiting_input'] = var_name
                             log_message(f"Waiting for user input for {var_name}...")
                             
-                            # Wait for input from the queue
-                            input_value = execution_state['input_queue'].get()
-                            if input_value is None:
-                                log_message("User cancelled input")
-                                break
-                                
-                            value = input_value
+                            # Wait for input with a more responsive approach
+                            input_received = False
+                            start_time = time.time()
+                            
+                            while not input_received and execution_state['running'] and not execution_state['paused']:
+                                try:
+                                    if not execution_state['input_queue'].empty():
+                                        input_value = execution_state['input_queue'].get_nowait()
+                                        if input_value is not None:
+                                            value = input_value
+                                            log_message(f"Received user input for {var_name}")
+                                            input_received = True
+                                        else:
+                                            log_message("User cancelled input")
+                                            break
+                                except queue.Empty:
+                                    time.sleep(0.1)  # Short sleep to prevent CPU hogging
+                                    # Check if we've been waiting too long (5 minutes)
+                                    if time.time() - start_time > 300:
+                                        log_message("Timeout waiting for user input")
+                                        break
+                                    continue
+                            
                             execution_state['awaiting_input'] = None
                             
+                            if not input_received:
+                                log_message("Skipping step due to no input received")
+                                continue
+                            
+                            # Wait a moment before proceeding with the input
+                            page.wait_for_timeout(500)
+                            
                         # For password field, use type instead of fill for security
-                        if 'Password' in selector:
+                        if 'password' in selector.lower():
+                            # Clear the field first
+                            page.fill(selector, '')
                             page.type(selector, value, delay=100)
                             log_message("Entered password")
                         else:
-                            page.fill(selector, value)
-                            log_message(f"Filled {selector} with value")
+                            # Clear the field first
+                            page.fill(selector, '')
+                            # Wait a moment before typing
+                            page.wait_for_timeout(500)
+                            # Type the value with a delay between keystrokes
+                            page.type(selector, value, delay=100)
+                            log_message(f"Entered text into {selector}")
+                        
+                        # Wait after filling to ensure the value is properly set
+                        page.wait_for_timeout(500)
                         
                     elif action == 'wait':
                         wait_time = int(value) if value else 1000
@@ -259,6 +330,7 @@ def execute_test_case():
         finally:
             if not execution_state['awaiting_input']:
                 browser.close()
+                log_message("Browser closed")
             execution_state['running'] = False
 
 def generate_chart(data, chart_type='pie', filename=None):
@@ -947,8 +1019,6 @@ def api_test_run_results(run_id):
 def run_test_suite(suite_id):
     """Run a test suite by redirecting to create_test_run."""
     return redirect(url_for('create_test_run', suite_id=suite_id))
-
-
 
 @app.route('/api/record/start', methods=['POST'])
 def start_recording():

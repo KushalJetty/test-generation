@@ -15,38 +15,69 @@
 <body class="p-4">
 <div class="container">
     <h2>Test Case Executor</h2>
+    
+    <div class="alert alert-info mb-4">
+        <h5>How to use:</h5>
+        <ol>
+            <li>Upload a JSON file containing test steps</li>
+            <li>Enter the target URL where the test should run</li>
+            <li>Click "Start" to begin test execution</li>
+            <li>Use "Pause/Resume" and "Stop" buttons to control execution</li>
+        </ol>
+    </div>
 
-    <form id="uploadForm" class="mb-3">
-        {{ form.hidden_tag() }}
-        <div class="input-group">
-            <input type="file" name="file" class="form-control" required>
-            <button class="btn btn-secondary" type="submit">Upload Test Case</button>
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5>Step 1: Upload Test Case</h5>
         </div>
-    </form>
+        <div class="card-body">
+            <form id="uploadForm" class="mb-3">
+                {{ form.hidden_tag() }}
+                <div class="input-group">
+                    <input type="file" name="file" class="form-control" required>
+                    <button class="btn btn-primary" type="submit">Upload Test Case</button>
+                </div>
+            </form>
+            <div id="uploadStatus" class="mt-2"></div>
+        </div>
+    </div>
 
-    <form id="executeForm" class="mb-3">
-        {{ form.hidden_tag() }}
-        <div class="mb-2">
-            <label>Target URL:</label>
-            <input type="text" name="target_url" class="form-control" required>
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5>Step 2: Execute Test</h5>
         </div>
-        <div class="form-check mb-2">
-            <input class="form-check-input" type="checkbox" name="headless" id="headless" checked>
-            <label class="form-check-label" for="headless">Headless Mode</label>
+        <div class="card-body">
+            <form id="executeForm" class="mb-3">
+                {{ form.hidden_tag() }}
+                <div class="mb-2">
+                    <label>Target URL:</label>
+                    <input type="text" name="target_url" class="form-control" required placeholder="https://example.com">
+                </div>
+                <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" name="headless" id="headless" checked>
+                    <label class="form-check-label" for="headless">Headless Mode (run browser in background)</label>
+                </div>
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-success">Start Test</button>
+                    <button type="button" id="pauseBtn" class="btn btn-warning">Pause/Resume</button>
+                    <button type="button" id="stopBtn" class="btn btn-danger">Stop</button>
+                </div>
+            </form>
         </div>
-        <div class="d-flex gap-2">
-            <button type="submit" class="btn btn-primary">Start</button>
-            <button type="button" id="pauseBtn" class="btn btn-warning">Pause/Resume</button>
-            <button type="button" id="stopBtn" class="btn btn-danger">Stop</button>
-        </div>
-    </form>
+    </div>
 
-    <h4>Execution Log</h4>
-    <pre id="logBox" class="bg-light p-3 border rounded" style="height: 300px; overflow-y: auto;"></pre>
+    <div class="card">
+        <div class="card-header">
+            <h5>Execution Log</h5>
+        </div>
+        <div class="card-body">
+            <pre id="logBox" class="bg-light p-3 border rounded" style="height: 300px; overflow-y: auto;"></pre>
+        </div>
+    </div>
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="inputModal" tabindex="-1" aria-labelledby="inputModalLabel" aria-hidden="true">
+<div class="modal fade" id="inputModal" tabindex="-1" aria-labelledby="inputModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog">
         <div class="modal-content">
             <form id="inputForm">
@@ -55,9 +86,14 @@
                 </div>
                 <div class="modal-body">
                     <p id="inputPromptText"></p>
-                    <input type="text" id="inputValue" class="form-control" required>
+                    <div class="form-group">
+                        <input type="text" id="inputValue" class="form-control" required autocomplete="off">
+                        <small class="form-text text-muted">Type your input and press Enter or click Submit when done</small>
+                    </div>
+                    <div id="inputStatus" class="mt-2"></div>
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancelInput">Cancel</button>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </form>
@@ -71,18 +107,24 @@
     const logBox = document.getElementById('logBox');
     const inputPromptText = document.getElementById('inputPromptText');
     const inputValue = document.getElementById('inputValue');
-    const inputModal = new bootstrap.Modal(document.getElementById('inputModal'));
+    const inputModal = new bootstrap.Modal(document.getElementById('inputModal'), {
+        backdrop: 'static',
+        keyboard: false
+    });
     const uploadForm = document.getElementById('uploadForm');
     const executeForm = document.getElementById('executeForm');
     const pauseBtn = document.getElementById('pauseBtn');
     const stopBtn = document.getElementById('stopBtn');
+    const uploadStatus = document.getElementById('uploadStatus');
+    const inputStatus = document.getElementById('inputStatus');
 
     let statusPollInterval;
     let inputPollInterval;
+    let lastInputCheck = 0;
 
     function startStatusPolling() {
         statusPollInterval = setInterval(updateLog, 1000);
-        inputPollInterval = setInterval(checkAwaitingInput, 1000);
+        inputPollInterval = setInterval(checkAwaitingInput, 500); // Check more frequently
     }
 
     function stopStatusPolling() {
@@ -110,20 +152,45 @@
     }
 
     function checkAwaitingInput() {
+        const now = Date.now();
+        // Prevent too frequent checks
+        if (now - lastInputCheck < 500) return;
+        lastInputCheck = now;
+
         fetch('{{ url_for("check_awaiting_input") }}')
             .then(res => res.json())
             .then(data => {
                 if (data.awaiting) {
+                    console.log('Input required for:', data.var_name); // Debug log
                     inputPromptText.innerText = `Enter value for "${data.var_name}":`;
-                    inputValue.value = ''; // Clear previous value
-                    inputModal.show();
+                    inputStatus.innerHTML = ''; // Clear any previous status
+                    
+                    if (!inputModal._isShown) {
+                        inputValue.value = ''; // Clear only when first showing
+                        inputModal.show();
+                        setTimeout(() => {
+                            inputValue.focus();
+                        }, 500);
+                    }
                 }
+            })
+            .catch(error => {
+                console.error('Error checking for input:', error);
             });
     }
 
+    // Handle input form submission
     document.getElementById('inputForm').addEventListener('submit', function (e) {
         e.preventDefault();
-        const value = inputValue.value;
+        const value = inputValue.value.trim();
+        
+        if (!value) {
+            inputStatus.innerHTML = '<div class="alert alert-warning">Please enter a value</div>';
+            inputValue.focus();
+            return;
+        }
+        
+        inputStatus.innerHTML = '<div class="alert alert-info">Submitting input...</div>';
         
         fetch('{{ url_for("submit_input") }}', {
             method: 'POST',
@@ -133,12 +200,81 @@
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                inputValue.value = '';
-                inputModal.hide();
+                inputStatus.innerHTML = '<div class="alert alert-success">Input submitted successfully!</div>';
+                // Add the input to the log
+                logBox.innerText += `\nSubmitted input: ${value}`;
+                logBox.scrollTop = logBox.scrollHeight;
+                
+                // Wait a moment before closing
+                setTimeout(() => {
+                    inputModal.hide();
+                }, 1000);
+            } else if (data.error) {
+                inputStatus.innerHTML = '<div class="alert alert-danger">Error: ' + data.error + '</div>';
+                inputValue.focus();
             }
         })
         .catch(error => {
             console.error('Error submitting input:', error);
+            inputStatus.innerHTML = '<div class="alert alert-danger">Error submitting input. Please try again.</div>';
+            inputValue.focus();
+        });
+    });
+
+    // Handle input keypress
+    inputValue.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            document.getElementById('inputForm').dispatchEvent(new Event('submit'));
+        }
+    });
+
+    // Prevent accidental input loss
+    inputValue.addEventListener('input', function (e) {
+        // Store the current input value
+        localStorage.setItem('lastInputValue', e.target.value);
+    });
+
+    // Handle cancel button
+    document.getElementById('cancelInput').addEventListener('click', function() {
+        if (confirm('Are you sure you want to cancel? This will skip the current input step.')) {
+            fetch('{{ url_for("submit_input") }}', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ value: null })
+            })
+            .then(() => {
+                inputModal.hide();
+                logBox.innerText += '\nInput cancelled by user';
+                logBox.scrollTop = logBox.scrollHeight;
+            });
+        }
+    });
+
+    // Handle file upload
+    uploadForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const formData = new FormData(uploadForm);
+        
+        uploadStatus.innerHTML = '<div class="alert alert-info">Uploading file...</div>';
+        
+        fetch('{{ url_for("upload_test_case") }}', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message) {
+                uploadStatus.innerHTML = '<div class="alert alert-success">' + data.message + '</div>';
+                // Start polling to see the log messages
+                startStatusPolling();
+            } else if (data.error) {
+                uploadStatus.innerHTML = '<div class="alert alert-danger">' + data.error + '</div>';
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            uploadStatus.innerHTML = '<div class="alert alert-danger">Error uploading file</div>';
         });
     });
 
@@ -152,14 +288,22 @@
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
                 target_url: formData.get('target_url'),
-                headless: formData.get('headless') === 'true'
+                headless: formData.get('headless') === 'on'
             })
         })
         .then(response => response.json())
         .then(data => {
             if (data.message) {
                 startStatusPolling();
+            } else if (data.error) {
+                logBox.innerText += '\nError: ' + data.error;
+                logBox.scrollTop = logBox.scrollHeight;
             }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            logBox.innerText += '\nError starting test execution';
+            logBox.scrollTop = logBox.scrollHeight;
         });
     });
 
