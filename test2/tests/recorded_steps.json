@@ -1,0 +1,735 @@
+[
+    {
+        "timestamp": 1744797898437,
+        "action": "click",
+        "selector": "#Username"
+    },
+    {
+        "timestamp": 1744797899250,
+        "action": "input",
+        "selector": "#Username",
+        "value": "k"
+    },
+    {
+        "timestamp": 1744797899456,
+        "action": "input",
+        "selector": "#Username",
+        "value": "ku"
+    },
+    {
+        "timestamp": 1744797899718,
+        "action": "input",
+        "selector": "#Username",
+        "value": "kus"
+    },
+    {
+        "timestamp": 1744797899958,
+        "action": "input",
+        "selector": "#Username",
+        "value": "kush"
+    },
+    {
+        "timestamp": 1744797900093,
+        "action": "input",
+        "selector": "#Username",
+        "value": "kusha"
+    },
+    {
+        "timestamp": 1744797900328,
+        "action": "input",
+        "selector": "#Username",
+        "value": "kushal"
+    },
+    {
+        "timestamp": 1744797901341,
+        "action": "input",
+        "selector": "#Username",
+        "value": "kushal."
+    },
+    {
+        "timestamp": 1744797901767,
+        "action": "input",
+        "selector": "#Username",
+        "value": "kushal.j"
+    },
+    {
+        "timestamp": 1744797901999,
+        "action": "input",
+        "selector": "#Username",
+        "value": "kushal.je"
+    },
+    {
+        "timestamp": 1744797902188,
+        "action": "input",
+        "selector": "#Username",
+        "value": "kushal.jet"
+    },
+    {
+        "timestamp": 1744797902362,
+        "action": "input",
+        "selector": "#Username",
+        "value": "kushal.jett"
+    },
+    {
+        "timestamp": 1744797902587,
+        "action": "input",
+        "selector": "#Username",
+        "value": "kushal.jetty"
+    },
+    {
+        "timestamp": 1744797903059,
+        "action": "input",
+        "selector": "#Username",
+        "value": "kushal.jetty@"
+    },
+    {
+        "timestamp": 1744797903596,
+        "action": "input",
+        "selector": "#Username",
+        "value": "kushal.jetty@t"
+    },
+    {
+        "timestamp": 1744797903731,
+        "action": "input",
+        "selector": "#Username",
+        "value": "kushal.jetty@te"
+    },
+    {
+        "timestamp": 1744797903982,
+        "action": "input",
+        "selector": "#Username",
+        "value": "kushal.jetty@tea"
+    },
+    {
+        "timestamp": 1744797904192,
+        "action": "input",
+        "selector": "#Username",
+        "value": "kushal.jetty@team"
+    },
+    {
+        "timestamp": 1744797904629,
+        "action": "input",
+        "selector": "#Username",
+        "value": "kushal.jetty@teams"
+    },
+    {
+        "timestamp": 1744797904899,
+        "action": "input",
+        "selector": "#Username",
+        "value": "kushal.jetty@teamst"
+    },
+    {
+        "timestamp": 1744797905102,
+        "action": "input",
+        "selector": "#Username",
+        "value": "kushal.jetty@teamstr"
+    },
+    {
+        "timestamp": 1744797905296,
+        "action": "input",
+        "selector": "#Username",
+        "value": "kushal.jetty@teamstre"
+    },
+    {
+        "timestamp": 1744797906855,
+        "action": "input",
+        "selector": "#Username",
+        "value": "kushal.jetty@teamstrea"
+    },
+    {
+        "timestamp": 1744797907084,
+        "action": "input",
+        "selector": "#Username",
+        "value": "kushal.jetty@teamstream"
+    },
+    {
+        "timestamp": 1744797907312,
+        "action": "input",
+        "selector": "#Username",
+        "value": "kushal.jetty@teamstreamz"
+    },
+    {
+        "timestamp": 1744797907983,
+        "action": "input",
+        "selector": "#Username",
+        "value": "kushal.jetty@teamstreamz."
+    },
+    {
+        "timestamp": 1744797908293,
+        "action": "input",
+        "selector": "#Username",
+        "value": "kushal.jetty@teamstreamz.c"
+    },
+    {
+        "timestamp": 1744797908459,
+        "action": "input",
+        "selector": "#Username",
+        "value": "kushal.jetty@teamstreamz.co"
+    },
+    {
+        "timestamp": 1744797908734,
+        "action": "input",
+        "selector": "#Username",
+        "value": "kushal.jetty@teamstreamz.com"
+    },
+    {
+        "timestamp": 1744797910071,
+        "action": "input",
+        "selector": "#Password",
+        "value": "T"
+    },
+    {
+        "timestamp": 1744797910462,
+        "action": "input",
+        "selector": "#Password",
+        "value": "Te"
+    },
+    {
+        "timestamp": 1744797910676,
+        "action": "input",
+        "selector": "#Password",
+        "value": "Tes"
+    },
+    {
+        "timestamp": 1744797911191,
+        "action": "input",
+        "selector": "#Password",
+        "value": "Test"
+    },
+    {
+        "timestamp": 1744797911673,
+        "action": "input",
+        "selector": "#Password",
+        "value": "Test@"
+    },
+    {
+        "timestamp": 1744797912082,
+        "action": "input",
+        "selector": "#Password",
+        "value": "Test@1"
+    },
+    {
+        "timestamp": 1744797912303,
+        "action": "input",
+        "selector": "#Password",
+        "value": "Test@12"
+    },
+    {
+        "timestamp": 1744797912519,
+        "action": "input",
+        "selector": "#Password",
+        "value": "Test@123"
+    },
+    {
+        "timestamp": 1744797914245,
+        "action": "click",
+        "selector": ".btn.signin-btn.bg-primary.ng-tns-c813547932-0"
+    },
+    {
+        "timestamp": 1744797917953,
+        "action": "click",
+        "selector": ".list-group-item.inactive-link.ng-star-inserted"
+    },
+    {
+        "timestamp": 1744797921425,
+        "action": "click",
+        "selector": ".btn-ts.btn-ts-primary.ng-star-inserted"
+    },
+    {
+        "timestamp": 1744797923456,
+        "action": "click",
+        "selector": ".activity-type.font-fourteen.mb-3.bg-light.rounded"
+    },
+    {
+        "timestamp": 1744797927393,
+        "action": "click",
+        "selector": ".toggle-button"
+    },
+    {
+        "timestamp": 1744797930709,
+        "action": "click",
+        "selector": ".form-control.ng-untouched.ng-pristine.ng-valid"
+    },
+    {
+        "timestamp": 1744797934616,
+        "action": "input",
+        "selector": ".form-control.ng-untouched.ng-pristine.ng-valid",
+        "value": "t"
+    },
+    {
+        "timestamp": 1744797934775,
+        "action": "input",
+        "selector": ".form-control.ng-untouched.ng-valid.ng-dirty",
+        "value": "te"
+    },
+    {
+        "timestamp": 1744797935067,
+        "action": "input",
+        "selector": ".form-control.ng-untouched.ng-valid.ng-dirty",
+        "value": "tes"
+    },
+    {
+        "timestamp": 1744797935271,
+        "action": "input",
+        "selector": ".form-control.ng-untouched.ng-valid.ng-dirty",
+        "value": "test"
+    },
+    {
+        "timestamp": 1744797937547,
+        "action": "input",
+        "selector": ".form-control.ng-untouched.ng-pristine.ng-valid",
+        "value": "d"
+    },
+    {
+        "timestamp": 1744797937752,
+        "action": "input",
+        "selector": ".form-control.ng-untouched.ng-valid.ng-dirty",
+        "value": "de"
+    },
+    {
+        "timestamp": 1744797937966,
+        "action": "input",
+        "selector": ".form-control.ng-untouched.ng-valid.ng-dirty",
+        "value": "des"
+    },
+    {
+        "timestamp": 1744797938303,
+        "action": "input",
+        "selector": ".form-control.ng-untouched.ng-valid.ng-dirty",
+        "value": "desc"
+    },
+    {
+        "timestamp": 1744797938588,
+        "action": "input",
+        "selector": ".form-control.ng-untouched.ng-valid.ng-dirty",
+        "value": "descr"
+    },
+    {
+        "timestamp": 1744797938828,
+        "action": "input",
+        "selector": ".form-control.ng-untouched.ng-valid.ng-dirty",
+        "value": "descri"
+    },
+    {
+        "timestamp": 1744797939055,
+        "action": "input",
+        "selector": ".form-control.ng-untouched.ng-valid.ng-dirty",
+        "value": "descrip"
+    },
+    {
+        "timestamp": 1744797939405,
+        "action": "input",
+        "selector": ".form-control.ng-untouched.ng-valid.ng-dirty",
+        "value": "descript"
+    },
+    {
+        "timestamp": 1744797939665,
+        "action": "input",
+        "selector": ".form-control.ng-untouched.ng-valid.ng-dirty",
+        "value": "descripti"
+    },
+    {
+        "timestamp": 1744797939841,
+        "action": "input",
+        "selector": ".form-control.ng-untouched.ng-valid.ng-dirty",
+        "value": "descriptio"
+    },
+    {
+        "timestamp": 1744797940208,
+        "action": "input",
+        "selector": ".form-control.ng-untouched.ng-valid.ng-dirty",
+        "value": "description"
+    },
+    {
+        "timestamp": 1744797944957,
+        "action": "input",
+        "selector": "input",
+        "value": "C"
+    },
+    {
+        "timestamp": 1744797948380,
+        "action": "input",
+        "selector": "input",
+        "value": "CO"
+    },
+    {
+        "timestamp": 1744797948603,
+        "action": "input",
+        "selector": "input",
+        "value": "COU"
+    },
+    {
+        "timestamp": 1744797949120,
+        "action": "input",
+        "selector": "input",
+        "value": "COUN"
+    },
+    {
+        "timestamp": 1744797949530,
+        "action": "input",
+        "selector": "input",
+        "value": "COUNT"
+    },
+    {
+        "timestamp": 1744797949726,
+        "action": "input",
+        "selector": "input",
+        "value": "COUNTR"
+    },
+    {
+        "timestamp": 1744797949950,
+        "action": "input",
+        "selector": "input",
+        "value": "COUNTRY"
+    },
+    {
+        "timestamp": 1744797952585,
+        "action": "input",
+        "selector": "input",
+        "value": "COUNTRY|"
+    },
+    {
+        "timestamp": 1744797956307,
+        "action": "click",
+        "selector": ".ng-option-label.ng-star-inserted"
+    },
+    {
+        "timestamp": 1744797958719,
+        "action": "click",
+        "selector": "input"
+    },
+    {
+        "timestamp": 1744797959703,
+        "action": "input",
+        "selector": "input",
+        "value": "I"
+    },
+    {
+        "timestamp": 1744797960101,
+        "action": "input",
+        "selector": "input",
+        "value": "In"
+    },
+    {
+        "timestamp": 1744797960475,
+        "action": "input",
+        "selector": "input",
+        "value": "Int"
+    },
+    {
+        "timestamp": 1744797963212,
+        "action": "input",
+        "selector": "input",
+        "value": "Intt"
+    },
+    {
+        "timestamp": 1744797963361,
+        "action": "input",
+        "selector": "input",
+        "value": "Intte"
+    },
+    {
+        "timestamp": 1744797963563,
+        "action": "input",
+        "selector": "input",
+        "value": "Intter"
+    },
+    {
+        "timestamp": 1744797964080,
+        "action": "input",
+        "selector": "input",
+        "value": "Inttern"
+    },
+    {
+        "timestamp": 1744797964217,
+        "action": "input",
+        "selector": "input",
+        "value": "Intterna"
+    },
+    {
+        "timestamp": 1744797964418,
+        "action": "input",
+        "selector": "input",
+        "value": "Intternal"
+    },
+    {
+        "timestamp": 1744797965916,
+        "action": "input",
+        "selector": "input",
+        "value": "Intterna"
+    },
+    {
+        "timestamp": 1744797966118,
+        "action": "input",
+        "selector": "input",
+        "value": "Inttern"
+    },
+    {
+        "timestamp": 1744797966284,
+        "action": "input",
+        "selector": "input",
+        "value": "Intter"
+    },
+    {
+        "timestamp": 1744797966439,
+        "action": "input",
+        "selector": "input",
+        "value": "Intte"
+    },
+    {
+        "timestamp": 1744797966585,
+        "action": "input",
+        "selector": "input",
+        "value": "Intt"
+    },
+    {
+        "timestamp": 1744797966749,
+        "action": "input",
+        "selector": "input",
+        "value": "Int"
+    },
+    {
+        "timestamp": 1744797967507,
+        "action": "input",
+        "selector": "input",
+        "value": "Inte"
+    },
+    {
+        "timestamp": 1744797967710,
+        "action": "input",
+        "selector": "input",
+        "value": "Inter"
+    },
+    {
+        "timestamp": 1744797968191,
+        "action": "input",
+        "selector": "input",
+        "value": "Intern"
+    },
+    {
+        "timestamp": 1744797968329,
+        "action": "input",
+        "selector": "input",
+        "value": "Interna"
+    },
+    {
+        "timestamp": 1744797968568,
+        "action": "input",
+        "selector": "input",
+        "value": "Internal"
+    },
+    {
+        "timestamp": 1744797973983,
+        "action": "click",
+        "selector": ".checkmark"
+    },
+    {
+        "timestamp": 1744797973984,
+        "action": "click",
+        "selector": "[name=\"private\"]"
+    },
+    {
+        "timestamp": 1744797973984,
+        "action": "input",
+        "selector": "[name=\"private\"]",
+        "value": "on"
+    },
+    {
+        "timestamp": 1744797974383,
+        "action": "click",
+        "selector": ".form-group.mb-3.ng-star-inserted"
+    },
+    {
+        "timestamp": 1744797974755,
+        "action": "click",
+        "selector": ".checkmark"
+    },
+    {
+        "timestamp": 1744797974756,
+        "action": "click",
+        "selector": "[name=\"account\"]"
+    },
+    {
+        "timestamp": 1744797974756,
+        "action": "input",
+        "selector": "[name=\"account\"]",
+        "value": "on"
+    },
+    {
+        "timestamp": 1744797975267,
+        "action": "click",
+        "selector": ".checkmark"
+    },
+    {
+        "timestamp": 1744797975268,
+        "action": "click",
+        "selector": "[name=\"multiPage\"]"
+    },
+    {
+        "timestamp": 1744797975268,
+        "action": "input",
+        "selector": "[name=\"multiPage\"]",
+        "value": "on"
+    },
+    {
+        "timestamp": 1744798002943,
+        "action": "click",
+        "selector": ".btn-ts.btn-ts-primary-outline.ng-star-inserted"
+    },
+    {
+        "timestamp": 1744798006250,
+        "action": "click",
+        "selector": ".svc-text.svc-text--normal.svc-text--bold"
+    },
+    {
+        "timestamp": 1744798006579,
+        "action": "click",
+        "selector": ".svc-string-editor__input"
+    },
+    {
+        "timestamp": 1744798008696,
+        "action": "input",
+        "selector": ".sv-string-editor.ng-star-inserted",
+        "value": null
+    },
+    {
+        "timestamp": 1744798008858,
+        "action": "input",
+        "selector": ".sv-string-editor.ng-star-inserted",
+        "value": null
+    },
+    {
+        "timestamp": 1744798009017,
+        "action": "input",
+        "selector": ".sv-string-editor.ng-star-inserted",
+        "value": null
+    },
+    {
+        "timestamp": 1744798010063,
+        "action": "input",
+        "selector": ".sv-string-editor.ng-star-inserted",
+        "value": null
+    },
+    {
+        "timestamp": 1744798010533,
+        "action": "input",
+        "selector": ".sv-string-editor.ng-star-inserted",
+        "value": null
+    },
+    {
+        "timestamp": 1744798010779,
+        "action": "input",
+        "selector": ".sv-string-editor.ng-star-inserted",
+        "value": null
+    },
+    {
+        "timestamp": 1744798010943,
+        "action": "input",
+        "selector": ".sv-string-editor.ng-star-inserted",
+        "value": null
+    },
+    {
+        "timestamp": 1744798011185,
+        "action": "input",
+        "selector": ".sv-string-editor.ng-star-inserted",
+        "value": null
+    },
+    {
+        "timestamp": 1744798011363,
+        "action": "input",
+        "selector": ".sv-string-editor.ng-star-inserted",
+        "value": null
+    },
+    {
+        "timestamp": 1744798011530,
+        "action": "input",
+        "selector": ".sv-string-editor.ng-star-inserted",
+        "value": null
+    },
+    {
+        "timestamp": 1744798011831,
+        "action": "input",
+        "selector": ".sv-string-editor.ng-star-inserted",
+        "value": null
+    },
+    {
+        "timestamp": 1744798012611,
+        "action": "input",
+        "selector": ".sv-string-editor.ng-star-inserted",
+        "value": null
+    },
+    {
+        "timestamp": 1744798013323,
+        "action": "input",
+        "selector": ".sv-string-editor.ng-star-inserted",
+        "value": null
+    },
+    {
+        "timestamp": 1744798013496,
+        "action": "input",
+        "selector": ".sv-string-editor.ng-star-inserted",
+        "value": null
+    },
+    {
+        "timestamp": 1744798014108,
+        "action": "input",
+        "selector": ".sv-string-editor.ng-star-inserted",
+        "value": null
+    },
+    {
+        "timestamp": 1744798014257,
+        "action": "input",
+        "selector": ".sv-string-editor.ng-star-inserted",
+        "value": null
+    },
+    {
+        "timestamp": 1744798014446,
+        "action": "input",
+        "selector": ".sv-string-editor.ng-star-inserted",
+        "value": null
+    },
+    {
+        "timestamp": 1744798014965,
+        "action": "input",
+        "selector": ".sv-string-editor.ng-star-inserted",
+        "value": null
+    },
+    {
+        "timestamp": 1744798015290,
+        "action": "input",
+        "selector": ".sv-string-editor.ng-star-inserted",
+        "value": null
+    },
+    {
+        "timestamp": 1744798015609,
+        "action": "input",
+        "selector": ".sv-string-editor.ng-star-inserted",
+        "value": null
+    },
+    {
+        "timestamp": 1744798015844,
+        "action": "input",
+        "selector": ".sv-string-editor.ng-star-inserted",
+        "value": null
+    },
+    {
+        "timestamp": 1744798019496,
+        "action": "click",
+        "selector": ".btn-ts.btn-ts-primary-outline"
+    },
+    {
+        "timestamp": 1744798025421,
+        "action": "click",
+        "selector": ".btn-ts.btn-ts-primary-outline"
+    },
+    {
+        "timestamp": 1744798028537,
+        "action": "click",
+        "selector": "img"
+    },
+    {
+        "timestamp": 1744798030058,
+        "action": "click",
+        "selector": ".btn-ts.btn-ts-primary.restrictedButton"
+    }
+]

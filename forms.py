@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, SelectField, FileField, BooleanField, DateField, IntegerField
-from wtforms.validators import DataRequired, Optional, Length
+from wtforms.validators import DataRequired, Optional, Length, URL
 
 class ProjectForm(FlaskForm):
     """Form for creating and editing projects."""
@@ -19,6 +19,12 @@ class TestRunForm(FlaskForm):
     """Form for creating and running test runs."""
     name = StringField('Test Run Name', validators=[DataRequired(), Length(max=100)])
     test_suite_id = SelectField('Test Suite', coerce=int, validators=[DataRequired()])
+
+class TestExecutionForm(FlaskForm):
+    """Form for executing test cases."""
+    file = FileField('Test Case File', validators=[DataRequired()])
+    target_url = StringField('Target URL', validators=[DataRequired(), URL()])
+    headless = BooleanField('Headless Mode', default=True)
 
 class FilterForm(FlaskForm):
     """Form for filtering test results."""

@@ -16,14 +16,16 @@
 <div class="container">
     <h2>Test Case Executor</h2>
 
-    <form action="/upload" method="post" enctype="multipart/form-data" class="mb-3">
+    <form id="uploadForm" class="mb-3">
+        {{ form.hidden_tag() }}
         <div class="input-group">
             <input type="file" name="file" class="form-control" required>
             <button class="btn btn-secondary" type="submit">Upload Test Case</button>
         </div>
     </form>
 
-    <form action="/start" method="post" class="mb-3">
+    <form id="executeForm" class="mb-3">
+        {{ form.hidden_tag() }}
         <div class="mb-2">
             <label>Target URL:</label>
             <input type="text" name="target_url" class="form-control" required>
@@ -34,12 +36,8 @@
         </div>
         <div class="d-flex gap-2">
             <button type="submit" class="btn btn-primary">Start</button>
-            <form action="/pause" method="post">
-                <button type="submit" class="btn btn-warning">Pause/Resume</button>
-            </form>
-            <form action="/stop" method="post">
-                <button type="submit" class="btn btn-danger">Stop</button>
-            </form>
+            <button type="button" id="pauseBtn" class="btn btn-warning">Pause/Resume</button>
+            <button type="button" id="stopBtn" class="btn btn-danger">Stop</button>
         </div>
     </form>
 
@@ -74,21 +72,50 @@
     const inputPromptText = document.getElementById('inputPromptText');
     const inputValue = document.getElementById('inputValue');
     const inputModal = new bootstrap.Modal(document.getElementById('inputModal'));
+    const uploadForm = document.getElementById('uploadForm');
+    const executeForm = document.getElementById('executeForm');
+    const pauseBtn = document.getElementById('pauseBtn');
+    const stopBtn = document.getElementById('stopBtn');
+
+    let statusPollInterval;
+    let inputPollInterval;
+
+    function startStatusPolling() {
+        statusPollInterval = setInterval(updateLog, 1000);
+        inputPollInterval = setInterval(checkAwaitingInput, 1000);
+    }
+
+    function stopStatusPolling() {
+        clearInterval(statusPollInterval);
+        clearInterval(inputPollInterval);
+    }
 
     function updateLog() {
-        fetch('/log')
+        fetch('{{ url_for("get_test_status") }}')
             .then(res => res.json())
             .then(data => {
                 logBox.innerText = data.log.join('\n');
+                // Auto-scroll to bottom
+                logBox.scrollTop = logBox.scrollHeight;
+                
+                // If test is not running, stop polling
+                if (!data.running) {
+                    stopStatusPolling();
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                stopStatusPolling();
             });
     }
 
     function checkAwaitingInput() {
-        fetch('/awaiting_input')
+        fetch('{{ url_for("check_awaiting_input") }}')
             .then(res => res.json())
             .then(data => {
                 if (data.awaiting) {
                     inputPromptText.innerText = `Enter value for "${data.var_name}":`;
+                    inputValue.value = ''; // Clear previous value
                     inputModal.show();
                 }
             });
@@ -96,18 +123,67 @@
 
     document.getElementById('inputForm').addEventListener('submit', function (e) {
         e.preventDefault();
-        fetch('/submit_input', {
+        const value = inputValue.value;
+        
+        fetch('{{ url_for("submit_input") }}', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({ value: inputValue.value })
-        }).then(() => {
-            inputValue.value = '';
-            inputModal.hide();
+            body: JSON.stringify({ value: value })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                inputValue.value = '';
+                inputModal.hide();
+            }
+        })
+        .catch(error => {
+            console.error('Error submitting input:', error);
         });
     });
 
-    setInterval(updateLog, 1000);
-    setInterval(checkAwaitingInput, 1500);
+    // Start polling when test execution begins
+    executeForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const formData = new FormData(executeForm);
+        
+        fetch('{{ url_for("execute_test") }}', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                target_url: formData.get('target_url'),
+                headless: formData.get('headless') === 'true'
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message) {
+                startStatusPolling();
+            }
+        });
+    });
+
+    // Handle pause button
+    pauseBtn.addEventListener('click', function () {
+        fetch('{{ url_for("pause_test") }}', { method: 'POST' })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status) {
+                    pauseBtn.textContent = data.status.includes('paused') ? 'Resume' : 'Pause';
+                }
+            });
+    });
+
+    // Handle stop button
+    stopBtn.addEventListener('click', function () {
+        fetch('{{ url_for("stop_test") }}', { method: 'POST' })
+            .then(() => {
+                stopStatusPolling();
+            });
+    });
+
+    // Initialize polling if test is already running
+    startStatusPolling();
 </script>
 </body>
 </html>
