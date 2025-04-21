@@ -5,102 +5,207 @@
 {% block header %}Test Suites{% endblock %}
 
 {% block content %}
-<div class="row mb-4">
-    <div class="col-md-12 d-flex justify-content-between align-items-center">
-        <h2 class="h4">All Test Suites</h2>
-        <a href="{{ url_for('create_test_suite') }}" class="btn btn-primary">
-            <i class="bi bi-plus-circle"></i> New Test Suite
-        </a>
+<div class="container-fluid px-4">
+    <!-- Header Section -->
+    <div class="row mb-4">
+        <div class="col-12 d-flex justify-content-between align-items-center">
+            <div>
+                <h2 class="h3 mb-0">Test Suites</h2>
+                <p class="text-muted small mb-0">Manage and organize your test collections</p>
+            </div>
+            <a href="{{ url_for('create_test_suite') }}" class="btn btn-primary d-flex align-items-center gap-2">
+                <i class="bi bi-plus-lg"></i>
+                New Test Suite
+            </a>
+        </div>
     </div>
-</div>
 
-<div class="row">
-    {% if test_suites %}
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Project</th>
-                                    <th>Description</th>
-                                    <th>Test Cases</th>
-                                    <th>Test Runs</th>
-                                    <th>Created</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for test_suite in test_suites %}
-                                <tr>
-                                    <td>
-                                        <a href="{{ url_for('test_suite_detail', suite_id=test_suite.id) }}">
-                                            {{ test_suite.name }}
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="{{ url_for('project_detail', project_id=test_suite.project.id) }}">
-                                            {{ test_suite.project.name }}
-                                        </a>
-                                    </td>
-                                    <td>{{ test_suite.description|truncate(50) or 'No description' }}</td>
-                                    <td>{{ test_suite.test_cases|length }}</td>
-                                    <td>{{ test_suite.test_runs|length }}</td>
-                                    <td>{{ test_suite.created_at.strftime('%Y-%m-%d') }}</td>
-                                    <td>
-                                        <div class="btn-group" role="group">
-                                            <a href="{{ url_for('test_suite_detail', suite_id=test_suite.id) }}" class="btn btn-sm btn-info">
-                                                <i class="bi bi-eye"></i>
+    <!-- Content Section -->
+    <div class="row">
+        {% if test_suites %}
+            <div class="col-12">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle mb-0">
+                                <thead class="bg-light">
+                                    <tr>
+                                        <th class="px-4 py-3">Name</th>
+                                        <th class="py-3">Project</th>
+                                        <th class="py-3">Description</th>
+                                        <th class="py-3 text-center">Test Cases</th>
+                                        <th class="py-3 text-center">Test Runs</th>
+                                        <th class="py-3">Created</th>
+                                        <th class="py-3 text-end pe-4">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for test_suite in test_suites %}
+                                    <tr>
+                                        <td class="px-4">
+                                            <a href="{{ url_for('test_suite_detail', suite_id=test_suite.id) }}" class="text-decoration-none">
+                                                <div class="d-flex align-items-center">
+                                                    <i class="bi bi-folder me-2 text-primary"></i>
+                                                    <span>{{ test_suite.name }}</span>
+                                                </div>
                                             </a>
-                                            <a href="{{ url_for('edit_test_suite', suite_id=test_suite.id) }}" class="btn btn-sm btn-primary">
-                                                <i class="bi bi-pencil"></i>
+                                        </td>
+                                        <td>
+                                            <a href="{{ url_for('project_detail', project_id=test_suite.project.id) }}" class="text-decoration-none">
+                                                <span class="badge bg-light text-dark">
+                                                    <i class="bi bi-briefcase me-1"></i>
+                                                    {{ test_suite.project.name }}
+                                                </span>
                                             </a>
-                                            <a href="{{ url_for('create_test_run', suite_id=test_suite.id) }}" class="btn btn-sm btn-success">
-                                                <i class="bi bi-play"></i>
-                                            </a>
-                                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteTestSuiteModal{{ test_suite.id }}">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
-                                        </div>
-                                        
-                                        <!-- Delete Confirmation Modal -->
-                                        <div class="modal fade" id="deleteTestSuiteModal{{ test_suite.id }}" tabindex="-1" aria-labelledby="deleteTestSuiteModalLabel{{ test_suite.id }}" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="deleteTestSuiteModalLabel{{ test_suite.id }}">Confirm Delete</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        Are you sure you want to delete the test suite <strong>{{ test_suite.name }}</strong>? This action cannot be undone and will delete all associated test cases and test runs.
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                                        <form action="{{ url_for('delete_test_suite', suite_id=test_suite.id) }}" method="POST" style="display: inline;">
-                                                            <button type="submit" class="btn btn-danger">Delete Test Suite</button>
-                                                        </form>
+                                        </td>
+                                        <td>
+                                            <span class="text-muted">{{ test_suite.description|truncate(50) or 'No description' }}</span>
+                                        </td>
+                                        <td class="text-center">
+                                            <span class="badge bg-info">{{ test_suite.test_cases|length }}</span>
+                                        </td>
+                                        <td class="text-center">
+                                            <span class="badge bg-success">{{ test_suite.test_runs|length }}</span>
+                                        </td>
+                                        <td>
+                                            <span class="text-muted small">
+                                                <i class="bi bi-calendar me-1"></i>
+                                                {{ test_suite.created_at.strftime('%Y-%m-%d') }}
+                                            </span>
+                                        </td>
+                                        <td class="text-end pe-4">
+                                            <div class="btn-group">
+                                                <a href="{{ url_for('test_suite_detail', suite_id=test_suite.id) }}" 
+                                                   class="btn btn-sm btn-outline-secondary" 
+                                                   data-bs-toggle="tooltip" 
+                                                   title="View Details">
+                                                    <i class="bi bi-eye"></i>
+                                                </a>
+                                                <a href="{{ url_for('edit_test_suite', suite_id=test_suite.id) }}" 
+                                                   class="btn btn-sm btn-outline-primary"
+                                                   data-bs-toggle="tooltip" 
+                                                   title="Edit">
+                                                    <i class="bi bi-pencil"></i>
+                                                </a>
+                                                <a href="{{ url_for('create_test_run', suite_id=test_suite.id) }}" 
+                                                   class="btn btn-sm btn-outline-success"
+                                                   data-bs-toggle="tooltip" 
+                                                   title="Run Tests">
+                                                    <i class="bi bi-play-fill"></i>
+                                                </a>
+                                                <!-- New Record Button -->
+                                                <button type="button" 
+                                                        class="btn btn-sm btn-outline-info"
+                                                        onclick="startRecording({{ test_suite.id }})"
+                                                        data-bs-toggle="tooltip" 
+                                                        title="Record Test Case">
+                                                    <i class="bi bi-record-circle"></i>
+                                                </button>
+                                                <button type="button" 
+                                                        class="btn btn-sm btn-outline-danger" 
+                                                        data-bs-toggle="modal" 
+                                                        data-bs-target="#deleteTestSuiteModal{{ test_suite.id }}"
+                                                        title="Delete">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </div>
+                                            
+                                            <!-- Delete Modal -->
+                                            <div class="modal fade" id="deleteTestSuiteModal{{ test_suite.id }}" tabindex="-1">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header border-bottom-0">
+                                                            <h5 class="modal-title">Delete Test Suite</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                        </div>
+                                                        <div class="modal-body text-center py-4">
+                                                            <i class="bi bi-exclamation-triangle text-warning display-4 mb-3"></i>
+                                                            <p class="mb-0">Are you sure you want to delete <strong>{{ test_suite.name }}</strong>?</p>
+                                                            <p class="text-muted small">This action cannot be undone and will delete all associated test cases and runs.</p>
+                                                        </div>
+                                                        <div class="modal-footer border-top-0">
+                                                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                                                            <form action="{{ url_for('delete_test_suite', suite_id=test_suite.id) }}" method="POST" class="d-inline">
+                                                                <button type="submit" class="btn btn-danger">Delete Test Suite</button>
+                                                            </form>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    {% else %}
-    <div class="col-md-12">
-        <div class="alert alert-info">
-            <i class="bi bi-info-circle"></i> No test suites found. 
-            <a href="{{ url_for('create_test_suite') }}" class="alert-link">Create your first test suite</a> to get started.
-        </div>
+        {% else %}
+            <div class="col-12">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body text-center py-5">
+                        <i class="bi bi-folder-plus display-4 text-muted mb-3"></i>
+                        <h5>No Test Suites Found</h5>
+                        <p class="text-muted mb-3">Get started by creating your first test suite</p>
+                        <a href="{{ url_for('create_test_suite') }}" class="btn btn-primary">
+                            <i class="bi bi-plus-lg me-1"></i>
+                            Create Test Suite
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
     </div>
-    {% endif %}
 </div>
+
+<!-- Initialize tooltips -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize all tooltips
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    });
+
+    // Function to start recording
+    window.startRecording = function(suiteId) {
+        // Show loading state
+        const button = event.target.closest('button');
+        const icon = button.querySelector('i');
+        button.disabled = true;
+        icon.className = 'bi bi-record-circle-fill text-danger';
+
+        // Make API call to start recording
+        fetch(`/api/record/start`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                suite_id: suiteId
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                // Redirect to recording page or show success message
+                window.location.href = `/test-suite/${suiteId}/record`;
+            } else {
+                alert('Failed to start recording: ' + data.message);
+                // Reset button state
+                button.disabled = false;
+                icon.className = 'bi bi-record-circle';
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Failed to start recording');
+            // Reset button state
+            button.disabled = false;
+            icon.className = 'bi bi-record-circle';
+        });
+    };
+});
+</script>
 {% endblock %}
