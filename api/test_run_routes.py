@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect, url_for, flash
 from models import db, TestSuite, TestRun, TestResult
 from forms import TestRunForm
-from test_executor import run_tests_async, active_test_runs
+from folder_analyser.test_executor import run_tests_async, active_test_runs
 from chart_utils import generate_chart
 import threading
 

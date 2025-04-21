@@ -30,7 +30,7 @@ def run_tests_async(test_run_id):
             test_cases = test_suite.test_cases
             
             # Import the test runner
-            from test_runner import StreamzAITestRunner
+            from folder_analyser.test_runner import StreamzAITestRunner
             
             # Collect test files to run
             test_files = []
