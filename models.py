@@ -3,8 +3,14 @@ from datetime import datetime
 
 db = SQLAlchemy()
 
-class Project(db.Model):
+class BaseModel(db.Model):
+    """Base model with soft delete functionality."""
+    __abstract__ = True
+    active = db.Column(db.Boolean, default=True, nullable=False)
+
+class Project(BaseModel):
     """Model for storing project information."""
+    __tablename__ = 'project'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     path = db.Column(db.String(500), nullable=False)
@@ -16,8 +22,9 @@ class Project(db.Model):
     def __repr__(self):
         return f'<Project {self.name}>' 
 
-class TestSuite(db.Model):
+class TestSuite(BaseModel):
     """Model for storing test suite information."""
+    __tablename__ = 'test_suite'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text, nullable=True)
@@ -30,13 +37,14 @@ class TestSuite(db.Model):
     def __repr__(self):
         return f'<TestSuite {self.name}>'
 
-class TestCase(db.Model):
+class TestCase(BaseModel):
     """Model for storing test case information."""
+    __tablename__ = 'test_case'
     id = db.Column(db.Integer, primary_key=True)
     original_file_path = db.Column(db.String(500), nullable=False)
     test_file_path = db.Column(db.String(500), nullable=False)
     language = db.Column(db.String(50), nullable=False)
-    status = db.Column(db.String(20), nullable=False, default='generated')  # generated, passed, failed
+    status = db.Column(db.String(20), nullable=False, default='generated')
     test_suite_id = db.Column(db.Integer, db.ForeignKey('test_suite.id'), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
@@ -45,11 +53,12 @@ class TestCase(db.Model):
     def __repr__(self):
         return f'<TestCase {self.test_file_path}>'
 
-class TestRun(db.Model):
+class TestRun(BaseModel):
     """Model for storing test run information."""
+    __tablename__ = 'test_run'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
-    status = db.Column(db.String(20), nullable=False, default='pending')  # pending, running, completed, failed
+    status = db.Column(db.String(20), nullable=False, default='pending')
     start_time = db.Column(db.DateTime, nullable=True)
     end_time = db.Column(db.DateTime, nullable=True)
     test_suite_id = db.Column(db.Integer, db.ForeignKey('test_suite.id'), nullable=False)
@@ -59,11 +68,13 @@ class TestRun(db.Model):
     def __repr__(self):
         return f'<TestRun {self.name}>'
 
+# TestResult doesn't need soft delete
 class TestResult(db.Model):
     """Model for storing test result information."""
+    __tablename__ = 'test_result'
     id = db.Column(db.Integer, primary_key=True)
-    status = db.Column(db.String(20), nullable=False)  # passed, failed, skipped, error
-    execution_time = db.Column(db.Float, nullable=True)  # in seconds
+    status = db.Column(db.String(20), nullable=False)
+    execution_time = db.Column(db.Float, nullable=True)
     error_message = db.Column(db.Text, nullable=True)
     test_case_id = db.Column(db.Integer, db.ForeignKey('test_case.id'), nullable=False)
     test_run_id = db.Column(db.Integer, db.ForeignKey('test_run.id'), nullable=False)
