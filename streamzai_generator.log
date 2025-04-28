@@ -1,0 +1,170 @@
+2025-04-21 14:40:21,414 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-04-21 14:40:21,414 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-21 14:40:21,416 - werkzeug - INFO -  * Restarting with stat
+2025-04-21 14:40:23,358 - werkzeug - WARNING -  * Debugger is active!
+2025-04-21 14:40:23,358 - werkzeug - INFO -  * Debugger PIN: 510-286-410
+2025-04-21 14:40:23,929 - werkzeug - INFO - 127.0.0.1 - - [21/Apr/2025 14:40:23] "GET /test-suite/create HTTP/1.1" 200 -
+2025-04-21 14:40:23,958 - werkzeug - INFO - 127.0.0.1 - - [21/Apr/2025 14:40:23] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-21 14:40:23,958 - werkzeug - INFO - 127.0.0.1 - - [21/Apr/2025 14:40:23] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-21 14:40:35,445 - StreamzAI - WARNING - No Google API key provided. Please set GOOGLE_API_KEY environment variable or provide it as an argument.
+2025-04-21 14:40:35,448 - StreamzAI - ERROR - Project path does not exist: C:\Users\kusha\Documents\Desktop\Classroom\Projects\Portfolio\portfolio
+2025-04-21 14:40:35,448 - werkzeug - INFO - 127.0.0.1 - - [21/Apr/2025 14:40:35] "[32mPOST /test-suite/create HTTP/1.1[0m" 302 -
+2025-04-21 14:40:35,505 - werkzeug - INFO - 127.0.0.1 - - [21/Apr/2025 14:40:35] "GET /test-suites HTTP/1.1" 200 -
+2025-04-21 14:40:35,523 - werkzeug - INFO - 127.0.0.1 - - [21/Apr/2025 14:40:35] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-21 14:40:35,526 - werkzeug - INFO - 127.0.0.1 - - [21/Apr/2025 14:40:35] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-21 14:40:50,625 - werkzeug - INFO - 127.0.0.1 - - [21/Apr/2025 14:40:50] "[32mPOST /test-suite/15/delete HTTP/1.1[0m" 302 -
+2025-04-21 14:40:50,638 - werkzeug - INFO - 127.0.0.1 - - [21/Apr/2025 14:40:50] "GET /test-suites HTTP/1.1" 200 -
+2025-04-21 14:40:50,654 - werkzeug - INFO - 127.0.0.1 - - [21/Apr/2025 14:40:50] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-21 14:40:50,657 - werkzeug - INFO - 127.0.0.1 - - [21/Apr/2025 14:40:50] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-22 10:05:28,428 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-04-22 10:05:28,428 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-22 10:05:28,429 - werkzeug - INFO -  * Restarting with stat
+2025-04-22 10:05:30,235 - werkzeug - WARNING -  * Debugger is active!
+2025-04-22 10:05:30,235 - werkzeug - INFO -  * Debugger PIN: 510-286-410
+2025-04-22 10:05:56,517 - werkzeug - INFO - 127.0.0.1 - - [22/Apr/2025 10:05:56] "GET /test-suites HTTP/1.1" 200 -
+2025-04-22 10:05:56,611 - werkzeug - INFO - 127.0.0.1 - - [22/Apr/2025 10:05:56] "GET / HTTP/1.1" 200 -
+2025-04-22 10:05:56,876 - werkzeug - INFO - 127.0.0.1 - - [22/Apr/2025 10:05:56] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-22 10:05:56,893 - werkzeug - INFO - 127.0.0.1 - - [22/Apr/2025 10:05:56] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-22 10:05:57,011 - werkzeug - INFO - 127.0.0.1 - - [22/Apr/2025 10:05:57] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-04-22 14:20:15,278 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-04-22 14:20:15,278 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-22 14:20:15,284 - werkzeug - INFO -  * Restarting with stat
+2025-04-22 14:20:18,105 - werkzeug - WARNING -  * Debugger is active!
+2025-04-22 14:20:18,106 - werkzeug - INFO -  * Debugger PIN: 510-286-410
+2025-04-22 14:20:18,146 - werkzeug - INFO - 127.0.0.1 - - [22/Apr/2025 14:20:18] "[33mGET /stream HTTP/1.1[0m" 404 -
+2025-04-22 14:20:18,206 - werkzeug - INFO - 127.0.0.1 - - [22/Apr/2025 14:20:18] "GET / HTTP/1.1" 200 -
+2025-04-22 14:20:18,233 - werkzeug - INFO - 127.0.0.1 - - [22/Apr/2025 14:20:18] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-22 14:20:18,273 - werkzeug - INFO - 127.0.0.1 - - [22/Apr/2025 14:20:18] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-22 14:20:20,267 - werkzeug - INFO - 127.0.0.1 - - [22/Apr/2025 14:20:20] "GET /projects HTTP/1.1" 200 -
+2025-04-22 14:20:20,292 - werkzeug - INFO - 127.0.0.1 - - [22/Apr/2025 14:20:20] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-22 14:20:20,304 - werkzeug - INFO - 127.0.0.1 - - [22/Apr/2025 14:20:20] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-22 14:20:21,953 - werkzeug - INFO - 127.0.0.1 - - [22/Apr/2025 14:20:21] "GET /test-suites HTTP/1.1" 200 -
+2025-04-22 14:20:21,975 - werkzeug - INFO - 127.0.0.1 - - [22/Apr/2025 14:20:21] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-22 14:20:21,986 - werkzeug - INFO - 127.0.0.1 - - [22/Apr/2025 14:20:21] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-22 14:21:01,952 - werkzeug - INFO - 127.0.0.1 - - [22/Apr/2025 14:21:01] "GET /project/1 HTTP/1.1" 200 -
+2025-04-22 14:21:01,974 - werkzeug - INFO - 127.0.0.1 - - [22/Apr/2025 14:21:01] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-22 14:21:01,984 - werkzeug - INFO - 127.0.0.1 - - [22/Apr/2025 14:21:01] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-22 14:21:13,153 - werkzeug - INFO - 127.0.0.1 - - [22/Apr/2025 14:21:13] "GET /test-runs HTTP/1.1" 200 -
+2025-04-22 14:21:13,181 - werkzeug - INFO - 127.0.0.1 - - [22/Apr/2025 14:21:13] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-22 14:21:13,189 - werkzeug - INFO - 127.0.0.1 - - [22/Apr/2025 14:21:13] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-22 14:21:15,313 - werkzeug - INFO - 127.0.0.1 - - [22/Apr/2025 14:21:15] "GET /test-run/4 HTTP/1.1" 200 -
+2025-04-22 14:21:15,347 - werkzeug - INFO - 127.0.0.1 - - [22/Apr/2025 14:21:15] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-22 14:21:15,354 - werkzeug - INFO - 127.0.0.1 - - [22/Apr/2025 14:21:15] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-22 14:27:57,504 - werkzeug - INFO - 127.0.0.1 - - [22/Apr/2025 14:27:57] "[33mPOST /stop-recording HTTP/1.1[0m" 404 -
+2025-04-22 14:32:08,949 - werkzeug - INFO - 127.0.0.1 - - [22/Apr/2025 14:32:08] "GET / HTTP/1.1" 200 -
+2025-04-22 14:32:08,968 - werkzeug - INFO - 127.0.0.1 - - [22/Apr/2025 14:32:08] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-22 14:32:08,968 - werkzeug - INFO - 127.0.0.1 - - [22/Apr/2025 14:32:08] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-23 12:19:16,002 - flask_migrate - ERROR - Error: Path doesn't exist: 'C:\\Users\\HP\\Documents\\StreamzAI\\downloads\\testing\\test-generation1\\test-generation\\migrations'.  Please use the 'init' command to create a new scripts folder.
+2025-04-23 12:21:45,741 - flask_migrate - ERROR - Error: Directory migrations already exists and is not empty
+2025-04-23 12:30:51,921 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-04-23 12:30:51,921 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-23 12:30:51,926 - werkzeug - INFO -  * Restarting with stat
+2025-04-23 12:30:54,534 - werkzeug - WARNING -  * Debugger is active!
+2025-04-23 12:30:54,534 - werkzeug - INFO -  * Debugger PIN: 510-286-410
+2025-04-23 12:30:54,534 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:30:54] "[33mGET /stream HTTP/1.1[0m" 404 -
+2025-04-23 12:30:54,634 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:30:54] "GET /projects HTTP/1.1" 200 -
+2025-04-23 12:30:54,656 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:30:54] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-23 12:30:54,656 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:30:54] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-23 12:30:56,670 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:30:56] "GET /projects HTTP/1.1" 200 -
+2025-04-23 12:30:56,683 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:30:56] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-23 12:30:56,688 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:30:56] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-23 12:30:58,045 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:30:58] "GET /projects HTTP/1.1" 200 -
+2025-04-23 12:30:58,068 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:30:58] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-23 12:30:58,072 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:30:58] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-23 12:30:59,657 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:30:59] "GET /test-suites HTTP/1.1" 200 -
+2025-04-23 12:30:59,689 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:30:59] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-23 12:30:59,697 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:30:59] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-23 12:31:16,384 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:31:16] "[32mPOST /test-suite/16/delete HTTP/1.1[0m" 302 -
+2025-04-23 12:31:16,400 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:31:16] "GET /test-suites HTTP/1.1" 200 -
+2025-04-23 12:31:16,422 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:31:16] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-23 12:31:16,434 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:31:16] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-23 12:32:03,550 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:32:03] "GET /test-suite/create HTTP/1.1" 200 -
+2025-04-23 12:32:03,574 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:32:03] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-23 12:32:03,585 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:32:03] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-23 12:32:09,938 - StreamzAI - WARNING - No Google API key provided. Please set GOOGLE_API_KEY environment variable or provide it as an argument.
+2025-04-23 12:32:09,955 - StreamzAI - ERROR - Project path does not exist: C:\Users\kusha\Documents\Desktop\Classroom\Projects\Portfolio\portfolio
+2025-04-23 12:32:09,955 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:32:09] "[32mPOST /test-suite/create HTTP/1.1[0m" 302 -
+2025-04-23 12:32:09,974 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:32:09] "GET /test-suites HTTP/1.1" 200 -
+2025-04-23 12:32:10,007 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:32:10] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-23 12:32:10,011 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:32:10] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-23 12:36:20,184 - werkzeug - INFO -  * Detected change in 'C:\\Users\\HP\\Documents\\StreamzAI\\downloads\\testing\\test-generation1\\test-generation\\app.py', reloading
+2025-04-23 12:36:20,496 - werkzeug - INFO -  * Restarting with stat
+2025-04-23 12:36:23,122 - werkzeug - WARNING -  * Debugger is active!
+2025-04-23 12:36:23,122 - werkzeug - INFO -  * Debugger PIN: 510-286-410
+2025-04-23 12:36:32,212 - werkzeug - INFO -  * Detected change in 'C:\\Users\\HP\\Documents\\StreamzAI\\downloads\\testing\\test-generation1\\test-generation\\app.py', reloading
+2025-04-23 12:36:32,483 - werkzeug - INFO -  * Restarting with stat
+2025-04-23 12:36:35,217 - werkzeug - WARNING -  * Debugger is active!
+2025-04-23 12:36:35,222 - werkzeug - INFO -  * Debugger PIN: 510-286-410
+2025-04-23 12:36:55,946 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:36:55] "GET /projects HTTP/1.1" 200 -
+2025-04-23 12:36:55,969 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:36:55] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-23 12:36:55,972 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:36:55] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-23 12:36:57,122 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:36:57] "GET / HTTP/1.1" 200 -
+2025-04-23 12:36:57,142 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:36:57] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-23 12:36:57,152 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:36:57] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-23 12:36:58,092 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:36:58] "GET /projects HTTP/1.1" 200 -
+2025-04-23 12:36:58,120 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:36:58] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-23 12:36:58,125 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:36:58] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-23 12:37:03,155 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:37:03] "[32mPOST /project/1/delete HTTP/1.1[0m" 302 -
+2025-04-23 12:37:03,155 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:37:03] "GET /projects HTTP/1.1" 200 -
+2025-04-23 12:37:03,181 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:37:03] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-23 12:37:03,187 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:37:03] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-23 12:37:05,850 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:37:05] "GET /projects HTTP/1.1" 200 -
+2025-04-23 12:37:05,865 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:37:05] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-23 12:37:05,869 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:37:05] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-23 12:37:06,687 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:37:06] "GET /projects HTTP/1.1" 200 -
+2025-04-23 12:37:06,703 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:37:06] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-23 12:37:06,705 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:37:06] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-23 12:38:02,939 - werkzeug - INFO -  * Detected change in 'C:\\Users\\HP\\Documents\\StreamzAI\\downloads\\testing\\test-generation1\\test-generation\\app.py', reloading
+2025-04-23 12:38:03,249 - werkzeug - INFO -  * Restarting with stat
+2025-04-23 12:38:05,851 - werkzeug - WARNING -  * Debugger is active!
+2025-04-23 12:38:05,851 - werkzeug - INFO -  * Debugger PIN: 510-286-410
+2025-04-23 12:38:15,051 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:38:15] "[32mPOST /project/1/delete HTTP/1.1[0m" 302 -
+2025-04-23 12:38:15,067 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:38:15] "GET /projects HTTP/1.1" 200 -
+2025-04-23 12:38:15,086 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:38:15] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-23 12:38:15,087 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:38:15] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-23 12:38:16,881 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:38:16] "GET /projects HTTP/1.1" 200 -
+2025-04-23 12:38:16,899 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:38:16] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-23 12:38:16,903 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:38:16] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-23 12:38:57,255 - werkzeug - INFO -  * Detected change in 'C:\\Users\\HP\\Documents\\StreamzAI\\downloads\\testing\\test-generation1\\test-generation\\app.py', reloading
+2025-04-23 12:38:57,559 - werkzeug - INFO -  * Restarting with stat
+2025-04-23 12:38:59,900 - werkzeug - WARNING -  * Debugger is active!
+2025-04-23 12:38:59,903 - werkzeug - INFO -  * Debugger PIN: 510-286-410
+2025-04-23 12:39:07,980 - werkzeug - INFO -  * Detected change in 'C:\\Users\\HP\\Documents\\StreamzAI\\downloads\\testing\\test-generation1\\test-generation\\app.py', reloading
+2025-04-23 12:39:08,259 - werkzeug - INFO -  * Restarting with stat
+2025-04-23 12:39:10,622 - werkzeug - WARNING -  * Debugger is active!
+2025-04-23 12:39:10,629 - werkzeug - INFO -  * Debugger PIN: 510-286-410
+2025-04-23 20:16:14,302 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-04-23 20:16:14,302 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-23 20:16:14,302 - werkzeug - INFO -  * Restarting with stat
+2025-04-23 20:16:16,960 - werkzeug - WARNING -  * Debugger is active!
+2025-04-23 20:16:16,961 - werkzeug - INFO -  * Debugger PIN: 510-286-410
+2025-04-23 21:47:03,628 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 21:47:03] "GET /test-suites HTTP/1.1" 200 -
+2025-04-23 21:47:03,650 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 21:47:03] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-04-25 14:42:13,499 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-04-25 14:42:13,505 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-25 14:42:13,512 - werkzeug - INFO -  * Restarting with stat
+2025-04-25 14:42:15,584 - werkzeug - WARNING -  * Debugger is active!
+2025-04-25 14:42:15,586 - werkzeug - INFO -  * Debugger PIN: 510-286-410
+2025-04-25 14:42:21,032 - werkzeug - INFO - 127.0.0.1 - - [25/Apr/2025 14:42:21] "GET /projects HTTP/1.1" 200 -
+2025-04-25 14:42:21,074 - werkzeug - INFO - 127.0.0.1 - - [25/Apr/2025 14:42:21] "GET / HTTP/1.1" 200 -
+2025-04-25 14:42:21,486 - werkzeug - INFO - 127.0.0.1 - - [25/Apr/2025 14:42:21] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-25 14:42:21,519 - werkzeug - INFO - 127.0.0.1 - - [25/Apr/2025 14:42:21] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-04-25 14:42:21,544 - werkzeug - INFO - 127.0.0.1 - - [25/Apr/2025 14:42:21] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-25 14:42:23,611 - werkzeug - INFO - 127.0.0.1 - - [25/Apr/2025 14:42:23] "GET /projects HTTP/1.1" 200 -
+2025-04-25 14:42:23,646 - werkzeug - INFO - 127.0.0.1 - - [25/Apr/2025 14:42:23] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-25 14:42:23,681 - werkzeug - INFO - 127.0.0.1 - - [25/Apr/2025 14:42:23] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-25 14:42:26,031 - werkzeug - INFO - 127.0.0.1 - - [25/Apr/2025 14:42:26] "GET /test-suites HTTP/1.1" 200 -
+2025-04-25 14:42:26,052 - werkzeug - INFO - 127.0.0.1 - - [25/Apr/2025 14:42:26] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-25 14:42:26,059 - werkzeug - INFO - 127.0.0.1 - - [25/Apr/2025 14:42:26] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-25 14:42:57,571 - werkzeug - INFO - 127.0.0.1 - - [25/Apr/2025 14:42:57] "GET /projects HTTP/1.1" 200 -
+2025-04-25 14:42:57,584 - werkzeug - INFO - 127.0.0.1 - - [25/Apr/2025 14:42:57] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-25 14:42:57,591 - werkzeug - INFO - 127.0.0.1 - - [25/Apr/2025 14:42:57] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-04-25 14:42:59,120 - werkzeug - INFO - 127.0.0.1 - - [25/Apr/2025 14:42:59] "GET /project/1 HTTP/1.1" 200 -
+2025-04-25 14:42:59,141 - werkzeug - INFO - 127.0.0.1 - - [25/Apr/2025 14:42:59] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-04-25 14:42:59,147 - werkzeug - INFO - 127.0.0.1 - - [25/Apr/2025 14:42:59] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -

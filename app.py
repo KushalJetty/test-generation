@@ -29,6 +29,7 @@ from generate_code.selenium_code_generator import generate_test_file
 from playwright.async_api import async_playwright
 import asyncio
 from folder_analyser.streamzai_test_generator import StreamzAITestGenerator
+from flask_migrate import Migrate
 
 # Initialize Flask app
 app = Flask(__name__)
