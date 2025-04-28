@@ -31,7 +31,6 @@
                                 <thead class="bg-light">
                                     <tr>
                                         <th class="px-4 py-3">Name</th>
-                                        <th class="py-3">Project</th>
                                         <th class="py-3">Description</th>
                                         <th class="py-3 text-center">Test Cases</th>
                                         <th class="py-3 text-center">Test Runs</th>
@@ -50,14 +49,7 @@
                                                 </div>
                                             </a>
                                         </td>
-                                        <td>
-                                            <a href="{{ url_for('project_detail', project_id=test_suite.project.id) }}" class="text-decoration-none">
-                                                <span class="badge bg-light text-dark">
-                                                    <i class="bi bi-briefcase me-1"></i>
-                                                    {{ test_suite.project.name }}
-                                                </span>
-                                            </a>
-                                        </td>
+                                        
                                         <td>
                                             <span class="text-muted">{{ test_suite.description|truncate(50) or 'No description' }}</span>
                                         </td>
