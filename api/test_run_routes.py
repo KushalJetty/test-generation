@@ -46,13 +46,17 @@ def init_test_run_routes(app):
     def test_run_detail(run_id):
         """Show test run details."""
         test_run = TestRun.query.get_or_404(run_id)
-        test_results = TestResult.query.filter_by(test_run_id=test_run.id).all()
+        if not test_run.is_active:
+            flash('This test run has been deleted.', 'error')
+            return redirect(url_for('test_suite_detail', suite_id=test_run.test_suite_id))
+            
+        test_results = TestResult.query.filter_by(test_run_id=run_id, is_active=True).all()
         
         summary = {
-            'passed': TestResult.query.filter_by(test_run_id=test_run.id, status='passed').count(),
-            'failed': TestResult.query.filter_by(test_run_id=test_run.id, status='failed').count(),
-            'skipped': TestResult.query.filter_by(test_run_id=test_run.id, status='skipped').count(),
-            'error': TestResult.query.filter_by(test_run_id=test_run.id, status='error').count()
+            'passed': TestResult.query.filter_by(test_run_id=run_id, status='passed').count(),
+            'failed': TestResult.query.filter_by(test_run_id=run_id, status='failed').count(),
+            'skipped': TestResult.query.filter_by(test_run_id=run_id, status='skipped').count(),
+            'error': TestResult.query.filter_by(test_run_id=run_id, status='error').count()
         }
         summary['total'] = sum(summary.values())
         
@@ -68,3 +72,17 @@ def init_test_run_routes(app):
             chart_path = generate_chart(chart_data, filename=f"run_{run_id}_results.png")
         
         return render_template('test_run_detail.html', test_run=test_run, test_results=test_results, summary=summary, chart_path=chart_path)
+
+    @app.route('/test-run/<int:run_id>/delete', methods=['POST'])
+    def delete_test_run(run_id):
+        """Soft delete a test run."""
+        test_run = TestRun.query.get_or_404(run_id)
+        test_run.is_active = False
+        
+        # Also soft delete all related test results
+        TestResult.query.filter_by(test_run_id=run_id).update({'is_active': False})
+        
+        db.session.commit()
+        
+        flash('Test run deleted successfully!', 'success')
+        return redirect(url_for('test_suite_detail', suite_id=test_run.test_suite_id))

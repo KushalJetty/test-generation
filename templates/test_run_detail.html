@@ -11,18 +11,9 @@
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h5 class="card-title mb-0">Test Run Details</h5>
                 <div>
-                    {% if test_run.status == 'pending' or test_run.status == 'running' %}
-                    <span class="badge bg-primary me-2">{{ test_run.status|capitalize }}</span>
-                    <div class="spinner-border spinner-border-sm text-primary" role="status">
-                        <span class="visually-hidden">Loading...</span>
-                    </div>
-                    {% elif test_run.status == 'completed' %}
-                    <span class="badge bg-success">Completed</span>
-                    {% elif test_run.status == 'failed' %}
-                    <span class="badge bg-danger">Failed</span>
-                    {% else %}
-                    <span class="badge bg-secondary">{{ test_run.status|capitalize }}</span>
-                    {% endif %}
+                    <a href="{{ url_for('test_suite_detail', suite_id=test_run.test_suite.id) }}" class="btn btn-sm btn-secondary">
+                        <i class="bi bi-arrow-left"></i> Back to Test Suite
+                    </a>
                 </div>
             </div>
             <div class="card-body">
@@ -146,55 +137,46 @@
                         <thead>
                             <tr>
                                 <th>Test Case</th>
-                                <th>Original File</th>
-                                <th>Language</th>
                                 <th>Status</th>
                                 <th>Execution Time</th>
                                 <th>Error Message</th>
+                                <th>Created</th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for result in test_results %}
+                            {% if result.is_active %}
                             <tr>
-                                <td>{{ result.test_case.test_file_path }}</td>
-                                <td>{{ result.test_case.original_file_path }}</td>
-                                <td>{{ result.test_case.language }}</td>
                                 <td>
-                                    {% if result.status == 'passed' %}
-                                    <span class="badge bg-success">Passed</span>
-                                    {% elif result.status == 'failed' %}
-                                    <span class="badge bg-danger">Failed</span>
-                                    {% elif result.status == 'skipped' %}
-                                    <span class="badge bg-warning">Skipped</span>
-                                    {% elif result.status == 'error' %}
-                                    <span class="badge bg-secondary">Error</span>
-                                    {% else %}
-                                    <span class="badge bg-secondary">{{ result.status|capitalize }}</span>
-                                    {% endif %}
+                                    <a href="{{ url_for('test_case_detail', case_id=result.test_case.id) }}">
+                                        {{ result.test_case.test_file_path }}
+                                    </a>
+                                </td>
+                                <td>
+                                    <span class="badge bg-{{ 'success' if result.status == 'passed' else 'danger' if result.status == 'failed' else 'warning' if result.status == 'skipped' else 'secondary' }}">
+                                        {{ result.status }}
+                                    </span>
                                 </td>
                                 <td>{{ result.execution_time|round(3) if result.execution_time else 'N/A' }} s</td>
                                 <td>
                                     {% if result.error_message %}
-                                    <button class="btn btn-sm btn-outline-danger" type="button" data-bs-toggle="collapse" data-bs-target="#errorMessage{{ result.id }}" aria-expanded="false" aria-controls="errorMessage{{ result.id }}">
+                                    <button type="button" class="btn btn-sm btn-link" data-bs-toggle="modal" data-bs-target="#errorModal{{ result.id }}">
                                         View Error
                                     </button>
-                                    <div class="collapse mt-2" id="errorMessage{{ result.id }}">
-                                        <div class="card card-body bg-light">
-                                            <pre class="mb-0"><code>{{ result.error_message }}</code></pre>
-                                        </div>
-                                    </div>
                                     {% else %}
-                                    <span class="text-muted">None</span>
+                                    -
                                     {% endif %}
                                 </td>
+                                <td>{{ result.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
                             </tr>
+                            {% endif %}
                             {% endfor %}
                         </tbody>
                     </table>
                 </div>
                 {% else %}
                 <div class="alert alert-info">
-                    <i class="bi bi-info-circle"></i> No test results available.
+                    <i class="bi bi-info-circle"></i> No test results found for this test run.
                 </div>
                 {% endif %}
             </div>
@@ -202,12 +184,25 @@
     </div>
 </div>
 
-{% if test_run.status == 'running' or test_run.status == 'pending' %}
-<script>
-    // Auto-refresh the page every 5 seconds if the test run is still in progress
-    setTimeout(function() {
-        window.location.reload();
-    }, 5000);
-</script>
+{% for result in test_results %}
+{% if result.is_active and result.error_message %}
+<!-- Error Modal -->
+<div class="modal fade" id="errorModal{{ result.id }}" tabindex="-1" aria-labelledby="errorModalLabel{{ result.id }}" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="errorModalLabel{{ result.id }}">Error Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <pre class="bg-light p-3 rounded"><code>{{ result.error_message }}</code></pre>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 {% endif %}
+{% endfor %}
 {% endblock %}

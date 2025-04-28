@@ -7,8 +7,9 @@ class Project(db.Model):
     """Model for storing project information."""
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
-    path = db.Column(db.String(500), nullable=False)
-    description = db.Column(db.Text, nullable=True)
+    path = db.Column(db.String(255), nullable=False)
+    description = db.Column(db.Text)
+    is_active = db.Column(db.Boolean, nullable=True, default=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     test_suites = db.relationship('TestSuite', backref='project', lazy=True, cascade='all, delete-orphan')
@@ -22,6 +23,7 @@ class TestSuite(db.Model):
     name = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text, nullable=True)
     project_id = db.Column(db.Integer, db.ForeignKey('project.id'), nullable=False)
+    is_active = db.Column(db.Boolean, nullable=True, default=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     test_cases = db.relationship('TestCase', backref='test_suite', lazy=True, cascade='all, delete-orphan')
@@ -38,6 +40,7 @@ class TestCase(db.Model):
     language = db.Column(db.String(50), nullable=False)
     status = db.Column(db.String(20), nullable=False, default='generated')  # generated, passed, failed
     test_suite_id = db.Column(db.Integer, db.ForeignKey('test_suite.id'), nullable=False)
+    is_active = db.Column(db.Boolean, nullable=True, default=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     test_results = db.relationship('TestResult', backref='test_case', lazy=True, cascade='all, delete-orphan')
@@ -53,6 +56,7 @@ class TestRun(db.Model):
     start_time = db.Column(db.DateTime, nullable=True)
     end_time = db.Column(db.DateTime, nullable=True)
     test_suite_id = db.Column(db.Integer, db.ForeignKey('test_suite.id'), nullable=False)
+    is_active = db.Column(db.Boolean, nullable=True, default=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     test_results = db.relationship('TestResult', backref='test_run', lazy=True, cascade='all, delete-orphan')
 
@@ -67,7 +71,9 @@ class TestResult(db.Model):
     error_message = db.Column(db.Text, nullable=True)
     test_case_id = db.Column(db.Integer, db.ForeignKey('test_case.id'), nullable=False)
     test_run_id = db.Column(db.Integer, db.ForeignKey('test_run.id'), nullable=False)
+    is_active = db.Column(db.Boolean, nullable=True, default=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
     def __repr__(self):
         return f'<TestResult {self.status} for TestCase {self.test_case_id}>'

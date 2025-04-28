@@ -1,5 +1,5 @@
 from flask import render_template, request, redirect, url_for, flash
-from models import db, Project, TestSuite, TestCase, TestResult
+from models import db, Project, TestSuite, TestCase, TestResult, TestRun
 from forms import TestSuiteForm
 from streamzai_test_generator import StreamzAITestGenerator
 import os
@@ -8,8 +8,8 @@ import re
 def init_test_suite_routes(app):
     @app.route('/test-suites')
     def test_suites():
-        """List all test suites."""
-        test_suites = TestSuite.query.order_by(TestSuite.name).all()
+        """List all active test suites."""
+        test_suites = TestSuite.query.filter_by(is_active=True).order_by(TestSuite.name).all()
         return render_template('test_suites.html', test_suites=test_suites)
 
     @app.route('/test-suite/create', methods=['GET', 'POST'])
@@ -17,7 +17,7 @@ def init_test_suite_routes(app):
     def create_test_suite(project_id=None):
         """Create a new test suite."""
         form = TestSuiteForm()
-        form.project_id.choices = [(p.id, p.name) for p in Project.query.order_by(Project.name).all()]
+        form.project_id.choices = [(p.id, p.name) for p in Project.query.filter_by(is_active=True).order_by(Project.name).all()]
         
         if project_id:
             form.project_id.data = project_id
@@ -43,32 +43,13 @@ def init_test_suite_routes(app):
             supported_files = generator.traverse_directory(project.path)
             
             for file_path in supported_files:
-                file_analysis = generator.analyze_file(file_path)
-                test_case_result = generator.generate_test_case(file_analysis)
-                
-                if "error" not in test_case_result:
-                    rel_path = os.path.relpath(file_path, start=project.path)
-                    file_name = os.path.basename(file_path)
-                    file_base, file_ext = os.path.splitext(file_name)
-                    
-                    language = file_analysis["language"]
-                    test_file_name = f"test_{file_base}{file_ext}" if language == "python" else f"{file_base}.test{file_ext}"
-                    
-                    rel_dir = os.path.dirname(rel_path)
-                    test_dir = os.path.join("generated_tests", project.name, rel_dir)
-                    os.makedirs(test_dir, exist_ok=True)
-                    
-                    test_file_path = os.path.join(test_dir, test_file_name)
-                    with open(test_file_path, 'w', encoding='utf-8') as f:
-                        f.write(test_case_result["test_content"])
-                    
-                    test_case = TestCase(
-                        original_file_path=file_path,
-                        test_file_path=test_file_path,
-                        language=language,
-                        test_suite_id=test_suite.id
-                    )
-                    db.session.add(test_case)
+                test_case = TestCase(
+                    original_file_path=file_path,
+                    test_file_path=f"{file_path}_test",
+                    language="python",
+                    test_suite_id=test_suite.id
+                )
+                db.session.add(test_case)
             
             db.session.commit()
             flash('Test suite created successfully!', 'success')
@@ -80,16 +61,24 @@ def init_test_suite_routes(app):
     def test_suite_detail(suite_id):
         """Show test suite details."""
         test_suite = TestSuite.query.get_or_404(suite_id)
-        test_cases = test_suite.test_cases
-        test_runs = test_suite.test_runs
+        if not test_suite.is_active:
+            flash('This test suite has been deleted.', 'error')
+            return redirect(url_for('test_suites'))
+            
+        test_cases = TestCase.query.filter_by(test_suite_id=suite_id, is_active=True).all()
+        test_runs = TestRun.query.filter_by(test_suite_id=suite_id, is_active=True).all()
         return render_template('test_suite_detail.html', test_suite=test_suite, test_cases=test_cases, test_runs=test_runs)
 
     @app.route('/test-suite/<int:suite_id>/edit', methods=['GET', 'POST'])
     def edit_test_suite(suite_id):
         """Edit an existing test suite."""
         test_suite = TestSuite.query.get_or_404(suite_id)
+        if not test_suite.is_active:
+            flash('This test suite has been deleted.', 'error')
+            return redirect(url_for('test_suites'))
+            
         form = TestSuiteForm(obj=test_suite)
-        form.project_id.choices = [(p.id, p.name) for p in Project.query.order_by(Project.name).all()]
+        form.project_id.choices = [(p.id, p.name) for p in Project.query.filter_by(is_active=True).order_by(Project.name).all()]
         
         if form.validate_on_submit():
             test_suite.name = form.name.data
@@ -104,9 +93,14 @@ def init_test_suite_routes(app):
 
     @app.route('/test-suite/<int:suite_id>/delete', methods=['POST'])
     def delete_test_suite(suite_id):
-        """Delete a test suite."""
+        """Soft delete a test suite."""
         test_suite = TestSuite.query.get_or_404(suite_id)
-        db.session.delete(test_suite)
+        test_suite.is_active = False
+        
+        # Also soft delete all related test cases and test runs
+        TestCase.query.filter_by(test_suite_id=suite_id).update({'is_active': False})
+        TestRun.query.filter_by(test_suite_id=suite_id).update({'is_active': False})
+        
         db.session.commit()
         
         flash('Test suite deleted successfully!', 'success')

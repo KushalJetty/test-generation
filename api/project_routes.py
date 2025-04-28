@@ -5,8 +5,8 @@ from forms import ProjectForm
 def init_project_routes(app):
     @app.route('/projects')
     def projects():
-        """List all projects."""
-        projects = Project.query.order_by(Project.name).all()
+        """List all active projects."""
+        projects = Project.query.filter_by(is_active=True).order_by(Project.name).all()
         return render_template('projects.html', projects=projects)
 
     @app.route('/project/create', methods=['GET', 'POST'])
@@ -32,6 +32,10 @@ def init_project_routes(app):
     def project_detail(project_id):
         """Show project details."""
         project = Project.query.get_or_404(project_id)
+        if not project.is_active:
+            flash('This project has been deleted.', 'error')
+            return redirect(url_for('projects'))
+            
         test_suites = project.test_suites
         
         test_stats = {}
@@ -71,9 +75,9 @@ def init_project_routes(app):
 
     @app.route('/project/<int:project_id>/delete', methods=['POST'])
     def delete_project(project_id):
-        """Delete a project."""
+        """Soft delete a project."""
         project = Project.query.get_or_404(project_id)
-        db.session.delete(project)
+        project.is_active = False
         db.session.commit()
         
         flash('Project deleted successfully!', 'success')

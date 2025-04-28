@@ -10,6 +10,7 @@ from validators import url as validate_url
 matplotlib.use('Agg')  # Use non-interactive backend for server environment
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify, send_file
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 from werkzeug.utils import secure_filename
 from models import db, Project, TestSuite, TestCase, TestRun, TestResult
 from forms import ProjectForm, TestSuiteForm, TestRunForm, FilterForm, ExportForm, TestExecutionForm
@@ -37,6 +38,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Initialize database
 db.init_app(app)
+migrate = Migrate(app, db)
 app.config['UPLOAD_FOLDER'] = 'uploads'
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 # Create database tables if they don't exist
