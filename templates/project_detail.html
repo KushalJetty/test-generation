@@ -59,7 +59,7 @@
                         </thead>
                         <tbody>
                             {% for test_suite in test_suites %}
-                            {% if test_suite.is_active %}
+                            {% if test_suite.active %}
                             <tr>
                                 <td>
                                     <a href="{{ url_for('test_suite_detail', suite_id=test_suite.id) }}">
@@ -67,8 +67,8 @@
                                     </a>
                                 </td>
                                 <td>{{ test_suite.description|truncate(50) or 'No description' }}</td>
-                                <td>{{ test_suite.test_cases|selectattr('is_active', 'equalto', true)|list|length }}</td>
-                                <td>{{ test_suite.test_runs|selectattr('is_active', 'equalto', true)|list|length }}</td>
+                                <td>{{ test_suite.test_cases|selectattr('active', 'equalto', true)|list|length }}</td>
+                                <td>{{ test_suite.test_runs|selectattr('active', 'equalto', true)|list|length }}</td>
                                 <td>{{ test_suite.created_at.strftime('%Y-%m-%d') }}</td>
                                 <td>
                                     <div class="btn-group" role="group">
@@ -122,9 +122,9 @@
                         </thead>
                         <tbody>
                             {% for test_suite in test_suites %}
-                            {% if test_suite.is_active %}
+                            {% if test_suite.active %}
                                 {% for test_run in test_suite.test_runs %}
-                                {% if test_run.is_active %}
+                                {% if test_run.active %}
                                 <tr>
                                     <td>{{ test_suite.name }}</td>
                                     <td>

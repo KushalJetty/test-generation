@@ -64,7 +64,7 @@
                         </thead>
                         <tbody>
                             {% for test_case in test_cases %}
-                            {% if test_case.is_active %}
+                            {% if test_case.active %}
                             <tr>
                                 <td>{{ test_case.original_file_path }}</td>
                                 <td>{{ test_case.test_file_path }}</td>
@@ -122,7 +122,7 @@
                         </thead>
                         <tbody>
                             {% for test_run in test_runs %}
-                            {% if test_run.is_active %}
+                            {% if test_run.active %}
                             <tr>
                                 <td>
                                     <a href="{{ url_for('test_run_detail', run_id=test_run.id) }}">
@@ -144,11 +144,11 @@
                                     {% endif %}
                                 </td>
                                 <td>
-                                    {% set passed = test_run.test_results|selectattr('status', 'equalto', 'passed')|selectattr('is_active', 'equalto', true)|list|length %}
-                                    {% set failed = test_run.test_results|selectattr('status', 'equalto', 'failed')|selectattr('is_active', 'equalto', true)|list|length %}
-                                    {% set skipped = test_run.test_results|selectattr('status', 'equalto', 'skipped')|selectattr('is_active', 'equalto', true)|list|length %}
-                                    {% set error = test_run.test_results|selectattr('status', 'equalto', 'error')|selectattr('is_active', 'equalto', true)|list|length %}
-                                    {% set total = test_run.test_results|selectattr('is_active', 'equalto', true)|list|length %}
+                                    {% set passed = test_run.test_results|selectattr('status', 'equalto', 'passed')|selectattr('active', 'equalto', true)|list|length %}
+                                    {% set failed = test_run.test_results|selectattr('status', 'equalto', 'failed')|selectattr('active', 'equalto', true)|list|length %}
+                                    {% set skipped = test_run.test_results|selectattr('status', 'equalto', 'skipped')|selectattr('active', 'equalto', true)|list|length %}
+                                    {% set error = test_run.test_results|selectattr('status', 'equalto', 'error')|selectattr('active', 'equalto', true)|list|length %}
+                                    {% set total = test_run.test_results|selectattr('active', 'equalto', true)|list|length %}
                                     
                                     {% if total > 0 %}
                                     <div class="d-flex align-items-center">

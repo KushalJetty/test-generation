@@ -6,7 +6,7 @@ def init_project_routes(app):
     @app.route('/projects')
     def projects():
         """List all active projects."""
-        projects = Project.query.filter_by(is_active=True).order_by(Project.name).all()
+        projects = Project.query.filter_by(active=True).order_by(Project.name).all()
         return render_template('projects.html', projects=projects)
 
     @app.route('/project/create', methods=['GET', 'POST'])
@@ -32,7 +32,7 @@ def init_project_routes(app):
     def project_detail(project_id):
         """Show project details."""
         project = Project.query.get_or_404(project_id)
-        if not project.is_active:
+        if not project.active:
             flash('This project has been deleted.', 'error')
             return redirect(url_for('projects'))
             
@@ -77,7 +77,7 @@ def init_project_routes(app):
     def delete_project(project_id):
         """Soft delete a project."""
         project = Project.query.get_or_404(project_id)
-        project.is_active = False
+        project.active = False
         db.session.commit()
         
         flash('Project deleted successfully!', 'success')

@@ -542,7 +542,7 @@ def index():
 @app.route('/projects')
 def projects():
     """List all projects."""
-    projects = Project.query.order_by(Project.name).all()
+    projects = Project.query.filter_by(active=True).order_by(Project.name).all()
     return render_template('projects.html', projects=projects)
 
 @app.route('/project/create', methods=['GET', 'POST'])
@@ -568,16 +568,16 @@ def create_project():
 def project_detail(project_id):
     """Show project details."""
     project = Project.query.get_or_404(project_id)
-    test_suites = project.test_suites
+    test_suites = TestSuite.query.filter_by(project_id=project_id, active=True).all()
     
     # Get test statistics for this project
     test_stats = {}
     for test_suite in test_suites:
-        for test_run in test_suite.test_runs:
-            passed = TestResult.query.filter_by(test_run_id=test_run.id, status='passed').count()
-            failed = TestResult.query.filter_by(test_run_id=test_run.id, status='failed').count()
-            skipped = TestResult.query.filter_by(test_run_id=test_run.id, status='skipped').count()
-            error = TestResult.query.filter_by(test_run_id=test_run.id, status='error').count()
+        for test_run in TestRun.query.filter_by(test_suite_id=test_suite.id, active=True).all():
+            passed = TestResult.query.filter_by(test_run_id=test_run.id, status='passed', active=True).count()
+            failed = TestResult.query.filter_by(test_run_id=test_run.id, status='failed', active=True).count()
+            skipped = TestResult.query.filter_by(test_run_id=test_run.id, status='skipped', active=True).count()
+            error = TestResult.query.filter_by(test_run_id=test_run.id, status='error', active=True).count()
             
             test_stats[test_run.id] = {
                 'passed': passed,
@@ -619,7 +619,7 @@ def delete_project(project_id):
 @app.route('/test-suites')
 def test_suites():
     """List all test suites."""
-    test_suites = TestSuite.query.order_by(TestSuite.name).all()
+    test_suites = TestSuite.query.filter_by(active=True).order_by(TestSuite.name).all()
     return render_template('test_suites.html', test_suites=test_suites)
 
 @app.route('/test-suite/create', methods=['GET', 'POST'])
@@ -684,8 +684,8 @@ def create_test_suite(project_id=None):
 def test_suite_detail(suite_id):
     """Show test suite details."""
     test_suite = TestSuite.query.get_or_404(suite_id)
-    test_cases = test_suite.test_cases
-    test_runs = test_suite.test_runs
+    test_cases = TestCase.query.filter_by(test_suite_id=suite_id, active=True).all()
+    test_runs = TestRun.query.filter_by(test_suite_id=suite_id, active=True).all()
     
     return render_template('test_suite_detail.html', test_suite=test_suite, test_cases=test_cases, test_runs=test_runs)
 
@@ -722,7 +722,7 @@ def delete_test_suite(suite_id):
 @app.route('/test-runs')
 def test_runs():
     """List all test runs."""
-    test_runs = TestRun.query.order_by(TestRun.created_at.desc()).all()
+    test_runs = TestRun.query.filter_by(active=True).order_by(TestRun.created_at.desc()).all()
     return render_template('test_runs.html', test_runs=test_runs)
 
 @app.route('/test-run/create', methods=['GET', 'POST'])
@@ -764,14 +764,14 @@ def create_test_run(suite_id=None):
 def test_run_detail(run_id):
     """Show test run details."""
     test_run = TestRun.query.get_or_404(run_id)
-    test_results = TestResult.query.filter_by(test_run_id=test_run.id).all()
+    test_results = TestResult.query.filter_by(test_run_id=test_run.id, active=True).all()
     
     # Calculate summary
     summary = {
-        'passed': TestResult.query.filter_by(test_run_id=test_run.id, status='passed').count(),
-        'failed': TestResult.query.filter_by(test_run_id=test_run.id, status='failed').count(),
-        'skipped': TestResult.query.filter_by(test_run_id=test_run.id, status='skipped').count(),
-        'error': TestResult.query.filter_by(test_run_id=test_run.id, status='error').count()
+        'passed': TestResult.query.filter_by(test_run_id=test_run.id, status='passed', active=True).count(),
+        'failed': TestResult.query.filter_by(test_run_id=test_run.id, status='failed', active=True).count(),
+        'skipped': TestResult.query.filter_by(test_run_id=test_run.id, status='skipped', active=True).count(),
+        'error': TestResult.query.filter_by(test_run_id=test_run.id, status='error', active=True).count()
     }
     summary['total'] = sum(summary.values())
     

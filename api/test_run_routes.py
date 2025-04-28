@@ -46,11 +46,12 @@ def init_test_run_routes(app):
     def test_run_detail(run_id):
         """Show test run details."""
         test_run = TestRun.query.get_or_404(run_id)
-        if not test_run.is_active:
+        
+        if not test_run.active:
             flash('This test run has been deleted.', 'error')
             return redirect(url_for('test_suite_detail', suite_id=test_run.test_suite_id))
             
-        test_results = TestResult.query.filter_by(test_run_id=run_id, is_active=True).all()
+        test_results = TestResult.query.filter_by(test_run_id=run_id, active=True).all()
         
         summary = {
             'passed': TestResult.query.filter_by(test_run_id=run_id, status='passed').count(),
@@ -77,11 +78,11 @@ def init_test_run_routes(app):
     def delete_test_run(run_id):
         """Soft delete a test run."""
         test_run = TestRun.query.get_or_404(run_id)
-        test_run.is_active = False
+        test_run.active = False
+        db.session.commit()
         
         # Also soft delete all related test results
-        TestResult.query.filter_by(test_run_id=run_id).update({'is_active': False})
-        
+        TestResult.query.filter_by(test_run_id=run_id).update({'active': False})
         db.session.commit()
         
         flash('Test run deleted successfully!', 'success')

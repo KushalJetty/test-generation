@@ -145,7 +145,7 @@
                         </thead>
                         <tbody>
                             {% for result in test_results %}
-                            {% if result.is_active %}
+                            {% if result.active %}
                             <tr>
                                 <td>
                                     <a href="{{ url_for('test_case_detail', case_id=result.test_case.id) }}">
@@ -185,7 +185,7 @@
 </div>
 
 {% for result in test_results %}
-{% if result.is_active and result.error_message %}
+{% if result.active and result.error_message %}
 <!-- Error Modal -->
 <div class="modal fade" id="errorModal{{ result.id }}" tabindex="-1" aria-labelledby="errorModalLabel{{ result.id }}" aria-hidden="true">
     <div class="modal-dialog modal-lg">
