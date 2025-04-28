@@ -1,0 +1,11 @@
+{
+  "#Username": "kushal.jetty@teamstreamz.com",
+  "#Password": "Test@123",
+  ".form-control.ng-untouched.ng-pristine.ng-valid": "test",
+  ".form-control.ng-untouched.ng-valid.ng-dirty": "description",
+  "input": "Internal",
+  "[name=\"private\"]": "on",
+  "[name=\"account\"]": "on",
+  "[name=\"multiPage\"]": "on",
+  ".sv-string-editor.ng-star-inserted": null
+}
