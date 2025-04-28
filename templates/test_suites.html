@@ -93,14 +93,13 @@
                                                    title="Run Tests">
                                                     <i class="bi bi-play-fill"></i>
                                                 </a>
-                                                <!-- New Record Button -->
-                                                <button type="button" 
-                                                        class="btn btn-sm btn-outline-info"
-                                                        onclick="startRecording({{ test_suite.id }})"
-                                                        data-bs-toggle="tooltip" 
-                                                        title="Record Test Case">
+                                                <!-- Record Test Case Button -->
+                                                <a href="{{ url_for('record_test', suite_id=test_suite.id) }}" 
+                                                   class="btn btn-sm btn-outline-info"
+                                                   data-bs-toggle="tooltip" 
+                                                   title="Record Test Case">
                                                     <i class="bi bi-record-circle"></i>
-                                                </button>
+                                                </a>
                                                 <button type="button" 
                                                         class="btn btn-sm btn-outline-danger" 
                                                         data-bs-toggle="modal" 
@@ -188,45 +187,6 @@ document.addEventListener('DOMContentLoaded', function() {
     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
         return new bootstrap.Tooltip(tooltipTriggerEl)
     });
-
-    // Function to start recording
-    window.startRecording = function(suiteId) {
-        // Show loading state
-        const button = event.target.closest('button');
-        const icon = button.querySelector('i');
-        button.disabled = true;
-        icon.className = 'bi bi-record-circle-fill text-danger';
-
-        // Make API call to start recording
-        fetch(`/api/record/start`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                suite_id: suiteId
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success') {
-                // Redirect to recording page or show success message
-                window.location.href = `/test-suite/${suiteId}/record`;
-            } else {
-                alert('Failed to start recording: ' + data.message);
-                // Reset button state
-                button.disabled = false;
-                icon.className = 'bi bi-record-circle';
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Failed to start recording');
-            // Reset button state
-            button.disabled = false;
-            icon.className = 'bi bi-record-circle';
-        });
-    };
 });
 </script>
 {% endblock %}

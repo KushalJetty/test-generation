@@ -8,7 +8,7 @@ from playwright.sync_api import sync_playwright
 import queue
 from validators import url as validate_url
 matplotlib.use('Agg')  # Use non-interactive backend for server environment
-from flask import Flask, render_template, request, redirect, url_for, flash, jsonify, send_file
+from flask import Flask, render_template, request, redirect, url_for, flash, jsonify, send_file, Response
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from werkzeug.utils import secure_filename
@@ -62,6 +62,104 @@ execution_state = {
 recording_actions = []
 is_recording = False
 driver = None
+
+# Global variables for record test functionality
+event_queue = queue.Queue()
+browser = None
+playwright = None
+page = None
+tracker = None
+recorded_url = None
+
+# Async thread for Playwright operations
+class AsyncThread(threading.Thread):
+    def __init__(self):
+        super().__init__(daemon=True)
+        self.loop = asyncio.new_event_loop()
+
+    def run(self):
+        asyncio.set_event_loop(self.loop)
+        self.loop.run_forever()
+
+async_thread = AsyncThread()
+async_thread.start()
+
+def run_async(coroutine):
+    future = asyncio.run_coroutine_threadsafe(coroutine, async_thread.loop)
+    return future.result()
+
+class ActionTracker:
+    def __init__(self, page):
+        self.page = page
+        self.steps = []
+
+    async def start_tracking(self):
+        await self.page.expose_function("recordAction", self.record_action)
+        await self.page.add_init_script(self.tracking_script())
+
+    async def record_action(self, action):
+        self.steps.append(action)
+        try:
+            event_queue.put_nowait({'type': 'action', 'data': action})
+        except queue.Full:
+            pass
+
+    def tracking_script(self):
+        return """
+            (() => {
+                function getSelector(el) {
+                    if (el.id) return `#${el.id}`;
+                    if (el.name) return `[name="${el.name}"]`;
+                    if (el.className) return `.${el.className.split(" ").join(".")}`;
+                    return el.tagName.toLowerCase();
+                }
+
+                document.addEventListener('click', e => {
+                    const selector = getSelector(e.target);
+                    window.recordAction({
+                        action: "click",
+                        selector: selector,
+                        timestamp: Date.now()
+                    });
+                }, true);
+
+                document.addEventListener('input', e => {
+                    const selector = getSelector(e.target);
+                    window.recordAction({
+                        action: "input",
+                        selector: selector,
+                        value: e.target.value,
+                        timestamp: Date.now()
+                    });
+                }, true);
+            })();
+        """
+
+    def save_steps(self, filename="tests/recorded_steps.json"):
+        import os
+        os.makedirs(os.path.dirname(filename), exist_ok=True)
+        with open(filename, "w") as f:
+            json.dump(self.steps, f, indent=4)
+
+def generate_code(steps):
+    global recorded_url
+    code = [
+        "from playwright.async_api import async_playwright\n",
+        "import asyncio\n\n",
+        "async def test_recorded_actions():\n",
+        "    async with async_playwright() as p:\n",
+        "        browser = await p.chromium.launch(headless=False)\n",
+        "        page = await browser.new_page()\n",
+        f"        await page.goto('{recorded_url}')\n"
+    ]
+    for step in steps:
+        if step['action'] == 'click':
+            code.append(f"        await page.click('{step['selector']}')\n")
+        elif step['action'] == 'input':
+            code.append(f"        await page.fill('{step['selector']}', '{step['value']}')\n")
+    code.append("        await browser.close()\n")
+    code.append("asyncio.run(test_recorded_actions())")
+    return ''.join(code)
 
 @app.route('/test-case/upload', methods=['GET', 'POST'])
 def upload_test_case():
@@ -998,282 +1096,68 @@ def run_test_suite(suite_id):
     return redirect(url_for('create_test_run', suite_id=suite_id))
 
 @app.route('/api/record/start', methods=['POST'])
-def start_recording():
-    """Start recording browser actions."""
-    global is_recording, recording_actions, driver
+def handle_start():
+    global recorded_url
     data = request.get_json()
-    suite_id = data.get('suite_id')
-    url = data.get('url', 'https://test.teamstreamz.com/')
-    
-    try:
-        # Initialize Chrome driver with appropriate options
-        chrome_options = Options()
-        chrome_options.add_argument('--start-maximized')
-        chrome_options.add_argument('--disable-extensions')  # Disable extensions that might interfere
-        chrome_options.add_argument('--disable-popup-blocking')  # Allow popups
-        chrome_options.add_argument('--disable-infobars')  # Disable infobars
-        chrome_options.add_argument('--disable-notifications')  # Disable notifications
-        chrome_options.add_experimental_option('excludeSwitches', ['enable-automation'])  # Disable automation info bar
-        chrome_options.add_experimental_option('useAutomationExtension', False)  # Disable automation extension
-        
-        driver = webdriver.Chrome(options=chrome_options)
-        
-        # Navigate to the specified URL
-        driver.get(url)
-        
-        # Clear previous actions and start recording
-        recording_actions = []
-        is_recording = True
-        
-        # Inject the recorder script into the browser
-        recorder_script = """
-        window.recordingActions = [];
-        
-        function recordAction(action) {
-            window.recordingActions.push(action);
-            fetch('/api/record/action', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(action)
-            }).catch(error => console.error('Failed to record action:', error));
-        }
-        
-        // Set up event listeners
-        document.addEventListener('click', function(event) {
-            const element = event.target;
-            const selector = getSelector(element);
-            if (selector) {
-                recordAction({
-                    type: 'click',
-                    selector: selector,
-                    description: 'Clicked on ' + element.tagName.toLowerCase() + (element.id ? '#' + element.id : '')
-                });
-            }
-        }, true);
-        
-        document.addEventListener('input', function(event) {
-            const element = event.target;
-            const selector = getSelector(element);
-            if (selector) {
-                recordAction({
-                    type: 'input',
-                    selector: selector,
-                    value: element.value,
-                    description: 'Entered text in ' + element.tagName.toLowerCase() + (element.id ? '#' + element.id : '')
-                });
-            }
-        }, true);
-        
-        document.addEventListener('submit', function(event) {
-            const form = event.target;
-            const selector = getSelector(form);
-            if (selector) {
-                recordAction({
-                    type: 'submit',
-                    selector: selector,
-                    description: 'Submitted form' + (form.id ? ' #' + form.id : '')
-                });
-            }
-        }, true);
-        
-        document.addEventListener('keydown', function(event) {
-            const specialKeys = ['Enter', 'Tab', 'Escape'];
-            if (specialKeys.includes(event.key)) {
-                recordAction({
-                    type: 'keypress',
-                    key: event.key,
-                    description: 'Pressed ' + event.key + ' key'
-                });
-            }
-        }, true);
-        
-        function getSelector(element) {
-            if (!element) return null;
-            
-            // Try ID first
-            if (element.id) {
-                return '#' + element.id;
-            }
-            
-            // Try name attribute
-            if (element.name) {
-                return '[name="' + element.name + '"]';
-            }
-            
-            // Try data attributes
-            const dataAttrs = Array.from(element.attributes)
-                .filter(attr => attr.name.startsWith('data-'));
-            if (dataAttrs.length > 0) {
-                return '[' + dataAttrs[0].name + '="' + dataAttrs[0].value + '"]';
-            }
-            
-            // Try type and name combination for inputs
-            if (element.type && element.name) {
-                return 'input[type="' + element.type + '"][name="' + element.name + '"]';
-            }
-            
-            // Try classes
-            if (element.className) {
-                const classes = Array.from(element.classList)
-                    .filter(cls => !cls.includes(' '))
-                    .join('.');
-                if (classes) {
-                    const similar = document.querySelectorAll('.' + classes);
-                    if (similar.length === 1) {
-                        return '.' + classes;
-                    }
-                }
-            }
-            
-            // Try parent context with nth-child
-            let path = [];
-            let current = element;
-            
-            while (current && current !== document.body) {
-                let selector = current.tagName.toLowerCase();
-                let parent = current.parentElement;
-                
-                if (parent) {
-                    let children = Array.from(parent.children);
-                    let index = children.filter(child => child.tagName === current.tagName).indexOf(current);
-                    if (index > 0) {
-                        selector += ':nth-of-type(' + (index + 1) + ')';
-                    }
-                }
-                
-                path.unshift(selector);
-                current = parent;
-            }
-            
-            return path.join(' > ');
-        }
-        
-        console.log('Recorder script injected successfully');
-        """
-        
-        # Execute the script in the browser
-        driver.execute_script(recorder_script)
-        
-        return jsonify({
-            'status': 'success',
-            'message': 'Recording started'
-        })
-    except Exception as e:
-        if driver:
-            driver.quit()
-        return jsonify({
-            'status': 'error',
-            'message': str(e)
-        }), 500
+    recorded_url = data.get('url', 'https://test.teamstreamz.com/')
+    run_async(start_recording())
+    return jsonify({'status': 'success', 'message': 'Recording started'})
 
-@app.route('/api/record/action', methods=['POST'])
-def record_action():
-    """Record a browser action."""
-    global recording_actions
-    if not is_recording:
-        return jsonify({
-            'status': 'error',
-            'message': 'Not currently recording'
-        })
-    
-    action = request.get_json()
-    action['timestamp'] = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    recording_actions.append(action)
-    
-    # Log the action for debugging
-    print(f"Recorded action: {action}")
-    
-    return jsonify({
-        'status': 'success',
-        'message': 'Action recorded'
-    })
+@app.route('/api/record/clear', methods=['POST'])
+def handle_clear():
+    run_async(clear_recording())
+    return jsonify({'status': 'success', 'message': 'Recording cleared'})
+
+@app.route('/api/record/stream')
+def stream():
+    def event_stream():
+        while True:
+            try:
+                event = event_queue.get(timeout=1)
+                yield f"data: {json.dumps(event)}\n\n"
+            except queue.Empty:
+                continue
+    return Response(event_stream(), mimetype="text/event-stream")
 
 @app.route('/api/record/stop', methods=['POST'])
-def stop_recording():
-    """Stop recording and generate Selenium code."""
-    global is_recording, recording_actions, driver
-    is_recording = False
-    
-    try:
-        # Get recorded actions from the browser
-        if driver:
-            # Execute script to get recorded actions
-            browser_actions = driver.execute_script("return window.recordingActions || [];")
-            
-            # Add browser actions to our recording_actions list
-            if browser_actions:
-                for action in browser_actions:
-                    action['timestamp'] = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-                    recording_actions.append(action)
-            
-            # Close the browser
-            driver.quit()
-            driver = None
-        
-        # Generate test file
-        test_file = generate_test_file(recording_actions)
-        
-        # Read the generated code
-        with open(test_file, 'r', encoding='utf-8') as f:
-            selenium_code = f.read()
-        
-        # Create test cases from recorded actions
-        test_cases = generate_test_cases_from_actions(recording_actions)
-        
-        # Prepare response with recorded actions
-        response = {
-            'status': 'success',
-            'selenium_code': selenium_code,
-            'test_cases': test_cases,
-            'actions': [{
-                'timestamp': action.get('timestamp', ''),
-                'description': action.get('description', ''),
-                'type': action.get('type', ''),
-                'selector': action.get('selector', ''),
-                'value': action.get('value', '')
-            } for action in recording_actions]
-        }
-        
-        # Clear recorded actions
-        recording_actions = []
-        
-        return jsonify(response)
-    except Exception as e:
-        if driver:
-            driver.quit()
-            driver = None
-        return jsonify({
-            'status': 'error',
-            'message': str(e)
-        }), 500
+def handle_stop():
+    result = run_async(stop_recording())
+    return jsonify(result)
 
-def generate_test_cases_from_actions(actions):
-    """Generate test cases from recorded actions."""
-    test_cases = []
-    current_test = {
-        'name': 'Recorded Test Case',
-        'description': 'Test case generated from recorded browser actions',
-        'steps': []
-    }
-    
-    for action in actions:
-        description = None
-        if action['type'] == 'click':
-            description = f"Click on element {action['selector']}"
-        elif action['type'] == 'input':
-            description = f"Enter '{action['value']}' into {action['selector']}"
-        elif action['type'] == 'navigate':
-            description = f"Navigate to {action['url']}"
-        elif action['type'] == 'keypress':
-            description = f"Press {action['key']} key"
-            
-        if description:
-            current_test['steps'].append(description)
-    
-    test_cases.append(current_test)
-    return test_cases
+async def clear_recording():
+    global tracker
+    if tracker:
+        tracker.steps = []
+    while not event_queue.empty():
+        try:
+            event_queue.get_nowait()
+        except queue.Empty:
+            break
+    event_queue.put({'type': 'clear', 'data': None})
+
+async def start_recording():
+    global browser, playwright, page, tracker
+    playwright = await async_playwright().start()
+    browser = await playwright.chromium.launch(headless=False)
+    page = await browser.new_page()
+    tracker = ActionTracker(page)
+    await tracker.start_tracking()
+    await page.goto(recorded_url)
+
+async def stop_recording():
+    global browser, playwright, tracker
+    tracker.save_steps()
+    code = generate_code(tracker.steps)
+    event_queue.put({'type': 'code', 'data': code})
+    await browser.close()
+    await playwright.stop()
+    return {'steps': tracker.steps, 'code': code}
+
+# Record test routes
+@app.route('/test-suite/<int:suite_id>/record')
+def record_test(suite_id):
+    test_suite = TestSuite.query.get_or_404(suite_id)
+    return render_template('record_test/index.html', test_suite=test_suite)
 
 # Main entry point
 if __name__ == '__main__':

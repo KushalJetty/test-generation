@@ -1,0 +1,209 @@
+[
+    {
+        "action": "click",
+        "selector": "#Username",
+        "timestamp": 1745823358401
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "a",
+        "timestamp": 1745823359951
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "ab",
+        "timestamp": 1745823360035
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "abh",
+        "timestamp": 1745823360233
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "abhi",
+        "timestamp": 1745823360862
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "abhis",
+        "timestamp": 1745823368050
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "abhish",
+        "timestamp": 1745823368229
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "abhishe",
+        "timestamp": 1745823368441
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "abhishek",
+        "timestamp": 1745823368664
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "abhishek@",
+        "timestamp": 1745823371462
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "abhishek@t",
+        "timestamp": 1745823371837
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "abhishek@te",
+        "timestamp": 1745823372049
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "abhishek@tea",
+        "timestamp": 1745823372287
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "abhishek@team",
+        "timestamp": 1745823372513
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "abhishek@teams",
+        "timestamp": 1745823372756
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "abhishek@teamst",
+        "timestamp": 1745823372914
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "abhishek@teamstr",
+        "timestamp": 1745823373090
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "abhishek@teamstre",
+        "timestamp": 1745823373262
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "abhishek@teamstrea",
+        "timestamp": 1745823373519
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "abhishek@teamstream",
+        "timestamp": 1745823373759
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "abhishek@teamstreamz",
+        "timestamp": 1745823374083
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "abhishek@teamstreamz.",
+        "timestamp": 1745823374352
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "abhishek@teamstreamz.c",
+        "timestamp": 1745823374709
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "abhishek@teamstreamz.co",
+        "timestamp": 1745823374868
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "abhishek@teamstreamz.com",
+        "timestamp": 1745823375065
+    },
+    {
+        "action": "click",
+        "selector": "#Password",
+        "timestamp": 1745823377032
+    },
+    {
+        "action": "input",
+        "selector": "#Password",
+        "value": "T",
+        "timestamp": 1745823377921
+    },
+    {
+        "action": "input",
+        "selector": "#Password",
+        "value": "Te",
+        "timestamp": 1745823378214
+    },
+    {
+        "action": "input",
+        "selector": "#Password",
+        "value": "Tes",
+        "timestamp": 1745823378463
+    },
+    {
+        "action": "input",
+        "selector": "#Password",
+        "value": "Test",
+        "timestamp": 1745823378633
+    },
+    {
+        "action": "input",
+        "selector": "#Password",
+        "value": "Test@",
+        "timestamp": 1745823379116
+    },
+    {
+        "action": "input",
+        "selector": "#Password",
+        "value": "Test@1",
+        "timestamp": 1745823379407
+    },
+    {
+        "action": "input",
+        "selector": "#Password",
+        "value": "Test@12",
+        "timestamp": 1745823379629
+    },
+    {
+        "action": "input",
+        "selector": "#Password",
+        "value": "Test@123",
+        "timestamp": 1745823379978
+    },
+    {
+        "action": "click",
+        "selector": ".btn.signin-btn.bg-primary.ng-tns-c813547932-0",
+        "timestamp": 1745823381545
+    }
+]
