@@ -8,7 +8,7 @@ from playwright.sync_api import sync_playwright
 import queue
 from validators import url as validate_url
 matplotlib.use('Agg')  # Use non-interactive backend for server environment
-from flask import Flask, render_template, request, redirect, url_for, flash, jsonify, send_file, Response
+from flask import Flask, render_template, request, redirect, url_for, flash, jsonify, send_file, Response, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from werkzeug.utils import secure_filename
@@ -30,6 +30,12 @@ from playwright.async_api import async_playwright
 import asyncio
 from folder_analyser.streamzai_test_generator import StreamzAITestGenerator
 from flask_migrate import Migrate
+import ast
+
+# Add test runner imports
+from test_runner.test_execution.optimizer import TestOptimizer
+from test_runner.test_execution.vpn_manager import VPNManager
+from test_runner.test_execution.reporter import TestReporter, generate_report
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -41,7 +47,12 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 migrate = Migrate(app, db)
 app.config['UPLOAD_FOLDER'] = 'uploads'
-os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+app.config['SCREENSHOTS_FOLDER'] = 'static/screenshots'
+app.config['REPORTS_FOLDER'] = 'reports'
+
+for folder in [app.config['UPLOAD_FOLDER'], app.config['SCREENSHOTS_FOLDER'], app.config['REPORTS_FOLDER']]:
+    os.makedirs(folder, exist_ok=True)
+
 # Create database tables if they don't exist
 with app.app_context():
     db.create_all()
@@ -57,7 +68,15 @@ execution_state = {
     'target_url': '',
     'headless': True,
     'input_queue': queue.Queue(),
-    'awaiting_input': None
+    'awaiting_input': None,
+    'reporter': None,
+    'event_queue': queue.Queue(),
+    'stats': {
+        'total': 0,
+        'passed': 0,
+        'failed': 0,
+        'retried': 0
+    }
 }
 recording_actions = []
 is_recording = False
@@ -164,7 +183,6 @@ def generate_code(steps):
 @app.route('/test-case/upload', methods=['GET', 'POST'])
 def upload_test_case():
     """Handle test case file upload."""
-    form = TestExecutionForm()
     if request.method == 'POST':
         if 'file' not in request.files:
             return jsonify({'error': 'No file provided'}), 400
@@ -175,20 +193,17 @@ def upload_test_case():
             
         if file and file.filename.endswith('.json'):
             filename = secure_filename(file.filename)
-            filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            filepath = os.path.join('uploads', filename)
             
             # Ensure upload directory exists
-            os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+            os.makedirs('uploads', exist_ok=True)
             
             try:
                 file.save(filepath)
                 with open(filepath) as f:
                     test_steps = json.load(f)
                     execution_state['test_steps'] = test_steps
-                    # Add a log message about the upload
-                    log_message(f"Test case file '{filename}' uploaded successfully")
-                    log_message(f"Loaded {len(test_steps)} test steps")
-                return jsonify({'message': 'Test case uploaded successfully'})
+                    return jsonify({'message': 'Test case uploaded successfully'})
             except json.JSONDecodeError:
                 os.remove(filepath)
                 return jsonify({'error': 'Invalid JSON file'}), 400
@@ -197,8 +212,7 @@ def upload_test_case():
         else:
             return jsonify({'error': 'Invalid file type. Please upload a JSON file'}), 400
     
-    # Handle GET request
-    return render_template('test_run_form.html', form=form)
+    return render_template('test_run_form.html')
 
 @app.route('/test-case/execute', methods=['POST'])
 def execute_test():
@@ -224,10 +238,6 @@ def execute_test():
         execution_state['running'] = True
         execution_state['paused'] = False
         execution_state['log'] = []
-        
-        # Add log message about starting execution
-        log_message(f"Starting test execution with target URL: {target_url}")
-        log_message(f"Running in {'headless' if execution_state['headless'] else 'visible'} mode")
 
         thread = threading.Thread(target=execute_test_case)
         thread.daemon = True
@@ -294,145 +304,65 @@ def log_message(msg):
     execution_state['log'].append(msg)
 
 def execute_test_case():
+    """Execute test case using Playwright."""
     with sync_playwright() as p:
-        # Launch browser based on headless setting
         browser = p.chromium.launch(headless=execution_state['headless'])
         context = browser.new_context()
         page = context.new_page()
+        reporter = TestReporter()
         
         try:
-            # Navigate to the target URL
-            log_message(f"Opening browser and navigating to {execution_state['target_url']}")
+            # Navigate to target URL
             page.goto(execution_state['target_url'])
-            log_message(f"Navigated to {execution_state['target_url']}")
-            
-            # Wait for page load
             page.wait_for_load_state('networkidle')
-            log_message("Page loaded successfully")
             
-            # Execute each test step
+            # Execute test steps
             for idx, step in enumerate(execution_state['test_steps']):
                 if not execution_state['running']:
-                    log_message("Test execution stopped by user")
                     break
                     
                 while execution_state['paused']:
-                    time.sleep(0.5)  # Add a small delay to prevent CPU hogging
+                    time.sleep(0.5)
                     continue
                     
                 execution_state['current_step'] = idx
-                log_message(f"Executing step {idx + 1}: {step.get('action', 'unknown')} on {step.get('selector', 'N/A')}")
-                
-                # Get step details
                 action = step.get('action', '')
                 selector = step.get('selector', '')
                 value = step.get('value', '')
                 
                 try:
-                    # Wait for element to be visible before any action
                     if selector:
-                        log_message(f"Waiting for element: {selector}")
                         element = page.wait_for_selector(selector, state='visible', timeout=10000)
                         if not element:
-                            log_message(f"Element not found: {selector}")
+                            reporter.record_step(step, 'error', f"Element not found: {selector}")
                             continue
-                        log_message(f"Found element: {selector}")
                     
                     if action == 'click':
-                        # For login button, wait for navigation after click
-                        if 'signin-btn' in selector or 'login' in selector.lower():
-                            with page.expect_navigation():
-                                page.click(selector)
-                            log_message("Clicked login button and waiting for navigation")
-                        else:
-                            page.click(selector)
-                            log_message(f"Clicked element: {selector}")
-                        
-                    elif action == 'fill' or action == 'input':
-                        if value.startswith('{') and value.endswith('}'):
-                            var_name = value[1:-1]
-                            # Clear the input queue before waiting for new input
-                            while not execution_state['input_queue'].empty():
-                                execution_state['input_queue'].get()
-                                
-                            execution_state['awaiting_input'] = var_name
-                            log_message(f"Waiting for user input for {var_name}...")
-                            
-                            # Wait for input with a more responsive approach
-                            input_received = False
-                            start_time = time.time()
-                            
-                            while not input_received and execution_state['running'] and not execution_state['paused']:
-                                try:
-                                    if not execution_state['input_queue'].empty():
-                                        input_value = execution_state['input_queue'].get_nowait()
-                                        if input_value is not None:
-                                            value = input_value
-                                            log_message(f"Received user input for {var_name}")
-                                            input_received = True
-                                        else:
-                                            log_message("User cancelled input")
-                                            break
-                                except queue.Empty:
-                                    time.sleep(0.1)  # Short sleep to prevent CPU hogging
-                                    # Check if we've been waiting too long (5 minutes)
-                                    if time.time() - start_time > 300:
-                                        log_message("Timeout waiting for user input")
-                                        break
-                                    continue
-                            
-                            execution_state['awaiting_input'] = None
-                            
-                            if not input_received:
-                                log_message("Skipping step due to no input received")
-                                continue
-                            
-                            # Wait a moment before proceeding with the input
-                            page.wait_for_timeout(500)
-                            
-                        # For password field, use type instead of fill for security
-                        if 'password' in selector.lower():
-                            # Clear the field first
-                            page.fill(selector, '')
-                            page.type(selector, value, delay=100)
-                            log_message("Entered password")
-                        else:
-                            # Clear the field first
-                            page.fill(selector, '')
-                            # Wait a moment before typing
-                            page.wait_for_timeout(500)
-                            # Type the value with a delay between keystrokes
-                            page.type(selector, value, delay=100)
-                            log_message(f"Entered text into {selector}")
-                        
-                        # Wait after filling to ensure the value is properly set
-                        page.wait_for_timeout(500)
-                        
+                        page.click(selector)
+                        reporter.record_step(step, 'success')
+                    elif action in ['fill', 'type', 'input']:
+                        page.fill(selector, value)
+                        reporter.record_step(step, 'success')
                     elif action == 'wait':
                         wait_time = int(value) if value else 1000
                         page.wait_for_timeout(wait_time)
-                        log_message(f"Waited for {wait_time}ms")
-                        
+                        reporter.record_step(step, 'success')
                     elif action == 'navigate':
                         page.goto(value)
-                        log_message(f"Navigated to: {value}")
                         page.wait_for_load_state('networkidle')
-                    
-                    # Add delay between steps
-                    page.wait_for_timeout(1000)
+                        reporter.record_step(step, 'success')
                     
                 except Exception as e:
-                    log_message(f"Error in step {idx + 1}: {str(e)}")
-                    continue
+                    reporter.record_step(step, 'error', str(e))
             
-            log_message("All test steps completed")
+            # Generate report
+            report_path = generate_report(reporter, 'html')
+            execution_state['log'].append(f"Test execution completed. Report saved to: {report_path}")
             
         except Exception as e:
-            log_message(f"Error during test execution: {str(e)}")
+            execution_state['log'].append(f"Error during test execution: {str(e)}")
         finally:
-            if not execution_state['awaiting_input']:
-                browser.close()
-                log_message("Browser closed")
+            browser.close()
             execution_state['running'] = False
 
 def generate_chart(data, chart_type='pie', filename=None):
@@ -1158,6 +1088,262 @@ async def stop_recording():
 def record_test(suite_id):
     test_suite = TestSuite.query.get_or_404(suite_id)
     return render_template('record_test/index.html', test_suite=test_suite)
+
+@app.route('/test-runner')
+def test_runner():
+    """Main test runner page."""
+    return render_template('test_run_form.html')
+
+@app.route('/test-runner/upload', methods=['POST'])
+def upload_test_file():
+    """Handle test case file upload."""
+    if 'file' not in request.files:
+        return jsonify({'error': 'No file part'}), 400
+    
+    file = request.files['file']
+    if file.filename == '':
+        return jsonify({'error': 'No selected file'}), 400
+    
+    if file and (file.filename.endswith('.json') or file.filename.endswith('.py')):
+        # Save the uploaded file
+        upload_dir = app.config['UPLOAD_FOLDER']
+        file_path = os.path.join(upload_dir, secure_filename(file.filename))
+        file.save(file_path)
+        
+        try:
+            if file.filename.endswith('.json'):
+                with open(file_path, 'r') as f:
+                    test_config = json.load(f)
+                return jsonify({'success': True, 'config': test_config})
+            else:
+                steps = extract_steps_from_python(file_path)
+                return jsonify({'success': True, 'config': {'test_steps': steps}})
+        except Exception as e:
+            return jsonify({'error': str(e)}), 500
+    
+    return jsonify({'error': 'Unsupported file type'}), 400
+
+@app.route('/test-runner/execute', methods=['POST'])
+def execute_test_runner():
+    """Start test execution."""
+    if execution_state['running']:
+        return jsonify({'error': 'Test already running'}), 400
+
+    test_config = request.get_json()
+    if not test_config:
+        return jsonify({'error': 'No test configuration provided'}), 400
+
+    execution_state['running'] = True
+    execution_state['reporter'] = TestReporter()
+    execution_state['current_step'] = 0
+    execution_state['stats'] = {
+        'total': 0,
+        'passed': 0,
+        'failed': 0,
+        'retried': 0
+    }
+
+    # Start test execution in a new thread
+    thread = threading.Thread(target=run_test_case, args=(test_config,))
+    thread.daemon = True
+    thread.start()
+
+    return jsonify({'message': 'Test execution started'})
+
+@app.route('/test-runner/stop', methods=['POST'])
+def stop_test_runner():
+    """Stop test execution."""
+    execution_state['running'] = False
+    return jsonify({'message': 'Test execution stopped'})
+
+@app.route('/test-runner/events')
+def test_runner_events():
+    """SSE endpoint for real-time updates."""
+    def generate():
+        while True:
+            try:
+                event = execution_state['event_queue'].get(timeout=1)
+                yield f"data: {json.dumps(event)}\n\n"
+            except queue.Empty:
+                if not execution_state['running']:
+                    break
+                continue
+    
+    return Response(generate(), mimetype='text/event-stream')
+
+def run_test_case(config):
+    """Execute the test case."""
+    try:
+        with sync_playwright() as p:
+            # Launch browser based on configuration
+            browser_type = getattr(p, config.get('browser', 'chromium'))
+            browser = browser_type.launch(headless=config.get('headless', False))
+            context = browser.new_context()
+            page = context.new_page()
+            
+            # Initialize components
+            reporter = execution_state['reporter']
+            optimizer = TestOptimizer(config.get('mode', 'default'), config.get('inputs'))
+
+            # Setup event handlers
+            page.on("console", lambda msg: execution_state['event_queue'].put({
+                'type': 'console',
+                'data': f"{msg.type}: {msg.text}"
+            }))
+
+            try:
+                # Navigate to initial URL if provided
+                if config.get('url'):
+                    page.goto(config['url'])
+                    reporter.record_step({'action': 'navigate', 'value': config['url']}, 'passed')
+
+                # Process and execute test steps
+                if config.get('test_steps'):
+                    steps = optimizer.process_steps(config['test_steps'])
+                    
+                    for step in steps:
+                        if not execution_state['running']:
+                            break
+                        
+                        try:
+                            start_time = time.time()
+                            
+                            # Execute step based on action type
+                            if step['action'] == 'click':
+                                page.click(step['selector'])
+                            elif step['action'] in ['fill', 'type']:
+                                page.fill(step['selector'], step['value'])
+                            elif step['action'] == 'select':
+                                page.select_option(step['selector'], step['value'])
+                            elif step['action'] == 'check':
+                                page.check(step['selector'])
+                            elif step['action'] == 'uncheck':
+                                page.uncheck(step['selector'])
+                            
+                            execution_time = int((time.time() - start_time) * 1000)
+                            status = 'passed'
+                            
+                            # Take screenshot
+                            screenshot_path = f"screenshot_{execution_state['current_step']}.png"
+                            page.screenshot(path=os.path.join(app.config['SCREENSHOTS_FOLDER'], screenshot_path))
+                            
+                            # Update statistics
+                            execution_state['stats']['total'] += 1
+                            execution_state['stats']['passed'] += 1
+                            
+                            # Record step result
+                            reporter.record_step(step, status, execution_time=execution_time)
+                            
+                            # Send events
+                            execution_state['event_queue'].put({
+                                'type': 'step',
+                                'data': {
+                                    'action': step['action'],
+                                    'selector': step.get('selector', ''),
+                                    'status': status,
+                                    'time': execution_time
+                                }
+                            })
+                            
+                            execution_state['event_queue'].put({
+                                'type': 'screenshot',
+                                'data': {
+                                    'url': f"/static/screenshots/{screenshot_path}"
+                                }
+                            })
+                            
+                            execution_state['event_queue'].put({
+                                'type': 'stats',
+                                'data': execution_state['stats']
+                            })
+                            
+                            execution_state['current_step'] += 1
+                            
+                        except Exception as e:
+                            # Handle step failure
+                            execution_state['stats']['failed'] += 1
+                            reporter.record_step(step, 'failed', error=str(e))
+                            execution_state['event_queue'].put({
+                                'type': 'console',
+                                'data': f"Error executing step: {str(e)}"
+                            })
+                            
+                            if config.get('stopOnFailure'):
+                                break
+                
+                # Generate report
+                if config.get('reportFormat'):
+                    report_path = generate_report(reporter, config['reportFormat'])
+                    execution_state['event_queue'].put({
+                        'type': 'report',
+                        'data': {'url': f"/reports/{os.path.basename(report_path)}"}
+                    })
+            
+            finally:
+                browser.close()
+                
+    except Exception as e:
+        execution_state['event_queue'].put({
+            'type': 'error',
+            'data': f"Test execution error: {str(e)}"
+        })
+    finally:
+        execution_state['running'] = False
+        execution_state['event_queue'].put({
+            'type': 'complete',
+            'data': None
+        })
+
+def extract_steps_from_python(file_path):
+    """Extract test steps from Python file."""
+    with open(file_path, 'r') as f:
+        content = f.read()
+    
+    tree = ast.parse(content)
+    steps = []
+    
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Call):
+            if isinstance(node.func, ast.Attribute) and hasattr(node.func.value, 'id') and node.func.value.id == 'page':
+                action = node.func.attr
+                if action in ['goto', 'click', 'fill', 'type', 'select_option', 'check', 'uncheck']:
+                    step = {'action': action}
+                    
+                    if node.args:
+                        if action == 'goto':
+                            step['value'] = extract_string_value(node.args[0])
+                        elif action in ['click', 'check', 'uncheck']:
+                            step['selector'] = extract_string_value(node.args[0])
+                        elif action in ['fill', 'type']:
+                            step['selector'] = extract_string_value(node.args[0])
+                            if len(node.args) > 1:
+                                step['value'] = extract_string_value(node.args[1])
+                        elif action == 'select_option':
+                            step['selector'] = extract_string_value(node.args[0])
+                            if len(node.args) > 1:
+                                step['value'] = extract_string_value(node.args[1])
+                    
+                    steps.append(step)
+    
+    return steps
+
+def extract_string_value(node):
+    """Extract string value from AST node."""
+    if isinstance(node, ast.Str):
+        return node.s
+    elif isinstance(node, ast.Constant) and isinstance(node.value, str):
+        return node.value
+    return None
+
+@app.route('/static/screenshots/<path:filename>')
+def serve_screenshot(filename):
+    """Serve screenshot files."""
+    return send_from_directory(app.config['SCREENSHOTS_FOLDER'], filename)
+
+@app.route('/reports/<path:filename>')
+def serve_report(filename):
+    """Serve report files."""
+    return send_from_directory(app.config['REPORTS_FOLDER'], filename)
 
 # Main entry point
 if __name__ == '__main__':
