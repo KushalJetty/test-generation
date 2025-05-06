@@ -168,3 +168,364 @@
 2025-04-25 14:42:59,120 - werkzeug - INFO - 127.0.0.1 - - [25/Apr/2025 14:42:59] "GET /project/1 HTTP/1.1" 200 -
 2025-04-25 14:42:59,141 - werkzeug - INFO - 127.0.0.1 - - [25/Apr/2025 14:42:59] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
 2025-04-25 14:42:59,147 - werkzeug - INFO - 127.0.0.1 - - [25/Apr/2025 14:42:59] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-06 20:22:58,476 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-06 20:22:58,477 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-05-06 20:22:58,487 - werkzeug - INFO -  * Restarting with stat
+2025-05-06 20:23:01,433 - werkzeug - WARNING -  * Debugger is active!
+2025-05-06 20:23:01,452 - werkzeug - INFO -  * Debugger PIN: 427-303-074
+2025-05-06 20:23:05,649 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 20:23:05] "GET / HTTP/1.1" 200 -
+2025-05-06 20:23:05,693 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 20:23:05] "GET /static/css/style.css HTTP/1.1" 200 -
+2025-05-06 20:23:05,693 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 20:23:05] "GET /static/js/main.js HTTP/1.1" 200 -
+2025-05-06 20:23:06,549 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 20:23:06] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-05-06 20:23:27,072 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 20:23:27] "GET /test-suites HTTP/1.1" 200 -
+2025-05-06 20:23:27,107 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 20:23:27] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-06 20:23:27,431 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 20:23:27] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-06 20:23:34,195 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 20:23:34] "GET /test-suite/13/record HTTP/1.1" 200 -
+2025-05-06 20:23:34,236 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 20:23:34] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-06 20:23:34,237 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 20:23:34] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-06 20:23:46,759 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 20:23:46] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-05-06 20:23:46,800 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 20:23:46] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-06 20:23:46,801 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 20:23:46] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-06 20:24:02,432 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 20:24:02] "GET /test-suite/3/record HTTP/1.1" 200 -
+2025-05-06 20:24:02,483 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 20:24:02] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-06 20:24:02,484 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 20:24:02] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-06 20:24:30,443 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 20:24:30] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-05-06 20:24:30,483 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 20:24:30] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-06 20:24:30,486 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 20:24:30] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-06 20:24:54,234 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 20:24:54] "GET /test-suite/13/record HTTP/1.1" 200 -
+2025-05-06 20:24:54,281 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 20:24:54] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-06 20:24:54,283 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 20:24:54] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-06 20:25:14,056 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 20:25:14] "[35m[1mPOST /api/record/start HTTP/1.1[0m" 500 -
+2025-05-06 20:25:33,355 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 20:25:33] "[35m[1mPOST /api/record/start HTTP/1.1[0m" 500 -
+2025-05-06 20:26:27,649 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-06 20:26:27,650 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-05-06 20:26:27,652 - werkzeug - INFO -  * Restarting with stat
+2025-05-06 20:26:30,508 - werkzeug - WARNING -  * Debugger is active!
+2025-05-06 20:26:30,529 - werkzeug - INFO -  * Debugger PIN: 427-303-074
+2025-05-06 20:27:10,873 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 20:27:10] "GET /projects HTTP/1.1" 200 -
+2025-05-06 20:27:10,910 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 20:27:10] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-06 20:27:10,911 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 20:27:10] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-06 20:27:14,377 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 20:27:14] "GET /test-suites HTTP/1.1" 200 -
+2025-05-06 20:27:14,459 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 20:27:14] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-06 20:27:14,766 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 20:27:14] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-06 20:30:21,006 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 20:30:21] "GET /test-suite/13/record HTTP/1.1" 200 -
+2025-05-06 20:30:21,058 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 20:30:21] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-06 20:30:21,059 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 20:30:21] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-06 20:30:34,655 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 20:30:34] "GET /test-suite/13/record HTTP/1.1" 200 -
+2025-05-06 20:30:34,703 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 20:30:34] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-06 20:30:34,703 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 20:30:34] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-06 20:30:41,532 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 20:30:41] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-05-06 20:30:41,568 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 20:30:41] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-06 20:30:41,571 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 20:30:41] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-06 20:32:12,201 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 20:32:12] "GET /test-suite/13/test-run/create HTTP/1.1" 200 -
+2025-05-06 20:32:12,269 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 20:32:12] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-06 20:32:12,271 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 20:32:12] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-06 21:03:05,902 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 21:03:05] "GET /test-suite/13/record HTTP/1.1" 200 -
+2025-05-06 21:03:05,937 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 21:03:05] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-06 21:03:05,938 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 21:03:05] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-06 21:12:34,627 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 21:12:34] "GET /test-suite/13/record HTTP/1.1" 200 -
+2025-05-06 21:12:34,699 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 21:12:34] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-06 21:12:34,702 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 21:12:34] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-06 21:18:58,878 - werkzeug - INFO -  * Detected change in 'C:\\Users\\Sathwik\\Desktop\\test-generation\\app.py', reloading
+2025-05-06 21:18:59,776 - werkzeug - INFO -  * Restarting with stat
+2025-05-06 21:19:05,730 - werkzeug - WARNING -  * Debugger is active!
+2025-05-06 21:19:05,782 - werkzeug - INFO -  * Debugger PIN: 427-303-074
+2025-05-06 21:19:25,318 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 21:19:25] "GET /test-suite/13/test-run/create HTTP/1.1" 200 -
+2025-05-06 21:19:25,382 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 21:19:25] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-06 21:19:25,383 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 21:19:25] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-06 21:19:29,410 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 21:19:29] "GET /test-suite/13/record HTTP/1.1" 200 -
+2025-05-06 21:19:40,080 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 21:19:40] "GET /test-suite/13/record HTTP/1.1" 200 -
+2025-05-06 21:19:47,602 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 21:19:47] "GET /test-suite/13/record HTTP/1.1" 200 -
+2025-05-06 21:22:35,749 - werkzeug - INFO -  * Detected change in 'C:\\Users\\Sathwik\\Desktop\\test-generation\\app.py', reloading
+2025-05-06 21:22:36,436 - werkzeug - INFO -  * Restarting with stat
+2025-05-06 21:22:41,870 - werkzeug - WARNING -  * Debugger is active!
+2025-05-06 21:22:41,918 - werkzeug - INFO -  * Debugger PIN: 427-303-074
+2025-05-06 21:25:38,583 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 21:25:38] "GET /test-suite/13/record HTTP/1.1" 200 -
+2025-05-06 21:25:38,666 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 21:25:38] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-06 21:25:38,668 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 21:25:38] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-06 22:07:36,112 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 22:07:36] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-05-06 22:38:36,397 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 22:38:36] "GET /test-suites HTTP/1.1" 200 -
+2025-05-06 22:38:36,416 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 22:38:36] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-06 22:38:36,858 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 22:38:36] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-06 22:38:39,074 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 22:38:39] "GET /test-suite/13/record HTTP/1.1" 200 -
+2025-05-06 22:38:50,071 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 22:38:50] "[35m[1mPOST /api/record/stop HTTP/1.1[0m" 500 -
+2025-05-06 22:41:09,756 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 22:41:09] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-05-06 22:41:09,791 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 22:41:09] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-06 22:41:09,794 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 22:41:09] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-06 22:41:16,316 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 22:41:16] "GET /test-suite/13/test-run/create HTTP/1.1" 200 -
+2025-05-06 22:41:16,339 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 22:41:16] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-06 22:41:16,340 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 22:41:16] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-06 22:41:21,245 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 22:41:21] "GET /test-suite/13/record HTTP/1.1" 200 -
+2025-05-06 22:41:21,293 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 22:41:21] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-06 22:41:21,293 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 22:41:21] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-06 22:47:38,810 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 22:47:38] "GET /test-suite/13/record HTTP/1.1" 200 -
+2025-05-06 22:47:41,767 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 22:47:41] "[35m[1mGET /test-suites HTTP/1.1[0m" 500 -
+2025-05-06 22:47:41,819 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 22:47:41] "GET /test-suites?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2025-05-06 22:47:41,830 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 22:47:41] "GET /test-suites?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2025-05-06 22:47:42,283 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 22:47:42] "GET /test-suites?__debugger__=yes&cmd=resource&f=console.png&s=CHg7nrDoIU3sSTA6PAh2 HTTP/1.1" 200 -
+2025-05-06 22:47:42,283 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 22:47:42] "GET /test-suites?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+2025-05-06 22:47:42,311 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 22:47:42] "[36mGET /test-suites?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-05-06 22:53:08,646 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 22:53:08] "GET /test-suites HTTP/1.1" 200 -
+2025-05-06 22:53:08,696 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 22:53:08] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-06 22:53:09,191 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 22:53:09] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-06 22:53:11,320 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 22:53:11] "GET /test-suite/13/record HTTP/1.1" 200 -
+2025-05-06 23:00:34,052 - werkzeug - INFO -  * Detected change in 'C:\\Users\\Sathwik\\Desktop\\test-generation\\app.py', reloading
+2025-05-06 23:00:35,355 - werkzeug - INFO -  * Restarting with stat
+2025-05-06 23:00:44,160 - werkzeug - WARNING -  * Debugger is active!
+2025-05-06 23:00:44,215 - werkzeug - INFO -  * Debugger PIN: 427-303-074
+2025-05-06 23:01:29,075 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:01:29] "GET /test-suites HTTP/1.1" 200 -
+2025-05-06 23:01:29,119 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:01:29] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-06 23:01:30,038 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:01:30] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-06 23:01:30,039 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:01:30] "GET /static/js/recorder.js HTTP/1.1" 200 -
+2025-05-06 23:02:38,580 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:02:38] "GET /api/record/start?url=https://mail.google.com/ HTTP/1.1" 200 -
+2025-05-06 23:02:40,249 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:02:40] "GET /api/record/start?url=https://mail.google.com/ HTTP/1.1" 200 -
+2025-05-06 23:02:48,367 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:02:48] "[35m[1mGET /api/record/start?url=https://mail.google.com/ HTTP/1.1[0m" 500 -
+2025-05-06 23:02:52,650 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:02:52] "GET /api/record/start?url=https://mail.google.com/ HTTP/1.1" 200 -
+2025-05-06 23:02:57,396 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:02:57] "GET /test-suites HTTP/1.1" 200 -
+2025-05-06 23:02:57,428 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:02:57] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-06 23:02:57,844 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:02:57] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-06 23:02:57,846 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:02:57] "[36mGET /static/js/recorder.js HTTP/1.1[0m" 304 -
+2025-05-06 23:03:09,468 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:03:09] "[35m[1mGET /api/record/start?url=https://mail.google.com/ HTTP/1.1[0m" 500 -
+2025-05-06 23:03:13,202 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:03:13] "GET /api/record/start?url=https://mail.google.com/ HTTP/1.1" 200 -
+2025-05-06 23:04:04,326 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:04:04] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-06 23:04:04,372 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:04:04] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-05-06 23:12:12,866 - werkzeug - INFO -  * Detected change in 'C:\\Users\\Sathwik\\Desktop\\test-generation\\app.py', reloading
+2025-05-06 23:12:13,834 - werkzeug - INFO -  * Restarting with stat
+2025-05-06 23:12:20,305 - werkzeug - WARNING -  * Debugger is active!
+2025-05-06 23:12:20,359 - werkzeug - INFO -  * Debugger PIN: 427-303-074
+2025-05-06 23:12:26,976 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:12:26] "GET /api/record/start?url=https://mail.google.com/ HTTP/1.1" 200 -
+2025-05-06 23:12:26,978 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:12:26] "GET /api/record/start?url=https://mail.google.com/ HTTP/1.1" 200 -
+2025-05-06 23:12:30,175 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:12:30] "GET /test-suites HTTP/1.1" 200 -
+2025-05-06 23:12:30,238 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:12:30] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-06 23:12:31,301 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:12:31] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-06 23:12:31,302 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:12:31] "GET /static/js/recorder.js HTTP/1.1" 200 -
+2025-05-06 23:12:50,028 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:12:50] "POST /api/record/action HTTP/1.1" 200 -
+2025-05-06 23:12:50,030 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:12:50] "GET /api/record/start?url=https://in.pinterest.com/pin/71494712829661135/ HTTP/1.1" 200 -
+2025-05-06 23:13:11,432 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:13:11] "POST /api/record/action HTTP/1.1" 200 -
+2025-05-06 23:13:11,474 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:13:11] "POST /api/record/action HTTP/1.1" 200 -
+2025-05-06 23:13:11,476 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:13:11] "GET /api/record/start?url=https://in.pinterest.com/pin/71494712829661135/ HTTP/1.1" 200 -
+2025-05-06 23:13:29,522 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:13:29] "POST /api/record/action HTTP/1.1" 200 -
+2025-05-06 23:13:29,922 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:13:29] "POST /api/record/action HTTP/1.1" 200 -
+2025-05-06 23:13:31,588 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:13:31] "POST /api/record/action HTTP/1.1" 200 -
+2025-05-06 23:13:31,828 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:13:31] "POST /api/record/action HTTP/1.1" 200 -
+2025-05-06 23:13:31,830 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:13:31] "GET /api/record/start?url=https://mail.google.com/ HTTP/1.1" 200 -
+2025-05-06 23:15:06,456 - werkzeug - INFO -  * Detected change in 'C:\\Users\\Sathwik\\Desktop\\test-generation\\app.py', reloading
+2025-05-06 23:15:07,221 - werkzeug - INFO -  * Restarting with stat
+2025-05-06 23:15:13,597 - werkzeug - WARNING -  * Debugger is active!
+2025-05-06 23:15:13,660 - werkzeug - INFO -  * Debugger PIN: 427-303-074
+2025-05-06 23:15:25,986 - werkzeug - INFO -  * Detected change in 'C:\\Users\\Sathwik\\Desktop\\test-generation\\app.py', reloading
+2025-05-06 23:15:26,676 - werkzeug - INFO -  * Restarting with stat
+2025-05-06 23:15:32,684 - werkzeug - WARNING -  * Debugger is active!
+2025-05-06 23:15:32,736 - werkzeug - INFO -  * Debugger PIN: 427-303-074
+2025-05-06 23:15:45,656 - werkzeug - INFO -  * Detected change in 'C:\\Users\\Sathwik\\Desktop\\test-generation\\app.py', reloading
+2025-05-06 23:15:46,374 - werkzeug - INFO -  * Restarting with stat
+2025-05-06 23:15:52,074 - werkzeug - WARNING -  * Debugger is active!
+2025-05-06 23:15:52,150 - werkzeug - INFO -  * Debugger PIN: 427-303-074
+2025-05-06 23:16:28,869 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:16:28] "GET /test-suites HTTP/1.1" 200 -
+2025-05-06 23:16:28,932 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:16:28] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-06 23:16:29,369 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:16:29] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-06 23:16:29,370 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:16:29] "GET /static/js/recorder.js HTTP/1.1" 200 -
+2025-05-06 23:16:36,228 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:16:36] "POST /api/record/action HTTP/1.1" 200 -
+2025-05-06 23:16:36,232 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:16:36] "GET /api/record/start?url=https://mail.google.com/ HTTP/1.1" 200 -
+2025-05-06 23:16:51,401 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:16:51] "GET /api/record/start?url=https://mail.google.com/ HTTP/1.1" 200 -
+2025-05-06 23:16:51,463 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:16:51] "[35m[1mPOST /api/record/action HTTP/1.1[0m" 500 -
+2025-05-06 23:16:51,478 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:16:51] "[35m[1mPOST /api/record/action HTTP/1.1[0m" 500 -
+2025-05-06 23:17:04,628 - werkzeug - INFO -  * Detected change in 'C:\\Users\\Sathwik\\Desktop\\test-generation\\app.py', reloading
+2025-05-06 23:17:05,488 - werkzeug - INFO -  * Restarting with stat
+2025-05-06 23:17:11,778 - werkzeug - WARNING -  * Debugger is active!
+2025-05-06 23:17:11,838 - werkzeug - INFO -  * Debugger PIN: 427-303-074
+2025-05-06 23:20:20,707 - werkzeug - INFO -  * Detected change in 'C:\\Users\\Sathwik\\Desktop\\test-generation\\app.py', reloading
+2025-05-06 23:20:21,362 - werkzeug - INFO -  * Restarting with stat
+2025-05-06 23:20:27,370 - werkzeug - WARNING -  * Debugger is active!
+2025-05-06 23:20:27,423 - werkzeug - INFO -  * Debugger PIN: 427-303-074
+2025-05-06 23:22:44,460 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:22:44] "[33mPOST /api/record/action HTTP/1.1[0m" 404 -
+2025-05-06 23:22:46,423 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:22:46] "GET /test-suites HTTP/1.1" 200 -
+2025-05-06 23:22:46,484 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:22:46] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-06 23:22:46,486 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:22:46] "GET /static/js/recorder.js HTTP/1.1" 200 -
+2025-05-06 23:22:46,939 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:22:46] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-06 23:22:59,408 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:22:59] "POST /api/record/start HTTP/1.1" 200 -
+2025-05-06 23:23:11,762 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:23:11] "GET /test-suites HTTP/1.1" 200 -
+2025-05-06 23:23:11,823 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:23:11] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-06 23:23:11,825 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:23:11] "[36mGET /static/js/recorder.js HTTP/1.1[0m" 304 -
+2025-05-06 23:23:12,212 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:23:12] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-06 23:23:24,250 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:23:24] "POST /api/record/start HTTP/1.1" 200 -
+2025-05-06 23:23:38,158 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:23:38] "GET /api/record/stream HTTP/1.1" 200 -
+2025-05-06 23:23:38,323 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:23:38] "GET /api/record/stream HTTP/1.1" 200 -
+2025-05-06 23:24:16,272 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:24:16] "POST /api/record/stop HTTP/1.1" 200 -
+2025-05-06 23:29:11,677 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:29:11] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-05-06 23:29:12,154 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:29:12] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-06 23:29:12,161 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:29:12] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-06 23:32:31,141 - werkzeug - INFO -  * Detected change in 'C:\\Users\\Sathwik\\Desktop\\test-generation\\app.py', reloading
+2025-05-06 23:32:37,775 - werkzeug - INFO -  * Restarting with stat
+2025-05-06 23:32:57,720 - werkzeug - WARNING -  * Debugger is active!
+2025-05-06 23:32:57,763 - werkzeug - INFO -  * Debugger PIN: 427-303-074
+2025-05-06 23:34:12,524 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-06 23:34:12,524 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-05-06 23:34:12,532 - werkzeug - INFO -  * Restarting with stat
+2025-05-06 23:34:15,051 - werkzeug - WARNING -  * Debugger is active!
+2025-05-06 23:34:15,075 - werkzeug - INFO -  * Debugger PIN: 427-303-074
+2025-05-06 23:34:48,784 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:34:48] "POST /api/record/start HTTP/1.1" 200 -
+2025-05-06 23:34:57,982 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:34:57] "GET /api/record/stream HTTP/1.1" 200 -
+2025-05-06 23:35:14,639 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:35:14] "POST /api/record/stop HTTP/1.1" 200 -
+2025-05-06 23:35:32,616 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:35:32] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-05-06 23:35:32,654 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:35:32] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-06 23:35:32,654 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:35:32] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-06 23:40:33,979 - werkzeug - INFO -  * Detected change in 'C:\\Users\\Sathwik\\Desktop\\test-generation\\app.py', reloading
+2025-05-06 23:40:34,400 - werkzeug - INFO -  * Detected change in 'C:\\Users\\Sathwik\\Desktop\\test-generation\\app.py', reloading
+2025-05-06 23:40:34,654 - werkzeug - INFO -  * Restarting with stat
+2025-05-06 23:40:34,904 - werkzeug - INFO -  * Restarting with stat
+2025-05-06 23:40:56,507 - werkzeug - WARNING -  * Debugger is active!
+2025-05-06 23:40:56,534 - werkzeug - INFO -  * Debugger PIN: 427-303-074
+2025-05-06 23:41:02,761 - werkzeug - INFO -  * Detected change in 'C:\\Users\\Sathwik\\Desktop\\test-generation\\app.py', reloading
+2025-05-06 23:41:03,183 - werkzeug - INFO -  * Detected change in 'C:\\Users\\Sathwik\\Desktop\\test-generation\\app.py', reloading
+2025-05-06 23:41:03,255 - werkzeug - INFO -  * Restarting with stat
+2025-05-06 23:41:03,702 - werkzeug - INFO -  * Restarting with stat
+2025-05-06 23:41:06,038 - werkzeug - WARNING -  * Debugger is active!
+2025-05-06 23:41:06,061 - werkzeug - INFO -  * Debugger PIN: 427-303-074
+2025-05-06 23:41:06,438 - werkzeug - WARNING -  * Debugger is active!
+2025-05-06 23:41:06,461 - werkzeug - INFO -  * Debugger PIN: 427-303-074
+2025-05-06 23:43:00,261 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:43:00] "[35m[1mGET /test-suites HTTP/1.1[0m" 500 -
+2025-05-06 23:43:00,304 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:43:00] "[36mGET /test-suites?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-05-06 23:43:00,311 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:43:00] "[36mGET /test-suites?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-05-06 23:43:00,592 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:43:00] "GET /test-suites?__debugger__=yes&cmd=resource&f=console.png&s=6MoMBjYITDS47LIIkRs7 HTTP/1.1" 200 -
+2025-05-06 23:43:00,602 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:43:00] "[36mGET /test-suites?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-05-06 23:43:00,629 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:43:00] "[36mGET /test-suites?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-05-06 23:44:25,629 - werkzeug - INFO -  * Detected change in 'C:\\Users\\Sathwik\\Desktop\\test-generation\\migrate_db.py', reloading
+2025-05-06 23:44:26,384 - werkzeug - INFO -  * Restarting with stat
+2025-05-06 23:44:29,289 - werkzeug - WARNING -  * Debugger is active!
+2025-05-06 23:44:29,311 - werkzeug - INFO -  * Debugger PIN: 427-303-074
+2025-05-06 23:45:00,367 - werkzeug - INFO -  * Detected change in 'C:\\Users\\Sathwik\\Desktop\\test-generation\\init_db.py', reloading
+2025-05-06 23:45:00,857 - werkzeug - INFO -  * Restarting with stat
+2025-05-06 23:45:00,951 - werkzeug - INFO -  * Detected change in 'C:\\Users\\Sathwik\\Desktop\\test-generation\\init_db.py', reloading
+2025-05-06 23:45:01,457 - werkzeug - INFO -  * Restarting with stat
+2025-05-06 23:45:03,676 - werkzeug - WARNING -  * Debugger is active!
+2025-05-06 23:45:03,702 - werkzeug - INFO -  * Debugger PIN: 427-303-074
+2025-05-06 23:45:04,274 - werkzeug - WARNING -  * Debugger is active!
+2025-05-06 23:45:04,306 - werkzeug - INFO -  * Debugger PIN: 427-303-074
+2025-05-06 23:48:26,250 - werkzeug - INFO -  * Detected change in 'C:\\Users\\Sathwik\\Desktop\\test-generation\\create_db.py', reloading
+2025-05-06 23:48:26,592 - werkzeug - INFO -  * Detected change in 'C:\\Users\\Sathwik\\Desktop\\test-generation\\create_db.py', reloading
+2025-05-06 23:48:26,819 - werkzeug - INFO -  * Restarting with stat
+2025-05-06 23:48:27,138 - werkzeug - INFO -  * Restarting with stat
+2025-05-06 23:48:29,732 - werkzeug - WARNING -  * Debugger is active!
+2025-05-06 23:48:29,753 - werkzeug - INFO -  * Debugger PIN: 427-303-074
+2025-05-06 23:48:29,906 - werkzeug - WARNING -  * Debugger is active!
+2025-05-06 23:48:29,929 - werkzeug - INFO -  * Debugger PIN: 427-303-074
+2025-05-06 23:49:03,652 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:49:03] "[35m[1mGET /test-suites HTTP/1.1[0m" 500 -
+2025-05-06 23:49:03,684 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:49:03] "[36mGET /test-suites?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-05-06 23:49:03,684 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:49:03] "[36mGET /test-suites?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-05-06 23:49:04,180 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:49:04] "GET /test-suites?__debugger__=yes&cmd=resource&f=console.png&s=J1kyQiYrmcRA6tA97QRH HTTP/1.1" 200 -
+2025-05-06 23:49:04,187 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:49:04] "[36mGET /test-suites?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-05-06 23:49:04,202 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:49:04] "[36mGET /test-suites?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-05-06 23:49:05,531 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:49:05] "[35m[1mGET /test-suites HTTP/1.1[0m" 500 -
+2025-05-06 23:49:05,555 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:49:05] "[36mGET /test-suites?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-05-06 23:49:05,556 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:49:05] "[36mGET /test-suites?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-05-06 23:49:05,902 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:49:05] "[36mGET /test-suites?__debugger__=yes&cmd=resource&f=console.png&s=J1kyQiYrmcRA6tA97QRH HTTP/1.1[0m" 304 -
+2025-05-06 23:49:05,904 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:49:05] "[36mGET /test-suites?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-05-06 23:49:05,918 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:49:05] "[36mGET /test-suites?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-05-06 23:49:06,630 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:49:06] "[35m[1mGET /test-suites HTTP/1.1[0m" 500 -
+2025-05-06 23:49:06,650 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:49:06] "[36mGET /test-suites?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-05-06 23:49:06,651 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:49:06] "[36mGET /test-suites?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-05-06 23:49:06,841 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:49:06] "[36mGET /test-suites?__debugger__=yes&cmd=resource&f=console.png&s=J1kyQiYrmcRA6tA97QRH HTTP/1.1[0m" 304 -
+2025-05-06 23:49:06,847 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:49:06] "[36mGET /test-suites?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-05-06 23:49:06,872 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:49:06] "[36mGET /test-suites?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-05-06 23:49:07,215 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:49:07] "[35m[1mGET /test-suites HTTP/1.1[0m" 500 -
+2025-05-06 23:49:07,244 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:49:07] "[36mGET /test-suites?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-05-06 23:49:07,245 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:49:07] "[36mGET /test-suites?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-05-06 23:49:07,427 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:49:07] "[36mGET /test-suites?__debugger__=yes&cmd=resource&f=console.png&s=J1kyQiYrmcRA6tA97QRH HTTP/1.1[0m" 304 -
+2025-05-06 23:49:07,438 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:49:07] "[36mGET /test-suites?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-05-06 23:49:07,459 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:49:07] "[36mGET /test-suites?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-05-06 23:49:11,513 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:49:11] "[35m[1mGET /test-suites HTTP/1.1[0m" 500 -
+2025-05-06 23:49:11,540 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:49:11] "[36mGET /test-suites?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-05-06 23:49:11,541 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:49:11] "[36mGET /test-suites?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-05-06 23:49:11,720 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:49:11] "[36mGET /test-suites?__debugger__=yes&cmd=resource&f=console.png&s=J1kyQiYrmcRA6tA97QRH HTTP/1.1[0m" 304 -
+2025-05-06 23:49:11,728 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:49:11] "[36mGET /test-suites?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-05-06 23:49:11,748 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:49:11] "[36mGET /test-suites?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-05-06 23:51:01,588 - werkzeug - INFO -  * Detected change in 'C:\\Users\\Sathwik\\Desktop\\test-generation\\create_db.py', reloading
+2025-05-06 23:51:01,953 - werkzeug - INFO -  * Detected change in 'C:\\Users\\Sathwik\\Desktop\\test-generation\\create_db.py', reloading
+2025-05-06 23:51:02,164 - werkzeug - INFO -  * Restarting with stat
+2025-05-06 23:51:02,684 - werkzeug - INFO -  * Restarting with stat
+2025-05-06 23:51:05,049 - werkzeug - WARNING -  * Debugger is active!
+2025-05-06 23:51:05,070 - werkzeug - INFO -  * Debugger PIN: 427-303-074
+2025-05-06 23:51:05,445 - werkzeug - WARNING -  * Debugger is active!
+2025-05-06 23:51:05,474 - werkzeug - INFO -  * Debugger PIN: 427-303-074
+2025-05-06 23:53:37,646 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-06 23:53:37,646 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-05-06 23:53:37,647 - werkzeug - INFO -  * Restarting with stat
+2025-05-06 23:53:40,433 - werkzeug - WARNING -  * Debugger is active!
+2025-05-06 23:53:40,455 - werkzeug - INFO -  * Debugger PIN: 427-303-074
+2025-05-06 23:56:46,669 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:56:46] "GET /test-suites HTTP/1.1" 200 -
+2025-05-06 23:56:46,711 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:56:46] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-06 23:56:46,713 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:56:46] "GET /static/js/recorder.js HTTP/1.1" 200 -
+2025-05-06 23:56:47,226 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:56:47] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-06 23:57:14,444 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:57:14] "POST /api/record/start HTTP/1.1" 200 -
+2025-05-06 23:57:15,420 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:57:15] "GET /api/record/stream HTTP/1.1" 200 -
+2025-05-06 23:57:22,930 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:57:22] "POST /api/record/stop HTTP/1.1" 200 -
+2025-05-06 23:57:27,800 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:57:27] "POST /api/record/save HTTP/1.1" 200 -
+2025-05-06 23:57:29,898 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:57:29] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-05-06 23:57:29,946 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:57:29] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-06 23:57:29,951 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:57:29] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-06 23:57:29,952 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:57:29] "[36mGET /static/js/recorder.js HTTP/1.1[0m" 304 -
+2025-05-06 23:57:43,192 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:57:43] "[35m[1mGET /test-case/1 HTTP/1.1[0m" 500 -
+2025-05-06 23:57:43,235 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:57:43] "GET /test-case/1?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2025-05-06 23:57:43,236 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:57:43] "GET /test-case/1?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2025-05-06 23:57:43,613 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:57:43] "GET /test-case/1?__debugger__=yes&cmd=resource&f=console.png&s=TSWE2xjkzcBQGQwAHiqn HTTP/1.1" 200 -
+2025-05-06 23:57:43,615 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:57:43] "GET /test-case/1?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+2025-05-06 23:57:43,641 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:57:43] "[36mGET /test-case/1?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-05-06 23:57:49,627 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:57:49] "[35m[1mGET /test-case/1 HTTP/1.1[0m" 500 -
+2025-05-06 23:57:49,662 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:57:49] "[36mGET /test-case/1?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-05-06 23:57:49,665 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:57:49] "[36mGET /test-case/1?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-05-06 23:57:50,062 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:57:50] "[36mGET /test-case/1?__debugger__=yes&cmd=resource&f=console.png&s=TSWE2xjkzcBQGQwAHiqn HTTP/1.1[0m" 304 -
+2025-05-06 23:57:50,063 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:57:50] "[36mGET /test-case/1?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-05-06 23:57:57,398 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:57:57] "GET /test-case/1/download HTTP/1.1" 200 -
+2025-05-06 23:58:02,418 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:58:02] "[35m[1mGET /test-case/1 HTTP/1.1[0m" 500 -
+2025-05-06 23:58:02,462 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:58:02] "[36mGET /test-case/1?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-05-06 23:58:02,463 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:58:02] "[36mGET /test-case/1?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-05-06 23:58:02,766 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:58:02] "[36mGET /test-case/1?__debugger__=yes&cmd=resource&f=console.png&s=TSWE2xjkzcBQGQwAHiqn HTTP/1.1[0m" 304 -
+2025-05-06 23:58:02,766 - werkzeug - INFO - 127.0.0.1 - - [06/May/2025 23:58:02] "[36mGET /test-case/1?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-05-07 00:00:19,121 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 00:00:19] "[35m[1mGET /test-case/1 HTTP/1.1[0m" 500 -
+2025-05-07 00:00:19,151 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 00:00:19] "[36mGET /test-case/1?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-05-07 00:00:19,153 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 00:00:19] "[36mGET /test-case/1?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-05-07 00:00:19,735 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 00:00:19] "[36mGET /test-case/1?__debugger__=yes&cmd=resource&f=console.png&s=TSWE2xjkzcBQGQwAHiqn HTTP/1.1[0m" 304 -
+2025-05-07 00:00:19,737 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 00:00:19] "[36mGET /test-case/1?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-05-07 00:01:04,780 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 00:01:04] "[35m[1mGET /test-case/1 HTTP/1.1[0m" 500 -
+2025-05-07 00:01:04,840 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 00:01:04] "[36mGET /test-case/1?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-05-07 00:01:04,840 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 00:01:04] "[36mGET /test-case/1?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-05-07 00:01:05,171 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 00:01:05] "[36mGET /test-case/1?__debugger__=yes&cmd=resource&f=console.png&s=TSWE2xjkzcBQGQwAHiqn HTTP/1.1[0m" 304 -
+2025-05-07 00:01:05,173 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 00:01:05] "[36mGET /test-case/1?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-05-07 00:02:33,198 - werkzeug - INFO -  * Detected change in 'C:\\Users\\Sathwik\\Desktop\\test-generation\\models.py', reloading
+2025-05-07 00:02:33,938 - werkzeug - INFO -  * Restarting with stat
+2025-05-07 00:02:34,366 - werkzeug - INFO -  * Detected change in 'C:\\Users\\Sathwik\\Desktop\\test-generation\\models.py', reloading
+2025-05-07 00:02:34,559 - werkzeug - INFO -  * Detected change in 'C:\\Users\\Sathwik\\Desktop\\test-generation\\models.py', reloading
+2025-05-07 00:02:35,046 - werkzeug - INFO -  * Restarting with stat
+2025-05-07 00:02:35,211 - werkzeug - INFO -  * Restarting with stat
+2025-05-07 00:02:37,342 - werkzeug - WARNING -  * Debugger is active!
+2025-05-07 00:02:37,363 - werkzeug - INFO -  * Debugger PIN: 427-303-074
+2025-05-07 00:02:38,267 - werkzeug - WARNING -  * Debugger is active!
+2025-05-07 00:02:38,300 - werkzeug - INFO -  * Debugger PIN: 427-303-074
+2025-05-07 00:02:38,604 - werkzeug - WARNING -  * Debugger is active!
+2025-05-07 00:02:38,633 - werkzeug - INFO -  * Debugger PIN: 427-303-074
+2025-05-07 00:02:49,991 - werkzeug - INFO -  * Detected change in 'C:\\Users\\Sathwik\\Desktop\\test-generation\\add_active_to_test_result.py', reloading
+2025-05-07 00:02:50,237 - werkzeug - INFO -  * Detected change in 'C:\\Users\\Sathwik\\Desktop\\test-generation\\add_active_to_test_result.py', reloading
+2025-05-07 00:02:50,812 - werkzeug - INFO -  * Restarting with stat
+2025-05-07 00:02:51,065 - werkzeug - INFO -  * Restarting with stat
+2025-05-07 00:02:51,277 - werkzeug - INFO -  * Detected change in 'C:\\Users\\Sathwik\\Desktop\\test-generation\\add_active_to_test_result.py', reloading
+2025-05-07 00:02:51,885 - werkzeug - INFO -  * Restarting with stat
+2025-05-07 00:02:54,359 - werkzeug - WARNING -  * Debugger is active!
+2025-05-07 00:02:54,382 - werkzeug - INFO -  * Debugger PIN: 427-303-074
+2025-05-07 00:02:54,551 - werkzeug - WARNING -  * Debugger is active!
+2025-05-07 00:02:54,577 - werkzeug - INFO -  * Debugger PIN: 427-303-074
+2025-05-07 00:02:55,369 - werkzeug - WARNING -  * Debugger is active!
+2025-05-07 00:02:55,395 - werkzeug - INFO -  * Debugger PIN: 427-303-074
+2025-05-07 00:03:06,478 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-07 00:03:06,478 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-05-07 00:03:06,480 - werkzeug - INFO -  * Restarting with stat
+2025-05-07 00:03:09,215 - werkzeug - WARNING -  * Debugger is active!
+2025-05-07 00:03:09,242 - werkzeug - INFO -  * Debugger PIN: 427-303-074
+2025-05-07 00:06:18,394 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 00:06:18] "GET /test-case/1 HTTP/1.1" 200 -
+2025-05-07 00:06:18,438 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 00:06:18] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-07 00:06:18,441 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 00:06:18] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -

@@ -4,6 +4,11 @@
 
 {% block header %}Test Suites{% endblock %}
 
+{% block head %}
+<!-- Add recorder.js script -->
+<script src="{{ url_for('static', filename='js/recorder.js') }}"></script>
+{% endblock %}
+
 {% block content %}
 <div class="container-fluid px-4">
     <!-- Header Section -->
@@ -86,12 +91,13 @@
                                                     <i class="bi bi-play-fill"></i>
                                                 </a>
                                                 <!-- Record Test Case Button -->
-                                                <a href="{{ url_for('record_test', suite_id=test_suite.id) }}" 
-                                                   class="btn btn-sm btn-outline-info"
-                                                   data-bs-toggle="tooltip" 
-                                                   title="Record Test Case">
+                                                <button type="button"
+                                                        class="btn btn-sm btn-outline-info"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#recordModal{{ test_suite.id }}"
+                                                        title="Record Test Case">
                                                     <i class="bi bi-record-circle"></i>
-                                                </a>
+                                                </button>
                                                 <button type="button" 
                                                         class="btn btn-sm btn-outline-danger" 
                                                         data-bs-toggle="modal" 
@@ -99,6 +105,42 @@
                                                         title="Delete">
                                                     <i class="bi bi-trash"></i>
                                                 </button>
+                                            </div>
+                                            
+                                            <!-- Record Modal -->
+                                            <div class="modal fade" id="recordModal{{ test_suite.id }}" tabindex="-1" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">Record Browser Actions for {{ test_suite.name }}</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <!-- URL Input Field -->
+                                                            <div class="mb-3">
+                                                                <label for="urlInput{{ test_suite.id }}" class="form-label">Enter URL to Test</label>
+                                                                <input type="text" id="urlInput{{ test_suite.id }}" class="form-control" placeholder="https://example.com">
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <h6>Recorded Actions (JSON)</h6>
+                                                                    <pre id="recordedActions{{ test_suite.id }}" class="bg-light border p-2 rounded" style="height: 300px; overflow: auto; text-align: left;"></pre>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <h6>Generated Playwright Code</h6>
+                                                                    <pre id="generatedCode{{ test_suite.id }}" class="bg-light border p-2 rounded" style="height: 300px; overflow: auto; text-align: left;"></pre>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer justify-content-center">
+                                                            <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button class="btn btn-danger" id="stopBtn{{ test_suite.id }}">⏹ Stop Recording</button>
+                                                            <button class="btn btn-warning" id="clearBtn{{ test_suite.id }}">⎌ Clear Actions</button>
+                                                            <button class="btn btn-primary" id="startBtn{{ test_suite.id }}">🔴 Start Recording</button>
+                                                            <button class="btn btn-success" id="saveBtn{{ test_suite.id }}">💾 Save Test Case</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                             
                                             <!-- First Delete Modal -->
@@ -171,7 +213,7 @@
     </div>
 </div>
 
-<!-- Initialize tooltips -->
+<!-- Initialize tooltips and recording functionality -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize all tooltips
@@ -179,6 +221,11 @@ document.addEventListener('DOMContentLoaded', function() {
     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
         return new bootstrap.Tooltip(tooltipTriggerEl)
     });
+    
+    // Setup recording functionality for each test suite
+    {% for test_suite in test_suites %}
+    setupRecorder("{{ test_suite.id }}", {});
+    {% endfor %}
 });
 </script>
 {% endblock %}

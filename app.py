@@ -1054,6 +1054,61 @@ def handle_stop():
     result = run_async(stop_recording())
     return jsonify(result)
 
+@app.route('/api/record/save', methods=['POST'])
+def save_recorded_test():
+    """Save a recorded test as a test case in the database."""
+    try:
+        data = request.get_json()
+        if not data:
+            return jsonify({'error': 'No data provided'}), 400
+            
+        suite_id = data.get('suite_id')
+        code = data.get('code')
+        test_name = data.get('name', f"Recorded Test {datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}")
+        
+        if not suite_id or not code:
+            return jsonify({'error': 'Missing required fields (suite_id, code)'}), 400
+            
+        # Get the test suite
+        test_suite = TestSuite.query.get_or_404(suite_id)
+        
+        # Create test file directory if it doesn't exist
+        test_dir = os.path.join('generated_tests', str(suite_id), 'recorded')
+        os.makedirs(test_dir, exist_ok=True)
+        
+        # Generate a unique filename
+        filename = f"{test_name.replace(' ', '_').lower()}.py"
+        filepath = os.path.join(test_dir, filename)
+        
+        # Write the code to the file
+        with open(filepath, 'w') as f:
+            f.write(code)
+        
+        # Create a new test case in the database
+        test_case = TestCase(
+            name=test_name,
+            description=f"Recorded test for {test_suite.name}",
+            original_file_path="recorded",
+            test_file_path=filepath,
+            language="python",
+            status="generated",
+            test_suite_id=suite_id
+        )
+        
+        db.session.add(test_case)
+        db.session.commit()
+        
+        return jsonify({
+            'status': 'success',
+            'message': 'Test case saved successfully',
+            'test_case_id': test_case.id,
+            'test_file': filepath
+        })
+        
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+
 async def clear_recording():
     global tracker
     if tracker:
@@ -1087,7 +1142,13 @@ async def stop_recording():
 @app.route('/test-suite/<int:suite_id>/record')
 def record_test(suite_id):
     test_suite = TestSuite.query.get_or_404(suite_id)
-    return render_template('record_test/index.html', test_suite=test_suite)
+    # Check if request accepts HTML (browser navigation) or JSON (modal)
+    if request.headers.get('Accept', '').find('text/html') >= 0:
+        # Browser navigation - return full page
+        return render_template('record_test/index.html', test_suite=test_suite)
+    else:
+        # Modal/API request - return just suite info
+        return jsonify({'test_suite': test_suite.name, 'id': test_suite.id})
 
 @app.route('/test-runner')
 def test_runner():
@@ -1344,6 +1405,41 @@ def serve_screenshot(filename):
 def serve_report(filename):
     """Serve report files."""
     return send_from_directory(app.config['REPORTS_FOLDER'], filename)
+
+@app.route('/test-case/<int:case_id>/download')
+def download_test_case(case_id):
+    """Download a test case file."""
+    test_case = TestCase.query.get_or_404(case_id)
+    
+    if not os.path.exists(test_case.test_file_path):
+        flash('Test file not found.', 'error')
+        return redirect(url_for('test_suite_detail', suite_id=test_case.test_suite_id))
+    
+    return send_file(test_case.test_file_path, 
+                    as_attachment=True, 
+                    download_name=f"{test_case.name.replace(' ', '_')}.py")
+
+@app.route('/test-case/<int:case_id>')
+def test_case_detail(case_id):
+    """Show test case details."""
+    test_case = TestCase.query.get_or_404(case_id)
+    
+    # Get file content if it exists
+    file_content = None
+    if os.path.exists(test_case.test_file_path):
+        try:
+            with open(test_case.test_file_path, 'r') as f:
+                file_content = f.read()
+        except Exception as e:
+            file_content = f"Error reading file: {str(e)}"
+    
+    # Get test results for this test case
+    test_results = TestResult.query.filter_by(test_case_id=case_id, active=True).all()
+    
+    return render_template('test_case_detail.html', 
+                           test_case=test_case, 
+                           test_results=test_results, 
+                           file_content=file_content)
 
 # Main entry point
 if __name__ == '__main__':

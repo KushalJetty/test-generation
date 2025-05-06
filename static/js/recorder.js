@@ -1,3 +1,177 @@
+/**
+ * Test recorder functionality for StreamzAI
+ */
+
+function setupRecorder(suiteId, options) {
+    const elementIds = {
+        startBtn: options.startBtnId || `startBtn${suiteId}`,
+        stopBtn: options.stopBtnId || `stopBtn${suiteId}`,
+        clearBtn: options.clearBtnId || `clearBtn${suiteId}`,
+        saveBtn: options.saveBtnId || `saveBtn${suiteId}`,
+        recordedActions: options.recordedActionsId || `recordedActions${suiteId}`,
+        generatedCode: options.generatedCodeId || `generatedCode${suiteId}`,
+        urlInput: options.urlInputId || `urlInput${suiteId}`
+    };
+
+    let eventSource;
+    const startBtn = document.getElementById(elementIds.startBtn);
+    const stopBtn = document.getElementById(elementIds.stopBtn);
+    const clearBtn = document.getElementById(elementIds.clearBtn);
+    const saveBtn = document.getElementById(elementIds.saveBtn);
+    const recordedActions = document.getElementById(elementIds.recordedActions);
+    const codePreview = document.getElementById(elementIds.generatedCode);
+    const urlInput = document.getElementById(elementIds.urlInput);
+
+    let actionsArray = [];
+
+    function updateButtonStates(isRecording) {
+        startBtn.disabled = isRecording;
+        stopBtn.disabled = !isRecording;
+        clearBtn.disabled = !isRecording;
+        saveBtn.disabled = !actionsArray.length;
+    }
+
+    function renderActions() {
+        recordedActions.textContent = JSON.stringify(actionsArray, null, 2);
+        saveBtn.disabled = !actionsArray.length;
+    }
+
+    function addAction(action) {
+        actionsArray.push(action);
+        renderActions();
+    }
+
+    function clearActions() {
+        actionsArray = [];
+        renderActions();
+        codePreview.textContent = '';
+    }
+
+    startBtn.addEventListener('click', async () => {
+        const url = urlInput.value.trim();
+        if (!url) {
+            alert('Please enter a URL first.');
+            return;
+        }
+        try {
+            const response = await fetch('/api/record/start', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ url: url })
+            });
+            if (response.ok) {
+                updateButtonStates(true);
+                // Start listening for events
+                if (eventSource) eventSource.close();
+                eventSource = new EventSource('/api/record/stream');
+                eventSource.onmessage = (event) => {
+                    const data = JSON.parse(event.data);
+                    if (data.type === 'clear') {
+                        clearActions();
+                    }
+                    if (data.type === 'action') {
+                        addAction(data.data);
+                    }
+                    if (data.type === 'code') {
+                        codePreview.textContent = data.data;
+                    }
+                };
+            } else {
+                alert('Failed to start recording');
+            }
+        } catch (error) {
+            console.error('Error starting recording:', error);
+            alert('Failed to start recording');
+        }
+    });
+
+    stopBtn.addEventListener('click', async () => {
+        try {
+            const response = await fetch('/api/record/stop', { method: 'POST' });
+            if (response.ok) {
+                const data = await response.json();
+                if (data.steps) {
+                    actionsArray = data.steps;
+                    renderActions();
+                }
+                if (data.code) {
+                    codePreview.textContent = data.code;
+                }
+                updateButtonStates(false);
+                if (eventSource) eventSource.close();
+            }
+        } catch (error) {
+            console.error('Error stopping recording:', error);
+            alert('Failed to stop recording');
+        }
+    });
+
+    clearBtn.addEventListener('click', async () => {
+        try {
+            clearActions();
+            await fetch('/api/record/clear', { method: 'POST' });
+        } catch (error) {
+            console.error('Error clearing actions:', error);
+            alert('Failed to clear actions');
+        }
+    });
+
+    saveBtn.addEventListener('click', async () => {
+        // Always stop recording before saving
+        await stopBtn.click();
+        const codeContent = codePreview.textContent;
+        
+        try {
+            // Save to database only
+            const response = await fetch('/api/record/save', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    suite_id: suiteId,
+                    code: codeContent,
+                    name: `Recorded Test ${new Date().toISOString().replace(/[:.]/g, '-')}`
+                })
+            });
+            
+            const saveResult = await response.json();
+            
+            if (saveResult.status === 'success') {
+                alert('Test case saved successfully!');
+                
+                // If modal is shown, close it
+                const modalElement = document.querySelector(`#recordModal${suiteId}`);
+                if (modalElement) {
+                    const modal = bootstrap.Modal.getInstance(modalElement);
+                    if (modal) {
+                        modal.hide();
+                    }
+                }
+                
+                // Automatically redirect to the test suite page
+                window.location.href = `/test-suite/${suiteId}`;
+            } else {
+                alert(`Error saving test case: ${saveResult.error || 'Unknown error'}`);
+            }
+        } catch (err) {
+            console.error('Error saving file:', err);
+            alert('Error saving test case.');
+        }
+    });
+
+    // Initial state
+    updateButtonStates(false);
+    renderActions();
+
+    return {
+        updateButtonStates,
+        renderActions,
+        addAction,
+        clearActions
+    };
+}
+
 class BrowserRecorder {
     constructor() {
         this.recording = false;

@@ -41,6 +41,8 @@ class TestCase(BaseModel):
     """Model for storing test case information."""
     __tablename__ = 'test_case'
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False, default='Unnamed Test')
+    description = db.Column(db.Text, nullable=True)
     original_file_path = db.Column(db.String(500), nullable=False)
     test_file_path = db.Column(db.String(500), nullable=False)
     language = db.Column(db.String(50), nullable=False)
@@ -68,8 +70,8 @@ class TestRun(BaseModel):
     def __repr__(self):
         return f'<TestRun {self.name}>'
 
-# TestResult doesn't need soft delete
-class TestResult(db.Model):
+# Update TestResult to inherit from BaseModel
+class TestResult(BaseModel):
     """Model for storing test result information."""
     __tablename__ = 'test_result'
     id = db.Column(db.Integer, primary_key=True)

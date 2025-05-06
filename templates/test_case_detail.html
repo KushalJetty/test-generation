@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ test_case.name }} - StreamzAI Test Generator{% endblock %}
+
+{% block header %}Test Case: {{ test_case.name }}{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">Test Case Details</h5>
+                <div>
+                    <a href="{{ url_for('test_suite_detail', suite_id=test_case.test_suite_id) }}" class="btn btn-sm btn-secondary me-2">
+                        <i class="bi bi-arrow-left"></i> Back to Test Suite
+                    </a>
+                    <a href="{{ url_for('download_test_case', case_id=test_case.id) }}" class="btn btn-sm btn-success">
+                        <i class="bi bi-download"></i> Download Test Case
+                    </a>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Name:</strong> {{ test_case.name }}</p>
+                        <p><strong>Type:</strong> 
+                            {% if test_case.original_file_path == "recorded" %}
+                            <span class="badge bg-info">Recorded</span>
+                            {% else %}
+                            <span class="badge bg-primary">Generated</span>
+                            {% endif %}
+                        </p>
+                        <p>
+                            <strong>Test Suite:</strong> 
+                            <a href="{{ url_for('test_suite_detail', suite_id=test_case.test_suite_id) }}">
+                                {{ test_case.test_suite.name }}
+                            </a>
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Language:</strong> {{ test_case.language }}</p>
+                        <p><strong>Status:</strong> 
+                            <span class="badge bg-{{ 'success' if test_case.status == 'passed' else 'danger' if test_case.status == 'failed' else 'secondary' }}">
+                                {{ test_case.status }}
+                            </span>
+                        </p>
+                        <p><strong>Created:</strong> {{ test_case.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
+                    </div>
+                </div>
+                
+                {% if test_case.description %}
+                <div class="row mt-3">
+                    <div class="col-12">
+                        <p><strong>Description:</strong></p>
+                        <p>{{ test_case.description }}</p>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Test Case Code</h5>
+            </div>
+            <div class="card-body">
+                {% if file_content %}
+                <pre class="bg-light p-3 border rounded" style="max-height: 500px; overflow: auto;">{{ file_content }}</pre>
+                {% else %}
+                <div class="alert alert-warning">
+                    <i class="bi bi-exclamation-triangle"></i> Test file not found or could not be read.
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if test_results %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Test Results</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Test Run</th>
+                                <th>Status</th>
+                                <th>Execution Time</th>
+                                <th>Error Message</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for result in test_results %}
+                            <tr>
+                                <td>
+                                    <a href="{{ url_for('test_run_detail', run_id=result.test_run_id) }}">
+                                        {{ result.test_run.name }}
+                                    </a>
+                                </td>
+                                <td>
+                                    <span class="badge bg-{{ 'success' if result.status == 'passed' else 'danger' if result.status == 'failed' else 'warning' if result.status == 'skipped' else 'secondary' }}">
+                                        {{ result.status }}
+                                    </span>
+                                </td>
+                                <td>{{ result.execution_time|round(3) if result.execution_time else 'N/A' }} s</td>
+                                <td>
+                                    {% if result.error_message %}
+                                    <button class="btn btn-sm btn-outline-danger" type="button" data-bs-toggle="collapse" data-bs-target="#error{{ result.id }}">
+                                        View Error
+                                    </button>
+                                    <div class="collapse mt-2" id="error{{ result.id }}">
+                                        <div class="card card-body">
+                                            <pre class="small text-danger mb-0">{{ result.error_message }}</pre>
+                                        </div>
+                                    </div>
+                                    {% else %}
+                                    <span class="text-muted">None</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ result.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %} 

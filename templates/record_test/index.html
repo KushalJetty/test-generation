@@ -2,6 +2,11 @@
 
 {% block title %}Record Test - {{ test_suite.name }}{% endblock %}
 
+{% block head %}
+<!-- Add recorder.js script -->
+<script src="{{ url_for('static', filename='js/recorder.js') }}"></script>
+{% endblock %}
+
 {% block content %}
 <!-- Trigger the modal automatically on page load -->
 <script>
@@ -53,144 +58,17 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 
 <script>
-let eventSource;
-const startBtn = document.getElementById('startBtn');
-const stopBtn = document.getElementById('stopBtn');
-const clearBtn = document.getElementById('clearBtn');
-const saveBtn = document.getElementById('saveBtn');
-const recordedActions = document.getElementById('recordedActions');
-const codePreview = document.getElementById('generatedCode');
-const urlInput = document.getElementById('urlInput');
-
-let actionsArray = [];
-
-function updateButtonStates(isRecording) {
-    startBtn.disabled = isRecording;
-    stopBtn.disabled = !isRecording;
-    clearBtn.disabled = !isRecording;
-    saveBtn.disabled = !actionsArray.length;
-}
-
-function renderActions() {
-    recordedActions.textContent = JSON.stringify(actionsArray, null, 2);
-    saveBtn.disabled = !actionsArray.length;
-}
-
-function addAction(action) {
-    actionsArray.push(action);
-    renderActions();
-}
-
-function clearActions() {
-    actionsArray = [];
-    renderActions();
-    codePreview.textContent = '';
-}
-
-startBtn.addEventListener('click', async () => {
-    const url = urlInput.value.trim();
-    if (!url) {
-        alert('Please enter a URL first.');
-        return;
-    }
-    try {
-        const response = await fetch('/api/record/start', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ url: url })
-        });
-        if (response.ok) {
-            updateButtonStates(true);
-            // Start listening for events
-            if (eventSource) eventSource.close();
-            eventSource = new EventSource('/api/record/stream');
-            eventSource.onmessage = (event) => {
-                const data = JSON.parse(event.data);
-                if (data.type === 'clear') {
-                    clearActions();
-                }
-                if (data.type === 'action') {
-                    addAction(data.data);
-                }
-                if (data.type === 'code') {
-                    codePreview.textContent = data.data;
-                }
-            };
-        } else {
-            alert('Failed to start recording');
-        }
-    } catch (error) {
-        console.error('Error starting recording:', error);
-        alert('Failed to start recording');
-    }
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize recorder
+    setupRecorder("{{ test_suite.id }}", {
+        startBtnId: "startBtn",
+        stopBtnId: "stopBtn",
+        clearBtnId: "clearBtn",
+        saveBtnId: "saveBtn",
+        recordedActionsId: "recordedActions",
+        generatedCodeId: "generatedCode",
+        urlInputId: "urlInput"
+    });
 });
-
-stopBtn.addEventListener('click', async () => {
-    try {
-        const response = await fetch('/api/record/stop', { method: 'POST' });
-        if (response.ok) {
-            const data = await response.json();
-            if (data.steps) {
-                actionsArray = data.steps;
-                renderActions();
-            }
-            if (data.code) {
-                codePreview.textContent = data.code;
-            }
-            updateButtonStates(false);
-            if (eventSource) eventSource.close();
-        }
-    } catch (error) {
-        console.error('Error stopping recording:', error);
-        alert('Failed to stop recording');
-    }
-});
-
-clearBtn.addEventListener('click', async () => {
-    try {
-        clearActions();
-        await fetch('/api/record/clear', { method: 'POST' });
-    } catch (error) {
-        console.error('Error clearing actions:', error);
-        alert('Failed to clear actions');
-    }
-});
-
-saveBtn.addEventListener('click', async () => {
-    // Always stop recording before saving
-    await stopBtn.click();
-    const codeContent = codePreview.textContent;
-    try {
-        // Try File System Access API
-        if (window.showSaveFilePicker) {
-            const handle = await window.showSaveFilePicker({
-                suggestedName: 'test_case.py',
-                types: [{ description: 'Python Files', accept: { 'text/python': ['.py'] } }]
-            });
-            const writable = await handle.createWritable();
-            await writable.write(codeContent);
-            await writable.close();
-            alert('Test case saved successfully!');
-        } else {
-            // Fallback for browsers without File System Access API
-            const blob = new Blob([codeContent], { type: 'text/python' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'test_case.py';
-            a.click();
-            alert('Test case saved successfully!');
-        }
-    } catch (err) {
-        if (err.name !== 'AbortError') {
-            console.error('Error saving file:', err);
-            alert('Error saving file.');
-        }
-    }
-});
-
-// Initial state
-updateButtonStates(false);
-renderActions();
 </script>
 {% endblock %} 
