@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Runner</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="mb-0">Test Runner</h3>
+                    </div>
+                    <div class="card-body text-center">
+                        <button id="runTestBtn" class="btn btn-primary btn-lg">Run Test</button>
+
+                        <!-- Modal for test configuration -->
+                        <div class="modal fade" id="testConfigModal" tabindex="-1" aria-labelledby="testConfigModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="testConfigModalLabel">Test Configuration</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form id="testConfigForm">
+                                            <div class="mb-3">
+                                                <label for="testFile" class="form-label">Choose Test File</label>
+                                                <input type="file" class="form-control" id="testFile" name="file" accept=".py">
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="inputMode" class="form-label">Input Mode</label>
+                                                <select class="form-select" id="inputMode">
+                                                    <option value="default">Run with default input</option>
+                                                    <option value="dynamic">Dynamic custom input</option>
+                                                    <option value="existing">Existing custom input (upload JSON file)</option>
+                                                </select>
+                                            </div>
+
+                                            <div id="existingInputSection" class="mb-3 d-none">
+                                                <label for="inputValuesFile" class="form-label">Select Input Values File</label>
+                                                <input type="file" class="form-control mb-2" id="inputValuesFile" accept=".json">
+
+                                                <div class="mt-2">
+                                                    <label for="inputSet" class="form-label">Select Input Set</label>
+                                                    <select class="form-select" id="inputSet">
+                                                        <!-- Will be populated dynamically -->
+                                                        <option value="" disabled selected>Select a file first</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-3 form-check">
+                                                <input type="checkbox" class="form-check-input" id="headlessMode">
+                                                <label class="form-check-label" for="headlessMode">Headless Mode</label>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="button" class="btn btn-primary" id="runTestModalBtn">Run Test</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="resultSection" class="d-none mt-4 text-start">
+                            <h4>Test Results</h4>
+                            <div class="alert" id="statusAlert" role="alert"></div>
+
+                            <div class="mb-3">
+                                <h5>Output:</h5>
+                                <pre id="outputText" class="p-3 bg-light border rounded"></pre>
+                            </div>
+
+                            <div class="mb-3">
+                                <h5>Errors:</h5>
+                                <pre id="errorText" class="p-3 bg-light border rounded"></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM elements
+            const runTestBtn = document.getElementById('runTestBtn');
+            const runTestModalBtn = document.getElementById('runTestModalBtn');
+            const inputModeSelect = document.getElementById('inputMode');
+            const existingInputSection = document.getElementById('existingInputSection');
+            const inputSetSelect = document.getElementById('inputSet');
+            const resultSection = document.getElementById('resultSection');
+            const statusAlert = document.getElementById('statusAlert');
+            const outputText = document.getElementById('outputText');
+            const errorText = document.getElementById('errorText');
+
+            // Bootstrap modal
+            const testConfigModal = new bootstrap.Modal(document.getElementById('testConfigModal'));
+
+            // Load input sets from JSON file when selecting "existing custom input"
+            inputModeSelect.addEventListener('change', function() {
+                if (this.value === 'existing') {
+                    existingInputSection.classList.remove('d-none');
+                } else {
+                    existingInputSection.classList.add('d-none');
+                }
+            });
+
+            // Handle input values file selection
+            document.getElementById('inputValuesFile').addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (!file) return;
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    try {
+                        const data = JSON.parse(e.target.result);
+                        populateInputSets(data);
+                    } catch (error) {
+                        console.error('Error parsing JSON file:', error);
+                        alert('Error parsing JSON file. Please make sure it is a valid JSON file.');
+                    }
+                };
+                reader.readAsText(file);
+            });
+
+            // Show modal when "Run Test" button is clicked
+            runTestBtn.addEventListener('click', function() {
+                testConfigModal.show();
+            });
+
+            // Handle test execution from modal
+            runTestModalBtn.addEventListener('click', function() {
+                const fileInput = document.getElementById('testFile');
+                if (!fileInput.files.length) {
+                    alert('Please select a test file first.');
+                    return;
+                }
+
+                const inputMode = inputModeSelect.value;
+                const headlessMode = document.getElementById('headlessMode').checked;
+                let inputSet = null;
+                let inputValuesFile = null;
+
+                if (inputMode === 'existing') {
+                    // Check if input values file is selected
+                    const inputValuesFileInput = document.getElementById('inputValuesFile');
+                    if (!inputValuesFileInput.files.length) {
+                        alert('Please select an input values file.');
+                        return;
+                    }
+
+                    inputValuesFile = inputValuesFileInput.files[0];
+                    inputSet = inputSetSelect.value;
+
+                    if (!inputSet) {
+                        alert('Please select an input set.');
+                        return;
+                    }
+                }
+
+                // Disable button and show loading state
+                runTestModalBtn.disabled = true;
+                runTestModalBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Running...';
+
+                // First upload the test file
+                const formData = new FormData();
+                formData.append('file', fileInput.files[0]);
+
+                fetch('/upload', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.success) {
+                        throw new Error(data.error || 'Failed to upload test file');
+                    }
+
+                    const testFilePath = data.path;
+
+                    // If using existing input, upload the input values file
+                    if (inputMode === 'existing' && inputValuesFile) {
+                        const inputFormData = new FormData();
+                        inputFormData.append('file', inputValuesFile);
+
+                        return fetch('/upload_input_file', {
+                            method: 'POST',
+                            body: inputFormData
+                        }).then(response => response.json())
+                        .then(inputData => {
+                            if (!inputData.success) {
+                                throw new Error(inputData.error || 'Failed to upload input values file');
+                            }
+
+                            // Run the test with both files
+                            return fetch('/run_test_with_config', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    file_path: testFilePath,
+                                    input_mode: inputMode,
+                                    input_file_path: inputData.path,
+                                    input_set: inputSet,
+                                    headless: headlessMode
+                                })
+                            });
+                        });
+                    } else {
+                        // Run the test with just the test file
+                        return fetch('/run_test_with_config', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                file_path: testFilePath,
+                                input_mode: inputMode,
+                                input_set: inputSet,
+                                headless: headlessMode
+                            })
+                        });
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    testConfigModal.hide();
+                    displayResults(data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    resultSection.classList.remove('d-none');
+                    statusAlert.className = 'alert alert-danger';
+                    statusAlert.textContent = 'Error: ' + error.message;
+                    outputText.textContent = '';
+                    errorText.textContent = '';
+                })
+                .finally(() => {
+                    runTestModalBtn.disabled = false;
+                    runTestModalBtn.innerHTML = 'Run Test';
+                });
+            });
+
+            // Populate input sets from the provided data
+            function populateInputSets(data) {
+                // Clear existing options
+                inputSetSelect.innerHTML = '';
+
+                // Add options for each input set
+                if (data.test_sets && data.test_sets.length > 0) {
+                    // New format with test_sets array
+                    data.test_sets.forEach(set => {
+                        const option = document.createElement('option');
+                        option.value = set.name;
+                        option.textContent = set.name;
+                        inputSetSelect.appendChild(option);
+                    });
+                } else {
+                    // Legacy format (flat key-value pairs)
+                    const option = document.createElement('option');
+                    option.value = 'default';
+                    option.textContent = 'Default Values';
+                    inputSetSelect.appendChild(option);
+                }
+            }
+
+            // Display test results
+            function displayResults(data) {
+                resultSection.classList.remove('d-none');
+
+                if (data.success) {
+                    statusAlert.className = 'alert alert-success';
+                    statusAlert.textContent = 'Test completed successfully!';
+                } else {
+                    statusAlert.className = 'alert alert-danger';
+                    statusAlert.textContent = data.error || 'Test failed with errors.';
+                }
+
+                outputText.textContent = data.stdout || 'No output';
+                errorText.textContent = data.stderr || 'No errors';
+            }
+        });
+    </script>
+</body>
+</html>
