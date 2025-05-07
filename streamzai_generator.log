@@ -830,3 +830,26 @@
 2025-05-07 08:58:20,754 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 08:58:20] "GET /test-suite/13/test-run/create HTTP/1.1" 200 -
 2025-05-07 08:58:20,770 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 08:58:20] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
 2025-05-07 08:58:20,772 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 08:58:20] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-07 09:47:47,844 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-07 09:47:47,845 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-05-07 09:47:47,854 - werkzeug - INFO -  * Restarting with stat
+2025-05-07 09:47:50,551 - werkzeug - WARNING -  * Debugger is active!
+2025-05-07 09:47:50,573 - werkzeug - INFO -  * Debugger PIN: 117-887-961
+2025-05-07 09:47:54,244 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 09:47:54] "GET / HTTP/1.1" 200 -
+2025-05-07 09:47:54,312 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 09:47:54] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-07 09:47:54,357 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 09:47:54] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-07 09:47:55,119 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 09:47:55] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-05-07 09:47:57,801 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 09:47:57] "GET /projects HTTP/1.1" 200 -
+2025-05-07 09:47:57,841 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 09:47:57] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-07 09:47:57,841 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 09:47:57] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-07 09:48:00,845 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 09:48:00] "GET /test-suites HTTP/1.1" 200 -
+2025-05-07 09:48:00,862 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 09:48:00] "GET /test-suites HTTP/1.1" 200 -
+2025-05-07 09:48:00,900 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 09:48:00] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-07 09:48:00,901 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 09:48:00] "[36mGET /static/js/recorder.js HTTP/1.1[0m" 304 -
+2025-05-07 09:48:00,902 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 09:48:00] "GET /static/css/test-runner.css HTTP/1.1" 200 -
+2025-05-07 09:48:01,169 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 09:48:01] "GET /static/js/test-runner.js HTTP/1.1" 200 -
+2025-05-07 09:48:01,172 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 09:48:01] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-07 09:48:59,582 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 09:48:59] "POST /api/test-runner/upload HTTP/1.1" 200 -
+2025-05-07 09:48:59,606 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 09:48:59] "POST /api/test-runner/upload-input HTTP/1.1" 200 -
+2025-05-07 09:49:15,160 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 09:49:15] "POST /api/test-runner/run HTTP/1.1" 200 -

@@ -7,6 +7,9 @@
 {% block head %}
 <!-- Add recorder.js script -->
 <script src="{{ url_for('static', filename='js/recorder.js') }}"></script>
+<!-- Add test runner scripts and styles -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/test-runner.css') }}">
+<script src="{{ url_for('static', filename='js/test-runner.js') }}" defer></script>
 {% endblock %}
 
 {% block content %}
@@ -84,12 +87,14 @@
                                                    title="Edit">
                                                     <i class="bi bi-pencil"></i>
                                                 </a>
-                                                <a href="{{ url_for('create_test_run', suite_id=test_suite.id) }}" 
+                                                <!-- Run Tests Button (opens test runner modal) -->
+                                                <button type="button" 
                                                    class="btn btn-sm btn-outline-success"
                                                    data-bs-toggle="tooltip" 
-                                                   title="Run Tests">
+                                                   title="Run Tests"
+                                                   onclick="openTestRunnerModal('{{ test_suite.id }}')">
                                                     <i class="bi bi-play-fill"></i>
-                                                </a>
+                                                </button>
                                                 <!-- Record Test Case Button -->
                                                 <button type="button"
                                                         class="btn btn-sm btn-outline-info"
@@ -213,6 +218,82 @@
     </div>
 </div>
 
+<!-- Test Runner Modal -->
+<div class="modal fade" id="testRunnerModal" tabindex="-1" aria-labelledby="testRunnerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="testRunnerModalLabel">Test Runner</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="testRunnerContent">
+                    <div id="testConfigSection">
+                        <form id="testConfigForm">
+                            <input type="hidden" id="suiteId" name="suiteId" value="">
+                            
+                            <div class="mb-3">
+                                <label for="testFile" class="form-label">Choose Test File</label>
+                                <input type="file" class="form-control" id="testFile" name="file" accept=".py">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="inputMode" class="form-label">Input Mode</label>
+                                <select class="form-select" id="inputMode">
+                                    <option value="default">Run with default input</option>
+                                    <option value="dynamic">Dynamic custom input</option>
+                                    <option value="existing">Existing custom input (upload JSON file)</option>
+                                </select>
+                            </div>
+
+                            <div id="existingInputSection" class="mb-3 d-none">
+                                <label for="inputValuesFile" class="form-label">Select Input Values File</label>
+                                <input type="file" class="form-control mb-2" id="inputValuesFile" accept=".json">
+
+                                <div class="mt-2">
+                                    <label for="inputSet" class="form-label">Select Input Set</label>
+                                    <select class="form-select" id="inputSet">
+                                        <!-- Will be populated dynamically -->
+                                        <option value="" disabled selected>Select a file first</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="headlessMode">
+                                <label class="form-check-label" for="headlessMode">Headless Mode</label>
+                            </div>
+                            
+                            <div class="d-grid">
+                                <button type="button" id="runTestBtn" class="btn btn-primary btn-lg">Run Test</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <div id="resultSection" class="d-none mt-4">
+                        <h4>Test Results</h4>
+                        <div class="alert" id="statusAlert" role="alert"></div>
+
+                        <div class="mb-3">
+                            <h5>Output:</h5>
+                            <pre id="outputText" class="p-3 bg-light border rounded" style="height: 200px; overflow: auto;"></pre>
+                        </div>
+
+                        <div class="mb-3">
+                            <h5>Errors:</h5>
+                            <pre id="errorText" class="p-3 bg-light border rounded" style="height: 200px; overflow: auto;"></pre>
+                        </div>
+                        
+                        <div class="d-grid mt-3">
+                            <button type="button" id="resetBtn" class="btn btn-outline-secondary">Run Another Test</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Initialize tooltips and recording functionality -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -227,5 +308,12 @@ document.addEventListener('DOMContentLoaded', function() {
     setupRecorder("{{ test_suite.id }}", {});
     {% endfor %}
 });
+
+// Function to open the test runner modal for a specific test suite
+function openTestRunnerModal(suiteId) {
+    document.getElementById('suiteId').value = suiteId;
+    var testRunnerModal = new bootstrap.Modal(document.getElementById('testRunnerModal'));
+    testRunnerModal.show();
+}
 </script>
 {% endblock %}

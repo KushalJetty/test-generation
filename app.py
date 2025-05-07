@@ -1441,6 +1441,224 @@ def test_case_detail(case_id):
                            test_results=test_results, 
                            file_content=file_content)
 
+# Test Runner API routes
+@app.route('/api/test-runner/upload', methods=['POST'])
+def api_upload_test_file():
+    """Handle test file upload for the test runner API."""
+    if 'file' not in request.files:
+        return jsonify({'error': 'No file part'}), 400
+
+    file = request.files['file']
+    suite_id = request.form.get('suite_id')
+
+    if file.filename == '':
+        return jsonify({'error': 'No selected file'}), 400
+
+    if file and file.filename.endswith('.py'):
+        filename = secure_filename(file.filename)
+        # Create uploads/test_runner directory if it doesn't exist
+        upload_dir = os.path.join(app.config['UPLOAD_FOLDER'], 'test_runner')
+        os.makedirs(upload_dir, exist_ok=True)
+        
+        file_path = os.path.join(upload_dir, filename)
+        file.save(file_path)
+
+        return jsonify({
+            'success': True,
+            'filename': filename,
+            'path': file_path
+        })
+
+    return jsonify({'error': 'File type not allowed. Only Python files are accepted.'}), 400
+
+@app.route('/api/test-runner/upload-input', methods=['POST'])
+def api_upload_input_file():
+    """Handle input file upload for the test runner API."""
+    if 'file' not in request.files:
+        return jsonify({'error': 'No file part'}), 400
+
+    file = request.files['file']
+
+    if file.filename == '':
+        return jsonify({'error': 'No selected file'}), 400
+
+    if file and file.filename.endswith('.json'):
+        filename = secure_filename(file.filename)
+        # Create uploads/test_runner/inputs directory if it doesn't exist
+        upload_dir = os.path.join(app.config['UPLOAD_FOLDER'], 'test_runner', 'inputs')
+        os.makedirs(upload_dir, exist_ok=True)
+        
+        file_path = os.path.join(upload_dir, filename)
+        file.save(file_path)
+
+        # Validate that the file contains valid JSON
+        try:
+            with open(file_path, 'r') as f:
+                json.load(f)
+        except json.JSONDecodeError:
+            os.remove(file_path)  # Remove invalid file
+            return jsonify({'error': 'Invalid JSON file'}), 400
+
+        return jsonify({
+            'success': True,
+            'filename': filename,
+            'path': file_path
+        })
+
+    return jsonify({'error': 'File type not allowed. Only JSON files are accepted.'}), 400
+
+@app.route('/api/test-runner/run', methods=['POST'])
+def api_run_test():
+    """Run a test file with specified configuration."""
+    data = request.get_json()
+    file_path = data.get('file_path')
+    input_mode = data.get('input_mode', 'default')
+    input_set = data.get('input_set')
+    input_file_path = data.get('input_file_path')
+    headless = data.get('headless', False)
+    suite_id = data.get('suite_id')
+
+    if not file_path or not os.path.exists(file_path):
+        return jsonify({'error': 'Invalid test file path'}), 400
+    
+    # Create a test run record in the database if suite_id is provided
+    test_run = None
+    if suite_id:
+        test_suite = TestSuite.query.get(suite_id)
+        if test_suite:
+            test_run = TestRun(
+                name=f"Test Run {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
+                test_suite_id=suite_id,
+                status="running"
+            )
+            db.session.add(test_run)
+            db.session.commit()
+
+    try:
+        # For default input mode, just run the test file directly
+        if input_mode == 'default':
+            result = run_test_file(file_path)
+            
+            # Update test run status if it exists
+            if test_run:
+                test_run.status = "completed" if result.get('success', False) else "failed"
+                db.session.commit()
+                
+            return jsonify(result)
+
+        # For existing custom input mode, use the test runner script
+        elif input_mode == 'existing' and input_set and input_file_path:
+            # Check if input file exists
+            if not os.path.exists(input_file_path):
+                return jsonify({'error': 'Invalid input file path'}), 400
+
+            # Copy the test runner script into the upload directory if it doesn't exist
+            from shutil import copyfile
+            test_runner_script = os.path.join('features', 'test_runner_app', 'test_runner_script.py')
+            dest_script = os.path.join(app.config['UPLOAD_FOLDER'], 'test_runner', 'test_runner_script.py')
+            if not os.path.exists(dest_script):
+                os.makedirs(os.path.dirname(dest_script), exist_ok=True)
+                copyfile(test_runner_script, dest_script)
+
+            # Run the test using the test runner script
+            import subprocess
+            import sys
+            
+            cmd = [
+                sys.executable,
+                dest_script,
+                '--test', file_path,
+                '--input', input_file_path,
+                '--set', input_set
+            ]
+
+            if headless:
+                cmd.append('--headless')
+
+            proc = subprocess.run(
+                cmd,
+                capture_output=True,
+                text=True,
+                timeout=300  # 5 minute timeout
+            )
+            
+            result = {
+                'success': proc.returncode == 0,
+                'stdout': proc.stdout,
+                'stderr': proc.stderr,
+                'returncode': proc.returncode
+            }
+            
+            # Update test run status if it exists
+            if test_run:
+                test_run.status = "completed" if result.get('success', False) else "failed"
+                db.session.commit()
+                
+            return jsonify(result)
+
+        # For dynamic input mode
+        else:
+            result = run_test_file(file_path)
+            
+            # Update test run status if it exists
+            if test_run:
+                test_run.status = "completed" if result.get('success', False) else "failed"
+                db.session.commit()
+                
+            return jsonify(result)
+
+    except subprocess.TimeoutExpired:
+        # Update test run status if it exists
+        if test_run:
+            test_run.status = "failed"
+            db.session.commit()
+            
+        return jsonify({
+            'success': False,
+            'error': 'Test execution timed out after 5 minutes'
+        }), 500
+    except Exception as e:
+        # Update test run status if it exists
+        if test_run:
+            test_run.status = "failed"
+            db.session.commit()
+            
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        }), 500
+
+def run_test_file(file_path):
+    """Run a test file using Python and return the results."""
+    try:
+        import subprocess
+        import sys
+        
+        # Run the test file
+        proc = subprocess.run(
+            [sys.executable, file_path],
+            capture_output=True,
+            text=True,
+            timeout=300  # 5 minute timeout
+        )
+        
+        return {
+            'success': proc.returncode == 0,
+            'stdout': proc.stdout,
+            'stderr': proc.stderr,
+            'returncode': proc.returncode
+        }
+    except subprocess.TimeoutExpired:
+        return {
+            'success': False,
+            'error': 'Test execution timed out after 5 minutes'
+        }
+    except Exception as e:
+        return {
+            'success': False,
+            'error': str(e)
+        }
+
 # Main entry point
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
