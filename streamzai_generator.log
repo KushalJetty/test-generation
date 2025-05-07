@@ -853,3 +853,92 @@
 2025-05-07 09:48:59,582 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 09:48:59] "POST /api/test-runner/upload HTTP/1.1" 200 -
 2025-05-07 09:48:59,606 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 09:48:59] "POST /api/test-runner/upload-input HTTP/1.1" 200 -
 2025-05-07 09:49:15,160 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 09:49:15] "POST /api/test-runner/run HTTP/1.1" 200 -
+2025-05-07 11:08:50,622 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-07 11:08:50,622 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-05-07 11:08:50,622 - werkzeug - INFO -  * Restarting with stat
+2025-05-07 11:08:53,566 - werkzeug - WARNING -  * Debugger is active!
+2025-05-07 11:08:53,566 - werkzeug - INFO -  * Debugger PIN: 510-286-410
+2025-05-07 11:08:57,853 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:08:57] "GET /test-suites HTTP/1.1" 200 -
+2025-05-07 11:08:57,895 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:08:57] "GET /static/css/test-runner.css HTTP/1.1" 200 -
+2025-05-07 11:08:57,911 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:08:57] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-07 11:08:57,931 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:08:57] "[36mGET /static/js/recorder.js HTTP/1.1[0m" 304 -
+2025-05-07 11:08:57,950 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:08:57] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-07 11:08:57,992 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:08:57] "GET /static/js/test-runner.js HTTP/1.1" 200 -
+2025-05-07 11:09:51,212 - werkzeug - INFO -  * Detected change in 'C:\\Users\\HP\\Documents\\StreamzAI\\downloads\\testing\\test-generation1\\test-generation\\features\\tests\\test_case.py', reloading
+2025-05-07 11:09:51,546 - werkzeug - INFO -  * Restarting with stat
+2025-05-07 11:09:54,332 - werkzeug - WARNING -  * Debugger is active!
+2025-05-07 11:09:54,350 - werkzeug - INFO -  * Debugger PIN: 510-286-410
+2025-05-07 11:10:45,905 - werkzeug - INFO -  * Detected change in 'C:\\Users\\HP\\Documents\\StreamzAI\\downloads\\testing\\test-generation1\\test-generation\\features\\tests\\test_case.py', reloading
+2025-05-07 11:10:46,216 - werkzeug - INFO -  * Restarting with stat
+2025-05-07 11:10:48,523 - werkzeug - WARNING -  * Debugger is active!
+2025-05-07 11:10:48,523 - werkzeug - INFO -  * Debugger PIN: 510-286-410
+2025-05-07 11:13:24,182 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:13:24] "POST /api/test-runner/upload HTTP/1.1" 200 -
+2025-05-07 11:13:24,192 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:13:24] "POST /api/test-runner/upload-input HTTP/1.1" 200 -
+2025-05-07 11:13:24,252 - werkzeug - INFO -  * Detected change in 'C:\\Users\\HP\\Documents\\StreamzAI\\downloads\\testing\\test-generation1\\test-generation\\uploads\\test_runner\\test_case.py', reloading
+2025-05-07 11:13:24,658 - werkzeug - INFO -  * Restarting with stat
+2025-05-07 11:13:27,091 - werkzeug - WARNING -  * Debugger is active!
+2025-05-07 11:13:27,091 - werkzeug - INFO -  * Debugger PIN: 510-286-410
+2025-05-07 11:18:46,702 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:18:46] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-05-07 11:18:46,724 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:18:46] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-07 11:18:46,728 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:18:46] "[36mGET /static/js/recorder.js HTTP/1.1[0m" 304 -
+2025-05-07 11:18:46,729 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:18:46] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-07 11:18:53,998 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:18:53] "GET /test-case/1 HTTP/1.1" 200 -
+2025-05-07 11:18:54,009 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:18:54] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-07 11:18:54,012 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:18:54] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-07 11:20:01,079 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:20:01] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-05-07 11:20:01,095 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:20:01] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-07 11:20:01,105 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:20:01] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-07 11:20:01,107 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:20:01] "[36mGET /static/js/recorder.js HTTP/1.1[0m" 304 -
+2025-05-07 11:20:05,746 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:20:05] "GET /test-case/1 HTTP/1.1" 200 -
+2025-05-07 11:20:05,761 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:20:05] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-07 11:20:05,765 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:20:05] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-07 11:20:16,081 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:20:16] "GET /test-case/1 HTTP/1.1" 200 -
+2025-05-07 11:20:16,093 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:20:16] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-07 11:20:16,097 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:20:16] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-07 11:21:18,381 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:21:18] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-05-07 11:21:18,393 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:21:18] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-07 11:21:18,399 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:21:18] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-07 11:21:18,401 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:21:18] "[36mGET /static/js/recorder.js HTTP/1.1[0m" 304 -
+2025-05-07 11:21:28,191 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:21:28] "GET / HTTP/1.1" 200 -
+2025-05-07 11:21:28,203 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:21:28] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-07 11:21:28,208 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:21:28] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-07 11:24:32,168 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:24:32] "GET /test-run/6 HTTP/1.1" 200 -
+2025-05-07 11:24:32,180 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:24:32] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-07 11:24:32,184 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:24:32] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-07 11:24:39,106 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:24:39] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-05-07 11:24:39,117 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:24:39] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-07 11:24:39,125 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:24:39] "[36mGET /static/js/recorder.js HTTP/1.1[0m" 304 -
+2025-05-07 11:24:39,125 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:24:39] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-07 11:24:42,633 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:24:42] "GET / HTTP/1.1" 200 -
+2025-05-07 11:24:42,645 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:24:42] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-07 11:24:42,648 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:24:42] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-07 11:24:48,667 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:24:48] "GET / HTTP/1.1" 200 -
+2025-05-07 11:24:48,677 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:24:48] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-07 11:24:48,681 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:24:48] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-07 11:25:45,989 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:25:45] "GET /projects HTTP/1.1" 200 -
+2025-05-07 11:25:46,000 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:25:46] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-07 11:25:46,004 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:25:46] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-07 11:25:48,735 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:25:48] "GET / HTTP/1.1" 200 -
+2025-05-07 11:25:48,747 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:25:48] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-07 11:25:48,749 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:25:48] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-07 11:25:55,000 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:25:55] "GET /test-suites HTTP/1.1" 200 -
+2025-05-07 11:25:55,013 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:25:55] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-07 11:25:55,017 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:25:55] "[36mGET /static/css/test-runner.css HTTP/1.1[0m" 304 -
+2025-05-07 11:25:55,022 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:25:55] "[36mGET /static/js/recorder.js HTTP/1.1[0m" 304 -
+2025-05-07 11:25:55,024 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:25:55] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-07 11:25:55,034 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:25:55] "[36mGET /static/js/test-runner.js HTTP/1.1[0m" 304 -
+2025-05-07 11:46:15,563 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:46:15] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-05-07 11:46:15,584 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:46:15] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-07 11:46:15,588 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:46:15] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-07 11:46:15,588 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:46:15] "[36mGET /static/js/recorder.js HTTP/1.1[0m" 304 -
+2025-05-07 11:46:21,191 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:46:21] "GET /test-case/1 HTTP/1.1" 200 -
+2025-05-07 11:46:21,205 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:46:21] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-07 11:46:21,214 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 11:46:21] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-07 13:24:47,860 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 13:24:47] "GET /test-suite/13 HTTP/1.1" 200 -
+2025-05-07 13:24:47,914 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 13:24:47] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-07 13:24:47,915 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 13:24:47] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-05-07 13:24:47,918 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 13:24:47] "[36mGET /static/js/recorder.js HTTP/1.1[0m" 304 -
+2025-05-07 13:24:51,690 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 13:24:51] "GET /test-case/1 HTTP/1.1" 200 -
+2025-05-07 13:24:51,718 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 13:24:51] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-07 13:24:51,740 - werkzeug - INFO - 127.0.0.1 - - [07/May/2025 13:24:51] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
