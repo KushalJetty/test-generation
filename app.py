@@ -1452,6 +1452,40 @@ def test_case_detail(case_id):
                            test_results=test_results, 
                            file_content=file_content)
 
+@app.route('/test-case/<int:case_id>/delete', methods=['POST'])
+def delete_test_case(case_id):
+    """Delete a test case."""
+    try:
+        test_case = TestCase.query.get_or_404(case_id)
+        suite_id = test_case.test_suite_id
+        
+        # Mark as inactive (soft delete)
+        test_case.active = False
+        
+        # Also mark related test results as inactive
+        for result in test_case.test_results:
+            result.active = False
+        
+        db.session.commit()
+        
+        # Return JSON response for AJAX requests
+        if request.headers.get('Content-Type') == 'application/json':
+            return jsonify({'status': 'success', 'message': 'Test case deleted successfully'})
+        
+        # For form submissions, redirect with flash message
+        flash('Test case deleted successfully', 'success')
+        return redirect(url_for('test_suite_detail', suite_id=suite_id))
+        
+    except Exception as e:
+        db.session.rollback()
+        # Return JSON response for AJAX requests
+        if request.headers.get('Content-Type') == 'application/json':
+            return jsonify({'status': 'error', 'error': str(e)}), 500
+        
+        # For form submissions, redirect with error message
+        flash(f'Error deleting test case: {str(e)}', 'danger')
+        return redirect(url_for('test_suite_detail', suite_id=test_case.test_suite_id))
+
 # Test Runner API routes
 @app.route('/api/test-runner/upload', methods=['POST'])
 def api_upload_test_file():
