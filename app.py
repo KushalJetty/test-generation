@@ -18,17 +18,9 @@ import threading
 import uuid
 import io
 import re
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 import time
-from generate_code.selenium_code_generator import generate_test_file
 from playwright.async_api import async_playwright
 import asyncio
-from folder_analyser.streamzai_test_generator import StreamzAITestGenerator
 from flask_migrate import Migrate
 import ast
 
@@ -162,6 +154,31 @@ class ActionTracker:
 
 def generate_code(steps):
     global recorded_url
+    input_values = {}
+    consolidated_steps = []
+    
+    # Process steps in original sequence but consolidate inputs
+    for step in steps:
+        if step['action'] == 'click':
+            consolidated_steps.append(step)
+        elif step['action'] == 'input':
+            # Track input values but maintain sequence
+            input_values[step['selector']] = step['value']
+            
+    # Save input values to JSON
+    import os
+    # Generate unique filename
+    from urllib.parse import urlparse
+    import datetime
+    domain = urlparse(recorded_url).netloc.replace('.', '_')
+    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+    json_filename = f"{domain}_{timestamp}_input.json"
+    json_path = os.path.join('tests', json_filename)
+    os.makedirs(os.path.dirname(json_path), exist_ok=True)
+    with open(json_path, 'w') as f:
+        json.dump(input_values, f, indent=4)
+    
+    # Generate code
     code = [
         "from playwright.async_api import async_playwright\n",
         "import asyncio\n\n",
@@ -171,11 +188,16 @@ def generate_code(steps):
         "        page = await browser.new_page()\n",
         f"        await page.goto('{recorded_url}')\n"
     ]
+    
+    # Add steps in original sequence
     for step in steps:
         if step['action'] == 'click':
             code.append(f"        await page.click('{step['selector']}')\n")
         elif step['action'] == 'input':
-            code.append(f"        await page.fill('{step['selector']}', '{step['value']}')\n")
+            # Only add input if it's the final value for this selector
+            if input_values.get(step['selector']) == step['value']:
+                code.append(f"        await page.fill('{step['selector']}', '{step['value']}')\n")
+    
     code.append("        await browser.close()\n")
     code.append("asyncio.run(test_recorded_actions())")
     return ''.join(code)
@@ -1138,17 +1160,6 @@ async def stop_recording():
     await playwright.stop()
     return {'steps': tracker.steps, 'code': code}
 
-# Record test routes
-@app.route('/test-suite/<int:suite_id>/record')
-def record_test(suite_id):
-    test_suite = TestSuite.query.get_or_404(suite_id)
-    # Check if request accepts HTML (browser navigation) or JSON (modal)
-    if request.headers.get('Accept', '').find('text/html') >= 0:
-        # Browser navigation - return full page
-        return render_template('record_test/index.html', test_suite=test_suite)
-    else:
-        # Modal/API request - return just suite info
-        return jsonify({'test_suite': test_suite.name, 'id': test_suite.id})
 
 @app.route('/test-runner')
 def test_runner():

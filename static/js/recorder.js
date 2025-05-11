@@ -121,6 +121,14 @@ function setupRecorder(suiteId, options) {
         await stopBtn.click();
         const codeContent = codePreview.textContent;
         
+        // Prompt user for test case name
+        const testName = prompt("Enter a name for this test case:", `Recorded Test ${new Date().toISOString().replace(/[:.]/g, '-')}`);
+        
+        // If user cancels the prompt, don't proceed
+        if (testName === null) {
+            return;
+        }
+        
         try {
             // Save to database only
             const response = await fetch('/api/record/save', {
@@ -131,7 +139,7 @@ function setupRecorder(suiteId, options) {
                 body: JSON.stringify({
                     suite_id: suiteId,
                     code: codeContent,
-                    name: `Recorded Test ${new Date().toISOString().replace(/[:.]/g, '-')}`
+                    name: testName
                 })
             });
             

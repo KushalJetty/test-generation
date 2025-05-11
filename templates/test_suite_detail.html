@@ -58,10 +58,7 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Type</th>
                                 <th>Path</th>
-                                <th>Language</th>
-                                <th>Status</th>
                                 <th>Created</th>
                                 <th>Actions</th>
                             </tr>
@@ -72,21 +69,8 @@
                             <tr>
                                 <td>{{ test_case.name }}</td>
                                 <td>
-                                    {% if test_case.original_file_path == "recorded" %}
-                                    <span class="badge bg-info">Recorded</span>
-                                    {% else %}
-                                    <span class="badge bg-primary">Generated</span>
-                                    {% endif %}
-                                </td>
-                                <td>
                                     <span class="text-truncate d-inline-block" style="max-width: 200px;" title="{{ test_case.test_file_path }}">
                                         {{ test_case.test_file_path }}
-                                    </span>
-                                </td>
-                                <td>{{ test_case.language }}</td>
-                                <td>
-                                    <span class="badge bg-{{ 'success' if test_case.status == 'passed' else 'danger' if test_case.status == 'failed' else 'secondary' }}">
-                                        {{ test_case.status }}
                                     </span>
                                 </td>
                                 <td>{{ test_case.created_at.strftime('%Y-%m-%d') }}</td>

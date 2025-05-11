@@ -1,25 +1,84 @@
 [
     {
-        "action": "input",
-        "selector": "#identifierId",
-        "value": "j",
-        "timestamp": 1746556035416
+        "action": "click",
+        "selector": "#searchInput",
+        "timestamp": 1746951710425
     },
     {
         "action": "input",
-        "selector": "#identifierId",
-        "value": "jj",
-        "timestamp": 1746556035676
+        "selector": "#searchInput",
+        "value": "h",
+        "timestamp": 1746951711488
     },
     {
         "action": "input",
-        "selector": "#identifierId",
-        "value": "jjj",
-        "timestamp": 1746556035910
+        "selector": "#searchInput",
+        "value": "ho",
+        "timestamp": 1746951711645
+    },
+    {
+        "action": "input",
+        "selector": "#searchInput",
+        "value": "h",
+        "timestamp": 1746951712101
+    },
+    {
+        "action": "input",
+        "selector": "#searchInput",
+        "value": "",
+        "timestamp": 1746951712287
+    },
+    {
+        "action": "input",
+        "selector": "#searchInput",
+        "value": "p",
+        "timestamp": 1746951712779
+    },
+    {
+        "action": "input",
+        "selector": "#searchInput",
+        "value": "po",
+        "timestamp": 1746951713000
+    },
+    {
+        "action": "input",
+        "selector": "#searchInput",
+        "value": "pol",
+        "timestamp": 1746951713186
+    },
+    {
+        "action": "input",
+        "selector": "#searchInput",
+        "value": "poli",
+        "timestamp": 1746951713401
+    },
+    {
+        "action": "input",
+        "selector": "#searchInput",
+        "value": "polit",
+        "timestamp": 1746951713829
+    },
+    {
+        "action": "input",
+        "selector": "#searchInput",
+        "value": "politi",
+        "timestamp": 1746951714068
+    },
+    {
+        "action": "input",
+        "selector": "#searchInput",
+        "value": "politic",
+        "timestamp": 1746951714382
+    },
+    {
+        "action": "input",
+        "selector": "#searchInput",
+        "value": "politics",
+        "timestamp": 1746951714633
     },
     {
         "action": "click",
-        "selector": ".VfPpkd-vQzf8d",
-        "timestamp": 1746556036710
+        "selector": ".pure-button.pure-button-primary-progressive",
+        "timestamp": 1746951716985
     }
 ]
