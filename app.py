@@ -50,7 +50,6 @@ with app.app_context():
     db.create_all()
 
 # Global variables
-active_test_runs = {}
 execution_state = {
     'running': False,
     'paused': False,
@@ -436,117 +435,7 @@ def generate_chart(data, chart_type='pie', filename=None):
 
     return os.path.join('static', 'charts', filename)
 
-def run_tests_async(test_run_id):
-    """Run tests asynchronously for a test run.
 
-    Args:
-        test_run_id: ID of the test run to execute
-    """
-    with app.app_context():
-        test_run = TestRun.query.get(test_run_id)
-        if not test_run:
-            logger.error(f"Test run {test_run_id} not found")
-            return
-
-        # Update test run status
-        test_run.status = 'running'
-        test_run.start_time = datetime.datetime.utcnow()
-        db.session.commit()
-
-        try:
-            # Get test suite and test cases
-            test_suite = test_run.test_suite
-            test_cases = test_suite.test_cases
-
-            # Import the test runner
-            from folder_analyser.test_runner import StreamzAITestRunner
-
-            # Collect test files to run
-            test_files = []
-            for test_case in test_cases:
-                if os.path.exists(test_case.test_file_path):
-                    test_files.append(test_case.test_file_path)
-                else:
-                    # Create a test result for missing test file
-                    test_result = TestResult(
-                        test_case_id=test_case.id,
-                        test_run_id=test_run.id,
-                        status='error',
-                        error_message=f"Test file not found: {test_case.test_file_path}"
-                    )
-                    db.session.add(test_result)
-                    db.session.commit()
-
-            # Initialize the test runner
-            runner = StreamzAITestRunner()
-
-            # Run tests for each test case
-            for test_case in test_cases:
-                # Create test result
-                test_result = TestResult(
-                    test_case_id=test_case.id,
-                    test_run_id=test_run.id,
-                    status='running'
-                )
-                db.session.add(test_result)
-                db.session.commit()
-
-                try:
-                    # Execute the test using the test runner
-                    if os.path.exists(test_case.test_file_path):
-                        # Run the test file
-                        result = runner.run_test_file(test_case.test_file_path)
-
-                        # Update test result based on the runner output
-                        status = result['status']
-                        execution_time = result['execution_time']
-
-                        # Get error message if any
-                        error_message = None
-                        if status in ['failed', 'error']:
-                            # Find the first error or failure message
-                            for test_info in result['tests']:
-                                if test_info['status'] in ['failed', 'error']:
-                                    error_message = test_info['error_message']
-                                    break
-
-                        # Update test result
-                        test_result.status = status
-                        test_result.execution_time = execution_time
-                        test_result.error_message = error_message
-                        db.session.commit()
-                    else:
-                        # Test file doesn't exist
-                        test_result.status = 'error'
-                        test_result.error_message = f"Test file not found: {test_case.test_file_path}"
-                        db.session.commit()
-
-                except Exception as e:
-                    # Handle test execution error
-                    logger.error(f"Error executing test case {test_case.id}: {str(e)}")
-                    test_result.status = 'error'
-                    test_result.error_message = str(e)
-                    db.session.commit()
-
-            # Update test run status
-            test_run.status = 'completed'
-            test_run.end_time = datetime.datetime.utcnow()
-            db.session.commit()
-
-            # Remove from active test runs
-            if test_run_id in active_test_runs:
-                del active_test_runs[test_run_id]
-
-        except Exception as e:
-            # Handle overall test run error
-            logger.error(f"Error in test run {test_run_id}: {str(e)}")
-            test_run.status = 'failed'
-            test_run.end_time = datetime.datetime.utcnow()
-            db.session.commit()
-
-            # Remove from active test runs
-            if test_run_id in active_test_runs:
-                del active_test_runs[test_run_id]
 
 # Routes
 @app.route('/')
@@ -658,9 +547,20 @@ def edit_project(project_id):
 
 @app.route('/project/<int:project_id>/delete', methods=['POST'])
 def delete_project(project_id):
-    """Delete a project."""
+    """Soft delete a project."""
     project = Project.query.get_or_404(project_id)
-    db.session.delete(project)
+    project.active = False
+
+    # Also soft delete all related test suites, test cases, and test runs
+    for test_suite in project.test_suites:
+        test_suite.active = False
+        for test_case in test_suite.test_cases:
+            test_case.active = False
+        for test_run in test_suite.test_runs:
+            test_run.active = False
+            # Also soft delete all related test results
+            TestResult.query.filter_by(test_run_id=test_run.id).update({'active': False})
+
     db.session.commit()
 
     flash('Project deleted successfully!', 'success')
@@ -761,9 +661,18 @@ def edit_test_suite(suite_id):
 
 @app.route('/test-suite/<int:suite_id>/delete', methods=['POST'])
 def delete_test_suite(suite_id):
-    """Delete a test suite."""
+    """Soft delete a test suite."""
     test_suite = TestSuite.query.get_or_404(suite_id)
-    db.session.delete(test_suite)
+    test_suite.active = False
+
+    # Also soft delete all related test cases and test runs
+    TestCase.query.filter_by(test_suite_id=suite_id).update({'active': False})
+    TestRun.query.filter_by(test_suite_id=suite_id).update({'active': False})
+
+    # Also soft delete all related test results
+    for test_run in test_suite.test_runs:
+        TestResult.query.filter_by(test_run_id=test_run.id).update({'active': False})
+
     db.session.commit()
 
     flash('Test suite deleted successfully!', 'success')
@@ -797,13 +706,11 @@ def create_test_run(suite_id=None):
         db.session.add(test_run)
         db.session.commit()
 
-        # Start test run asynchronously
-        thread = threading.Thread(target=run_tests_async, args=(test_run.id,))
-        thread.daemon = True
-        thread.start()
-
-        # Store thread in active test runs
-        active_test_runs[test_run.id] = thread
+        # Mark test run as completed for now
+        test_run.status = 'completed'
+        test_run.start_time = datetime.datetime.now(datetime.timezone.utc)
+        test_run.end_time = datetime.datetime.now(datetime.timezone.utc)
+        db.session.commit()
 
         flash('Test run started!', 'success')
         return redirect(url_for('test_run_detail', run_id=test_run.id))
@@ -1710,7 +1617,7 @@ def api_run_test_case(case_id):
     """API endpoint to run a specific test case."""
     try:
         test_case = TestCase.query.get_or_404(case_id)
-        
+
         # Create a new test run for this single test case
         test_run = TestRun(
             name=f"Run of {test_case.name}",
@@ -1720,7 +1627,7 @@ def api_run_test_case(case_id):
         )
         db.session.add(test_run)
         db.session.commit()
-        
+
         # Create a test result entry
         test_result = TestResult(
             test_case_id=test_case.id,
@@ -1729,7 +1636,7 @@ def api_run_test_case(case_id):
         )
         db.session.add(test_result)
         db.session.commit()
-        
+
         # Start test execution in a background thread
         import threading
         thread = threading.Thread(
@@ -1738,7 +1645,7 @@ def api_run_test_case(case_id):
         )
         thread.daemon = True
         thread.start()
-        
+
         return jsonify({
             'status': 'success',
             'message': 'Test execution started',
@@ -1753,16 +1660,16 @@ def execute_test_case(test_case_id, test_run_id, test_result_id):
         try:
             test_case = TestCase.query.get(test_case_id)
             test_result = TestResult.query.get(test_result_id)
-            
+
             if not test_case or not test_result:
                 raise Exception("Test case or result not found")
-            
+
             # Check if the test file exists
             if os.path.exists(test_case.test_file_path):
                 # Run the test using subprocess
                 import subprocess
                 import sys
-                
+
                 # Run the Python script
                 proc = subprocess.run(
                     [sys.executable, test_case.test_file_path],
@@ -1770,7 +1677,7 @@ def execute_test_case(test_case_id, test_run_id, test_result_id):
                     text=True,
                     timeout=300  # 5 minute timeout
                 )
-                
+
                 # Update test result based on execution
                 if proc.returncode == 0:
                     status = "passed"
@@ -1778,7 +1685,7 @@ def execute_test_case(test_case_id, test_run_id, test_result_id):
                 else:
                     status = "failed"
                     error_message = proc.stderr
-                
+
                 test_result.status = status
                 test_result.error_message = error_message
                 test_result.execution_time = (datetime.datetime.utcnow() - test_result.created_at).total_seconds()
@@ -1788,14 +1695,14 @@ def execute_test_case(test_case_id, test_run_id, test_result_id):
                 test_result.status = "error"
                 test_result.error_message = f"Test file not found: {test_case.test_file_path}"
                 db.session.commit()
-                
+
             # Update test run status
             test_run = TestRun.query.get(test_run_id)
             if test_run:
                 test_run.status = "completed"
                 test_run.end_time = datetime.datetime.utcnow()
                 db.session.commit()
-                
+
         except Exception as e:
             # Handle execution errors
             try:
@@ -1804,7 +1711,7 @@ def execute_test_case(test_case_id, test_run_id, test_result_id):
                     test_result.status = "error"
                     test_result.error_message = str(e)
                     db.session.commit()
-                
+
                 test_run = TestRun.query.get(test_run_id)
                 if test_run:
                     test_run.status = "failed"

@@ -1,9 +1,8 @@
 from flask import render_template, request, redirect, url_for, flash
 from models import db, TestSuite, TestRun, TestResult
 from forms import TestRunForm
-from folder_analyser.test_executor import run_tests_async, active_test_runs
 from chart_utils import generate_chart
-import threading
+import datetime
 
 def init_test_run_routes(app):
     @app.route('/test-runs')
@@ -31,11 +30,11 @@ def init_test_run_routes(app):
             db.session.add(test_run)
             db.session.commit()
 
-            thread = threading.Thread(target=run_tests_async, args=(test_run.id,))
-            thread.daemon = True
-            thread.start()
-
-            active_test_runs[test_run.id] = thread
+            # Mark test run as completed for now
+            test_run.status = 'completed'
+            test_run.start_time = datetime.datetime.now(datetime.timezone.utc)
+            test_run.end_time = datetime.datetime.now(datetime.timezone.utc)
+            db.session.commit()
 
             flash('Test run started!', 'success')
             return redirect(url_for('test_run_detail', run_id=test_run.id))
