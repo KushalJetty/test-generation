@@ -1,31 +1,54 @@
 [
     {
-        "action": "input",
+        "action": "click",
         "selector": "#searchInput",
-        "value": "h",
-        "timestamp": 1746951859982
+        "timestamp": 1746958222508
     },
     {
         "action": "input",
         "selector": "#searchInput",
-        "value": "hi",
-        "timestamp": 1746951860105
+        "value": "k",
+        "timestamp": 1746958223246
     },
     {
         "action": "input",
         "selector": "#searchInput",
-        "value": "his",
-        "timestamp": 1746951860454
+        "value": "ka",
+        "timestamp": 1746958223406
     },
     {
         "action": "input",
         "selector": "#searchInput",
-        "value": "hist",
-        "timestamp": 1746951860664
+        "value": "kan",
+        "timestamp": 1746958223590
+    },
+    {
+        "action": "input",
+        "selector": "#searchInput",
+        "value": "kann",
+        "timestamp": 1746958223765
+    },
+    {
+        "action": "input",
+        "selector": "#searchInput",
+        "value": "kanna",
+        "timestamp": 1746958223820
+    },
+    {
+        "action": "input",
+        "selector": "#searchInput",
+        "value": "kannad",
+        "timestamp": 1746958224244
+    },
+    {
+        "action": "input",
+        "selector": "#searchInput",
+        "value": "kannada",
+        "timestamp": 1746958224403
     },
     {
         "action": "click",
         "selector": ".pure-button.pure-button-primary-progressive",
-        "timestamp": 1746951863551
+        "timestamp": 1746958225957
     }
 ]

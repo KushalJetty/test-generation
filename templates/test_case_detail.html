@@ -23,13 +23,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <p><strong>Name:</strong> {{ test_case.name }}</p>
-                        <p><strong>Type:</strong> 
-                            {% if test_case.original_file_path == "recorded" %}
-                            <span class="badge bg-info">Recorded</span>
-                            {% else %}
-                            <span class="badge bg-primary">Generated</span>
-                            {% endif %}
-                        </p>
+                        
                         <p>
                             <strong>Test Suite:</strong> 
                             <a href="{{ url_for('test_suite_detail', suite_id=test_case.test_suite_id) }}">
@@ -38,12 +32,6 @@
                         </p>
                     </div>
                     <div class="col-md-6">
-                        <p><strong>Language:</strong> {{ test_case.language }}</p>
-                        <p><strong>Status:</strong> 
-                            <span class="badge bg-{{ 'success' if test_case.status == 'passed' else 'danger' if test_case.status == 'failed' else 'secondary' }}">
-                                {{ test_case.status }}
-                            </span>
-                        </p>
                         <p><strong>Created:</strong> {{ test_case.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
                     </div>
                 </div>

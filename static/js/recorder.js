@@ -121,51 +121,105 @@ function setupRecorder(suiteId, options) {
         await stopBtn.click();
         const codeContent = codePreview.textContent;
         
-        // Prompt user for test case name
-        const testName = prompt("Enter a name for this test case:", `Recorded Test ${new Date().toISOString().replace(/[:.]/g, '-')}`);
+        // Create a custom modal for test case name and description
+        const modalId = `saveTestCaseModal${suiteId}`;
         
-        // If user cancels the prompt, don't proceed
-        if (testName === null) {
-            return;
+        // Remove any existing modal with the same ID
+        const existingModal = document.getElementById(modalId);
+        if (existingModal) {
+            existingModal.remove();
         }
         
-        try {
-            // Save to database only
-            const response = await fetch('/api/record/save', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    suite_id: suiteId,
-                    code: codeContent,
-                    name: testName
-                })
-            });
+        const modalHtml = `
+        <div class="modal fade" id="${modalId}" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Save Test Case</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="saveTestCaseForm${suiteId}">
+                            <div class="mb-3">
+                                <label for="testCaseName${suiteId}" class="form-label">Test Case Name</label>
+                                <input type="text" class="form-control" id="testCaseName${suiteId}" 
+                                       value="Recorded Test ${new Date().toISOString().replace(/[:.]/g, '-')}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="testCaseDescription${suiteId}" class="form-label">Description</label>
+                                <textarea class="form-control" id="testCaseDescription${suiteId}" rows="3" 
+                                          placeholder="Enter test case description..."></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" id="confirmSaveBtn${suiteId}">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        `;
+        
+        // Add the modal to the document
+        document.body.insertAdjacentHTML('beforeend', modalHtml);
+        
+        // Initialize the modal
+        const saveModal = new bootstrap.Modal(document.getElementById(modalId));
+        saveModal.show();
+        
+        // Handle save confirmation
+        document.getElementById(`confirmSaveBtn${suiteId}`).addEventListener('click', async () => {
+            const testName = document.getElementById(`testCaseName${suiteId}`).value.trim();
+            const testDescription = document.getElementById(`testCaseDescription${suiteId}`).value.trim();
             
-            const saveResult = await response.json();
-            
-            if (saveResult.status === 'success') {
-                alert('Test case saved successfully!');
-                
-                // If modal is shown, close it
-                const modalElement = document.querySelector(`#recordModal${suiteId}`);
-                if (modalElement) {
-                    const modal = bootstrap.Modal.getInstance(modalElement);
-                    if (modal) {
-                        modal.hide();
-                    }
-                }
-                
-                // Automatically redirect to the test suite page
-                window.location.href = `/test-suite/${suiteId}`;
-            } else {
-                alert(`Error saving test case: ${saveResult.error || 'Unknown error'}`);
+            if (!testName) {
+                alert('Please enter a test case name');
+                return;
             }
-        } catch (err) {
-            console.error('Error saving file:', err);
-            alert('Error saving test case.');
-        }
+            
+            try {
+                // Save to database
+                const response = await fetch('/api/record/save', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        suite_id: suiteId,
+                        code: codeContent,
+                        name: testName,
+                        description: testDescription
+                    })
+                });
+                
+                const saveResult = await response.json();
+                
+                if (saveResult.status === 'success') {
+                    alert('Test case saved successfully!');
+                    
+                    // Close the save modal
+                    saveModal.hide();
+                    
+                    // If recorder modal is shown, close it
+                    const recorderModalElement = document.querySelector(`#recordModal${suiteId}`);
+                    if (recorderModalElement) {
+                        const recorderModal = bootstrap.Modal.getInstance(recorderModalElement);
+                        if (recorderModal) {
+                            recorderModal.hide();
+                        }
+                    }
+                    
+                    // Automatically redirect to the test suite page
+                    window.location.href = `/test-suite/${suiteId}`;
+                } else {
+                    alert(`Error saving test case: ${saveResult.error || 'Unknown error'}`);
+                }
+            } catch (err) {
+                console.error('Error saving file:', err);
+                alert('Error saving test case.');
+            }
+        });
     });
 
     // Initial state
@@ -510,4 +564,82 @@ class BrowserRecorder {
 }
 
 // Export for use in other files
-window.BrowserRecorder = BrowserRecorder; 
+window.BrowserRecorder = BrowserRecorder;
+
+function runTestCase(testCaseId) {
+    // Show confirmation dialog
+    if (confirm('Are you sure you want to run this test case?')) {
+        // Show loading indicator if it exists
+        const loadingToast = document.getElementById('loadingToast');
+        if (loadingToast) {
+            const toast = new bootstrap.Toast(loadingToast);
+            toast.show();
+        }
+        
+        // Call API to run the test
+        fetch(`/api/test-case/${testCaseId}/run`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                // Show success message
+                alert('Test execution started successfully!');
+                // Redirect to test run detail page if available
+                if (data.test_run_id) {
+                    window.location.href = `/test-run/${data.test_run_id}`;
+                }
+            } else {
+                alert(`Error running test: ${data.error || 'Unknown error'}`);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while running the test.');
+        })
+        .finally(() => {
+            // Hide loading indicator if it exists
+            if (loadingToast) {
+                const toast = bootstrap.Toast.getInstance(loadingToast);
+                if (toast) {
+                    toast.hide();
+                }
+            }
+        });
+    }
+}
+
+function deleteTestCase(testCaseId) {
+    // Show confirmation dialog
+    if (confirm('Are you sure you want to delete this test case? This action cannot be undone.')) {
+        fetch(`/test-case/${testCaseId}/delete`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                // Reload the page to show updated list
+                window.location.reload();
+            } else {
+                response.json().then(data => {
+                    alert(`Failed to delete test case: ${data.error || 'Unknown error'}`);
+                }).catch(() => {
+                    alert('Failed to delete test case.');
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while deleting the test case.');
+        });
+    }
+}
+
+// Make these functions globally available
+window.runTestCase = runTestCase;
+window.deleteTestCase = deleteTestCase;

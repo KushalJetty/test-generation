@@ -156,7 +156,7 @@ def generate_code(steps):
     global recorded_url
     input_values = {}
     consolidated_steps = []
-    
+
     # Process steps in original sequence but consolidate inputs
     for step in steps:
         if step['action'] == 'click':
@@ -164,7 +164,7 @@ def generate_code(steps):
         elif step['action'] == 'input':
             # Track input values but maintain sequence
             input_values[step['selector']] = step['value']
-            
+
     # Save input values to JSON
     import os
     # Generate unique filename
@@ -177,7 +177,7 @@ def generate_code(steps):
     os.makedirs(os.path.dirname(json_path), exist_ok=True)
     with open(json_path, 'w') as f:
         json.dump(input_values, f, indent=4)
-    
+
     # Generate code
     code = [
         "from playwright.async_api import async_playwright\n",
@@ -188,7 +188,7 @@ def generate_code(steps):
         "        page = await browser.new_page()\n",
         f"        await page.goto('{recorded_url}')\n"
     ]
-    
+
     # Add steps in original sequence
     for step in steps:
         if step['action'] == 'click':
@@ -197,7 +197,7 @@ def generate_code(steps):
             # Only add input if it's the final value for this selector
             if input_values.get(step['selector']) == step['value']:
                 code.append(f"        await page.fill('{step['selector']}', '{step['value']}')\n")
-    
+
     code.append("        await browser.close()\n")
     code.append("asyncio.run(test_recorded_actions())")
     return ''.join(code)
@@ -208,18 +208,18 @@ def upload_test_case():
     if request.method == 'POST':
         if 'file' not in request.files:
             return jsonify({'error': 'No file provided'}), 400
-            
+
         file = request.files['file']
         if file.filename == '':
             return jsonify({'error': 'No file selected'}), 400
-            
+
         if file and file.filename.endswith('.json'):
             filename = secure_filename(file.filename)
             filepath = os.path.join('uploads', filename)
-            
+
             # Ensure upload directory exists
             os.makedirs('uploads', exist_ok=True)
-            
+
             try:
                 file.save(filepath)
                 with open(filepath) as f:
@@ -233,8 +233,8 @@ def upload_test_case():
                 return jsonify({'error': f'Error processing file: {str(e)}'}), 500
         else:
             return jsonify({'error': 'Invalid file type. Please upload a JSON file'}), 400
-    
-    return render_template('test_run_form.html')
+
+    return render_template('test_runs.html')
 
 @app.route('/test-case/execute', methods=['POST'])
 def execute_test():
@@ -312,7 +312,7 @@ def submit_input():
         data = request.get_json()
         if data is None:
             return jsonify({'error': 'No data provided'}), 400
-            
+
         value = data.get('value')
         # Put the value in the queue
         execution_state['input_queue'].put(value)
@@ -332,33 +332,33 @@ def execute_test_case():
         context = browser.new_context()
         page = context.new_page()
         reporter = TestReporter()
-        
+
         try:
             # Navigate to target URL
             page.goto(execution_state['target_url'])
             page.wait_for_load_state('networkidle')
-            
+
             # Execute test steps
             for idx, step in enumerate(execution_state['test_steps']):
                 if not execution_state['running']:
                     break
-                    
+
                 while execution_state['paused']:
                     time.sleep(0.5)
                     continue
-                    
+
                 execution_state['current_step'] = idx
                 action = step.get('action', '')
                 selector = step.get('selector', '')
                 value = step.get('value', '')
-                
+
                 try:
                     if selector:
                         element = page.wait_for_selector(selector, state='visible', timeout=10000)
                         if not element:
                             reporter.record_step(step, 'error', f"Element not found: {selector}")
                             continue
-                    
+
                     if action == 'click':
                         page.click(selector)
                         reporter.record_step(step, 'success')
@@ -373,14 +373,14 @@ def execute_test_case():
                         page.goto(value)
                         page.wait_for_load_state('networkidle')
                         reporter.record_step(step, 'success')
-                    
+
                 except Exception as e:
                     reporter.record_step(step, 'error', str(e))
-            
+
             # Generate report
             report_path = generate_report(reporter, 'html')
             execution_state['log'].append(f"Test execution completed. Report saved to: {report_path}")
-            
+
         except Exception as e:
             execution_state['log'].append(f"Error during test execution: {str(e)}")
         finally:
@@ -389,56 +389,56 @@ def execute_test_case():
 
 def generate_chart(data, chart_type='pie', filename=None):
     """Generate a chart based on test results data.
-    
+
     Args:
         data: Dictionary with test result counts
         chart_type: Type of chart to generate ('pie', 'bar', etc.)
         filename: Optional filename to save the chart
-        
+
     Returns:
         Path to the saved chart image
     """
     plt.figure(figsize=(8, 6))
-    
+
     if chart_type == 'pie':
         # Create a pie chart
         labels = list(data.keys())
         sizes = list(data.values())
         colors = ['#28a745', '#dc3545', '#ffc107', '#6c757d']
         explode = (0.1, 0, 0, 0)  # explode the 1st slice (passed)
-        
+
         plt.pie(sizes, explode=explode, labels=labels, colors=colors,
                 autopct='%1.1f%%', shadow=True, startangle=140)
         plt.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle
         plt.title('Test Results Distribution')
-        
+
     elif chart_type == 'bar':
         # Create a bar chart
         categories = list(data.keys())
         values = list(data.values())
         colors = ['#28a745', '#dc3545', '#ffc107', '#6c757d']
-        
+
         plt.bar(categories, values, color=colors)
         plt.xlabel('Status')
         plt.ylabel('Count')
         plt.title('Test Results by Status')
-    
+
     # Save the chart
     if not filename:
         filename = f"chart_{uuid.uuid4().hex[:8]}.png"
-    
+
     chart_dir = os.path.join(app.static_folder, 'charts')
     os.makedirs(chart_dir, exist_ok=True)
     chart_path = os.path.join(chart_dir, filename)
-    
+
     plt.savefig(chart_path)
     plt.close()
-    
+
     return os.path.join('static', 'charts', filename)
 
 def run_tests_async(test_run_id):
     """Run tests asynchronously for a test run.
-    
+
     Args:
         test_run_id: ID of the test run to execute
     """
@@ -447,20 +447,20 @@ def run_tests_async(test_run_id):
         if not test_run:
             logger.error(f"Test run {test_run_id} not found")
             return
-        
+
         # Update test run status
         test_run.status = 'running'
         test_run.start_time = datetime.datetime.utcnow()
         db.session.commit()
-        
+
         try:
             # Get test suite and test cases
             test_suite = test_run.test_suite
             test_cases = test_suite.test_cases
-            
+
             # Import the test runner
             from folder_analyser.test_runner import StreamzAITestRunner
-            
+
             # Collect test files to run
             test_files = []
             for test_case in test_cases:
@@ -476,10 +476,10 @@ def run_tests_async(test_run_id):
                     )
                     db.session.add(test_result)
                     db.session.commit()
-            
+
             # Initialize the test runner
             runner = StreamzAITestRunner()
-            
+
             # Run tests for each test case
             for test_case in test_cases:
                 # Create test result
@@ -490,17 +490,17 @@ def run_tests_async(test_run_id):
                 )
                 db.session.add(test_result)
                 db.session.commit()
-                
+
                 try:
                     # Execute the test using the test runner
                     if os.path.exists(test_case.test_file_path):
                         # Run the test file
                         result = runner.run_test_file(test_case.test_file_path)
-                        
+
                         # Update test result based on the runner output
                         status = result['status']
                         execution_time = result['execution_time']
-                        
+
                         # Get error message if any
                         error_message = None
                         if status in ['failed', 'error']:
@@ -509,7 +509,7 @@ def run_tests_async(test_run_id):
                                 if test_info['status'] in ['failed', 'error']:
                                     error_message = test_info['error_message']
                                     break
-                        
+
                         # Update test result
                         test_result.status = status
                         test_result.execution_time = execution_time
@@ -520,30 +520,30 @@ def run_tests_async(test_run_id):
                         test_result.status = 'error'
                         test_result.error_message = f"Test file not found: {test_case.test_file_path}"
                         db.session.commit()
-                    
+
                 except Exception as e:
                     # Handle test execution error
                     logger.error(f"Error executing test case {test_case.id}: {str(e)}")
                     test_result.status = 'error'
                     test_result.error_message = str(e)
                     db.session.commit()
-            
+
             # Update test run status
             test_run.status = 'completed'
             test_run.end_time = datetime.datetime.utcnow()
             db.session.commit()
-            
+
             # Remove from active test runs
             if test_run_id in active_test_runs:
                 del active_test_runs[test_run_id]
-                
+
         except Exception as e:
             # Handle overall test run error
             logger.error(f"Error in test run {test_run_id}: {str(e)}")
             test_run.status = 'failed'
             test_run.end_time = datetime.datetime.utcnow()
             db.session.commit()
-            
+
             # Remove from active test runs
             if test_run_id in active_test_runs:
                 del active_test_runs[test_run_id]
@@ -556,18 +556,18 @@ def index():
     projects_count = Project.query.count()
     test_suites_count = TestSuite.query.count()
     test_runs_count = TestRun.query.count()
-    
+
     # Calculate success rate
     passed_results = TestResult.query.filter_by(status='passed').count()
     total_results = TestResult.query.count()
     success_rate = round((passed_results / total_results) * 100) if total_results > 0 else 0
-    
+
     # Get recent test runs
     recent_test_runs = TestRun.query.order_by(TestRun.created_at.desc()).limit(5).all()
-    
+
     # Get recent projects
     recent_projects = Project.query.order_by(Project.created_at.desc()).limit(5).all()
-    
+
     # Generate chart for test results
     test_results = {
         'Passed': TestResult.query.filter_by(status='passed').count(),
@@ -575,11 +575,11 @@ def index():
         'Skipped': TestResult.query.filter_by(status='skipped').count(),
         'Error': TestResult.query.filter_by(status='error').count()
     }
-    
+
     chart_path = None
     if sum(test_results.values()) > 0:
         chart_path = generate_chart(test_results)
-    
+
     return render_template('index.html',
                            projects_count=projects_count,
                            test_suites_count=test_suites_count,
@@ -599,7 +599,7 @@ def projects():
 def create_project():
     """Create a new project."""
     form = ProjectForm()
-    
+
     if form.validate_on_submit():
         project = Project(
             name=form.name.data,
@@ -608,10 +608,10 @@ def create_project():
         )
         db.session.add(project)
         db.session.commit()
-        
+
         flash('Project created successfully!', 'success')
         return redirect(url_for('project_detail', project_id=project.id))
-    
+
     return render_template('project_form.html', form=form, title='Create Project')
 
 @app.route('/project/<int:project_id>')
@@ -619,7 +619,7 @@ def project_detail(project_id):
     """Show project details."""
     project = Project.query.get_or_404(project_id)
     test_suites = TestSuite.query.filter_by(project_id=project_id, active=True).all()
-    
+
     # Get test statistics for this project
     test_stats = {}
     for test_suite in test_suites:
@@ -628,7 +628,7 @@ def project_detail(project_id):
             failed = TestResult.query.filter_by(test_run_id=test_run.id, status='failed', active=True).count()
             skipped = TestResult.query.filter_by(test_run_id=test_run.id, status='skipped', active=True).count()
             error = TestResult.query.filter_by(test_run_id=test_run.id, status='error', active=True).count()
-            
+
             test_stats[test_run.id] = {
                 'passed': passed,
                 'failed': failed,
@@ -636,7 +636,7 @@ def project_detail(project_id):
                 'error': error,
                 'total': passed + failed + skipped + error
             }
-    
+
     return render_template('project_detail.html', project=project, test_suites=test_suites, test_stats=test_stats)
 
 @app.route('/project/<int:project_id>/edit', methods=['GET', 'POST'])
@@ -644,16 +644,16 @@ def edit_project(project_id):
     """Edit an existing project."""
     project = Project.query.get_or_404(project_id)
     form = ProjectForm(obj=project)
-    
+
     if form.validate_on_submit():
         project.name = form.name.data
         project.path = form.path.data
         project.description = form.description.data
         db.session.commit()
-        
+
         flash('Project updated successfully!', 'success')
         return redirect(url_for('project_detail', project_id=project.id))
-    
+
     return render_template('project_form.html', form=form, title='Edit Project')
 
 @app.route('/project/<int:project_id>/delete', methods=['POST'])
@@ -662,7 +662,7 @@ def delete_project(project_id):
     project = Project.query.get_or_404(project_id)
     db.session.delete(project)
     db.session.commit()
-    
+
     flash('Project deleted successfully!', 'success')
     return redirect(url_for('projects'))
 
@@ -677,14 +677,14 @@ def test_suites():
 def create_test_suite(project_id=None):
     """Create a new test suite."""
     form = TestSuiteForm()
-    
+
     # Populate project choices
     form.project_id.choices = [(p.id, p.name) for p in Project.query.order_by(Project.name).all()]
-    
+
     # If project_id is provided, preselect it
     if project_id:
         form.project_id.data = project_id
-    
+
     if form.validate_on_submit():
         try:
             # Get the project
@@ -704,10 +704,10 @@ def create_test_suite(project_id=None):
 
             # Initialize test generator
             generator = StreamzAITestGenerator()
-            
+
             # Generate test cases
             results = generator.generate_tests(project.path, os.path.join('generated_tests', str(test_suite.id)))
-            
+
             # Create test cases in database
             for test_file in results.get('test_files', []):
                 if test_file['status'] == 'success':
@@ -718,11 +718,11 @@ def create_test_suite(project_id=None):
                         test_suite_id=test_suite.id
                     )
                     db.session.add(test_case)
-            
+
             db.session.commit()
             flash('Test suite created successfully!', 'success')
             return redirect(url_for('test_suites'))
-            
+
         except Exception as e:
             db.session.rollback()
             flash(f'Error creating test suite: {str(e)}', 'error')
@@ -736,7 +736,7 @@ def test_suite_detail(suite_id):
     test_suite = TestSuite.query.get_or_404(suite_id)
     test_cases = TestCase.query.filter_by(test_suite_id=suite_id, active=True).all()
     test_runs = TestRun.query.filter_by(test_suite_id=suite_id, active=True).all()
-    
+
     return render_template('test_suite_detail.html', test_suite=test_suite, test_cases=test_cases, test_runs=test_runs)
 
 @app.route('/test-suite/<int:suite_id>/edit', methods=['GET', 'POST'])
@@ -744,19 +744,19 @@ def edit_test_suite(suite_id):
     """Edit an existing test suite."""
     test_suite = TestSuite.query.get_or_404(suite_id)
     form = TestSuiteForm(obj=test_suite)
-    
+
     # Populate project choices
     form.project_id.choices = [(p.id, p.name) for p in Project.query.order_by(Project.name).all()]
-    
+
     if form.validate_on_submit():
         test_suite.name = form.name.data
         test_suite.description = form.description.data
         test_suite.project_id = form.project_id.data
         db.session.commit()
-        
+
         flash('Test suite updated successfully!', 'success')
         return redirect(url_for('test_suite_detail', suite_id=test_suite.id))
-    
+
     return render_template('test_suite_form.html', form=form, title='Edit Test Suite')
 
 @app.route('/test-suite/<int:suite_id>/delete', methods=['POST'])
@@ -765,7 +765,7 @@ def delete_test_suite(suite_id):
     test_suite = TestSuite.query.get_or_404(suite_id)
     db.session.delete(test_suite)
     db.session.commit()
-    
+
     flash('Test suite deleted successfully!', 'success')
     return redirect(url_for('test_suites'))
 
@@ -780,14 +780,14 @@ def test_runs():
 def create_test_run(suite_id=None):
     """Create a new test run."""
     form = TestRunForm()
-    
+
     # Populate test suite choices
     form.test_suite_id.choices = [(ts.id, f"{ts.name} ({ts.project.name})") for ts in TestSuite.query.join(Project).order_by(TestSuite.name).all()]
-    
+
     # If suite_id is provided, preselect it
     if suite_id:
         form.test_suite_id.data = suite_id
-    
+
     if form.validate_on_submit():
         test_run = TestRun(
             name=form.name.data,
@@ -796,26 +796,26 @@ def create_test_run(suite_id=None):
         )
         db.session.add(test_run)
         db.session.commit()
-        
+
         # Start test run asynchronously
         thread = threading.Thread(target=run_tests_async, args=(test_run.id,))
         thread.daemon = True
         thread.start()
-        
+
         # Store thread in active test runs
         active_test_runs[test_run.id] = thread
-        
+
         flash('Test run started!', 'success')
         return redirect(url_for('test_run_detail', run_id=test_run.id))
-    
-    return render_template('test_run_form.html', form=form, title='Create Test Run')
+
+    return render_template('test_runs.html', form=form, title='Create Test Run')
 
 @app.route('/test-run/<int:run_id>')
 def test_run_detail(run_id):
     """Show test run details."""
     test_run = TestRun.query.get_or_404(run_id)
     test_results = TestResult.query.filter_by(test_run_id=test_run.id, active=True).all()
-    
+
     # Calculate summary
     summary = {
         'passed': TestResult.query.filter_by(test_run_id=test_run.id, status='passed', active=True).count(),
@@ -824,7 +824,7 @@ def test_run_detail(run_id):
         'error': TestResult.query.filter_by(test_run_id=test_run.id, status='error', active=True).count()
     }
     summary['total'] = sum(summary.values())
-    
+
     # Generate chart
     chart_data = {
         'Passed': summary['passed'],
@@ -832,11 +832,11 @@ def test_run_detail(run_id):
         'Skipped': summary['skipped'],
         'Error': summary['error']
     }
-    
+
     chart_path = None
     if summary['total'] > 0:
         chart_path = generate_chart(chart_data, filename=f"run_{run_id}_results.png")
-    
+
     return render_template('test_run_detail.html', test_run=test_run, test_results=test_results, summary=summary, chart_path=chart_path)
 
 @app.route('/reports')
@@ -844,40 +844,40 @@ def reports():
     """Show test reports."""
     filter_form = FilterForm()
     export_form = ExportForm()
-    
+
     # Populate filter form choices
     filter_form.project.choices = [(0, 'All')] + [(p.id, p.name) for p in Project.query.order_by(Project.name).all()]
     filter_form.test_suite_id.choices = [(0, 'All')] + [(ts.id, ts.name) for ts in TestSuite.query.order_by(TestSuite.name).all()]
-    
+
     # Apply filters
     query = TestResult.query.join(TestRun).join(TestCase).join(TestSuite).join(Project)
-    
+
     if request.args.get('project') and request.args.get('project') != '0':
         query = query.filter(Project.id == request.args.get('project'))
         filter_form.project.data = int(request.args.get('project'))
-    
+
     if request.args.get('test_suite') and request.args.get('test_suite') != '0':
         query = query.filter(TestSuite.id == request.args.get('test_suite'))
         filter_form.test_suite_id.data = int(request.args.get('test_suite'))
-    
+
     if request.args.get('status') and request.args.get('status') != '':
         query = query.filter(TestResult.status == request.args.get('status'))
         filter_form.status.data = request.args.get('status')
-    
+
     if request.args.get('date_from'):
         date_from = datetime.datetime.strptime(request.args.get('date_from'), '%Y-%m-%d')
         query = query.filter(TestResult.created_at >= date_from)
         filter_form.date_from.data = date_from
-    
+
     if request.args.get('date_to'):
         date_to = datetime.datetime.strptime(request.args.get('date_to'), '%Y-%m-%d')
         date_to = date_to.replace(hour=23, minute=59, second=59)
         query = query.filter(TestResult.created_at <= date_to)
         filter_form.date_to.data = date_to
-    
+
     # Get results
     results = query.order_by(TestResult.created_at.desc()).all()
-    
+
     # Calculate summary
     summary = {
         'passed': sum(1 for r in results if r.status == 'passed'),
@@ -886,7 +886,7 @@ def reports():
         'error': sum(1 for r in results if r.status == 'error')
     }
     summary['total'] = len(results)
-    
+
     # Generate chart
     chart_data = {
         'Passed': summary['passed'],
@@ -894,43 +894,43 @@ def reports():
         'Skipped': summary['skipped'],
         'Error': summary['error']
     }
-    
+
     chart_path = None
     if summary['total'] > 0:
         chart_path = generate_chart(chart_data, chart_type='bar', filename="report_results.png")
-    
+
     return render_template('reports.html', results=results, summary=summary, chart_path=chart_path, filter_form=filter_form, export_form=export_form)
 
 @app.route('/export', methods=['POST'])
 def export_results():
     """Export test results."""
     form = ExportForm()
-    
+
     if form.validate_on_submit():
         # Apply filters (same as in reports view)
         query = TestResult.query.join(TestRun).join(TestCase).join(TestSuite).join(Project)
-        
+
         if request.args.get('project') and request.args.get('project') != '0':
             query = query.filter(Project.id == request.args.get('project'))
-        
+
         if request.args.get('test_suite') and request.args.get('test_suite') != '0':
             query = query.filter(TestSuite.id == request.args.get('test_suite'))
-        
+
         if request.args.get('status') and request.args.get('status') != '':
             query = query.filter(TestResult.status == request.args.get('status'))
-        
+
         if request.args.get('date_from'):
             date_from = datetime.datetime.strptime(request.args.get('date_from'), '%Y-%m-%d')
             query = query.filter(TestResult.created_at >= date_from)
-        
+
         if request.args.get('date_to'):
             date_to = datetime.datetime.strptime(request.args.get('date_to'), '%Y-%m-%d')
             date_to = date_to.replace(hour=23, minute=59, second=59)
             query = query.filter(TestResult.created_at <= date_to)
-        
+
         # Get results
         results = query.order_by(TestResult.created_at.desc()).all()
-        
+
         # Prepare data for export
         data = []
         for result in results:
@@ -945,50 +945,50 @@ def export_results():
                 'Project': result.test_run.test_suite.project.name,
                 'Date': result.created_at.strftime('%Y-%m-%d %H:%M:%S')
             }
-            
+
             if form.include_details.data and result.error_message:
                 row['Error Message'] = result.error_message
-            
+
             data.append(row)
-        
+
         # Create DataFrame
         df = pd.DataFrame(data)
-        
+
         # Export based on selected format
         if form.format.data == 'csv':
             output = io.StringIO()
             df.to_csv(output, index=False)
             output.seek(0)
-            
+
             return send_file(
                 io.BytesIO(output.getvalue().encode('utf-8')),
                 mimetype='text/csv',
                 as_attachment=True,
                 download_name='test_results.csv'
             )
-            
+
         elif form.format.data == 'excel':
             output = io.BytesIO()
             df.to_excel(output, index=False)
             output.seek(0)
-            
+
             return send_file(
                 output,
                 mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
                 as_attachment=True,
                 download_name='test_results.xlsx'
             )
-            
+
         elif form.format.data == 'json':
             output = df.to_json(orient='records')
-            
+
             return send_file(
                 io.BytesIO(output.encode('utf-8')),
                 mimetype='application/json',
                 as_attachment=True,
                 download_name='test_results.json'
             )
-    
+
     flash('Invalid export parameters', 'error')
     return redirect(url_for('reports'))
 
@@ -1010,7 +1010,7 @@ def api_test_run_results(run_id):
     """Get test run results."""
     test_run = TestRun.query.get_or_404(run_id)
     test_results = TestResult.query.filter_by(test_run_id=test_run.id).all()
-    
+
     # Calculate summary
     summary = {
         'passed': TestResult.query.filter_by(test_run_id=test_run.id, status='passed').count(),
@@ -1019,7 +1019,7 @@ def api_test_run_results(run_id):
         'error': TestResult.query.filter_by(test_run_id=test_run.id, status='error').count(),
         'total': TestResult.query.filter_by(test_run_id=test_run.id).count()
     }
-    
+
     # Format results
     results = []
     for result in test_results:
@@ -1036,7 +1036,7 @@ def api_test_run_results(run_id):
                 'language': result.test_case.language
             }
         })
-    
+
     return jsonify({
         'summary': summary,
         'results': results
@@ -1083,50 +1083,51 @@ def save_recorded_test():
         data = request.get_json()
         if not data:
             return jsonify({'error': 'No data provided'}), 400
-            
+
         suite_id = data.get('suite_id')
         code = data.get('code')
         test_name = data.get('name', f"Recorded Test {datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}")
-        
+        test_description = data.get('description', '')
+
         if not suite_id or not code:
             return jsonify({'error': 'Missing required fields (suite_id, code)'}), 400
-            
+
         # Get the test suite
         test_suite = TestSuite.query.get_or_404(suite_id)
-        
+
         # Create test file directory if it doesn't exist
         test_dir = os.path.join('generated_tests', str(suite_id), 'recorded')
         os.makedirs(test_dir, exist_ok=True)
-        
+
         # Generate a unique filename
         filename = f"{test_name.replace(' ', '_').lower()}.py"
         filepath = os.path.join(test_dir, filename)
-        
+
         # Write the code to the file
         with open(filepath, 'w') as f:
             f.write(code)
-        
+
         # Create a new test case in the database
         test_case = TestCase(
             name=test_name,
-            description=f"Recorded test for {test_suite.name}",
+            description=test_description or f"Recorded test for {test_suite.name}",
             original_file_path="recorded",
             test_file_path=filepath,
             language="python",
             status="generated",
             test_suite_id=suite_id
         )
-        
+
         db.session.add(test_case)
         db.session.commit()
-        
+
         return jsonify({
             'status': 'success',
             'message': 'Test case saved successfully',
             'test_case_id': test_case.id,
             'test_file': filepath
         })
-        
+
     except Exception as e:
         db.session.rollback()
         return jsonify({'error': str(e)}), 500
@@ -1164,24 +1165,24 @@ async def stop_recording():
 @app.route('/test-runner')
 def test_runner():
     """Main test runner page."""
-    return render_template('test_run_form.html')
+    return render_template('test_runs.html')
 
 @app.route('/test-runner/upload', methods=['POST'])
 def upload_test_file():
     """Handle test case file upload."""
     if 'file' not in request.files:
         return jsonify({'error': 'No file part'}), 400
-    
+
     file = request.files['file']
     if file.filename == '':
         return jsonify({'error': 'No selected file'}), 400
-    
+
     if file and (file.filename.endswith('.json') or file.filename.endswith('.py')):
         # Save the uploaded file
         upload_dir = app.config['UPLOAD_FOLDER']
         file_path = os.path.join(upload_dir, secure_filename(file.filename))
         file.save(file_path)
-        
+
         try:
             if file.filename.endswith('.json'):
                 with open(file_path, 'r') as f:
@@ -1192,7 +1193,7 @@ def upload_test_file():
                 return jsonify({'success': True, 'config': {'test_steps': steps}})
         except Exception as e:
             return jsonify({'error': str(e)}), 500
-    
+
     return jsonify({'error': 'Unsupported file type'}), 400
 
 @app.route('/test-runner/execute', methods=['POST'])
@@ -1240,7 +1241,7 @@ def test_runner_events():
                 if not execution_state['running']:
                     break
                 continue
-    
+
     return Response(generate(), mimetype='text/event-stream')
 
 def run_test_case(config):
@@ -1252,7 +1253,7 @@ def run_test_case(config):
             browser = browser_type.launch(headless=config.get('headless', False))
             context = browser.new_context()
             page = context.new_page()
-            
+
             # Initialize components
             reporter = execution_state['reporter']
             optimizer = TestOptimizer(config.get('mode', 'default'), config.get('inputs'))
@@ -1272,14 +1273,14 @@ def run_test_case(config):
                 # Process and execute test steps
                 if config.get('test_steps'):
                     steps = optimizer.process_steps(config['test_steps'])
-                    
+
                     for step in steps:
                         if not execution_state['running']:
                             break
-                        
+
                         try:
                             start_time = time.time()
-                            
+
                             # Execute step based on action type
                             if step['action'] == 'click':
                                 page.click(step['selector'])
@@ -1291,21 +1292,21 @@ def run_test_case(config):
                                 page.check(step['selector'])
                             elif step['action'] == 'uncheck':
                                 page.uncheck(step['selector'])
-                            
+
                             execution_time = int((time.time() - start_time) * 1000)
                             status = 'passed'
-                            
+
                             # Take screenshot
                             screenshot_path = f"screenshot_{execution_state['current_step']}.png"
                             page.screenshot(path=os.path.join(app.config['SCREENSHOTS_FOLDER'], screenshot_path))
-                            
+
                             # Update statistics
                             execution_state['stats']['total'] += 1
                             execution_state['stats']['passed'] += 1
-                            
+
                             # Record step result
                             reporter.record_step(step, status, execution_time=execution_time)
-                            
+
                             # Send events
                             execution_state['event_queue'].put({
                                 'type': 'step',
@@ -1316,21 +1317,21 @@ def run_test_case(config):
                                     'time': execution_time
                                 }
                             })
-                            
+
                             execution_state['event_queue'].put({
                                 'type': 'screenshot',
                                 'data': {
                                     'url': f"/static/screenshots/{screenshot_path}"
                                 }
                             })
-                            
+
                             execution_state['event_queue'].put({
                                 'type': 'stats',
                                 'data': execution_state['stats']
                             })
-                            
+
                             execution_state['current_step'] += 1
-                            
+
                         except Exception as e:
                             # Handle step failure
                             execution_state['stats']['failed'] += 1
@@ -1339,10 +1340,10 @@ def run_test_case(config):
                                 'type': 'console',
                                 'data': f"Error executing step: {str(e)}"
                             })
-                            
+
                             if config.get('stopOnFailure'):
                                 break
-                
+
                 # Generate report
                 if config.get('reportFormat'):
                     report_path = generate_report(reporter, config['reportFormat'])
@@ -1350,10 +1351,10 @@ def run_test_case(config):
                         'type': 'report',
                         'data': {'url': f"/reports/{os.path.basename(report_path)}"}
                     })
-            
+
             finally:
                 browser.close()
-                
+
     except Exception as e:
         execution_state['event_queue'].put({
             'type': 'error',
@@ -1370,17 +1371,17 @@ def extract_steps_from_python(file_path):
     """Extract test steps from Python file."""
     with open(file_path, 'r') as f:
         content = f.read()
-    
+
     tree = ast.parse(content)
     steps = []
-    
+
     for node in ast.walk(tree):
         if isinstance(node, ast.Call):
             if isinstance(node.func, ast.Attribute) and hasattr(node.func.value, 'id') and node.func.value.id == 'page':
                 action = node.func.attr
                 if action in ['goto', 'click', 'fill', 'type', 'select_option', 'check', 'uncheck']:
                     step = {'action': action}
-                    
+
                     if node.args:
                         if action == 'goto':
                             step['value'] = extract_string_value(node.args[0])
@@ -1394,9 +1395,9 @@ def extract_steps_from_python(file_path):
                             step['selector'] = extract_string_value(node.args[0])
                             if len(node.args) > 1:
                                 step['value'] = extract_string_value(node.args[1])
-                    
+
                     steps.append(step)
-    
+
     return steps
 
 def extract_string_value(node):
@@ -1421,20 +1422,20 @@ def serve_report(filename):
 def download_test_case(case_id):
     """Download a test case file."""
     test_case = TestCase.query.get_or_404(case_id)
-    
+
     if not os.path.exists(test_case.test_file_path):
         flash('Test file not found.', 'error')
         return redirect(url_for('test_suite_detail', suite_id=test_case.test_suite_id))
-    
-    return send_file(test_case.test_file_path, 
-                    as_attachment=True, 
+
+    return send_file(test_case.test_file_path,
+                    as_attachment=True,
                     download_name=f"{test_case.name.replace(' ', '_')}.py")
 
 @app.route('/test-case/<int:case_id>')
 def test_case_detail(case_id):
     """Show test case details."""
     test_case = TestCase.query.get_or_404(case_id)
-    
+
     # Get file content if it exists
     file_content = None
     if os.path.exists(test_case.test_file_path):
@@ -1443,13 +1444,13 @@ def test_case_detail(case_id):
                 file_content = f.read()
         except Exception as e:
             file_content = f"Error reading file: {str(e)}"
-    
+
     # Get test results for this test case
     test_results = TestResult.query.filter_by(test_case_id=case_id, active=True).all()
-    
-    return render_template('test_case_detail.html', 
-                           test_case=test_case, 
-                           test_results=test_results, 
+
+    return render_template('test_case_detail.html',
+                           test_case=test_case,
+                           test_results=test_results,
                            file_content=file_content)
 
 @app.route('/test-case/<int:case_id>/delete', methods=['POST'])
@@ -1458,30 +1459,30 @@ def delete_test_case(case_id):
     try:
         test_case = TestCase.query.get_or_404(case_id)
         suite_id = test_case.test_suite_id
-        
+
         # Mark as inactive (soft delete)
         test_case.active = False
-        
+
         # Also mark related test results as inactive
         for result in test_case.test_results:
             result.active = False
-        
+
         db.session.commit()
-        
+
         # Return JSON response for AJAX requests
         if request.headers.get('Content-Type') == 'application/json':
             return jsonify({'status': 'success', 'message': 'Test case deleted successfully'})
-        
+
         # For form submissions, redirect with flash message
         flash('Test case deleted successfully', 'success')
         return redirect(url_for('test_suite_detail', suite_id=suite_id))
-        
+
     except Exception as e:
         db.session.rollback()
         # Return JSON response for AJAX requests
         if request.headers.get('Content-Type') == 'application/json':
             return jsonify({'status': 'error', 'error': str(e)}), 500
-        
+
         # For form submissions, redirect with error message
         flash(f'Error deleting test case: {str(e)}', 'danger')
         return redirect(url_for('test_suite_detail', suite_id=test_case.test_suite_id))
@@ -1504,7 +1505,7 @@ def api_upload_test_file():
         # Create uploads/test_runner directory if it doesn't exist
         upload_dir = os.path.join(app.config['UPLOAD_FOLDER'], 'test_runner')
         os.makedirs(upload_dir, exist_ok=True)
-        
+
         file_path = os.path.join(upload_dir, filename)
         file.save(file_path)
 
@@ -1532,7 +1533,7 @@ def api_upload_input_file():
         # Create uploads/test_runner/inputs directory if it doesn't exist
         upload_dir = os.path.join(app.config['UPLOAD_FOLDER'], 'test_runner', 'inputs')
         os.makedirs(upload_dir, exist_ok=True)
-        
+
         file_path = os.path.join(upload_dir, filename)
         file.save(file_path)
 
@@ -1565,7 +1566,7 @@ def api_run_test():
 
     if not file_path or not os.path.exists(file_path):
         return jsonify({'error': 'Invalid test file path'}), 400
-    
+
     # Create a test run record in the database if suite_id is provided
     test_run = None
     if suite_id:
@@ -1583,12 +1584,12 @@ def api_run_test():
         # For default input mode, just run the test file directly
         if input_mode == 'default':
             result = run_test_file(file_path)
-            
+
             # Update test run status if it exists
             if test_run:
                 test_run.status = "completed" if result.get('success', False) else "failed"
                 db.session.commit()
-                
+
             return jsonify(result)
 
         # For existing custom input mode, use the test runner script
@@ -1608,7 +1609,7 @@ def api_run_test():
             # Run the test using the test runner script
             import subprocess
             import sys
-            
+
             cmd = [
                 sys.executable,
                 dest_script,
@@ -1626,30 +1627,30 @@ def api_run_test():
                 text=True,
                 timeout=300  # 5 minute timeout
             )
-            
+
             result = {
                 'success': proc.returncode == 0,
                 'stdout': proc.stdout,
                 'stderr': proc.stderr,
                 'returncode': proc.returncode
             }
-            
+
             # Update test run status if it exists
             if test_run:
                 test_run.status = "completed" if result.get('success', False) else "failed"
                 db.session.commit()
-                
+
             return jsonify(result)
 
         # For dynamic input mode
         else:
             result = run_test_file(file_path)
-            
+
             # Update test run status if it exists
             if test_run:
                 test_run.status = "completed" if result.get('success', False) else "failed"
                 db.session.commit()
-                
+
             return jsonify(result)
 
     except subprocess.TimeoutExpired:
@@ -1657,7 +1658,7 @@ def api_run_test():
         if test_run:
             test_run.status = "failed"
             db.session.commit()
-            
+
         return jsonify({
             'success': False,
             'error': 'Test execution timed out after 5 minutes'
@@ -1667,7 +1668,7 @@ def api_run_test():
         if test_run:
             test_run.status = "failed"
             db.session.commit()
-            
+
         return jsonify({
             'success': False,
             'error': str(e)
@@ -1678,7 +1679,7 @@ def run_test_file(file_path):
     try:
         import subprocess
         import sys
-        
+
         # Run the test file
         proc = subprocess.run(
             [sys.executable, file_path],
@@ -1686,7 +1687,7 @@ def run_test_file(file_path):
             text=True,
             timeout=300  # 5 minute timeout
         )
-        
+
         return {
             'success': proc.returncode == 0,
             'stdout': proc.stdout,
@@ -1703,6 +1704,114 @@ def run_test_file(file_path):
             'success': False,
             'error': str(e)
         }
+
+@app.route('/api/test-case/<int:case_id>/run', methods=['POST'])
+def api_run_test_case(case_id):
+    """API endpoint to run a specific test case."""
+    try:
+        test_case = TestCase.query.get_or_404(case_id)
+        
+        # Create a new test run for this single test case
+        test_run = TestRun(
+            name=f"Run of {test_case.name}",
+            status="running",
+            start_time=datetime.datetime.utcnow(),
+            test_suite_id=test_case.test_suite_id
+        )
+        db.session.add(test_run)
+        db.session.commit()
+        
+        # Create a test result entry
+        test_result = TestResult(
+            test_case_id=test_case.id,
+            test_run_id=test_run.id,
+            status="running"
+        )
+        db.session.add(test_result)
+        db.session.commit()
+        
+        # Start test execution in a background thread
+        import threading
+        thread = threading.Thread(
+            target=execute_test_case,
+            args=(test_case.id, test_run.id, test_result.id)
+        )
+        thread.daemon = True
+        thread.start()
+        
+        return jsonify({
+            'status': 'success',
+            'message': 'Test execution started',
+            'test_run_id': test_run.id
+        })
+    except Exception as e:
+        return jsonify({'status': 'error', 'error': str(e)}), 500
+
+def execute_test_case(test_case_id, test_run_id, test_result_id):
+    """Execute a single test case in a background thread."""
+    with app.app_context():
+        try:
+            test_case = TestCase.query.get(test_case_id)
+            test_result = TestResult.query.get(test_result_id)
+            
+            if not test_case or not test_result:
+                raise Exception("Test case or result not found")
+            
+            # Check if the test file exists
+            if os.path.exists(test_case.test_file_path):
+                # Run the test using subprocess
+                import subprocess
+                import sys
+                
+                # Run the Python script
+                proc = subprocess.run(
+                    [sys.executable, test_case.test_file_path],
+                    capture_output=True,
+                    text=True,
+                    timeout=300  # 5 minute timeout
+                )
+                
+                # Update test result based on execution
+                if proc.returncode == 0:
+                    status = "passed"
+                    error_message = ""
+                else:
+                    status = "failed"
+                    error_message = proc.stderr
+                
+                test_result.status = status
+                test_result.error_message = error_message
+                test_result.execution_time = (datetime.datetime.utcnow() - test_result.created_at).total_seconds()
+                db.session.commit()
+            else:
+                # Test file doesn't exist
+                test_result.status = "error"
+                test_result.error_message = f"Test file not found: {test_case.test_file_path}"
+                db.session.commit()
+                
+            # Update test run status
+            test_run = TestRun.query.get(test_run_id)
+            if test_run:
+                test_run.status = "completed"
+                test_run.end_time = datetime.datetime.utcnow()
+                db.session.commit()
+                
+        except Exception as e:
+            # Handle execution errors
+            try:
+                test_result = TestResult.query.get(test_result_id)
+                if test_result:
+                    test_result.status = "error"
+                    test_result.error_message = str(e)
+                    db.session.commit()
+                
+                test_run = TestRun.query.get(test_run_id)
+                if test_run:
+                    test_run.status = "failed"
+                    test_run.end_time = datetime.datetime.utcnow()
+                    db.session.commit()
+            except Exception:
+                pass  # If we can't even update the status, just continue
 
 # Main entry point
 if __name__ == '__main__':
