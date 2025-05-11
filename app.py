@@ -12,7 +12,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash, jso
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from werkzeug.utils import secure_filename
-from models import db, Project, TestSuite, TestCase, TestRun, TestResult
+from models import db, Project, TestSuite, TestCase, TestRun, TestResult, ActionStep
 from forms import ProjectForm, TestSuiteForm, TestRunForm, FilterForm, ExportForm, TestExecutionForm
 import threading
 import uuid
@@ -433,7 +433,8 @@ def generate_chart(data, chart_type='pie', filename=None):
     plt.savefig(chart_path)
     plt.close()
 
-    return os.path.join('static', 'charts', filename)
+    # Return just the relative path within the static folder
+    return os.path.join('charts', filename)
 
 
 
@@ -1279,6 +1280,10 @@ def extract_steps_from_python(file_path):
     with open(file_path, 'r') as f:
         content = f.read()
 
+    return extract_steps_from_python_content(content)
+
+def extract_steps_from_python_content(content):
+    """Extract test steps from Python code content."""
     tree = ast.parse(content)
     steps = []
 
@@ -1292,6 +1297,7 @@ def extract_steps_from_python(file_path):
                     if node.args:
                         if action == 'goto':
                             step['value'] = extract_string_value(node.args[0])
+                            step['action'] = 'navigate'  # Normalize action name
                         elif action in ['click', 'check', 'uncheck']:
                             step['selector'] = extract_string_value(node.args[0])
                         elif action in ['fill', 'type']:
@@ -1352,13 +1358,51 @@ def test_case_detail(case_id):
         except Exception as e:
             file_content = f"Error reading file: {str(e)}"
 
+    # Get or parse action steps
+    action_steps = ActionStep.query.filter_by(test_case_id=case_id, active=True).order_by(ActionStep.order).all()
+
+    # If no steps exist in the database, parse them from the test file
+    if not action_steps and file_content:
+        try:
+            # Parse steps from the test file
+            parsed_steps = extract_steps_from_python_content(file_content)
+
+            # Save steps to the database
+            for i, step in enumerate(parsed_steps):
+                # Create a human-readable description
+                description = None
+                if step.get('action') == 'click':
+                    description = f"Click on element: {step.get('selector')}"
+                elif step.get('action') in ['fill', 'type']:
+                    description = f"Enter '{step.get('value')}' into {step.get('selector')}"
+                elif step.get('action') == 'navigate':
+                    description = f"Navigate to: {step.get('value')}"
+
+                action_step = ActionStep(
+                    action=step.get('action'),
+                    selector=step.get('selector'),
+                    value=step.get('value'),
+                    order=i,
+                    description=description,
+                    test_case_id=case_id
+                )
+                db.session.add(action_step)
+
+            db.session.commit()
+
+            # Reload steps
+            action_steps = ActionStep.query.filter_by(test_case_id=case_id, active=True).order_by(ActionStep.order).all()
+        except Exception as e:
+            flash(f"Error parsing test steps: {str(e)}", "error")
+
     # Get test results for this test case
     test_results = TestResult.query.filter_by(test_case_id=case_id, active=True).all()
 
     return render_template('test_case_detail.html',
                            test_case=test_case,
                            test_results=test_results,
-                           file_content=file_content)
+                           file_content=file_content,
+                           action_steps=action_steps)
 
 @app.route('/test-case/<int:case_id>/delete', methods=['POST'])
 def delete_test_case(case_id):
@@ -1612,11 +1656,111 @@ def run_test_file(file_path):
             'error': str(e)
         }
 
+@app.route('/api/test-case/<int:case_id>/update-steps', methods=['POST'])
+def update_test_steps(case_id):
+    """Update test case steps with new values."""
+    try:
+        test_case = TestCase.query.get_or_404(case_id)
+        data = request.get_json()
+
+        if not data or 'steps' not in data:
+            return jsonify({'status': 'error', 'error': 'No step data provided'}), 400
+
+        # Update each step
+        for step_data in data['steps']:
+            step_id = step_data.get('id')
+            new_value = step_data.get('value')
+
+            if step_id and new_value is not None:
+                step = ActionStep.query.get(step_id)
+                if step and step.test_case_id == test_case.id:
+                    step.value = new_value
+                    step.updated_at = datetime.datetime.utcnow()
+
+        db.session.commit()
+
+        # Regenerate the test file with updated values
+        regenerate_test_file(test_case.id)
+
+        return jsonify({
+            'status': 'success',
+            'message': 'Test steps updated successfully'
+        })
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'status': 'error', 'error': str(e)}), 500
+
+def regenerate_test_file(test_case_id):
+    """Regenerate the test file with updated step values."""
+    test_case = TestCase.query.get(test_case_id)
+    if not test_case:
+        return False
+
+    # Get all steps in order
+    steps = ActionStep.query.filter_by(test_case_id=test_case_id, active=True).order_by(ActionStep.order).all()
+    if not steps:
+        return False
+
+    # Generate code
+    code = [
+        "from playwright.async_api import async_playwright\n",
+        "import asyncio\n\n",
+        "async def test_recorded_actions():\n",
+        "    async with async_playwright() as p:\n",
+        "        browser = await p.chromium.launch(headless=False)\n",
+        "        page = await browser.new_page()\n"
+    ]
+
+    # Add steps
+    for step in steps:
+        if step.action == 'navigate':
+            code.append(f"        await page.goto('{step.value}')\n")
+        elif step.action == 'click':
+            code.append(f"        await page.click('{step.selector}')\n")
+        elif step.action in ['fill', 'type']:
+            code.append(f"        await page.fill('{step.selector}', '{step.value}')\n")
+        elif step.action == 'select':
+            code.append(f"        await page.select_option('{step.selector}', '{step.value}')\n")
+        elif step.action == 'check':
+            code.append(f"        await page.check('{step.selector}')\n")
+        elif step.action == 'uncheck':
+            code.append(f"        await page.uncheck('{step.selector}')\n")
+
+    code.append("        await browser.close()\n")
+    code.append("asyncio.run(test_recorded_actions())")
+
+    # Write to file
+    try:
+        with open(test_case.test_file_path, 'w') as f:
+            f.write(''.join(code))
+        return True
+    except Exception:
+        return False
+
 @app.route('/api/test-case/<int:case_id>/run', methods=['POST'])
 def api_run_test_case(case_id):
     """API endpoint to run a specific test case."""
     try:
         test_case = TestCase.query.get_or_404(case_id)
+
+        # Check if we need to update steps first
+        data = request.get_json() or {}
+        if data.get('steps'):
+            # Update steps before running
+            for step_data in data['steps']:
+                step_id = step_data.get('id')
+                new_value = step_data.get('value')
+
+                if step_id and new_value is not None:
+                    step = ActionStep.query.get(step_id)
+                    if step and step.test_case_id == test_case.id:
+                        step.value = new_value
+                        step.updated_at = datetime.datetime.utcnow()
+
+            db.session.commit()
+
+            # Regenerate the test file with updated values
+            regenerate_test_file(test_case.id)
 
         # Create a new test run for this single test case
         test_run = TestRun(

@@ -28,6 +28,48 @@
         }
         {% endif %}
         {% endfor %}
+
+        // Handle run test buttons
+        const runTestButtons = document.querySelectorAll('.run-test-btn');
+        runTestButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const testId = this.dataset.testId;
+                if (!testId) return;
+
+                // Disable button and show loading state
+                this.disabled = true;
+                const originalText = this.innerHTML;
+                this.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Running...';
+
+                // Run the test
+                fetch(`/api/test-case/${testId}/run`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        alert('Test execution started! You can view the results in the test case details.');
+                        // Redirect to test case detail page after a short delay
+                        setTimeout(() => {
+                            window.location.href = `/test-case/${testId}`;
+                        }, 1000);
+                    } else {
+                        alert('Error: ' + (data.error || 'Unknown error'));
+                        this.disabled = false;
+                        this.innerHTML = originalText;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error running test: ' + error.message);
+                    this.disabled = false;
+                    this.innerHTML = originalText;
+                });
+            });
+        });
     });
 </script>
 {% endblock %}
@@ -156,6 +198,79 @@
                 <div class="alert alert-info">
                     <i class="bi bi-info-circle"></i> No test suites found for this project.
                     <a href="{{ url_for('create_test_suite', project_id=project.id) }}" class="alert-link">Create a new test suite</a>.
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Test Cases Section -->
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Test Cases</h5>
+            </div>
+            <div class="card-body">
+                {% set has_test_cases = false %}
+                {% for test_suite in test_suites %}
+                    {% if test_suite.active and test_suite.test_cases|selectattr('active', 'equalto', true)|list|length > 0 %}
+                        {% set has_test_cases = true %}
+                    {% endif %}
+                {% endfor %}
+
+                {% if has_test_cases %}
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Test Case</th>
+                                <th>Test Suite</th>
+                                <th>Status</th>
+                                <th>Created</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for test_suite in test_suites %}
+                                {% if test_suite.active %}
+                                    {% for test_case in test_suite.test_cases %}
+                                        {% if test_case.active %}
+                                        <tr>
+                                            <td>{{ test_case.name }}</td>
+                                            <td>
+                                                <a href="{{ url_for('test_suite_detail', suite_id=test_suite.id) }}">
+                                                    {{ test_suite.name }}
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <span class="badge bg-{{ 'success' if test_case.status == 'passed' else 'warning' if test_case.status == 'generated' else 'danger' if test_case.status == 'failed' else 'secondary' }}">
+                                                    {{ test_case.status }}
+                                                </span>
+                                            </td>
+                                            <td>{{ test_case.created_at.strftime('%Y-%m-%d') }}</td>
+                                            <td>
+                                                <div class="btn-group" role="group">
+                                                    <a href="{{ url_for('test_case_detail', case_id=test_case.id) }}" class="btn btn-sm btn-info">
+                                                        <i class="bi bi-eye"></i> View
+                                                    </a>
+                                                    <button type="button" class="btn btn-sm btn-success run-test-btn" data-test-id="{{ test_case.id }}">
+                                                        <i class="bi bi-play"></i> Run
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="alert alert-info">
+                    <i class="bi bi-info-circle"></i> No test cases found for this project.
                 </div>
                 {% endif %}
             </div>

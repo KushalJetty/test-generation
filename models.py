@@ -51,6 +51,7 @@ class TestCase(BaseModel):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     test_results = db.relationship('TestResult', backref='test_case', lazy=True, cascade='all, delete-orphan')
+    action_steps = db.relationship('ActionStep', backref='test_case', lazy=True, cascade='all, delete-orphan')
 
     def __repr__(self):
         return f'<TestCase {self.test_file_path}>'
@@ -84,3 +85,19 @@ class TestResult(BaseModel):
 
     def __repr__(self):
         return f'<TestResult {self.status} for TestCase {self.test_case_id}>'
+
+class ActionStep(BaseModel):
+    """Model for storing test case steps."""
+    __tablename__ = 'action_step'
+    id = db.Column(db.Integer, primary_key=True)
+    action = db.Column(db.String(50), nullable=False)  # click, fill, navigate, etc.
+    selector = db.Column(db.String(500), nullable=True)  # CSS selector for the element
+    value = db.Column(db.Text, nullable=True)  # Value for input fields
+    order = db.Column(db.Integer, nullable=False)  # Order of execution
+    description = db.Column(db.Text, nullable=True)  # Human-readable description
+    test_case_id = db.Column(db.Integer, db.ForeignKey('test_case.id'), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+    def __repr__(self):
+        return f'<ActionStep {self.action} on {self.selector}>'

@@ -27,7 +27,7 @@
                     <div class="col-md-6">
                         <p><strong>Name:</strong> {{ test_suite.name }}</p>
                         <p>
-                            <strong>Project:</strong> 
+                            <strong>Project:</strong>
                             <a href="{{ url_for('project_detail', project_id=test_suite.project.id) }}">
                                 {{ test_suite.project.name }}
                             </a>
@@ -58,7 +58,8 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Path</th>
+                                <th>Status</th>
+                                <th>Description</th>
                                 <th>Created</th>
                                 <th>Actions</th>
                             </tr>
@@ -69,18 +70,19 @@
                             <tr>
                                 <td>{{ test_case.name }}</td>
                                 <td>
-                                    <span class="text-truncate d-inline-block" style="max-width: 200px;" title="{{ test_case.test_file_path }}">
-                                        {{ test_case.test_file_path }}
+                                    <span class="badge bg-{{ 'success' if test_case.status == 'passed' else 'warning' if test_case.status == 'generated' else 'danger' if test_case.status == 'failed' else 'secondary' }}">
+                                        {{ test_case.status }}
                                     </span>
                                 </td>
+                                <td>{{ test_case.description|truncate(50) if test_case.description else 'No description' }}</td>
                                 <td>{{ test_case.created_at.strftime('%Y-%m-%d') }}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="{{ url_for('test_case_detail', case_id=test_case.id) }}" class="btn btn-sm btn-info" title="View">
-                                            <i class="bi bi-eye"></i>
+                                        <a href="{{ url_for('test_case_detail', case_id=test_case.id) }}" class="btn btn-sm btn-info" title="View & Edit Steps">
+                                            <i class="bi bi-eye"></i> View Steps
                                         </a>
                                         <button onclick="runTestCase({{ test_case.id }})" class="btn btn-sm btn-success" title="Run Test">
-                                            <i class="bi bi-play-fill"></i>
+                                            <i class="bi bi-play-fill"></i> Run
                                         </button>
                                         <button onclick="deleteTestCase({{ test_case.id }})" class="btn btn-sm btn-danger" title="Delete">
                                             <i class="bi bi-trash"></i>
@@ -156,7 +158,7 @@
                                     {% set skipped = test_run.test_results|selectattr('status', 'equalto', 'skipped')|selectattr('active', 'equalto', true)|list|length %}
                                     {% set error = test_run.test_results|selectattr('status', 'equalto', 'error')|selectattr('active', 'equalto', true)|list|length %}
                                     {% set total = test_run.test_results|selectattr('active', 'equalto', true)|list|length %}
-                                    
+
                                     {% if total > 0 %}
                                     <div class="d-flex align-items-center">
                                         <div class="progress flex-grow-1" style="height: 10px;">
@@ -164,7 +166,7 @@
                                             {% set failed_percent = (failed / total * 100)|round|int %}
                                             {% set error_percent = (error / total * 100)|round|int %}
                                             {% set skipped_percent = (skipped / total * 100)|round|int %}
-                                            
+
                                             <div class="progress-bar bg-success" role="progressbar" style="width: {{ passed_percent }}%" title="Passed: {{ passed }}"></div>
                                             <div class="progress-bar bg-danger" role="progressbar" style="width: {{ failed_percent }}%" title="Failed: {{ failed }}"></div>
                                             <div class="progress-bar bg-warning" role="progressbar" style="width: {{ error_percent }}%" title="Error: {{ error }}"></div>
@@ -191,7 +193,7 @@
                 </div>
                 {% else %}
                 <div class="alert alert-info">
-                    <i class="bi bi-info-circle"></i> No test runs found for this test suite. 
+                    <i class="bi bi-info-circle"></i> No test runs found for this test suite.
                     <a href="{{ url_for('create_test_run', suite_id=test_suite.id) }}" class="alert-link">Create a new test run</a>.
                 </div>
                 {% endif %}
@@ -265,7 +267,7 @@ function runTestCase(testCaseId) {
             const toast = new bootstrap.Toast(loadingToast);
             toast.show();
         }
-        
+
         // Call API to run the test
         fetch(`/api/test-case/${testCaseId}/run`, {
             method: 'POST',
@@ -278,10 +280,8 @@ function runTestCase(testCaseId) {
             if (data.status === 'success') {
                 // Show success message
                 alert('Test execution started successfully!');
-                // Redirect to test run detail page if available
-                if (data.test_run_id) {
-                    window.location.href = `/test-run/${data.test_run_id}`;
-                }
+                // Redirect to test case detail page to view results
+                window.location.href = `/test-case/${testCaseId}`;
             } else {
                 alert(`Error running test: ${data.error || 'Unknown error'}`);
             }

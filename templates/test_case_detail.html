@@ -23,9 +23,9 @@
                 <div class="row">
                     <div class="col-md-6">
                         <p><strong>Name:</strong> {{ test_case.name }}</p>
-                        
+
                         <p>
-                            <strong>Test Suite:</strong> 
+                            <strong>Test Suite:</strong>
                             <a href="{{ url_for('test_suite_detail', suite_id=test_case.test_suite_id) }}">
                                 {{ test_case.test_suite.name }}
                             </a>
@@ -35,13 +35,79 @@
                         <p><strong>Created:</strong> {{ test_case.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
                     </div>
                 </div>
-                
+
                 {% if test_case.description %}
                 <div class="row mt-3">
                     <div class="col-12">
                         <p><strong>Description:</strong></p>
                         <p>{{ test_case.description }}</p>
                     </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">Test Steps</h5>
+                <div>
+                    <button id="saveStepsBtn" class="btn btn-sm btn-primary me-2">
+                        <i class="bi bi-save"></i> Save Changes
+                    </button>
+                    <button id="runTestBtn" class="btn btn-sm btn-success">
+                        <i class="bi bi-play-fill"></i> Run Test Case
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                {% if action_steps %}
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Action</th>
+                                <th>Description</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for step in action_steps %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>
+                                    <span class="badge bg-{{ 'primary' if step.action == 'click' else 'success' if step.action in ['fill', 'type'] else 'info' if step.action == 'navigate' else 'secondary' }}">
+                                        {{ step.action }}
+                                    </span>
+                                </td>
+                                <td>{{ step.description or 'No description' }}</td>
+                                <td>
+                                    {% if step.action in ['fill', 'type'] %}
+                                    <div class="input-group input-group-sm">
+                                        <input type="text" class="form-control step-value-input"
+                                               data-step-id="{{ step.id }}"
+                                               value="{{ step.value or '' }}">
+                                    </div>
+                                    {% elif step.action == 'navigate' %}
+                                    <code>{{ step.value }}</code>
+                                    {% elif step.action == 'click' %}
+                                    <code>{{ step.selector }}</code>
+                                    {% else %}
+                                    <code>{{ step.value or step.selector or 'N/A' }}</code>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="alert alert-info">
+                    <i class="bi bi-info-circle"></i> No test steps found for this test case.
                 </div>
                 {% endif %}
             </div>
@@ -126,4 +192,102 @@
     </div>
 </div>
 {% endif %}
-{% endblock %} 
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const saveStepsBtn = document.getElementById('saveStepsBtn');
+        const runTestBtn = document.getElementById('runTestBtn');
+        const stepInputs = document.querySelectorAll('.step-value-input');
+
+        // Save changes button
+        if (saveStepsBtn) {
+            saveStepsBtn.addEventListener('click', function() {
+                const steps = [];
+
+                // Collect all step values
+                stepInputs.forEach(input => {
+                    steps.push({
+                        id: input.dataset.stepId,
+                        value: input.value
+                    });
+                });
+
+                // Send to server
+                fetch('/api/test-case/{{ test_case.id }}/update-steps', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ steps: steps })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        // Show success message
+                        alert('Test steps updated successfully!');
+                        // Reload the page to show updated code
+                        window.location.reload();
+                    } else {
+                        alert('Error: ' + (data.error || 'Unknown error'));
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error saving changes: ' + error.message);
+                });
+            });
+        }
+
+        // Run test button
+        if (runTestBtn) {
+            runTestBtn.addEventListener('click', function() {
+                // Disable button and show loading state
+                runTestBtn.disabled = true;
+                runTestBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Running...';
+
+                const steps = [];
+
+                // Collect all step values
+                stepInputs.forEach(input => {
+                    steps.push({
+                        id: input.dataset.stepId,
+                        value: input.value
+                    });
+                });
+
+                // Run the test with current values
+                fetch('/api/test-case/{{ test_case.id }}/run', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ steps: steps })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        // Show success message
+                        alert('Test execution started! Check the results tab for updates.');
+                        // Reload the page after a delay to show results
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 5000);
+                    } else {
+                        alert('Error: ' + (data.error || 'Unknown error'));
+                        runTestBtn.disabled = false;
+                        runTestBtn.innerHTML = '<i class="bi bi-play-fill"></i> Run Test Case';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error running test: ' + error.message);
+                    runTestBtn.disabled = false;
+                    runTestBtn.innerHTML = '<i class="bi bi-play-fill"></i> Run Test Case';
+                });
+            });
+        }
+    });
+</script>
+{% endblock %}

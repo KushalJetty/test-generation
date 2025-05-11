@@ -21,13 +21,13 @@
                     <div class="col-md-6">
                         <p><strong>Name:</strong> {{ test_run.name }}</p>
                         <p>
-                            <strong>Test Suite:</strong> 
+                            <strong>Test Suite:</strong>
                             <a href="{{ url_for('test_suite_detail', suite_id=test_run.test_suite.id) }}">
                                 {{ test_run.test_suite.name }}
                             </a>
                         </p>
                         <p>
-                            <strong>Project:</strong> 
+                            <strong>Project:</strong>
                             <a href="{{ url_for('project_detail', project_id=test_run.test_suite.project.id) }}">
                                 {{ test_run.test_suite.project.name }}
                             </a>
@@ -38,7 +38,7 @@
                         <p><strong>Start Time:</strong> {{ test_run.start_time.strftime('%Y-%m-%d %H:%M:%S') if test_run.start_time else 'Not started' }}</p>
                         <p><strong>End Time:</strong> {{ test_run.end_time.strftime('%Y-%m-%d %H:%M:%S') if test_run.end_time else 'Not completed' }}</p>
                         <p>
-                            <strong>Duration:</strong> 
+                            <strong>Duration:</strong>
                             {% if test_run.start_time and test_run.end_time %}
                             {{ (test_run.end_time - test_run.start_time).total_seconds()|round(2) }} seconds
                             {% else %}
@@ -85,7 +85,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 {% if summary.total > 0 %}
                 <div class="progress mt-3" style="height: 20px;">
                     {% if summary.passed > 0 %}
@@ -105,7 +105,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="col-md-4">
         <div class="card">
             <div class="card-header">
@@ -113,7 +113,7 @@
             </div>
             <div class="card-body text-center">
                 {% if chart_path %}
-                <img src="{{ url_for('static', filename=chart_path.replace('static/', '')) }}" alt="Test Results Chart" class="img-fluid">
+                <img src="{{ url_for('static', filename='charts/run_' + test_run.id|string + '_results.png') }}" alt="Test Results Chart" class="img-fluid">
                 {% else %}
                 <div class="alert alert-info">
                     <i class="bi bi-info-circle"></i> No chart available.
