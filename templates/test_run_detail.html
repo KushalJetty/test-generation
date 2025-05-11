@@ -113,7 +113,7 @@
             </div>
             <div class="card-body text-center">
                 {% if chart_path %}
-                <img src="{{ url_for('static', filename='charts/run_' + test_run.id|string + '_results.png') }}" alt="Test Results Chart" class="img-fluid">
+                <img src="{{ url_for('static', filename=chart_path) }}" alt="Test Results Chart" class="img-fluid">
                 {% else %}
                 <div class="alert alert-info">
                     <i class="bi bi-info-circle"></i> No chart available.

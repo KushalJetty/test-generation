@@ -81,9 +81,9 @@
                                         <a href="{{ url_for('test_case_detail', case_id=test_case.id) }}" class="btn btn-sm btn-info" title="View & Edit Steps">
                                             <i class="bi bi-eye"></i> View Steps
                                         </a>
-                                        <button onclick="runTestCase({{ test_case.id }})" class="btn btn-sm btn-success" title="Run Test">
+                                        <a href="{{ url_for('run_test_case', case_id=test_case.id) }}" class="btn btn-sm btn-success" title="Run Test">
                                             <i class="bi bi-play-fill"></i> Run
-                                        </button>
+                                        </a>
                                         <button onclick="deleteTestCase({{ test_case.id }})" class="btn btn-sm btn-danger" title="Delete">
                                             <i class="bi bi-trash"></i>
                                         </button>
@@ -258,49 +258,7 @@
 {% endblock %}
 
 <script>
-function runTestCase(testCaseId) {
-    // Show confirmation dialog
-    if (confirm('Are you sure you want to run this test case?')) {
-        // Show loading indicator if it exists
-        const loadingToast = document.getElementById('loadingToast');
-        if (loadingToast) {
-            const toast = new bootstrap.Toast(loadingToast);
-            toast.show();
-        }
-
-        // Call API to run the test
-        fetch(`/api/test-case/${testCaseId}/run`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success') {
-                // Show success message
-                alert('Test execution started successfully!');
-                // Redirect to test case detail page to view results
-                window.location.href = `/test-case/${testCaseId}`;
-            } else {
-                alert(`Error running test: ${data.error || 'Unknown error'}`);
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('An error occurred while running the test.');
-        })
-        .finally(() => {
-            // Hide loading indicator if it exists
-            if (loadingToast) {
-                const toast = bootstrap.Toast.getInstance(loadingToast);
-                if (toast) {
-                    toast.hide();
-                }
-            }
-        });
-    }
-}
+// Run test case functionality now uses direct links to run_test_case page
 
 function deleteTestCase(testCaseId) {
     // Show confirmation dialog

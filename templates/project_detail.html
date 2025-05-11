@@ -29,47 +29,7 @@
         {% endif %}
         {% endfor %}
 
-        // Handle run test buttons
-        const runTestButtons = document.querySelectorAll('.run-test-btn');
-        runTestButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const testId = this.dataset.testId;
-                if (!testId) return;
-
-                // Disable button and show loading state
-                this.disabled = true;
-                const originalText = this.innerHTML;
-                this.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Running...';
-
-                // Run the test
-                fetch(`/api/test-case/${testId}/run`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.status === 'success') {
-                        alert('Test execution started! You can view the results in the test case details.');
-                        // Redirect to test case detail page after a short delay
-                        setTimeout(() => {
-                            window.location.href = `/test-case/${testId}`;
-                        }, 1000);
-                    } else {
-                        alert('Error: ' + (data.error || 'Unknown error'));
-                        this.disabled = false;
-                        this.innerHTML = originalText;
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Error running test: ' + error.message);
-                    this.disabled = false;
-                    this.innerHTML = originalText;
-                });
-            });
-        });
+        // Run test buttons now use direct links to run_test_case page
     });
 </script>
 {% endblock %}
@@ -255,9 +215,9 @@
                                                     <a href="{{ url_for('test_case_detail', case_id=test_case.id) }}" class="btn btn-sm btn-info">
                                                         <i class="bi bi-eye"></i> View
                                                     </a>
-                                                    <button type="button" class="btn btn-sm btn-success run-test-btn" data-test-id="{{ test_case.id }}">
+                                                    <a href="{{ url_for('run_test_case', case_id=test_case.id) }}" class="btn btn-sm btn-success">
                                                         <i class="bi bi-play"></i> Run
-                                                    </button>
+                                                    </a>
                                                 </div>
                                             </td>
                                         </tr>

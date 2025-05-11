@@ -58,9 +58,9 @@
                     <button id="saveStepsBtn" class="btn btn-sm btn-primary me-2">
                         <i class="bi bi-save"></i> Save Changes
                     </button>
-                    <button id="runTestBtn" class="btn btn-sm btn-success">
+                    <a href="{{ url_for('run_test_case', case_id=test_case.id) }}" class="btn btn-sm btn-success">
                         <i class="bi bi-play-fill"></i> Run Test Case
-                    </button>
+                    </a>
                 </div>
             </div>
             <div class="card-body">
@@ -198,7 +198,6 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const saveStepsBtn = document.getElementById('saveStepsBtn');
-        const runTestBtn = document.getElementById('runTestBtn');
         const stepInputs = document.querySelectorAll('.step-value-input');
 
         // Save changes button
@@ -240,54 +239,7 @@
             });
         }
 
-        // Run test button
-        if (runTestBtn) {
-            runTestBtn.addEventListener('click', function() {
-                // Disable button and show loading state
-                runTestBtn.disabled = true;
-                runTestBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Running...';
-
-                const steps = [];
-
-                // Collect all step values
-                stepInputs.forEach(input => {
-                    steps.push({
-                        id: input.dataset.stepId,
-                        value: input.value
-                    });
-                });
-
-                // Run the test with current values
-                fetch('/api/test-case/{{ test_case.id }}/run', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ steps: steps })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.status === 'success') {
-                        // Show success message
-                        alert('Test execution started! Check the results tab for updates.');
-                        // Reload the page after a delay to show results
-                        setTimeout(() => {
-                            window.location.reload();
-                        }, 5000);
-                    } else {
-                        alert('Error: ' + (data.error || 'Unknown error'));
-                        runTestBtn.disabled = false;
-                        runTestBtn.innerHTML = '<i class="bi bi-play-fill"></i> Run Test Case';
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Error running test: ' + error.message);
-                    runTestBtn.disabled = false;
-                    runTestBtn.innerHTML = '<i class="bi bi-play-fill"></i> Run Test Case';
-                });
-            });
-        }
+        // Run test button functionality removed - now using direct link to run_test_case page
     });
 </script>
 {% endblock %}

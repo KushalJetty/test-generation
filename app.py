@@ -8,7 +8,7 @@ from playwright.sync_api import sync_playwright
 import queue
 from validators import url as validate_url
 matplotlib.use('Agg')  # Use non-interactive backend for server environment
-from flask import Flask, render_template, request, redirect, url_for, flash, jsonify, send_file, Response, send_from_directory
+from flask import Flask, render_template, request, redirect, url_for, flash, jsonify, send_file, Response, stream_with_context, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from werkzeug.utils import secure_filename
@@ -80,6 +80,10 @@ playwright = None
 page = None
 tracker = None
 recorded_url = None
+
+# Global variables for test execution with real-time console output
+test_execution_state = {}  # Dictionary to store execution state for each test case
+test_event_queues = {}     # Dictionary to store event queues for each test case
 
 # Async thread for Playwright operations
 class AsyncThread(threading.Thread):
@@ -395,7 +399,7 @@ def generate_chart(data, chart_type='pie', filename=None):
         filename: Optional filename to save the chart
 
     Returns:
-        Path to the saved chart image
+        Path to the saved chart image relative to the static folder
     """
     plt.figure(figsize=(8, 6))
 
@@ -426,6 +430,10 @@ def generate_chart(data, chart_type='pie', filename=None):
     if not filename:
         filename = f"chart_{uuid.uuid4().hex[:8]}.png"
 
+    # Ensure the filename doesn't have 'charts/' prefix already
+    if filename.startswith('charts/'):
+        filename = filename[7:]
+
     chart_dir = os.path.join(app.static_folder, 'charts')
     os.makedirs(chart_dir, exist_ok=True)
     chart_path = os.path.join(chart_dir, filename)
@@ -434,7 +442,7 @@ def generate_chart(data, chart_type='pie', filename=None):
     plt.close()
 
     # Return just the relative path within the static folder
-    return os.path.join('charts', filename)
+    return f"charts/{filename}"
 
 
 
@@ -468,7 +476,7 @@ def index():
 
     chart_path = None
     if sum(test_results.values()) > 0:
-        chart_path = generate_chart(test_results)
+        chart_path = generate_chart(test_results, filename="dashboard_results.png")
 
     return render_template('index.html',
                            projects_count=projects_count,
@@ -805,7 +813,7 @@ def reports():
 
     chart_path = None
     if summary['total'] > 0:
-        chart_path = generate_chart(chart_data, chart_type='bar', filename="report_results.png")
+        chart_path = generate_chart(chart_data, chart_type='bar', filename="reports_results.png")
 
     return render_template('reports.html', results=results, summary=summary, chart_path=chart_path, filter_form=filter_form, export_form=export_form)
 
@@ -1797,6 +1805,326 @@ def api_run_test_case(case_id):
         })
     except Exception as e:
         return jsonify({'status': 'error', 'error': str(e)}), 500
+
+@app.route('/test-case/<int:case_id>/run')
+def run_test_case(case_id):
+    """Run a test case with real-time console output."""
+    test_case = TestCase.query.get_or_404(case_id)
+    action_steps = ActionStep.query.filter_by(test_case_id=case_id, active=True).order_by(ActionStep.order).all()
+
+    # Initialize test execution state
+    if case_id not in test_execution_state:
+        test_execution_state[case_id] = {
+            'running': False,
+            'current_step': 0,
+            'total_steps': len(action_steps),
+            'passed_steps': 0,
+            'failed_steps': 0
+        }
+
+    # Initialize event queue
+    if case_id not in test_event_queues:
+        test_event_queues[case_id] = queue.Queue()
+
+    # Create a new test run
+    test_run = TestRun(
+        name=f"Run of {test_case.name}",
+        status="running",
+        start_time=datetime.datetime.utcnow(),
+        test_suite_id=test_case.test_suite_id
+    )
+    db.session.add(test_run)
+    db.session.commit()
+
+    # Create a test result entry
+    test_result = TestResult(
+        test_case_id=test_case.id,
+        test_run_id=test_run.id,
+        status="running"
+    )
+    db.session.add(test_result)
+    db.session.commit()
+
+    # Start test execution in a background thread
+    thread = threading.Thread(
+        target=execute_test_case_with_console,
+        args=(test_case.id, test_run.id, test_result.id)
+    )
+    thread.daemon = True
+    thread.start()
+
+    return render_template('run_test_case.html',
+                          test_case=test_case,
+                          action_steps=action_steps,
+                          start_time=datetime.datetime.utcnow())
+
+@app.route('/test-case/<int:case_id>/stream')
+def stream_test_output(case_id):
+    """Stream test execution output as Server-Sent Events."""
+    def generate():
+        if case_id not in test_event_queues:
+            test_event_queues[case_id] = queue.Queue()
+
+        while True:
+            try:
+                # Check if test is still running
+                if case_id in test_execution_state and not test_execution_state[case_id]['running']:
+                    # Send a final status event
+                    yield f"data: {json.dumps({'type': 'status', 'data': 'completed'})}\n\n"
+                    break
+
+                # Get event from queue with timeout
+                event = test_event_queues[case_id].get(timeout=1)
+                yield f"data: {json.dumps(event)}\n\n"
+            except queue.Empty:
+                # Send a keep-alive comment to prevent connection timeout
+                yield ": keep-alive\n\n"
+                continue
+            except Exception as e:
+                # Log the error and continue
+                print(f"Error in stream_test_output: {str(e)}")
+                yield f"data: {json.dumps({'type': 'error', 'data': str(e)})}\n\n"
+                continue
+
+    return Response(stream_with_context(generate()), mimetype='text/event-stream')
+
+@app.route('/test-case/<int:case_id>/stop', methods=['POST'])
+def stop_test_case(case_id):
+    """Stop test execution for a specific test case."""
+    if case_id in test_execution_state:
+        test_execution_state[case_id]['running'] = False
+
+        # Update test result if it exists
+        test_run = TestRun.query.filter_by(
+            test_suite_id=TestCase.query.get(case_id).test_suite_id
+        ).order_by(TestRun.created_at.desc()).first()
+
+        if test_run:
+            test_result = TestResult.query.filter_by(
+                test_case_id=case_id,
+                test_run_id=test_run.id
+            ).first()
+
+            if test_result:
+                test_result.status = "stopped"
+                test_result.end_time = datetime.datetime.utcnow()
+                db.session.commit()
+
+        return jsonify({'status': 'success', 'message': 'Test execution stopped'})
+
+    return jsonify({'status': 'error', 'message': 'Test not running'}), 404
+
+def execute_test_case_with_console(test_case_id, test_run_id, test_result_id):
+    """Execute a test case with real-time console output."""
+    with app.app_context():
+        try:
+            test_case = TestCase.query.get(test_case_id)
+            test_result = TestResult.query.get(test_result_id)
+
+            if not test_case or not test_result:
+                raise Exception("Test case or result not found")
+
+            # Initialize execution state
+            test_execution_state[test_case_id] = {
+                'running': True,
+                'current_step': 0,
+                'total_steps': ActionStep.query.filter_by(test_case_id=test_case_id, active=True).count(),
+                'passed_steps': 0,
+                'failed_steps': 0
+            }
+
+            # Send initial console message
+            test_event_queues[test_case_id].put({
+                'type': 'console',
+                'data': f"Starting test execution for {test_case.name}...",
+                'level': 'info'
+            })
+
+            # Execute the test using Playwright
+            with sync_playwright() as p:
+                # Send console message
+                test_event_queues[test_case_id].put({
+                    'type': 'console',
+                    'data': "Launching browser...",
+                    'level': 'info'
+                })
+
+                # Launch browser
+                browser = p.chromium.launch(headless=False)
+                context = browser.new_context()
+                page = context.new_page()
+
+                # Get test steps
+                steps = ActionStep.query.filter_by(test_case_id=test_case_id, active=True).order_by(ActionStep.order).all()
+
+                # Execute each step
+                start_time = time.time()
+                success = True
+                error_message = ""
+
+                for i, step in enumerate(steps):
+                    # Check if test should be stopped
+                    if not test_execution_state[test_case_id]['running']:
+                        test_event_queues[test_case_id].put({
+                            'type': 'console',
+                            'data': "Test execution stopped by user.",
+                            'level': 'warning'
+                        })
+                        break
+
+                    # Update current step
+                    test_execution_state[test_case_id]['current_step'] = i
+
+                    # Send step info to console
+                    step_desc = step.description or f"{step.action} on {step.selector or ''} {f'with value {step.value}' if step.value else ''}"
+                    test_event_queues[test_case_id].put({
+                        'type': 'console',
+                        'data': f"Step {i+1}/{len(steps)}: {step_desc}",
+                        'level': 'normal'
+                    })
+
+                    try:
+                        step_start_time = time.time()
+
+                        # Execute step based on action type
+                        if step.action == 'navigate':
+                            test_event_queues[test_case_id].put({
+                                'type': 'console',
+                                'data': f"Navigating to: {step.value}",
+                                'level': 'normal'
+                            })
+                            page.goto(step.value)
+                            page.wait_for_load_state('networkidle')
+
+                        elif step.action == 'click':
+                            test_event_queues[test_case_id].put({
+                                'type': 'console',
+                                'data': f"Clicking on: {step.selector}",
+                                'level': 'normal'
+                            })
+                            page.click(step.selector)
+
+                        elif step.action in ['fill', 'type']:
+                            test_event_queues[test_case_id].put({
+                                'type': 'console',
+                                'data': f"Filling '{step.value}' into: {step.selector}",
+                                'level': 'normal'
+                            })
+                            page.fill(step.selector, step.value)
+
+                        elif step.action == 'select':
+                            test_event_queues[test_case_id].put({
+                                'type': 'console',
+                                'data': f"Selecting '{step.value}' in: {step.selector}",
+                                'level': 'normal'
+                            })
+                            page.select_option(step.selector, step.value)
+
+                        # Calculate step execution time
+                        step_time = time.time() - step_start_time
+
+                        # Send success message
+                        test_event_queues[test_case_id].put({
+                            'type': 'console',
+                            'data': f"Step completed successfully in {step_time:.2f}s",
+                            'level': 'success'
+                        })
+
+                        # Update step stats
+                        test_execution_state[test_case_id]['passed_steps'] += 1
+
+                        # Send step event
+                        test_event_queues[test_case_id].put({
+                            'type': 'step',
+                            'data': {
+                                'action': step.action,
+                                'selector': step.selector,
+                                'value': step.value,
+                                'status': 'passed',
+                                'time': step_time
+                            }
+                        })
+
+                    except Exception as e:
+                        # Send error message
+                        error_msg = str(e)
+                        test_event_queues[test_case_id].put({
+                            'type': 'console',
+                            'data': f"Error executing step: {error_msg}",
+                            'level': 'error'
+                        })
+
+                        # Update step stats
+                        test_execution_state[test_case_id]['failed_steps'] += 1
+
+                        # Send step event
+                        test_event_queues[test_case_id].put({
+                            'type': 'step',
+                            'data': {
+                                'action': step.action,
+                                'selector': step.selector,
+                                'value': step.value,
+                                'status': 'failed',
+                                'error': error_msg
+                            }
+                        })
+
+                        # Mark test as failed
+                        success = False
+                        error_message = error_msg
+                        break
+
+                # Close browser
+                browser.close()
+
+                # Calculate total execution time
+                execution_time = time.time() - start_time
+
+                # Update test result
+                test_result.status = "passed" if success else "failed"
+                test_result.execution_time = execution_time
+                test_result.error_message = error_message
+                test_result.end_time = datetime.datetime.utcnow()
+                db.session.commit()
+
+                # Send final status
+                test_event_queues[test_case_id].put({
+                    'type': 'console',
+                    'data': f"Test execution completed in {execution_time:.2f}s with status: {test_result.status}",
+                    'level': 'success' if success else 'error'
+                })
+
+                test_event_queues[test_case_id].put({
+                    'type': 'status',
+                    'data': 'completed' if success else 'failed'
+                })
+
+        except Exception as e:
+            # Handle any unexpected errors
+            error_msg = str(e)
+            if test_case_id in test_event_queues:
+                test_event_queues[test_case_id].put({
+                    'type': 'console',
+                    'data': f"Unexpected error: {error_msg}",
+                    'level': 'error'
+                })
+
+                test_event_queues[test_case_id].put({
+                    'type': 'status',
+                    'data': 'failed'
+                })
+
+            # Update test result
+            if test_result:
+                test_result.status = "failed"
+                test_result.error_message = error_msg
+                test_result.end_time = datetime.datetime.utcnow()
+                db.session.commit()
+
+        finally:
+            # Mark test as not running
+            if test_case_id in test_execution_state:
+                test_execution_state[test_case_id]['running'] = False
 
 def execute_test_case(test_case_id, test_run_id, test_result_id):
     """Execute a single test case in a background thread."""
