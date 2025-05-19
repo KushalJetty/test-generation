@@ -7,7 +7,7 @@ async def test_recorded_actions():
         page = await browser.new_page()
         await page.goto('https://www.wikipedia.org')
         await page.click('#searchInput')
-        await page.fill('#searchInput', 'kannada')
+        await page.fill('#searchInput', 'kushal')
         await page.click('.pure-button.pure-button-primary-progressive')
         await browser.close()
 asyncio.run(test_recorded_actions())

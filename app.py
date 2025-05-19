@@ -765,6 +765,10 @@ def reports():
     filter_form.project.choices = [(0, 'All')] + [(p.id, p.name) for p in Project.query.order_by(Project.name).all()]
     filter_form.test_suite_id.choices = [(0, 'All')] + [(ts.id, ts.name) for ts in TestSuite.query.order_by(TestSuite.name).all()]
 
+    # Populate export form choices
+    export_form.test_run_id.choices = [(0, 'All')] + [(tr.id, tr.name) for tr in TestRun.query.order_by(TestRun.created_at.desc()).all()]
+    export_form.test_suite_id.choices = [(0, 'All')] + [(ts.id, ts.name) for ts in TestSuite.query.order_by(TestSuite.name).all()]
+
     # Apply filters
     query = TestResult.query.join(TestRun).join(TestCase).join(TestSuite).join(Project)
 
@@ -817,32 +821,26 @@ def reports():
 
     return render_template('reports.html', results=results, summary=summary, chart_path=chart_path, filter_form=filter_form, export_form=export_form)
 
-@app.route('/export', methods=['POST'])
+@app.route('/export-results', methods=['POST'])
 def export_results():
     """Export test results."""
     form = ExportForm()
 
+    # Populate form choices
+    form.test_run_id.choices = [(0, 'All')] + [(tr.id, tr.name) for tr in TestRun.query.order_by(TestRun.created_at.desc()).all()]
+    form.test_suite_id.choices = [(0, 'All')] + [(ts.id, ts.name) for ts in TestSuite.query.order_by(TestSuite.name).all()]
+
     if form.validate_on_submit():
-        # Apply filters (same as in reports view)
+        # Apply filters based on form data
         query = TestResult.query.join(TestRun).join(TestCase).join(TestSuite).join(Project)
 
-        if request.args.get('project') and request.args.get('project') != '0':
-            query = query.filter(Project.id == request.args.get('project'))
+        # Filter by test run if selected
+        if form.test_run_id.data and form.test_run_id.data != 0:
+            query = query.filter(TestRun.id == form.test_run_id.data)
 
-        if request.args.get('test_suite') and request.args.get('test_suite') != '0':
-            query = query.filter(TestSuite.id == request.args.get('test_suite'))
-
-        if request.args.get('status') and request.args.get('status') != '':
-            query = query.filter(TestResult.status == request.args.get('status'))
-
-        if request.args.get('date_from'):
-            date_from = datetime.datetime.strptime(request.args.get('date_from'), '%Y-%m-%d')
-            query = query.filter(TestResult.created_at >= date_from)
-
-        if request.args.get('date_to'):
-            date_to = datetime.datetime.strptime(request.args.get('date_to'), '%Y-%m-%d')
-            date_to = date_to.replace(hour=23, minute=59, second=59)
-            query = query.filter(TestResult.created_at <= date_to)
+        # Filter by test suite if selected
+        if form.test_suite_id.data and form.test_suite_id.data != 0:
+            query = query.filter(TestSuite.id == form.test_suite_id.data)
 
         # Get results
         results = query.order_by(TestResult.created_at.desc()).all()

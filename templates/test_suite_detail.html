@@ -58,7 +58,6 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Status</th>
                                 <th>Description</th>
                                 <th>Created</th>
                                 <th>Actions</th>
@@ -69,11 +68,6 @@
                             {% if test_case.active %}
                             <tr>
                                 <td>{{ test_case.name }}</td>
-                                <td>
-                                    <span class="badge bg-{{ 'success' if test_case.status == 'passed' else 'warning' if test_case.status == 'generated' else 'danger' if test_case.status == 'failed' else 'secondary' }}">
-                                        {{ test_case.status }}
-                                    </span>
-                                </td>
                                 <td>{{ test_case.description|truncate(50) if test_case.description else 'No description' }}</td>
                                 <td>{{ test_case.created_at.strftime('%Y-%m-%d') }}</td>
                                 <td>

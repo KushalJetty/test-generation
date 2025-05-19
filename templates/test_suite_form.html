@@ -48,21 +48,6 @@
                         {% endif %}
                     </div>
                     
-                    {% if form.ignore_patterns is defined %}
-                    <div class="mb-3">
-                        {{ form.ignore_patterns.label(class="form-label") }}
-                        {{ form.ignore_patterns(class="form-control", rows=4, placeholder="Enter patterns to ignore, one per line") }}
-                        <div class="form-text">Enter patterns to ignore, one per line (e.g., *.test.js, test_*.py)</div>
-                        {% if form.ignore_patterns.errors %}
-                            <div class="text-danger">
-                                {% for error in form.ignore_patterns.errors %}
-                                    {{ error }}
-                                {% endfor %}
-                            </div>
-                        {% endif %}
-                    </div>
-                    {% endif %}
-                    
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                         <a href="{{ url_for('test_suites') }}" class="btn btn-secondary me-md-2">
                             <i class="bi bi-x-circle"></i> Cancel

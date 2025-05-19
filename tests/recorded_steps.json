@@ -1,0 +1,54 @@
+[
+    {
+        "action": "click",
+        "selector": "#searchInput",
+        "timestamp": 1747378164799
+    },
+    {
+        "action": "input",
+        "selector": "#searchInput",
+        "value": "h",
+        "timestamp": 1747378165991
+    },
+    {
+        "action": "input",
+        "selector": "#searchInput",
+        "value": "hi",
+        "timestamp": 1747378166138
+    },
+    {
+        "action": "input",
+        "selector": "#searchInput",
+        "value": "his",
+        "timestamp": 1747378166448
+    },
+    {
+        "action": "input",
+        "selector": "#searchInput",
+        "value": "hist",
+        "timestamp": 1747378166912
+    },
+    {
+        "action": "input",
+        "selector": "#searchInput",
+        "value": "histo",
+        "timestamp": 1747378167740
+    },
+    {
+        "action": "input",
+        "selector": "#searchInput",
+        "value": "histor",
+        "timestamp": 1747378168008
+    },
+    {
+        "action": "input",
+        "selector": "#searchInput",
+        "value": "history",
+        "timestamp": 1747378168323
+    },
+    {
+        "action": "click",
+        "selector": ".pure-button.pure-button-primary-progressive",
+        "timestamp": 1747378170083
+    }
+]
