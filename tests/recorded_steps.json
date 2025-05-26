@@ -2,53 +2,59 @@
     {
         "action": "click",
         "selector": "#searchInput",
-        "timestamp": 1747378164799
+        "timestamp": 1748082929822
     },
     {
         "action": "input",
         "selector": "#searchInput",
-        "value": "h",
-        "timestamp": 1747378165991
+        "value": "k",
+        "timestamp": 1748082930619
     },
     {
         "action": "input",
         "selector": "#searchInput",
-        "value": "hi",
-        "timestamp": 1747378166138
+        "value": "ki",
+        "timestamp": 1748082930787
     },
     {
         "action": "input",
         "selector": "#searchInput",
-        "value": "his",
-        "timestamp": 1747378166448
+        "value": "k",
+        "timestamp": 1748082931599
     },
     {
         "action": "input",
         "selector": "#searchInput",
-        "value": "hist",
-        "timestamp": 1747378166912
+        "value": "ku",
+        "timestamp": 1748082932115
     },
     {
         "action": "input",
         "selector": "#searchInput",
-        "value": "histo",
-        "timestamp": 1747378167740
+        "value": "kus",
+        "timestamp": 1748082932257
     },
     {
         "action": "input",
         "selector": "#searchInput",
-        "value": "histor",
-        "timestamp": 1747378168008
+        "value": "kush",
+        "timestamp": 1748082932662
     },
     {
         "action": "input",
         "selector": "#searchInput",
-        "value": "history",
-        "timestamp": 1747378168323
+        "value": "kusha",
+        "timestamp": 1748082932779
+    },
+    {
+        "action": "input",
+        "selector": "#searchInput",
+        "value": "kushal",
+        "timestamp": 1748082933054
     },
     {
         "action": "click",
-        "selector": ".pure-button.pure-button-primary-progressive",
-        "timestamp": 1747378170083
+        "selector": ".sprite.svg-search-icon",
+        "timestamp": 1748082934715
     }
 ]
