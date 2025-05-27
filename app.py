@@ -889,14 +889,12 @@ def export_results():
         data = []
         for result in results:
             row = {
-                'Test Case': result.test_case.test_file_path,
-                'Original File': result.test_case.original_file_path,
-                'Language': result.test_case.language,
-                'Status': result.status,
+                'Project': result.test_run.test_suite.project.name,
+                'Test Suite': result.test_run.test_suite.name,
+                'Test Case Name': result.test_case.name,
+                'Description' : result.test_case.description,
                 'Execution Time (s)': result.execution_time,
                 'Test Run': result.test_run.name,
-                'Test Suite': result.test_run.test_suite.name,
-                'Project': result.test_run.test_suite.project.name,
                 'Date': result.created_at.strftime('%Y-%m-%d %H:%M:%S')
             }
 
