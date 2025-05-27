@@ -22,6 +22,21 @@ function setupRecorder(suiteId, options) {
     const codePreview = document.getElementById(elementIds.generatedCode);
     const urlInput = document.getElementById(elementIds.urlInput);
 
+    // Check if all required elements exist
+    if (!startBtn || !stopBtn || !clearBtn || !saveBtn || !recordedActions || !codePreview || !urlInput) {
+        console.error('setupRecorder: Missing required elements', {
+            startBtn: !!startBtn,
+            stopBtn: !!stopBtn,
+            clearBtn: !!clearBtn,
+            saveBtn: !!saveBtn,
+            recordedActions: !!recordedActions,
+            codePreview: !!codePreview,
+            urlInput: !!urlInput,
+            elementIds: elementIds
+        });
+        return;
+    }
+
     let actionsArray = [];
 
     function updateButtonStates(isRecording) {
@@ -120,16 +135,16 @@ function setupRecorder(suiteId, options) {
         // Always stop recording before saving
         await stopBtn.click();
         const codeContent = codePreview.textContent;
-        
+
         // Create a custom modal for test case name and description
         const modalId = `saveTestCaseModal${suiteId}`;
-        
+
         // Remove any existing modal with the same ID
         const existingModal = document.getElementById(modalId);
         if (existingModal) {
             existingModal.remove();
         }
-        
+
         const modalHtml = `
         <div class="modal fade" id="${modalId}" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog">
@@ -142,12 +157,12 @@ function setupRecorder(suiteId, options) {
                         <form id="saveTestCaseForm${suiteId}">
                             <div class="mb-3">
                                 <label for="testCaseName${suiteId}" class="form-label">Test Case Name</label>
-                                <input type="text" class="form-control" id="testCaseName${suiteId}" 
+                                <input type="text" class="form-control" id="testCaseName${suiteId}"
                                        value="Recorded Test ${new Date().toISOString().replace(/[:.]/g, '-')}" required>
                             </div>
                             <div class="mb-3">
                                 <label for="testCaseDescription${suiteId}" class="form-label">Description</label>
-                                <textarea class="form-control" id="testCaseDescription${suiteId}" rows="3" 
+                                <textarea class="form-control" id="testCaseDescription${suiteId}" rows="3"
                                           placeholder="Enter test case description..."></textarea>
                             </div>
                         </form>
@@ -160,24 +175,24 @@ function setupRecorder(suiteId, options) {
             </div>
         </div>
         `;
-        
+
         // Add the modal to the document
         document.body.insertAdjacentHTML('beforeend', modalHtml);
-        
+
         // Initialize the modal
         const saveModal = new bootstrap.Modal(document.getElementById(modalId));
         saveModal.show();
-        
+
         // Handle save confirmation
         document.getElementById(`confirmSaveBtn${suiteId}`).addEventListener('click', async () => {
             const testName = document.getElementById(`testCaseName${suiteId}`).value.trim();
             const testDescription = document.getElementById(`testCaseDescription${suiteId}`).value.trim();
-            
+
             if (!testName) {
                 alert('Please enter a test case name');
                 return;
             }
-            
+
             try {
                 // Save to database
                 const response = await fetch('/api/record/save', {
@@ -192,24 +207,26 @@ function setupRecorder(suiteId, options) {
                         description: testDescription
                     })
                 });
-                
+
                 const saveResult = await response.json();
-                
+
                 if (saveResult.status === 'success') {
                     alert('Test case saved successfully!');
-                    
+
                     // Close the save modal
                     saveModal.hide();
-                    
+
                     // If recorder modal is shown, close it
-                    const recorderModalElement = document.querySelector(`#recordModal${suiteId}`);
+                    // Try both possible modal ID patterns
+                    const recorderModalElement = document.querySelector(`#recordModal${suiteId}`) ||
+                                                document.querySelector('#recordModal');
                     if (recorderModalElement) {
                         const recorderModal = bootstrap.Modal.getInstance(recorderModalElement);
                         if (recorderModal) {
                             recorderModal.hide();
                         }
                     }
-                    
+
                     // Automatically redirect to the test suite page
                     window.location.href = `/test-suite/${suiteId}`;
                 } else {
@@ -267,20 +284,20 @@ class BrowserRecorder {
     setupEventListeners() {
         // Listen for clicks
         document.addEventListener('click', this.handleClick.bind(this), true);
-        
+
         // Listen for input changes
         document.addEventListener('input', this.handleInput.bind(this), true);
         document.addEventListener('change', this.handleChange.bind(this), true);
-        
+
         // Listen for form submissions
         document.addEventListener('submit', this.handleSubmit.bind(this), true);
-        
+
         // Listen for key presses
         document.addEventListener('keydown', this.handleKeyPress.bind(this), true);
-        
+
         // Listen for navigation
         window.addEventListener('popstate', this.handleNavigation.bind(this));
-        
+
         // Setup mutation observer for dynamic elements
         this.observer = new MutationObserver(this.handleDOMChanges.bind(this));
         this.observer.observe(document.body, {
@@ -305,16 +322,16 @@ class BrowserRecorder {
 
     handleClick(event) {
         if (!this.recording) return;
-        
+
         const element = event.target;
         const selector = this.getSelector(element);
-        
+
         if (selector && this.shouldRecordAction()) {
             // If clicking on a form element, record its current value
             if (element.form && ['input', 'select', 'textarea'].includes(element.tagName.toLowerCase())) {
                 this.recordInputChange(element);
             }
-            
+
             this.recordAction({
                 type: 'click',
                 selector: selector,
@@ -326,14 +343,14 @@ class BrowserRecorder {
 
     handleInput(event) {
         if (!this.recording) return;
-        
+
         const element = event.target;
-        
+
         // Clear any existing timeout for this element
         if (this.inputBuffer.has(element)) {
             clearTimeout(this.inputBuffer.get(element));
         }
-        
+
         // Set a new timeout to record the input change
         this.inputBuffer.set(element, setTimeout(() => {
             this.recordInputChange(element);
@@ -343,15 +360,15 @@ class BrowserRecorder {
 
     handleChange(event) {
         if (!this.recording) return;
-        
+
         const element = event.target;
-        
+
         // Clear any pending input timeout
         if (this.inputBuffer.has(element)) {
             clearTimeout(this.inputBuffer.get(element));
             this.inputBuffer.delete(element);
         }
-        
+
         // Record the change immediately
         this.recordInputChange(element);
     }
@@ -359,7 +376,7 @@ class BrowserRecorder {
     recordInputChange(element) {
         const selector = this.getSelector(element);
         if (!selector || !this.shouldRecordAction()) return;
-        
+
         let value = '';
         if (element.type === 'checkbox' || element.type === 'radio') {
             value = element.checked;
@@ -369,7 +386,7 @@ class BrowserRecorder {
         } else {
             value = element.value;
         }
-        
+
         this.recordAction({
             type: 'input',
             selector: selector,
@@ -381,10 +398,10 @@ class BrowserRecorder {
 
     handleSubmit(event) {
         if (!this.recording) return;
-        
+
         const form = event.target;
         const selector = this.getSelector(form);
-        
+
         if (selector && this.shouldRecordAction()) {
             // Record any pending input changes before form submission
             form.querySelectorAll('input, select, textarea').forEach(element => {
@@ -393,7 +410,7 @@ class BrowserRecorder {
                     this.recordInputChange(element);
                 }
             });
-            
+
             this.recordAction({
                 type: 'submit',
                 selector: selector,
@@ -404,17 +421,17 @@ class BrowserRecorder {
 
     handleKeyPress(event) {
         if (!this.recording) return;
-        
+
         // Record special keys and Enter key on inputs
         const specialKeys = ['Enter', 'Tab', 'Escape'];
         const element = event.target;
-        
+
         if (specialKeys.includes(event.key) && this.shouldRecordAction()) {
             if (event.key === 'Enter' && element.tagName.toLowerCase() === 'input') {
                 // Record the input value before handling Enter
                 this.recordInputChange(element);
             }
-            
+
             this.recordAction({
                 type: 'keypress',
                 key: event.key,
@@ -425,7 +442,7 @@ class BrowserRecorder {
 
     handleNavigation(event) {
         if (!this.recording) return;
-        
+
         if (this.shouldRecordAction()) {
             this.recordAction({
                 type: 'navigate',
@@ -437,7 +454,7 @@ class BrowserRecorder {
 
     handleDOMChanges(mutations) {
         if (!this.recording) return;
-        
+
         let hasRelevantChanges = false;
         for (const mutation of mutations) {
             if (mutation.type === 'childList' && mutation.addedNodes.length) {
@@ -452,7 +469,7 @@ class BrowserRecorder {
                 }
             }
         }
-        
+
         if (hasRelevantChanges && this.shouldRecordAction()) {
             this.recordAction({
                 type: 'dom_change',
@@ -463,29 +480,29 @@ class BrowserRecorder {
 
     getSelector(element) {
         if (!element) return null;
-        
+
         // Try ID first
         if (element.id) {
             return `#${element.id}`;
         }
-        
+
         // Try name attribute
         if (element.name) {
             return `[name="${element.name}"]`;
         }
-        
+
         // Try data attributes
         const dataAttrs = Array.from(element.attributes)
             .filter(attr => attr.name.startsWith('data-'));
         if (dataAttrs.length > 0) {
             return `[${dataAttrs[0].name}="${dataAttrs[0].value}"]`;
         }
-        
+
         // Try type and name combination for inputs
         if (element.type && element.name) {
             return `input[type="${element.type}"][name="${element.name}"]`;
         }
-        
+
         // Try classes
         if (element.className) {
             const classes = Array.from(element.classList)
@@ -498,15 +515,15 @@ class BrowserRecorder {
                 }
             }
         }
-        
+
         // Try parent context with nth-child
         let path = [];
         let current = element;
-        
+
         while (current && current !== document.body) {
             let selector = current.tagName.toLowerCase();
             let parent = current.parentElement;
-            
+
             if (parent) {
                 let children = Array.from(parent.children);
                 let index = children.filter(child => child.tagName === current.tagName).indexOf(current);
@@ -514,11 +531,11 @@ class BrowserRecorder {
                     selector += `:nth-of-type(${index + 1})`;
                 }
             }
-            
+
             path.unshift(selector);
             current = parent;
         }
-        
+
         return path.join(' > ');
     }
 
@@ -534,10 +551,10 @@ class BrowserRecorder {
     recordAction(action) {
         // Add timestamp and clean up action object
         action.timestamp = new Date().toISOString();
-        
+
         // Store action locally
         this.actions.push(action);
-        
+
         // Send action to server
         fetch('/api/record/action', {
             method: 'POST',
@@ -575,7 +592,7 @@ function runTestCase(testCaseId) {
             const toast = new bootstrap.Toast(loadingToast);
             toast.show();
         }
-        
+
         // Call API to run the test
         fetch(`/api/test-case/${testCaseId}/run`, {
             method: 'POST',

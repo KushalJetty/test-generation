@@ -58,6 +58,9 @@
                     <button id="saveStepsBtn" class="btn btn-sm btn-primary me-2">
                         <i class="bi bi-save"></i> Save Changes
                     </button>
+                    <button id="continueRecordingBtn" class="btn btn-sm btn-warning me-2" data-bs-toggle="modal" data-bs-target="#continueRecordingModal">
+                        <i class="bi bi-record-circle"></i> Continue Recording
+                    </button>
                     <a href="{{ url_for('run_test_case', case_id=test_case.id) }}" class="btn btn-sm btn-success">
                         <i class="bi bi-play-fill"></i> Run Test Case
                     </a>
@@ -73,6 +76,7 @@
                                 <th>Action</th>
                                 <th>Description</th>
                                 <th>Value</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -99,6 +103,14 @@
                                     {% else %}
                                     <code>{{ step.value or step.selector or 'N/A' }}</code>
                                     {% endif %}
+                                </td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-warning continue-from-step-btn"
+                                            data-step-order="{{ step.order }}"
+                                            data-step-index="{{ loop.index0 }}"
+                                            title="Continue recording from this step">
+                                        <i class="bi bi-record-circle"></i> Continue from here
+                                    </button>
                                 </td>
                             </tr>
                             {% endfor %}
@@ -192,6 +204,71 @@
     </div>
 </div>
 {% endif %}
+
+<!-- Continue Recording Modal -->
+<div class="modal fade" id="continueRecordingModal" tabindex="-1" aria-labelledby="continueRecordingModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="continueRecordingModalLabel">Continue Recording Test Case</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-info">
+                    <i class="bi bi-info-circle"></i>
+                    <strong>Continue Recording:</strong> This will open a browser window and execute the existing steps up to your selected point, then start recording new actions.
+                </div>
+
+                <form id="continueRecordingForm">
+                    <div class="mb-3">
+                        <label for="continueUrl" class="form-label">Target URL</label>
+                        <input type="url" class="form-control" id="continueUrl" placeholder="https://example.com" required>
+                        <div class="form-text">The URL where you want to continue recording</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="continueFromStep" class="form-label">Continue from step:</label>
+                        <select class="form-select" id="continueFromStep">
+                            <option value="-1">From the beginning (before all steps)</option>
+                            {% for step in action_steps %}
+                            <option value="{{ loop.index0 }}">After step {{ loop.index }}: {{ step.action }} - {{ step.description or 'No description' }}</option>
+                            {% endfor %}
+                        </select>
+                        <div class="form-text">Select the point where you want to start recording new actions</div>
+                    </div>
+                </form>
+
+                <div id="recordingStatus" class="mt-3" style="display: none;">
+                    <div class="alert alert-warning">
+                        <i class="bi bi-record-circle text-danger"></i>
+                        <strong>Recording in progress...</strong> Perform your actions in the browser window.
+                    </div>
+                    <div class="d-flex gap-2">
+                        <button id="stopContinueRecording" class="btn btn-danger">
+                            <i class="bi bi-stop-circle"></i> Stop Recording
+                        </button>
+                        <button id="saveContinueRecording" class="btn btn-success">
+                            <i class="bi bi-save"></i> Save New Steps
+                        </button>
+                    </div>
+                </div>
+
+                <div id="newStepsPreview" class="mt-3" style="display: none;">
+                    <h6>New Steps Recorded:</h6>
+                    <div id="newStepsList" class="border rounded p-2 bg-light" style="max-height: 200px; overflow-y: auto;">
+                        <!-- New steps will be displayed here -->
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" id="startContinueRecording" class="btn btn-warning">
+                    <i class="bi bi-record-circle"></i> Start Recording
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block extra_js %}
@@ -199,6 +276,14 @@
     document.addEventListener('DOMContentLoaded', function() {
         const saveStepsBtn = document.getElementById('saveStepsBtn');
         const stepInputs = document.querySelectorAll('.step-value-input');
+        const continueFromStepBtns = document.querySelectorAll('.continue-from-step-btn');
+        const startContinueRecordingBtn = document.getElementById('startContinueRecording');
+        const stopContinueRecordingBtn = document.getElementById('stopContinueRecording');
+        const saveContinueRecordingBtn = document.getElementById('saveContinueRecording');
+        const continueFromStepSelect = document.getElementById('continueFromStep');
+
+        let recordingEventSource = null;
+        let isRecording = false;
 
         // Save changes button
         if (saveStepsBtn) {
@@ -239,7 +324,127 @@
             });
         }
 
-        // Run test button functionality removed - now using direct link to run_test_case page
+        // Continue from step buttons
+        continueFromStepBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const stepIndex = this.dataset.stepIndex;
+                continueFromStepSelect.value = stepIndex;
+                // Show the modal
+                const modal = new bootstrap.Modal(document.getElementById('continueRecordingModal'));
+                modal.show();
+            });
+        });
+
+        // Start continue recording
+        if (startContinueRecordingBtn) {
+            startContinueRecordingBtn.addEventListener('click', function() {
+                const url = document.getElementById('continueUrl').value;
+                const continueFromStep = parseInt(continueFromStepSelect.value);
+
+                if (!url) {
+                    alert('Please enter a target URL');
+                    return;
+                }
+
+                // Start continuation recording
+                fetch('/api/record/continue', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        test_case_id: {{ test_case.id }},
+                        continue_from_step: continueFromStep,
+                        url: url
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        // Show recording status
+                        document.getElementById('recordingStatus').style.display = 'block';
+                        startContinueRecordingBtn.style.display = 'none';
+                        isRecording = true;
+
+                        // Start listening for new actions
+                        startListeningForActions();
+                    } else {
+                        alert('Error starting recording: ' + (data.message || 'Unknown error'));
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error starting recording: ' + error.message);
+                });
+            });
+        }
+
+        // Stop continue recording
+        if (stopContinueRecordingBtn) {
+            stopContinueRecordingBtn.addEventListener('click', function() {
+                fetch('/api/record/stop', {
+                    method: 'POST'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    isRecording = false;
+                    if (recordingEventSource) {
+                        recordingEventSource.close();
+                    }
+                    document.getElementById('newStepsPreview').style.display = 'block';
+                })
+                .catch(error => {
+                    console.error('Error stopping recording:', error);
+                });
+            });
+        }
+
+        // Save continue recording
+        if (saveContinueRecordingBtn) {
+            saveContinueRecordingBtn.addEventListener('click', function() {
+                fetch('/api/record/continue/save', {
+                    method: 'POST'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        alert('New steps saved successfully! Added ' + data.new_steps_count + ' new steps.');
+                        // Reload the page to show updated steps
+                        window.location.reload();
+                    } else {
+                        alert('Error saving steps: ' + (data.error || 'Unknown error'));
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error saving steps: ' + error.message);
+                });
+            });
+        }
+
+        function startListeningForActions() {
+            recordingEventSource = new EventSource('/api/record/stream');
+            recordingEventSource.onmessage = function(event) {
+                const data = JSON.parse(event.data);
+                if (data.type === 'action') {
+                    addNewStepToPreview(data.data);
+                }
+            };
+        }
+
+        function addNewStepToPreview(action) {
+            const stepsList = document.getElementById('newStepsList');
+            const stepDiv = document.createElement('div');
+            stepDiv.className = 'border-bottom pb-1 mb-1';
+            stepDiv.innerHTML = `
+                <small class="text-muted">${new Date().toLocaleTimeString()}</small>
+                <strong>${action.action}</strong>
+                ${action.selector ? `<code class="ms-2">${action.selector}</code>` : ''}
+                ${action.value ? `<span class="ms-2 text-success">"${action.value}"</span>` : ''}
+            `;
+            stepsList.appendChild(stepDiv);
+            stepsList.scrollTop = stepsList.scrollHeight;
+        }
     });
 </script>
 {% endblock %}

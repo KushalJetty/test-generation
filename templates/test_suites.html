@@ -57,7 +57,7 @@
                                                 </div>
                                             </a>
                                         </td>
-                                        
+
                                         <td>
                                             <span class="text-muted">{{ test_suite.description|truncate(50) or 'No description' }}</span>
                                         </td>
@@ -75,22 +75,22 @@
                                         </td>
                                         <td class="text-end pe-4">
                                             <div class="btn-group">
-                                                <a href="{{ url_for('test_suite_detail', suite_id=test_suite.id) }}" 
-                                                   class="btn btn-sm btn-outline-secondary" 
-                                                   data-bs-toggle="tooltip" 
+                                                <a href="{{ url_for('test_suite_detail', suite_id=test_suite.id) }}"
+                                                   class="btn btn-sm btn-outline-secondary"
+                                                   data-bs-toggle="tooltip"
                                                    title="View Details">
                                                     <i class="bi bi-eye"></i>
                                                 </a>
-                                                <a href="{{ url_for('edit_test_suite', suite_id=test_suite.id) }}" 
+                                                <a href="{{ url_for('edit_test_suite', suite_id=test_suite.id) }}"
                                                    class="btn btn-sm btn-outline-primary"
-                                                   data-bs-toggle="tooltip" 
+                                                   data-bs-toggle="tooltip"
                                                    title="Edit">
                                                     <i class="bi bi-pencil"></i>
                                                 </a>
                                                 <!-- Run Tests Button (opens test runner modal) -->
-                                                <button type="button" 
+                                                <button type="button"
                                                    class="btn btn-sm btn-outline-success"
-                                                   data-bs-toggle="tooltip" 
+                                                   data-bs-toggle="tooltip"
                                                    title="Run Tests"
                                                    onclick="openTestRunnerModal('{{ test_suite.id }}')">
                                                     <i class="bi bi-play-fill"></i>
@@ -103,51 +103,20 @@
                                                         title="Record Test Case">
                                                     <i class="bi bi-record-circle"></i>
                                                 </button>
-                                                <button type="button" 
-                                                        class="btn btn-sm btn-outline-danger" 
-                                                        data-bs-toggle="modal" 
+                                                <button type="button"
+                                                        class="btn btn-sm btn-outline-danger"
+                                                        data-bs-toggle="modal"
                                                         data-bs-target="#deleteTestSuiteModal{{ test_suite.id }}"
                                                         title="Delete">
                                                     <i class="bi bi-trash"></i>
                                                 </button>
                                             </div>
-                                            
+
                                             <!-- Record Modal -->
-                                            <div class="modal fade" id="recordModal{{ test_suite.id }}" tabindex="-1" aria-hidden="true">
-                                                <div class="modal-dialog modal-xl modal-dialog-centered">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title">Record Browser Actions for {{ test_suite.name }}</h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <!-- URL Input Field -->
-                                                            <div class="mb-3">
-                                                                <label for="urlInput{{ test_suite.id }}" class="form-label">Enter URL to Test</label>
-                                                                <input type="text" id="urlInput{{ test_suite.id }}" class="form-control" placeholder="https://example.com">
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <h6>Recorded Actions (JSON)</h6>
-                                                                    <pre id="recordedActions{{ test_suite.id }}" class="bg-light border p-2 rounded" style="height: 300px; overflow: auto; text-align: left;"></pre>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <h6>Generated Playwright Code</h6>
-                                                                    <pre id="generatedCode{{ test_suite.id }}" class="bg-light border p-2 rounded" style="height: 300px; overflow: auto; text-align: left;"></pre>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="modal-footer justify-content-center">
-                                                            <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                            <button class="btn btn-danger" id="stopBtn{{ test_suite.id }}">⏹ Stop Recording</button>
-                                                            <button class="btn btn-warning" id="clearBtn{{ test_suite.id }}">⎌ Clear Actions</button>
-                                                            <button class="btn btn-primary" id="startBtn{{ test_suite.id }}">🔴 Start Recording</button>
-                                                            <button class="btn btn-success" id="saveBtn{{ test_suite.id }}">💾 Save Test Case</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
+                                            {% set modal_id = "recordModal" + test_suite.id|string %}
+                                            {% set element_suffix = test_suite.id|string %}
+                                            {% include 'partials/record_modal.html' %}
+
                                             <!-- First Delete Modal -->
                                             <div class="modal fade" id="deleteTestSuiteModal{{ test_suite.id }}" tabindex="-1">
                                                 <div class="modal-dialog modal-dialog-centered">
@@ -163,8 +132,8 @@
                                                         </div>
                                                         <div class="modal-footer border-top-0">
                                                             <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
-                                                            <button type="button" class="btn btn-danger" 
-                                                                    data-bs-toggle="modal" 
+                                                            <button type="button" class="btn btn-danger"
+                                                                    data-bs-toggle="modal"
                                                                     data-bs-target="#confirmDeleteModal{{ test_suite.id }}"
                                                                     data-bs-dismiss="modal">
                                                                 Delete Test Suite
@@ -231,7 +200,7 @@
                     <div id="testConfigSection">
                         <form id="testConfigForm">
                             <input type="hidden" id="suiteId" name="suiteId" value="">
-                            
+
                             <div class="mb-3">
                                 <label for="testFile" class="form-label">Choose Test File</label>
                                 <input type="file" class="form-control" id="testFile" name="file" accept=".py">
@@ -263,13 +232,13 @@
                                 <input type="checkbox" class="form-check-input" id="headlessMode">
                                 <label class="form-check-label" for="headlessMode">Headless Mode</label>
                             </div>
-                            
+
                             <div class="d-grid">
                                 <button type="button" id="runTestBtn" class="btn btn-primary btn-lg">Run Test</button>
                             </div>
                         </form>
                     </div>
-                    
+
                     <div id="resultSection" class="d-none mt-4">
                         <h4>Test Results</h4>
                         <div class="alert" id="statusAlert" role="alert"></div>
@@ -283,7 +252,7 @@
                             <h5>Errors:</h5>
                             <pre id="errorText" class="p-3 bg-light border rounded" style="height: 200px; overflow: auto;"></pre>
                         </div>
-                        
+
                         <div class="d-grid mt-3">
                             <button type="button" id="resetBtn" class="btn btn-outline-secondary">Run Another Test</button>
                         </div>
@@ -302,7 +271,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
         return new bootstrap.Tooltip(tooltipTriggerEl)
     });
-    
+
     // Setup recording functionality for each test suite
     {% for test_suite in test_suites %}
     setupRecorder("{{ test_suite.id }}", {});

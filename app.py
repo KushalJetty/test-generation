@@ -80,6 +80,7 @@ playwright = None
 page = None
 tracker = None
 recorded_url = None
+continuation_context = None  # Store context for continuation recording
 
 # Global variables for test execution with real-time console output
 test_execution_state = {}  # Dictionary to store execution state for each test case
@@ -103,16 +104,29 @@ def run_async(coroutine):
     return future.result()
 
 class ActionTracker:
-    def __init__(self, page):
+    def __init__(self, page, existing_steps=None, continue_from_step=None):
         self.page = page
-        self.steps = []
+        self.steps = existing_steps[:] if existing_steps else []
+        self.continue_from_step = continue_from_step
+        self.new_steps = []  # Track only newly recorded steps
+        self.recording_active = False
 
     async def start_tracking(self):
         await self.page.expose_function("recordAction", self.record_action)
         await self.page.add_init_script(self.tracking_script())
+        self.recording_active = True
 
     async def record_action(self, action):
-        self.steps.append(action)
+        if not self.recording_active:
+            return
+
+        # Add step order based on continuation point
+        if self.continue_from_step is not None:
+            action['order'] = self.continue_from_step + len(self.new_steps) + 1
+        else:
+            action['order'] = len(self.steps) + len(self.new_steps) + 1
+
+        self.new_steps.append(action)
         try:
             event_queue.put_nowait({'type': 'action', 'data': action})
         except queue.Full:
@@ -152,8 +166,34 @@ class ActionTracker:
     def save_steps(self, filename="tests/recorded_steps.json"):
         import os
         os.makedirs(os.path.dirname(filename), exist_ok=True)
+        # Combine existing steps with new steps for saving
+        all_steps = self.get_combined_steps()
         with open(filename, "w") as f:
-            json.dump(self.steps, f, indent=4)
+            json.dump(all_steps, f, indent=4)
+
+    def get_combined_steps(self):
+        """Get all steps (existing + new) in proper order."""
+        if self.continue_from_step is not None:
+            # Insert new steps after the continuation point
+            combined = self.steps[:self.continue_from_step + 1]
+            combined.extend(self.new_steps)
+            # Add remaining original steps with updated order
+            remaining_steps = self.steps[self.continue_from_step + 1:]
+            for step in remaining_steps:
+                step['order'] = len(combined) + 1
+                combined.append(step)
+            return combined
+        else:
+            # Just append new steps to existing ones
+            return self.steps + self.new_steps
+
+    def get_new_steps_only(self):
+        """Get only the newly recorded steps."""
+        return self.new_steps[:]
+
+    def stop_recording(self):
+        """Stop the recording process."""
+        self.recording_active = False
 
 def generate_code(steps):
     global recorded_url
@@ -990,6 +1030,122 @@ def handle_stop():
     result = run_async(stop_recording())
     return jsonify(result)
 
+@app.route('/api/record/continue', methods=['POST'])
+def start_continue_recording():
+    """Start recording from a specific point in an existing test case."""
+    try:
+        data = request.get_json()
+        if not data:
+            return jsonify({'error': 'No data provided'}), 400
+
+        test_case_id = data.get('test_case_id')
+        continue_from_step = data.get('continue_from_step', 0)
+        target_url = data.get('url', '')
+
+        if not test_case_id:
+            return jsonify({'error': 'Test case ID is required'}), 400
+
+        # Get the test case and its existing steps
+        test_case = TestCase.query.get_or_404(test_case_id)
+        existing_steps = ActionStep.query.filter_by(
+            test_case_id=test_case_id,
+            active=True
+        ).order_by(ActionStep.order).all()
+
+        # Convert ActionStep objects to dictionaries
+        steps_data = []
+        for step in existing_steps:
+            steps_data.append({
+                'action': step.action,
+                'selector': step.selector,
+                'value': step.value,
+                'order': step.order,
+                'description': step.description
+            })
+
+        # Store continuation context globally
+        global recorded_url, continuation_context
+        recorded_url = target_url
+        continuation_context = {
+            'test_case_id': test_case_id,
+            'existing_steps': steps_data,
+            'continue_from_step': continue_from_step
+        }
+
+        result = run_async(start_continue_recording_async(steps_data, continue_from_step, target_url))
+        return jsonify(result)
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/record/continue/save', methods=['POST'])
+def save_continued_recording():
+    """Save the continued recording by updating the test case with new steps."""
+    try:
+        global tracker, continuation_context
+
+        if not tracker or not continuation_context:
+            return jsonify({'error': 'No active continuation recording session'}), 400
+
+        test_case_id = continuation_context['test_case_id']
+        continue_from_step = continuation_context['continue_from_step']
+
+        # Get only the new steps
+        new_steps = tracker.get_new_steps_only()
+
+        if not new_steps:
+            return jsonify({'error': 'No new steps recorded'}), 400
+
+        # Update the database with new steps
+        test_case = TestCase.query.get_or_404(test_case_id)
+
+        # Reorder existing steps that come after the continuation point
+        existing_steps_after = ActionStep.query.filter(
+            ActionStep.test_case_id == test_case_id,
+            ActionStep.order > continue_from_step,
+            ActionStep.active == True
+        ).all()
+
+        # Update order of existing steps to make room for new ones
+        new_order_offset = len(new_steps)
+        for step in existing_steps_after:
+            step.order += new_order_offset
+            step.updated_at = datetime.datetime.utcnow()
+
+        # Add new steps to database
+        for i, step_data in enumerate(new_steps):
+            new_step = ActionStep(
+                action=step_data['action'],
+                selector=step_data.get('selector', ''),
+                value=step_data.get('value', ''),
+                order=continue_from_step + i + 1,
+                description=f"Continued recording step {i + 1}",
+                test_case_id=test_case_id
+            )
+            db.session.add(new_step)
+
+        # Update test case timestamp
+        test_case.updated_at = datetime.datetime.utcnow()
+
+        db.session.commit()
+
+        # Regenerate the test file with all steps
+        regenerate_test_file(test_case_id)
+
+        # Clear continuation context
+        continuation_context = None
+
+        return jsonify({
+            'status': 'success',
+            'message': f'Successfully added {len(new_steps)} new steps to test case',
+            'new_steps_count': len(new_steps),
+            'test_case_id': test_case_id
+        })
+
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+
 @app.route('/api/record/save', methods=['POST'])
 def save_recorded_test():
     """Save a recorded test as a test case in the database."""
@@ -1066,14 +1222,67 @@ async def start_recording():
     await tracker.start_tracking()
     await page.goto(recorded_url)
 
+async def start_continue_recording_async(existing_steps, continue_from_step, target_url):
+    """Start continuation recording with existing steps."""
+    global browser, playwright, page, tracker
+
+    try:
+        playwright = await async_playwright().start()
+        browser = await playwright.chromium.launch(headless=False)
+        page = await browser.new_page()
+
+        # Create tracker with existing steps and continuation point
+        tracker = ActionTracker(page, existing_steps, continue_from_step)
+        await tracker.start_tracking()
+
+        # Navigate to the target URL
+        if target_url:
+            await page.goto(target_url)
+
+        # Execute existing steps up to the continuation point
+        if existing_steps and continue_from_step >= 0:
+            steps_to_execute = existing_steps[:continue_from_step + 1]
+            for step in steps_to_execute:
+                try:
+                    action = step.get('action', '').lower()
+                    selector = step.get('selector', '')
+                    value = step.get('value', '')
+
+                    if action == 'click' and selector:
+                        await page.click(selector)
+                    elif action in ['fill', 'type', 'input'] and selector:
+                        await page.fill(selector, value)
+                    elif action == 'navigate' and value:
+                        await page.goto(value)
+
+                    # Small delay between steps
+                    await page.wait_for_timeout(500)
+
+                except Exception as e:
+                    print(f"Error executing step {step}: {str(e)}")
+                    # Continue with other steps even if one fails
+                    continue
+
+        return {'status': 'success', 'message': 'Continuation recording started'}
+
+    except Exception as e:
+        return {'status': 'error', 'message': str(e)}
+
 async def stop_recording():
     global browser, playwright, tracker
     tracker.save_steps()
-    code = generate_code(tracker.steps)
+
+    # For continuation recording, use combined steps
+    if hasattr(tracker, 'get_combined_steps'):
+        all_steps = tracker.get_combined_steps()
+    else:
+        all_steps = tracker.steps
+
+    code = generate_code(all_steps)
     event_queue.put({'type': 'code', 'data': code})
     await browser.close()
     await playwright.stop()
-    return {'steps': tracker.steps, 'code': code}
+    return {'steps': all_steps, 'code': code}
 
 
 @app.route('/test-runner')
@@ -1863,6 +2072,14 @@ def stream_test_output(case_id):
         if case_id not in test_event_queues:
             test_event_queues[case_id] = queue.Queue()
 
+        # Check if test is actually running
+        if case_id not in test_execution_state or not test_execution_state[case_id].get('running', False):
+            yield f"data: {json.dumps({'type': 'status', 'data': 'not_running'})}\n\n"
+            return
+
+        timeout_count = 0
+        max_timeouts = 30  # Maximum number of timeouts before closing connection
+
         while True:
             try:
                 # Check if test is still running
@@ -1872,17 +2089,23 @@ def stream_test_output(case_id):
                     break
 
                 # Get event from queue with timeout
-                event = test_event_queues[case_id].get(timeout=1)
+                event = test_event_queues[case_id].get(timeout=2)
                 yield f"data: {json.dumps(event)}\n\n"
+                timeout_count = 0  # Reset timeout counter on successful event
             except queue.Empty:
+                timeout_count += 1
+                if timeout_count >= max_timeouts:
+                    # Close connection after too many timeouts
+                    yield f"data: {json.dumps({'type': 'status', 'data': 'timeout'})}\n\n"
+                    break
                 # Send a keep-alive comment to prevent connection timeout
                 yield ": keep-alive\n\n"
                 continue
             except Exception as e:
-                # Log the error and continue
+                # Log the error and break the loop
                 print(f"Error in stream_test_output: {str(e)}")
                 yield f"data: {json.dumps({'type': 'error', 'data': str(e)})}\n\n"
-                continue
+                break
 
     return Response(stream_with_context(generate()), mimetype='text/event-stream')
 
@@ -2189,6 +2412,32 @@ def execute_test_case(test_case_id, test_run_id, test_result_id):
                     db.session.commit()
             except Exception:
                 pass  # If we can't even update the status, just continue
+
+# Cleanup function for event queues
+def cleanup_event_queues():
+    """Clean up old event queues and execution states."""
+    global test_execution_state, test_event_queues
+
+    # Clean up execution states for tests that are no longer running
+    to_remove = []
+    for case_id, state in test_execution_state.items():
+        if not state.get('running', False):
+            to_remove.append(case_id)
+
+    for case_id in to_remove:
+        if case_id in test_execution_state:
+            del test_execution_state[case_id]
+        if case_id in test_event_queues:
+            # Clear the queue
+            while not test_event_queues[case_id].empty():
+                try:
+                    test_event_queues[case_id].get_nowait()
+                except queue.Empty:
+                    break
+            del test_event_queues[case_id]
+
+# Clean up on startup
+cleanup_event_queues()
 
 # Main entry point
 if __name__ == '__main__':

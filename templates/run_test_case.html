@@ -112,30 +112,30 @@
         padding: 10px;
         border-radius: 0 0 4px 4px;
     }
-    
+
     .console-inner {
         min-height: 100%;
     }
-    
+
     .console-line {
         line-height: 1.5;
         margin-bottom: 2px;
         white-space: pre-wrap;
         word-break: break-all;
     }
-    
+
     .console-error {
         color: #ff5555;
     }
-    
+
     .console-warning {
         color: #ffff55;
     }
-    
+
     .console-success {
         color: #55ff55;
     }
-    
+
     .console-info {
         color: #5555ff;
     }
@@ -155,19 +155,19 @@
         const currentStepInfo = document.getElementById('currentStepInfo');
         const stopTestBtn = document.getElementById('stopTestBtn');
         const clearConsoleBtn = document.getElementById('clearConsoleBtn');
-        
+
         let eventSource;
         let isTestRunning = true;
         let totalStepsCount = parseInt(totalSteps.textContent) || 0;
         let completedStepsCount = 0;
         let passedStepsCount = 0;
         let failedStepsCount = 0;
-        
+
         // Function to add a line to the console
         function addConsoleMessage(message, type = 'normal') {
             const line = document.createElement('div');
             line.className = 'console-line';
-            
+
             if (type === 'error') {
                 line.classList.add('console-error');
             } else if (type === 'warning') {
@@ -177,38 +177,38 @@
             } else if (type === 'info') {
                 line.classList.add('console-info');
             }
-            
+
             line.textContent = message;
             consoleOutput.appendChild(line);
-            
+
             // Auto-scroll to bottom
             consoleOutput.parentElement.scrollTop = consoleOutput.parentElement.scrollHeight;
         }
-        
+
         // Function to update progress
         function updateProgress() {
             const percentage = totalStepsCount > 0 ? Math.round((completedStepsCount / totalStepsCount) * 100) : 0;
             progressBar.style.width = `${percentage}%`;
             progressBar.textContent = `${percentage}%`;
             progressBar.setAttribute('aria-valuenow', percentage);
-            
+
             completedSteps.textContent = completedStepsCount;
             passedSteps.textContent = passedStepsCount;
             failedSteps.textContent = failedStepsCount;
         }
-        
+
         // Connect to SSE endpoint
         function connectEventSource() {
             eventSource = new EventSource('/test-case/{{ test_case.id }}/stream');
-            
+
             eventSource.onmessage = function(event) {
                 const data = JSON.parse(event.data);
-                
+
                 switch (data.type) {
                     case 'console':
                         addConsoleMessage(data.data, data.level || 'normal');
                         break;
-                        
+
                     case 'step':
                         // Update current step info
                         currentStepInfo.innerHTML = `
@@ -216,7 +216,7 @@
                             <strong>Selector:</strong> ${data.data.selector || 'N/A'} |
                             <strong>Value:</strong> ${data.data.value || 'N/A'}
                         `;
-                        
+
                         // Update step counts
                         completedStepsCount++;
                         if (data.data.status === 'passed') {
@@ -226,56 +226,80 @@
                             failedStepsCount++;
                             currentStepInfo.className = 'alert alert-danger';
                         }
-                        
+
                         updateProgress();
                         break;
-                        
+
                     case 'status':
                         if (data.data === 'completed') {
                             testStatus.textContent = 'Completed';
                             testStatus.className = 'badge bg-success';
                             isTestRunning = false;
-                            
+
                             if (eventSource) {
                                 eventSource.close();
                             }
-                            
+
                             addConsoleMessage('Test execution completed.', 'success');
                         } else if (data.data === 'failed') {
                             testStatus.textContent = 'Failed';
                             testStatus.className = 'badge bg-danger';
                             isTestRunning = false;
-                            
+
                             if (eventSource) {
                                 eventSource.close();
                             }
-                            
+
                             addConsoleMessage('Test execution failed.', 'error');
+                        } else if (data.data === 'not_running') {
+                            testStatus.textContent = 'Not Running';
+                            testStatus.className = 'badge bg-secondary';
+                            isTestRunning = false;
+
+                            if (eventSource) {
+                                eventSource.close();
+                            }
+
+                            addConsoleMessage('Test is not currently running.', 'info');
+                        } else if (data.data === 'timeout') {
+                            testStatus.textContent = 'Timeout';
+                            testStatus.className = 'badge bg-warning';
+                            isTestRunning = false;
+
+                            if (eventSource) {
+                                eventSource.close();
+                            }
+
+                            addConsoleMessage('Connection timed out.', 'warning');
                         }
                         break;
-                        
+
                     case 'error':
                         addConsoleMessage(`Error: ${data.data}`, 'error');
                         break;
                 }
             };
-            
+
             eventSource.onerror = function() {
                 if (isTestRunning) {
-                    addConsoleMessage('Connection to server lost. Attempting to reconnect...', 'warning');
-                    setTimeout(connectEventSource, 3000);
+                    addConsoleMessage('Connection to server lost.', 'warning');
+                    // Don't automatically reconnect to prevent infinite loops
+                    // User can refresh the page if needed
+                    isTestRunning = false;
+                    testStatus.textContent = 'Connection Lost';
+                    testStatus.className = 'badge bg-warning';
                 }
             };
         }
-        
+
         // Initialize connection
         connectEventSource();
-        
+
         // Stop test button
         if (stopTestBtn) {
             stopTestBtn.addEventListener('click', function() {
                 if (!isTestRunning) return;
-                
+
                 if (confirm('Are you sure you want to stop the test execution?')) {
                     fetch('/test-case/{{ test_case.id }}/stop', {
                         method: 'POST',
@@ -289,7 +313,7 @@
                         testStatus.textContent = 'Stopped';
                         testStatus.className = 'badge bg-secondary';
                         isTestRunning = false;
-                        
+
                         if (eventSource) {
                             eventSource.close();
                         }
@@ -301,7 +325,7 @@
                 }
             });
         }
-        
+
         // Clear console button
         if (clearConsoleBtn) {
             clearConsoleBtn.addEventListener('click', function() {
@@ -309,7 +333,7 @@
                 addConsoleMessage('Console cleared.', 'info');
             });
         }
-        
+
         // Clean up on page unload
         window.addEventListener('beforeunload', function() {
             if (eventSource) {
