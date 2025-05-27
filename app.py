@@ -1001,11 +1001,32 @@ def run_test_suite(suite_id):
 
 @app.route('/api/record/start', methods=['POST'])
 def handle_start():
-    global recorded_url
-    data = request.get_json()
-    recorded_url = data.get('url', 'https://test.teamstreamz.com/')
-    run_async(start_recording())
-    return jsonify({'status': 'success', 'message': 'Recording started'})
+    """Start recording with improved error handling."""
+    try:
+        global recorded_url
+        data = request.get_json()
+
+        if not data:
+            return jsonify({'status': 'error', 'message': 'No data provided'}), 400
+
+        recorded_url = data.get('url', 'https://test.teamstreamz.com/')
+
+        if not recorded_url:
+            return jsonify({'status': 'error', 'message': 'URL is required'}), 400
+
+        # Validate URL format
+        if not recorded_url.startswith(('http://', 'https://')):
+            recorded_url = 'https://' + recorded_url
+
+        result = run_async(start_recording())
+
+        if result and result.get('status') == 'error':
+            return jsonify(result), 500
+
+        return jsonify({'status': 'success', 'message': 'Recording started successfully'})
+
+    except Exception as e:
+        return jsonify({'status': 'error', 'message': f'Failed to start recording: {str(e)}'}), 500
 
 @app.route('/api/record/clear', methods=['POST'])
 def handle_clear():
@@ -1028,27 +1049,73 @@ def handle_stop():
     result = run_async(stop_recording())
     return jsonify(result)
 
-@app.route('/api/record/continue', methods=['POST'])
-def start_continue_recording():
-    """Start recording from a specific point in an existing test case."""
+@app.route('/api/record/action', methods=['POST'])
+def handle_record_action():
+    """Handle recording of individual actions with improved error handling."""
     try:
         data = request.get_json()
         if not data:
-            return jsonify({'error': 'No data provided'}), 400
+            return jsonify({'status': 'error', 'message': 'No action data provided'}), 400
+
+        # Validate required action fields
+        if 'action' not in data:
+            return jsonify({'status': 'error', 'message': 'Action type is required'}), 400
+
+        # Add timestamp if not present
+        if 'timestamp' not in data:
+            data['timestamp'] = time.time()
+
+        # Put action in event queue for real-time streaming
+        try:
+            event_queue.put_nowait({'type': 'action', 'data': data})
+        except queue.Full:
+            # Queue is full, but we can still return success
+            pass
+
+        return jsonify({'status': 'success', 'message': 'Action recorded successfully'})
+
+    except Exception as e:
+        return jsonify({'status': 'error', 'message': f'Failed to record action: {str(e)}'}), 500
+
+@app.route('/api/record/continue', methods=['POST'])
+def start_continue_recording():
+    """Start recording from a specific point in an existing test case with improved error handling."""
+    try:
+        data = request.get_json()
+        if not data:
+            return jsonify({'status': 'error', 'error': 'No data provided'}), 400
 
         test_case_id = data.get('test_case_id')
         continue_from_step = data.get('continue_from_step', 0)
-        target_url = data.get('url', '')
+        target_url = data.get('url', '').strip()
 
+        # Validate required parameters
         if not test_case_id:
-            return jsonify({'error': 'Test case ID is required'}), 400
+            return jsonify({'status': 'error', 'error': 'Test case ID is required'}), 400
+
+        if not target_url:
+            return jsonify({'status': 'error', 'error': 'Target URL is required'}), 400
+
+        # Validate URL format
+        if not target_url.startswith(('http://', 'https://')):
+            target_url = 'https://' + target_url
 
         # Get the test case and its existing steps
-        test_case = TestCase.query.get_or_404(test_case_id)
+        test_case = TestCase.query.get(test_case_id)
+        if not test_case:
+            return jsonify({'status': 'error', 'error': 'Test case not found'}), 404
+
         existing_steps = ActionStep.query.filter_by(
             test_case_id=test_case_id,
             active=True
         ).order_by(ActionStep.order).all()
+
+        # Validate continue_from_step
+        if continue_from_step < 0 or continue_from_step >= len(existing_steps):
+            return jsonify({
+                'status': 'error',
+                'error': f'Invalid continue_from_step. Must be between 0 and {len(existing_steps) - 1}'
+            }), 400
 
         # Convert ActionStep objects to dictionaries
         steps_data = []
@@ -1070,11 +1137,16 @@ def start_continue_recording():
             'continue_from_step': continue_from_step
         }
 
+        # Start continuation recording using the refactored function
         result = run_async(start_continue_recording_async(steps_data, continue_from_step, target_url))
-        return jsonify(result)
+
+        if result and result.get('status') == 'error':
+            return jsonify(result), 500
+
+        return jsonify(result or {'status': 'success', 'message': 'Continuation recording started'})
 
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return jsonify({'status': 'error', 'error': f'Failed to start continuation recording: {str(e)}'}), 500
 
 @app.route('/api/record/continue/save', methods=['POST'])
 def save_continued_recording():
@@ -1211,17 +1283,8 @@ async def clear_recording():
             break
     event_queue.put({'type': 'clear', 'data': None})
 
-async def start_recording():
-    global browser, playwright, page, tracker
-    playwright = await async_playwright().start()
-    browser = await playwright.chromium.launch(headless=False)
-    page = await browser.new_page()
-    tracker = ActionTracker(page)
-    await tracker.start_tracking()
-    await page.goto(recorded_url)
-
-async def start_continue_recording_async(existing_steps, continue_from_step, target_url):
-    """Start continuation recording with existing steps."""
+async def start_recording(existing_steps=None, continue_from_step=None, target_url=None):
+    """Start recording with optional continuation parameters."""
     global browser, playwright, page, tracker
 
     try:
@@ -1229,42 +1292,69 @@ async def start_continue_recording_async(existing_steps, continue_from_step, tar
         browser = await playwright.chromium.launch(headless=False)
         page = await browser.new_page()
 
-        # Create tracker with existing steps and continuation point
-        tracker = ActionTracker(page, existing_steps, continue_from_step)
+        # Create tracker with continuation parameters if provided
+        if existing_steps is not None or continue_from_step is not None:
+            tracker = ActionTracker(page, existing_steps, continue_from_step)
+        else:
+            tracker = ActionTracker(page)
+
         await tracker.start_tracking()
 
-        # Navigate to the target URL
-        if target_url:
-            await page.goto(target_url)
+        # Use target_url if provided, otherwise use global recorded_url
+        url_to_navigate = target_url or recorded_url
+        await page.goto(url_to_navigate)
 
-        # Execute existing steps up to the continuation point
-        if existing_steps and continue_from_step >= 0:
-            steps_to_execute = existing_steps[:continue_from_step + 1]
-            for step in steps_to_execute:
-                try:
-                    action = step.get('action', '').lower()
-                    selector = step.get('selector', '')
-                    value = step.get('value', '')
+        # Execute existing steps up to continuation point if this is a continue operation
+        if existing_steps and continue_from_step is not None and continue_from_step >= 0:
+            await execute_steps_up_to_point(page, existing_steps, continue_from_step)
 
-                    if action == 'click' and selector:
-                        await page.click(selector)
-                    elif action in ['fill', 'type', 'input'] and selector:
-                        await page.fill(selector, value)
-                    elif action == 'navigate' and value:
-                        await page.goto(value)
-
-                    # Small delay between steps
-                    await page.wait_for_timeout(500)
-
-                except Exception as e:
-                    print(f"Error executing step {step}: {str(e)}")
-                    # Continue with other steps even if one fails
-                    continue
-
-        return {'status': 'success', 'message': 'Continuation recording started'}
+        return {'status': 'success', 'message': 'Recording started successfully'}
 
     except Exception as e:
-        return {'status': 'error', 'message': str(e)}
+        return {'status': 'error', 'message': f'Failed to start recording: {str(e)}'}
+
+async def execute_steps_up_to_point(page, existing_steps, continue_from_step):
+    """Execute existing steps up to the continuation point."""
+    try:
+        steps_to_execute = existing_steps[:continue_from_step + 1]
+        for step in steps_to_execute:
+            try:
+                action = step.get('action', '').lower()
+                selector = step.get('selector', '')
+                value = step.get('value', '')
+
+                if action == 'click' and selector:
+                    await page.click(selector)
+                elif action in ['fill', 'type', 'input'] and selector:
+                    await page.fill(selector, value)
+                elif action == 'navigate' and value:
+                    await page.goto(value)
+
+                # Small delay between steps
+                await page.wait_for_timeout(500)
+
+            except Exception as e:
+                print(f"Error executing step {step}: {str(e)}")
+                # Continue with other steps even if one fails
+                continue
+
+    except Exception as e:
+        print(f"Error in execute_steps_up_to_point: {str(e)}")
+        raise
+
+async def start_continue_recording_async(existing_steps, continue_from_step, target_url):
+    """Start continuation recording with existing steps - now uses start_recording."""
+    try:
+        # Use the refactored start_recording function with continuation parameters
+        result = await start_recording(existing_steps, continue_from_step, target_url)
+
+        if result['status'] == 'success':
+            result['message'] = 'Continuation recording started successfully'
+
+        return result
+
+    except Exception as e:
+        return {'status': 'error', 'message': f'Failed to start continuation recording: {str(e)}'}
 
 async def stop_recording():
     global browser, playwright, tracker
