@@ -1,7 +1,6 @@
 from flask import render_template, request, redirect, url_for, flash
 from models import db, Project, TestSuite, TestCase, TestResult, TestRun
 from forms import TestSuiteForm
-from streamzai_test_generator import StreamzAITestGenerator
 import os
 import re
 

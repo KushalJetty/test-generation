@@ -2,171 +2,110 @@
     {
         "action": "click",
         "selector": "#searchInput",
-        "timestamp": 1748257218413,
+        "timestamp": 1748322358561,
         "order": 1
     },
     {
         "action": "input",
         "selector": "#searchInput",
         "value": "k",
-        "timestamp": 1748257219183,
+        "timestamp": 1748322360023,
         "order": 2
     },
     {
         "action": "input",
         "selector": "#searchInput",
-        "value": "ka",
-        "timestamp": 1748257219616,
+        "value": "ku",
+        "timestamp": 1748322360260,
         "order": 3
     },
     {
         "action": "input",
         "selector": "#searchInput",
-        "value": "kan",
-        "timestamp": 1748257219965,
+        "value": "kus",
+        "timestamp": 1748322360431,
         "order": 4
     },
     {
         "action": "input",
         "selector": "#searchInput",
-        "value": "kann",
-        "timestamp": 1748257220162,
+        "value": "kush",
+        "timestamp": 1748322360753,
         "order": 5
     },
     {
         "action": "input",
         "selector": "#searchInput",
-        "value": "kanna",
-        "timestamp": 1748257220487,
+        "value": "kusha",
+        "timestamp": 1748322360901,
         "order": 6
     },
     {
         "action": "input",
         "selector": "#searchInput",
-        "value": "kannad",
-        "timestamp": 1748257220707,
+        "value": "kushal",
+        "timestamp": 1748322361143,
         "order": 7
-    },
-    {
-        "action": "input",
-        "selector": "#searchInput",
-        "value": "kannada",
-        "timestamp": 1748257220865,
-        "order": 8
     },
     {
         "action": "click",
         "selector": ".pure-button.pure-button-primary-progressive",
-        "timestamp": 1748257221722,
-        "order": 9
-    },
-    {
-        "action": "click",
-        "selector": "#searchInput",
-        "timestamp": 1748257225830,
-        "order": 10
+        "timestamp": 1748322363356,
+        "order": 8
     },
     {
         "action": "input",
         "selector": "[name=\"search\"]",
         "value": "e",
-        "timestamp": 1748257226709,
-        "order": 11
+        "timestamp": 1748322374795,
+        "order": 9
     },
     {
         "action": "input",
         "selector": "[name=\"search\"]",
         "value": "en",
-        "timestamp": 1748257227130,
-        "order": 12
+        "timestamp": 1748322374941,
+        "order": 10
     },
     {
         "action": "input",
         "selector": "[name=\"search\"]",
         "value": "eng",
-        "timestamp": 1748257227604,
-        "order": 13
+        "timestamp": 1748322375320,
+        "order": 11
     },
     {
         "action": "input",
         "selector": "[name=\"search\"]",
         "value": "engl",
-        "timestamp": 1748257227974,
-        "order": 14
+        "timestamp": 1748322375550,
+        "order": 12
     },
     {
         "action": "input",
         "selector": "[name=\"search\"]",
         "value": "engli",
-        "timestamp": 1748257228218,
-        "order": 15
+        "timestamp": 1748322375750,
+        "order": 13
     },
     {
         "action": "input",
         "selector": "[name=\"search\"]",
         "value": "englis",
-        "timestamp": 1748257228639,
-        "order": 16
+        "timestamp": 1748322375924,
+        "order": 14
     },
     {
         "action": "input",
         "selector": "[name=\"search\"]",
         "value": "english",
-        "timestamp": 1748257230079,
-        "order": 17
+        "timestamp": 1748322376269,
+        "order": 15
     },
     {
         "action": "click",
         "selector": ".cdx-button.cdx-button--action-default.cdx-button--weight-normal.cdx-button--size-medium.cdx-button--framed.cdx-search-input__end-button",
-        "timestamp": 1748257230383,
-        "order": 18
-    },
-    {
-        "action": "input",
-        "selector": "[name=\"search\"]",
-        "value": "g",
-        "timestamp": 1748257232893,
-        "order": 19
-    },
-    {
-        "action": "input",
-        "selector": "[name=\"search\"]",
-        "value": "ge",
-        "timestamp": 1748257233179,
-        "order": 20
-    },
-    {
-        "action": "input",
-        "selector": "[name=\"search\"]",
-        "value": "ger",
-        "timestamp": 1748257233397,
-        "order": 21
-    },
-    {
-        "action": "input",
-        "selector": "[name=\"search\"]",
-        "value": "germ",
-        "timestamp": 1748257233929,
-        "order": 22
-    },
-    {
-        "action": "input",
-        "selector": "[name=\"search\"]",
-        "value": "germa",
-        "timestamp": 1748257237318,
-        "order": 23
-    },
-    {
-        "action": "input",
-        "selector": "[name=\"search\"]",
-        "value": "german",
-        "timestamp": 1748257237649,
-        "order": 24
-    },
-    {
-        "action": "click",
-        "selector": ".cdx-button.cdx-button--action-default.cdx-button--weight-normal.cdx-button--size-medium.cdx-button--framed.cdx-search-input__end-button",
-        "timestamp": 1748257238086,
-        "order": 25
+        "timestamp": 1748322378462,
+        "order": 16
     }
 ]

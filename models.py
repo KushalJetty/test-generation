@@ -45,8 +45,6 @@ class TestCase(BaseModel):
     description = db.Column(db.Text, nullable=True)
     original_file_path = db.Column(db.String(500), nullable=False)
     test_file_path = db.Column(db.String(500), nullable=False)
-    language = db.Column(db.String(50), nullable=False)
-    status = db.Column(db.String(20), nullable=False, default='generated')
     test_suite_id = db.Column(db.Integer, db.ForeignKey('test_suite.id'), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
