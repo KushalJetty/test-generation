@@ -1,221 +1,278 @@
 [
     {
-        "action": "navigate",
-        "selector": null,
-        "value": "https://test.teamstreamz.com/",
-        "order": 0,
-        "description": "Navigate to: https://test.teamstreamz.com/"
-    },
-    {
         "action": "click",
         "selector": "#Username",
-        "value": null,
-        "order": 1,
-        "description": "Click on element: #Username"
+        "timestamp": 1748496227537,
+        "order": 1
     },
     {
-        "action": "fill",
+        "action": "input",
         "selector": "#Username",
-        "value": "kushal.jetty@teamstreamz.com",
-        "order": 2,
-        "description": "Enter 'kushal.jetty@teamstreamz.com' into #Username"
+        "value": "k",
+        "timestamp": 1748496228504,
+        "order": 2
     },
     {
-        "action": "fill",
-        "selector": "#Password",
-        "value": "Test@123",
-        "order": 3,
-        "description": "Enter 'Test@123' into #Password"
-    },
-    {
-        "action": "click",
-        "selector": ".btn.signin-btn.bg-primary.ng-tns-c813547932-0",
-        "value": null,
-        "order": 4,
-        "description": "Click on element: .btn.signin-btn.bg-primary.ng-tns-c813547932-0"
-    },
-    {
-        "action": "click",
-        "selector": "#Password",
-        "value": null,
-        "order": 5,
-        "description": "Click on element: #Password"
-    },
-    {
-        "action": "fill",
-        "selector": "#Password",
-        "value": "Test@123",
-        "order": 6,
-        "description": "Enter 'Test@123' into #Password"
-    },
-    {
-        "action": "click",
+        "action": "input",
         "selector": "#Username",
-        "timestamp": 1748330747798,
+        "value": "ku",
+        "timestamp": 1748496228701,
+        "order": 3
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "kus",
+        "timestamp": 1748496228912,
+        "order": 4
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "kush",
+        "timestamp": 1748496229264,
+        "order": 5
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "kusha",
+        "timestamp": 1748496229428,
+        "order": 6
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "kushal",
+        "timestamp": 1748496229670,
         "order": 7
     },
     {
         "action": "input",
         "selector": "#Username",
-        "value": "kushal.jetty@teamstreamz.com",
-        "timestamp": 1748330748312,
+        "value": "kushal.",
+        "timestamp": 1748496230288,
         "order": 8
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "kushal.j",
+        "timestamp": 1748496230629,
+        "order": 9
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "kushal.je",
+        "timestamp": 1748496230802,
+        "order": 10
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "kushal.jet",
+        "timestamp": 1748496231066,
+        "order": 11
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "kushal.jett",
+        "timestamp": 1748496231250,
+        "order": 12
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "kushal.jetty",
+        "timestamp": 1748496231453,
+        "order": 13
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "kushal.jetty@",
+        "timestamp": 1748496232852,
+        "order": 14
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "kushal.jetty@t",
+        "timestamp": 1748496233306,
+        "order": 15
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "kushal.jetty@te",
+        "timestamp": 1748496233526,
+        "order": 16
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "kushal.jetty@tea",
+        "timestamp": 1748496233819,
+        "order": 17
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "kushal.jetty@team",
+        "timestamp": 1748496234096,
+        "order": 18
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "kushal.jetty@teams",
+        "timestamp": 1748496234376,
+        "order": 19
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "kushal.jetty@teamst",
+        "timestamp": 1748496234691,
+        "order": 20
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "kushal.jetty@teamstr",
+        "timestamp": 1748496234917,
+        "order": 21
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "kushal.jetty@teamstre",
+        "timestamp": 1748496235120,
+        "order": 22
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "kushal.jetty@teamstrea",
+        "timestamp": 1748496235383,
+        "order": 23
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "kushal.jetty@teamstream",
+        "timestamp": 1748496235668,
+        "order": 24
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "kushal.jetty@teamstreamz",
+        "timestamp": 1748496235930,
+        "order": 25
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "kushal.jetty@teamstreamz.",
+        "timestamp": 1748496236648,
+        "order": 26
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "kushal.jetty@teamstreamz.c",
+        "timestamp": 1748496236811,
+        "order": 27
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "kushal.jetty@teamstreamz.co",
+        "timestamp": 1748496237031,
+        "order": 28
+    },
+    {
+        "action": "input",
+        "selector": "#Username",
+        "value": "kushal.jetty@teamstreamz.com",
+        "timestamp": 1748496237306,
+        "order": 29
+    },
+    {
+        "action": "input",
+        "selector": "#Password",
+        "value": "T",
+        "timestamp": 1748496239164,
+        "order": 30
+    },
+    {
+        "action": "input",
+        "selector": "#Password",
+        "value": "Te",
+        "timestamp": 1748496239596,
+        "order": 31
+    },
+    {
+        "action": "input",
+        "selector": "#Password",
+        "value": "Tes",
+        "timestamp": 1748496240164,
+        "order": 32
+    },
+    {
+        "action": "input",
+        "selector": "#Password",
+        "value": "Test",
+        "timestamp": 1748496240359,
+        "order": 33
+    },
+    {
+        "action": "input",
+        "selector": "#Password",
+        "value": "Test@",
+        "timestamp": 1748496240930,
+        "order": 34
+    },
+    {
+        "action": "input",
+        "selector": "#Password",
+        "value": "Test@1",
+        "timestamp": 1748496241406,
+        "order": 35
+    },
+    {
+        "action": "input",
+        "selector": "#Password",
+        "value": "Test@12",
+        "timestamp": 1748496241737,
+        "order": 36
     },
     {
         "action": "input",
         "selector": "#Password",
         "value": "Test@123",
-        "timestamp": 1748330748839,
-        "order": 9
+        "timestamp": 1748496242009,
+        "order": 37
     },
     {
         "action": "click",
         "selector": ".btn.signin-btn.bg-primary.ng-tns-c813547932-0",
-        "timestamp": 1748330749379,
-        "order": 10
+        "timestamp": 1748496243730,
+        "order": 38
     },
     {
         "action": "click",
         "selector": "span",
-        "timestamp": 1748330756880,
-        "order": 11
+        "timestamp": 1748496248385,
+        "order": 39
     },
     {
         "action": "click",
-        "selector": ".btn-ts.btn-ts-primary",
-        "timestamp": 1748330772184,
-        "order": 12
-    },
-    {
-        "action": "click",
-        "selector": ".ng-value-container",
-        "timestamp": 1748330774070,
-        "order": 13
-    },
-    {
-        "action": "click",
-        "selector": "#a9ae644fd115-0",
-        "timestamp": 1748330775498,
-        "order": 14
-    },
-    {
-        "action": "click",
-        "selector": "#stream-title",
-        "timestamp": 1748330776497,
-        "order": 15
-    },
-    {
-        "action": "input",
-        "selector": "#stream-title",
-        "value": "t",
-        "timestamp": 1748330779672,
-        "order": 16
-    },
-    {
-        "action": "input",
-        "selector": "#stream-title",
-        "value": "te",
-        "timestamp": 1748330779817,
-        "order": 17
-    },
-    {
-        "action": "input",
-        "selector": "#stream-title",
-        "value": "tes",
-        "timestamp": 1748330780010,
-        "order": 18
-    },
-    {
-        "action": "input",
-        "selector": "#stream-title",
-        "value": "test",
-        "timestamp": 1748330780200,
-        "order": 19
-    },
-    {
-        "action": "click",
-        "selector": "#stream-desc",
-        "timestamp": 1748330782087,
-        "order": 20
-    },
-    {
-        "action": "input",
-        "selector": "#stream-desc",
-        "value": "t",
-        "timestamp": 1748330782920,
-        "order": 21
-    },
-    {
-        "action": "input",
-        "selector": "#stream-desc",
-        "value": "te",
-        "timestamp": 1748330783018,
-        "order": 22
-    },
-    {
-        "action": "input",
-        "selector": "#stream-desc",
-        "value": "tes",
-        "timestamp": 1748330783224,
-        "order": 23
-    },
-    {
-        "action": "input",
-        "selector": "#stream-desc",
-        "value": "test",
-        "timestamp": 1748330783425,
-        "order": 24
-    },
-    {
-        "action": "click",
-        "selector": ".croppie-input",
-        "timestamp": 1748330785213,
-        "order": 25
-    },
-    {
-        "action": "input",
-        "selector": ".croppie-input",
-        "value": "C:\\fakepath\\test.jpg",
-        "timestamp": 1748330804871,
-        "order": 26
-    },
-    {
-        "action": "click",
-        "selector": ".btn-ts.btn-ts-primary.ng-star-inserted",
-        "timestamp": 1748330806634,
-        "order": 27
-    },
-    {
-        "action": "click",
-        "selector": "#stream-desc",
-        "timestamp": 1748330808357,
-        "order": 28
-    },
-    {
-        "action": "click",
-        "selector": ".btn-ts.btn-ts-primary-outline.ng-star-inserted",
-        "timestamp": 1748330810761,
-        "order": 29
-    },
-    {
-        "action": "click",
-        "selector": ".btn.signin-btn.bg-primary.ng-tns-c813547932-0",
-        "value": null,
-        "order": 31,
-        "description": "Click on element: .btn.signin-btn.bg-primary.ng-tns-c813547932-0"
-    },
-    {
-        "action": "click",
-        "selector": ".list-group-item.inactive-link.ng-star-inserted",
-        "value": null,
-        "order": 32,
-        "description": "Click on element: .list-group-item.inactive-link.ng-star-inserted"
-    },
-    {
-        "action": "click",
-        "selector": "span",
-        "value": null,
-        "order": 33,
-        "description": "Click on element: span"
+        "selector": "h5",
+        "timestamp": 1748496252821,
+        "order": 40
     }
 ]

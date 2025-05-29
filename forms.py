@@ -50,3 +50,15 @@ class ExportForm(FlaskForm):
     include_details = BooleanField('Include Details', default=True)
     test_run_id = SelectField('Test Run', coerce=int, validators=[Optional()])
     test_suite_id = SelectField('Test Suite', coerce=int, validators=[Optional()])
+    # Add date filter fields to match FilterForm
+    date_from = DateField('From Date', validators=[Optional()], format='%Y-%m-%d')
+    date_to = DateField('To Date', validators=[Optional()], format='%Y-%m-%d')
+    # Add other filter fields to match FilterForm
+    project_id = SelectField('Project', coerce=int, validators=[Optional()])
+    status = SelectField('Status', choices=[
+        ('', 'All'),
+        ('passed', 'Passed'),
+        ('failed', 'Failed'),
+        ('skipped', 'Skipped'),
+        ('error', 'Error')
+    ], validators=[Optional()])

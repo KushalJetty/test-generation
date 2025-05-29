@@ -808,6 +808,7 @@ def reports():
     # Populate export form choices
     export_form.test_run_id.choices = [(0, 'All')] + [(tr.id, tr.name) for tr in TestRun.query.order_by(TestRun.created_at.desc()).all()]
     export_form.test_suite_id.choices = [(0, 'All')] + [(ts.id, ts.name) for ts in TestSuite.query.order_by(TestSuite.name).all()]
+    export_form.project_id.choices = [(0, 'All')] + [(p.id, p.name) for p in Project.query.order_by(Project.name).all()]
 
     # Apply filters
     query = TestResult.query.join(TestRun).join(TestCase).join(TestSuite).join(Project)
@@ -815,25 +816,35 @@ def reports():
     if request.args.get('project') and request.args.get('project') != '0':
         query = query.filter(Project.id == request.args.get('project'))
         filter_form.project.data = int(request.args.get('project'))
+        # Sync to export form
+        export_form.project_id.data = int(request.args.get('project'))
 
     if request.args.get('test_suite') and request.args.get('test_suite') != '0':
         query = query.filter(TestSuite.id == request.args.get('test_suite'))
         filter_form.test_suite_id.data = int(request.args.get('test_suite'))
+        # Sync to export form
+        export_form.test_suite_id.data = int(request.args.get('test_suite'))
 
     if request.args.get('status') and request.args.get('status') != '':
         query = query.filter(TestResult.status == request.args.get('status'))
         filter_form.status.data = request.args.get('status')
+        # Sync to export form
+        export_form.status.data = request.args.get('status')
 
     if request.args.get('date_from'):
         date_from = datetime.datetime.strptime(request.args.get('date_from'), '%Y-%m-%d')
         query = query.filter(TestResult.created_at >= date_from)
         filter_form.date_from.data = date_from
+        # Sync to export form
+        export_form.date_from.data = date_from.date()
 
     if request.args.get('date_to'):
         date_to = datetime.datetime.strptime(request.args.get('date_to'), '%Y-%m-%d')
         date_to = date_to.replace(hour=23, minute=59, second=59)
         query = query.filter(TestResult.created_at <= date_to)
         filter_form.date_to.data = date_to
+        # Sync to export form
+        export_form.date_to.data = date_to.date()
 
     # Get results
     results = query.order_by(TestResult.created_at.desc()).all()
@@ -863,24 +874,56 @@ def reports():
 
 @app.route('/export-results', methods=['POST'])
 def export_results():
-    """Export test results."""
+    """Export test results with enhanced filtering and dynamic filename generation."""
     form = ExportForm()
 
     # Populate form choices
     form.test_run_id.choices = [(0, 'All')] + [(tr.id, tr.name) for tr in TestRun.query.order_by(TestRun.created_at.desc()).all()]
     form.test_suite_id.choices = [(0, 'All')] + [(ts.id, ts.name) for ts in TestSuite.query.order_by(TestSuite.name).all()]
+    form.project_id.choices = [(0, 'All')] + [(p.id, p.name) for p in Project.query.order_by(Project.name).all()]
 
     if form.validate_on_submit():
-        # Apply filters based on form data
+        # Apply filters based on form data - same logic as reports route
         query = TestResult.query.join(TestRun).join(TestCase).join(TestSuite).join(Project)
 
-        # Filter by test run if selected
-        if form.test_run_id.data and form.test_run_id.data != 0:
-            query = query.filter(TestRun.id == form.test_run_id.data)
+        # Track applied filters for filename generation
+        applied_filters = []
+
+        # Filter by project if selected
+        if form.project_id.data and form.project_id.data != 0:
+            project = Project.query.get(form.project_id.data)
+            if project:
+                query = query.filter(Project.id == form.project_id.data)
+                applied_filters.append(f"project_{project.name.replace(' ', '_')}")
 
         # Filter by test suite if selected
         if form.test_suite_id.data and form.test_suite_id.data != 0:
-            query = query.filter(TestSuite.id == form.test_suite_id.data)
+            test_suite = TestSuite.query.get(form.test_suite_id.data)
+            if test_suite:
+                query = query.filter(TestSuite.id == form.test_suite_id.data)
+                applied_filters.append(f"suite_{test_suite.name.replace(' ', '_')}")
+
+        # Filter by test run if selected
+        if form.test_run_id.data and form.test_run_id.data != 0:
+            test_run = TestRun.query.get(form.test_run_id.data)
+            if test_run:
+                query = query.filter(TestRun.id == form.test_run_id.data)
+                applied_filters.append(f"run_{test_run.name.replace(' ', '_')}")
+
+        # Filter by status if selected
+        if form.status.data and form.status.data != '':
+            query = query.filter(TestResult.status == form.status.data)
+            applied_filters.append(f"status_{form.status.data}")
+
+        # Filter by date range if provided
+        if form.date_from.data:
+            query = query.filter(TestResult.created_at >= form.date_from.data)
+            applied_filters.append(f"from_{form.date_from.data.strftime('%Y%m%d')}")
+
+        if form.date_to.data:
+            date_to = datetime.datetime.combine(form.date_to.data, datetime.time(23, 59, 59))
+            query = query.filter(TestResult.created_at <= date_to)
+            applied_filters.append(f"to_{form.date_to.data.strftime('%Y%m%d')}")
 
         # Get results
         results = query.order_by(TestResult.created_at.desc()).all()
@@ -892,7 +935,8 @@ def export_results():
                 'Project': result.test_run.test_suite.project.name,
                 'Test Suite': result.test_run.test_suite.name,
                 'Test Case Name': result.test_case.name,
-                'Description' : result.test_case.description,
+                'Description': result.test_case.description,
+                'Status': result.status,
                 'Execution Time (s)': result.execution_time,
                 'Test Run': result.test_run.name,
                 'Date': result.created_at.strftime('%Y-%m-%d %H:%M:%S')
@@ -906,6 +950,19 @@ def export_results():
         # Create DataFrame
         df = pd.DataFrame(data)
 
+        # Generate dynamic filename based on applied filters
+        timestamp = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
+
+        if applied_filters:
+            filter_string = '_'.join(applied_filters[:3])  # Limit to first 3 filters to avoid long filenames
+            base_filename = f"test_results_filtered_{filter_string}_{timestamp}"
+        else:
+            base_filename = f"test_results_all_{timestamp}"
+
+        # Clean filename (remove special characters)
+        import re
+        base_filename = re.sub(r'[^\w\-_.]', '_', base_filename)
+
         # Export based on selected format
         if form.format.data == 'csv':
             output = io.StringIO()
@@ -916,7 +973,7 @@ def export_results():
                 io.BytesIO(output.getvalue().encode('utf-8')),
                 mimetype='text/csv',
                 as_attachment=True,
-                download_name='test_results.csv'
+                download_name=f'{base_filename}.csv'
             )
 
         elif form.format.data == 'excel':
@@ -928,7 +985,7 @@ def export_results():
                 output,
                 mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
                 as_attachment=True,
-                download_name='test_results.xlsx'
+                download_name=f'{base_filename}.xlsx'
             )
 
         elif form.format.data == 'json':
@@ -938,7 +995,7 @@ def export_results():
                 io.BytesIO(output.encode('utf-8')),
                 mimetype='application/json',
                 as_attachment=True,
-                download_name='test_results.json'
+                download_name=f'{base_filename}.json'
             )
 
     flash('Invalid export parameters', 'error')
@@ -1137,6 +1194,19 @@ def start_continue_recording():
             'continue_from_step': continue_from_step
         }
 
+        # Soft delete steps from n+1 onward before starting recording
+        steps_to_delete = ActionStep.query.filter(
+            ActionStep.test_case_id == test_case_id,
+            ActionStep.order > continue_from_step,
+            ActionStep.active == True
+        ).all()
+
+        for step in steps_to_delete:
+            step.active = False
+            step.updated_at = datetime.datetime.utcnow()
+
+        db.session.commit()
+
         # Start continuation recording using the refactored function
         result = run_async(start_continue_recording_async(steps_data, continue_from_step, target_url))
 
@@ -1146,6 +1216,7 @@ def start_continue_recording():
         return jsonify(result or {'status': 'success', 'message': 'Continuation recording started'})
 
     except Exception as e:
+        db.session.rollback()
         return jsonify({'status': 'error', 'error': f'Failed to start continuation recording: {str(e)}'}), 500
 
 @app.route('/api/record/continue/save', methods=['POST'])
@@ -1253,8 +1324,6 @@ def save_recorded_test():
             description=test_description or f"Recorded test for {test_suite.name}",
             original_file_path="recorded",
             test_file_path=filepath,
-            language="python",
-            status="generated",
             test_suite_id=suite_id
         )
 
@@ -1989,6 +2058,250 @@ def update_test_steps(case_id):
             'status': 'success',
             'message': 'Test steps updated successfully'
         })
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'status': 'error', 'error': str(e)}), 500
+
+@app.route('/api/test-case/<int:case_id>/update-steps-enhanced', methods=['POST'])
+def update_test_steps_enhanced(case_id):
+    """Update test case steps with enhanced data including action, description, selector."""
+    try:
+        test_case = TestCase.query.get_or_404(case_id)
+        data = request.get_json()
+
+        if not data or 'steps' not in data:
+            return jsonify({'status': 'error', 'error': 'No step data provided'}), 400
+
+        # Update each step with enhanced data
+        for step_data in data['steps']:
+            step_id = step_data.get('id')
+            if step_id:
+                step = ActionStep.query.get(step_id)
+                if step and step.test_case_id == test_case.id:
+                    step.action = step_data.get('action', step.action)
+                    step.description = step_data.get('description', step.description)
+                    step.selector = step_data.get('selector', step.selector)
+                    step.value = step_data.get('value', step.value)
+                    step.updated_at = datetime.datetime.utcnow()
+
+        db.session.commit()
+
+        # Regenerate the test file with updated steps
+        regenerate_test_file(test_case.id)
+
+        return jsonify({'status': 'success', 'message': 'Test steps updated successfully'})
+
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'status': 'error', 'error': str(e)}), 500
+
+@app.route('/api/test-case/<int:case_id>/update-metadata', methods=['POST'])
+def update_test_case_metadata(case_id):
+    """Update test case name and description."""
+    try:
+        test_case = TestCase.query.get_or_404(case_id)
+        data = request.get_json()
+
+        if not data:
+            return jsonify({'status': 'error', 'error': 'No data provided'}), 400
+
+        # Update metadata
+        if 'name' in data:
+            test_case.name = data['name']
+        if 'description' in data:
+            test_case.description = data['description']
+
+        test_case.updated_at = datetime.datetime.utcnow()
+        db.session.commit()
+
+        return jsonify({'status': 'success', 'message': 'Test case metadata updated successfully'})
+
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'status': 'error', 'error': str(e)}), 500
+
+@app.route('/api/test-case/<int:case_id>/step/<int:step_id>/delete', methods=['DELETE'])
+def delete_test_step(case_id, step_id):
+    """Delete a specific test step."""
+    try:
+        test_case = TestCase.query.get_or_404(case_id)
+        step = ActionStep.query.get_or_404(step_id)
+
+        # Verify the step belongs to this test case
+        if step.test_case_id != test_case.id:
+            return jsonify({'status': 'error', 'error': 'Step does not belong to this test case'}), 400
+
+        # Soft delete the step
+        step.active = False
+        step.updated_at = datetime.datetime.utcnow()
+        db.session.commit()
+
+        # Regenerate the test file
+        regenerate_test_file(test_case.id)
+
+        return jsonify({'status': 'success', 'message': 'Step deleted successfully'})
+
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'status': 'error', 'error': str(e)}), 500
+
+@app.route('/api/test-case/<int:case_id>/add-step', methods=['POST'])
+def add_test_step(case_id):
+    """Add a new test step."""
+    try:
+        test_case = TestCase.query.get_or_404(case_id)
+        data = request.get_json()
+
+        if not data or not data.get('action'):
+            return jsonify({'status': 'error', 'error': 'Action is required'}), 400
+
+        # Determine the order for the new step
+        position = data.get('position', 'end')
+        if position == 'beginning':
+            # Shift all existing steps down
+            existing_steps = ActionStep.query.filter_by(test_case_id=case_id, active=True).all()
+            for step in existing_steps:
+                step.order += 1
+                step.updated_at = datetime.datetime.utcnow()
+            new_order = 0
+        else:  # position == 'end'
+            max_order = db.session.query(db.func.max(ActionStep.order)).filter_by(
+                test_case_id=case_id, active=True
+            ).scalar() or -1
+            new_order = max_order + 1
+
+        # Create the new step
+        new_step = ActionStep(
+            action=data['action'],
+            description=data.get('description', ''),
+            selector=data.get('selector', ''),
+            value=data.get('value', ''),
+            order=new_order,
+            test_case_id=case_id
+        )
+        db.session.add(new_step)
+        db.session.commit()
+
+        # Regenerate the test file
+        regenerate_test_file(test_case.id)
+
+        return jsonify({'status': 'success', 'message': 'Step added successfully'})
+
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'status': 'error', 'error': str(e)}), 500
+
+@app.route('/api/test-suites', methods=['GET'])
+def get_test_suites():
+    """Get all test suites for import functionality."""
+    try:
+        test_suites = TestSuite.query.filter_by(active=True).all()
+        return jsonify({
+            'status': 'success',
+            'test_suites': [{'id': suite.id, 'name': suite.name} for suite in test_suites]
+        })
+    except Exception as e:
+        return jsonify({'status': 'error', 'error': str(e)}), 500
+
+@app.route('/api/test-suite/<int:suite_id>/test-cases', methods=['GET'])
+def get_test_cases_by_suite(suite_id):
+    """Get all test cases for a specific test suite."""
+    try:
+        test_cases = TestCase.query.filter_by(test_suite_id=suite_id, active=True).all()
+        return jsonify({
+            'status': 'success',
+            'test_cases': [{'id': case.id, 'name': case.name} for case in test_cases]
+        })
+    except Exception as e:
+        return jsonify({'status': 'error', 'error': str(e)}), 500
+
+@app.route('/api/test-case/<int:case_id>/steps', methods=['GET'])
+def get_test_case_steps(case_id):
+    """Get all steps for a specific test case."""
+    try:
+        steps = ActionStep.query.filter_by(test_case_id=case_id, active=True).order_by(ActionStep.order).all()
+        return jsonify({
+            'status': 'success',
+            'steps': [{
+                'id': step.id,
+                'action': step.action,
+                'description': step.description,
+                'selector': step.selector,
+                'value': step.value,
+                'order': step.order
+            } for step in steps]
+        })
+    except Exception as e:
+        return jsonify({'status': 'error', 'error': str(e)}), 500
+
+@app.route('/api/test-case/<int:case_id>/import', methods=['POST'])
+def import_test_case_steps(case_id):
+    """Import steps from another test case."""
+    try:
+        target_test_case = TestCase.query.get_or_404(case_id)
+        data = request.get_json()
+
+        if not data or not data.get('source_test_case_id'):
+            return jsonify({'status': 'error', 'error': 'Source test case ID is required'}), 400
+
+        source_test_case_id = data['source_test_case_id']
+        position = data.get('position', 'end')
+
+        # Get source steps
+        source_steps = ActionStep.query.filter_by(
+            test_case_id=source_test_case_id,
+            active=True
+        ).order_by(ActionStep.order).all()
+
+        if not source_steps:
+            return jsonify({'status': 'error', 'error': 'No steps found in source test case'}), 400
+
+        # Handle different import positions
+        if position == 'replace':
+            # Soft delete all existing steps
+            existing_steps = ActionStep.query.filter_by(test_case_id=case_id, active=True).all()
+            for step in existing_steps:
+                step.active = False
+                step.updated_at = datetime.datetime.utcnow()
+            start_order = 0
+        elif position == 'beginning':
+            # Shift existing steps down
+            existing_steps = ActionStep.query.filter_by(test_case_id=case_id, active=True).all()
+            for step in existing_steps:
+                step.order += len(source_steps)
+                step.updated_at = datetime.datetime.utcnow()
+            start_order = 0
+        else:  # position == 'end'
+            max_order = db.session.query(db.func.max(ActionStep.order)).filter_by(
+                test_case_id=case_id, active=True
+            ).scalar() or -1
+            start_order = max_order + 1
+
+        # Import steps
+        imported_count = 0
+        for i, source_step in enumerate(source_steps):
+            new_step = ActionStep(
+                action=source_step.action,
+                description=source_step.description,
+                selector=source_step.selector,
+                value=source_step.value,
+                order=start_order + i,
+                test_case_id=case_id
+            )
+            db.session.add(new_step)
+            imported_count += 1
+
+        db.session.commit()
+
+        # Regenerate the test file
+        regenerate_test_file(case_id)
+
+        return jsonify({
+            'status': 'success',
+            'message': f'Successfully imported {imported_count} steps',
+            'imported_steps_count': imported_count
+        })
+
     except Exception as e:
         db.session.rollback()
         return jsonify({'status': 'error', 'error': str(e)}), 500

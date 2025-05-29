@@ -66,9 +66,24 @@
                         {{ export_form.include_details(class="form-check-input") }}
                         {{ export_form.include_details.label(class="form-check-label") }}
                     </div>
+
+                    <!-- Hidden fields to pass current filter values -->
+                    {{ export_form.date_from(type="hidden", id="export_date_from") }}
+                    {{ export_form.date_to(type="hidden", id="export_date_to") }}
+                    {{ export_form.project_id(type="hidden", id="export_project_id") }}
+                    {{ export_form.test_suite_id(type="hidden", id="export_test_suite_id") }}
+                    {{ export_form.status(type="hidden", id="export_status") }}
+
+                    <div class="mb-3">
+                        <small class="text-muted">
+                            <i class="bi bi-info-circle"></i>
+                            Export will include only the filtered results currently displayed.
+                        </small>
+                    </div>
+
                     <div class="d-grid">
                         <button type="submit" class="btn btn-success">
-                            <i class="bi bi-download"></i> Export Results
+                            <i class="bi bi-download"></i> Export Filtered Results
                         </button>
                     </div>
                 </form>
@@ -219,4 +234,67 @@
         </div>
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Function to sync filter values to export form
+    function syncFilterValues() {
+        // Get current filter values
+        const projectFilter = document.querySelector('#project');
+        const testSuiteFilter = document.querySelector('#test_suite_id');
+        const statusFilter = document.querySelector('#status');
+        const dateFromFilter = document.querySelector('#date_from');
+        const dateToFilter = document.querySelector('#date_to');
+
+        // Set export form hidden fields
+        if (projectFilter) {
+            document.querySelector('#export_project_id').value = projectFilter.value || '';
+        }
+        if (testSuiteFilter) {
+            document.querySelector('#export_test_suite_id').value = testSuiteFilter.value || '';
+        }
+        if (statusFilter) {
+            document.querySelector('#export_status').value = statusFilter.value || '';
+        }
+        if (dateFromFilter) {
+            document.querySelector('#export_date_from').value = dateFromFilter.value || '';
+        }
+        if (dateToFilter) {
+            document.querySelector('#export_date_to').value = dateToFilter.value || '';
+        }
+    }
+
+    // Sync values on page load
+    syncFilterValues();
+
+    // Sync values when filter form changes
+    const filterForm = document.querySelector('#filterForm');
+    if (filterForm) {
+        filterForm.addEventListener('change', syncFilterValues);
+    }
+
+    // Update export button text based on active filters
+    function updateExportButtonText() {
+        const hasFilters = document.querySelector('#date_from').value ||
+                          document.querySelector('#date_to').value ||
+                          (document.querySelector('#project').value && document.querySelector('#project').value !== '0') ||
+                          (document.querySelector('#test_suite_id').value && document.querySelector('#test_suite_id').value !== '0') ||
+                          document.querySelector('#status').value;
+
+        const exportButton = document.querySelector('#exportForm button[type="submit"]');
+        if (hasFilters) {
+            exportButton.innerHTML = '<i class="bi bi-download"></i> Export Filtered Results';
+        } else {
+            exportButton.innerHTML = '<i class="bi bi-download"></i> Export All Results';
+        }
+    }
+
+    // Update button text on page load and filter changes
+    updateExportButtonText();
+    const filterForm = document.querySelector('#filterForm');
+    if (filterForm) {
+        filterForm.addEventListener('change', updateExportButtonText);
+    }
+});
+</script>
 {% endblock %}
