@@ -136,9 +136,76 @@ class ActionTracker:
         return """
             (() => {
                 function getSelector(el) {
+                    // Priority 1: ID selector
                     if (el.id) return `#${el.id}`;
+
+                    // Priority 2: Name attribute
                     if (el.name) return `[name="${el.name}"]`;
-                    if (el.className) return `.${el.className.split(" ").join(".")}`;
+
+                    // Priority 3: Class selector (clean up classes)
+                    if (el.className && typeof el.className === 'string') {
+                        const classes = el.className.trim().split(/\\s+/).filter(cls => cls.length > 0);
+                        if (classes.length > 0) {
+                            return `.${classes.join(".")}`;
+                        }
+                    }
+
+                    // Priority 4: Data attributes
+                    for (let attr of el.attributes) {
+                        if (attr.name.startsWith('data-') && attr.value) {
+                            return `[${attr.name}="${attr.value}"]`;
+                        }
+                    }
+
+                    // Priority 5: Other unique attributes
+                    const uniqueAttrs = ['type', 'role', 'aria-label', 'title', 'placeholder'];
+                    for (let attrName of uniqueAttrs) {
+                        const attrValue = el.getAttribute(attrName);
+                        if (attrValue) {
+                            return `[${attrName}="${attrValue}"]`;
+                        }
+                    }
+
+                    // Priority 6: Text content for buttons, links, spans with short text
+                    if (['BUTTON', 'A', 'SPAN', 'LABEL'].includes(el.tagName)) {
+                        const text = el.textContent?.trim();
+                        if (text && text.length > 0 && text.length <= 50) {
+                            const escapedText = text.replace(/"/g, '\\\\"');
+                            return `${el.tagName.toLowerCase()}:contains("${escapedText}")`;
+                        }
+                    }
+
+                    // Priority 7: DOM hierarchy path
+                    function getDOMPath(element) {
+                        const path = [];
+                        let current = element;
+
+                        while (current && current.nodeType === Node.ELEMENT_NODE && current !== document.body) {
+                            let selector = current.tagName.toLowerCase();
+
+                            // Add index if there are siblings with same tag
+                            const siblings = Array.from(current.parentNode?.children || [])
+                                .filter(sibling => sibling.tagName === current.tagName);
+
+                            if (siblings.length > 1) {
+                                const index = siblings.indexOf(current) + 1;
+                                selector += `:nth-of-type(${index})`;
+                            }
+
+                            path.unshift(selector);
+                            current = current.parentNode;
+
+                            // Limit path depth to avoid overly long selectors
+                            if (path.length >= 5) break;
+                        }
+
+                        return path.join(' > ');
+                    }
+
+                    const domPath = getDOMPath(el);
+                    if (domPath) return domPath;
+
+                    // Fallback: Just tag name
                     return el.tagName.toLowerCase();
                 }
 
@@ -147,7 +214,13 @@ class ActionTracker:
                     window.recordAction({
                         action: "click",
                         selector: selector,
-                        timestamp: Date.now()
+                        timestamp: Date.now(),
+                        elementInfo: {
+                            tagName: e.target.tagName,
+                            id: e.target.id || null,
+                            className: e.target.className || null,
+                            textContent: e.target.textContent?.trim().substring(0, 100) || null
+                        }
                     });
                 }, true);
 
@@ -157,8 +230,33 @@ class ActionTracker:
                         action: "input",
                         selector: selector,
                         value: e.target.value,
-                        timestamp: Date.now()
+                        timestamp: Date.now(),
+                        elementInfo: {
+                            tagName: e.target.tagName,
+                            id: e.target.id || null,
+                            className: e.target.className || null,
+                            type: e.target.type || null
+                        }
                     });
+                }, true);
+
+                // Track additional interactions
+                document.addEventListener('change', e => {
+                    if (['SELECT', 'INPUT'].includes(e.target.tagName)) {
+                        const selector = getSelector(e.target);
+                        window.recordAction({
+                            action: e.target.tagName === 'SELECT' ? "select" : "change",
+                            selector: selector,
+                            value: e.target.value,
+                            timestamp: Date.now(),
+                            elementInfo: {
+                                tagName: e.target.tagName,
+                                id: e.target.id || null,
+                                className: e.target.className || null,
+                                type: e.target.type || null
+                            }
+                        });
+                    }
                 }, true);
             })();
         """
@@ -1055,6 +1153,121 @@ def api_test_run_results(run_id):
 def run_test_suite(suite_id):
     """Run a test suite by redirecting to create_test_run."""
     return redirect(url_for('create_test_run', suite_id=suite_id))
+
+# API Routes for Import Test Case functionality
+@app.route('/api/test-suites')
+def api_get_test_suites():
+    """Get all test suites for import functionality."""
+    try:
+        test_suites = TestSuite.query.join(Project).filter(TestSuite.active == True).all()
+        suites_data = []
+        for suite in test_suites:
+            suites_data.append({
+                'id': suite.id,
+                'name': suite.name,
+                'project_name': suite.project.name,
+                'description': suite.description
+            })
+        return jsonify({'test_suites': suites_data})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/test-suite/<int:suite_id>/test-cases')
+def api_get_test_cases(suite_id):
+    """Get all test cases for a specific test suite."""
+    try:
+        test_cases = TestCase.query.filter_by(test_suite_id=suite_id, active=True).all()
+        cases_data = []
+        for case in test_cases:
+            cases_data.append({
+                'id': case.id,
+                'name': case.name,
+                'description': case.description
+            })
+        return jsonify({'test_cases': cases_data})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/test-case/<int:case_id>/steps')
+def api_get_test_case_steps(case_id):
+    """Get all steps for a specific test case."""
+    try:
+        steps = ActionStep.query.filter_by(test_case_id=case_id, active=True).order_by(ActionStep.order).all()
+        steps_data = []
+        for step in steps:
+            steps_data.append({
+                'id': step.id,
+                'action': step.action,
+                'selector': step.selector,
+                'value': step.value,
+                'description': step.description,
+                'order': step.order
+            })
+        return jsonify({'steps': steps_data})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/test-suite/import-test-case', methods=['POST'])
+def api_import_test_case():
+    """Import a test case from one test suite to another."""
+    try:
+        data = request.get_json()
+        if not data:
+            return jsonify({'error': 'No data provided'}), 400
+
+        source_test_case_id = data.get('source_test_case_id')
+        target_test_suite_id = data.get('target_test_suite_id')
+        new_name = data.get('name', '').strip()
+        new_description = data.get('description', '').strip()
+
+        if not source_test_case_id or not target_test_suite_id or not new_name:
+            return jsonify({'error': 'Missing required fields'}), 400
+
+        # Get source test case
+        source_test_case = TestCase.query.get(source_test_case_id)
+        if not source_test_case:
+            return jsonify({'error': 'Source test case not found'}), 404
+
+        # Get target test suite
+        target_test_suite = TestSuite.query.get(target_test_suite_id)
+        if not target_test_suite:
+            return jsonify({'error': 'Target test suite not found'}), 404
+
+        # Create new test case
+        new_test_case = TestCase(
+            name=new_name,
+            description=new_description,
+            original_file_path=source_test_case.original_file_path,
+            test_file_path=f"imported_{source_test_case_id}_{new_name.replace(' ', '_').lower()}.py",
+            test_suite_id=target_test_suite_id
+        )
+        db.session.add(new_test_case)
+        db.session.flush()  # Get the ID
+
+        # Copy all steps from source test case
+        source_steps = ActionStep.query.filter_by(test_case_id=source_test_case_id, active=True).order_by(ActionStep.order).all()
+        for step in source_steps:
+            new_step = ActionStep(
+                action=step.action,
+                selector=step.selector,
+                value=step.value,
+                order=step.order,
+                description=step.description,
+                test_case_id=new_test_case.id
+            )
+            db.session.add(new_step)
+
+        db.session.commit()
+
+        return jsonify({
+            'status': 'success',
+            'message': f'Test case "{new_name}" imported successfully',
+            'new_test_case_id': new_test_case.id
+        })
+
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/api/record/start', methods=['POST'])
 def handle_start():
@@ -2110,11 +2323,33 @@ def update_test_case_metadata(case_id):
             test_case.name = data['name']
         if 'description' in data:
             test_case.description = data['description']
+        if 'test_suite_id' in data:
+            # Validate that the test suite exists
+            new_test_suite = TestSuite.query.get(data['test_suite_id'])
+            if not new_test_suite:
+                return jsonify({'status': 'error', 'error': 'Invalid test suite selected'}), 400
+            test_case.test_suite_id = data['test_suite_id']
 
         test_case.updated_at = datetime.datetime.utcnow()
         db.session.commit()
 
         return jsonify({'status': 'success', 'message': 'Test case metadata updated successfully'})
+
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'status': 'error', 'error': str(e)}), 500
+
+@app.route('/api/test-result/<int:result_id>', methods=['DELETE'])
+def delete_test_result(result_id):
+    """Hard delete a test result."""
+    try:
+        test_result = TestResult.query.get_or_404(result_id)
+
+        # Perform hard delete (not soft delete like other tables)
+        db.session.delete(test_result)
+        db.session.commit()
+
+        return jsonify({'status': 'success', 'message': 'Test result deleted successfully'})
 
     except Exception as e:
         db.session.rollback()
@@ -2722,31 +2957,105 @@ def execute_test_case_with_console(test_case_id, test_run_id, test_result_id):
                 })
 
         except Exception as e:
-            # Handle any unexpected errors
+            # Handle any unexpected errors including connection loss
             error_msg = str(e)
-            if test_case_id in test_event_queues:
-                test_event_queues[test_case_id].put({
-                    'type': 'console',
-                    'data': f"Unexpected error: {error_msg}",
-                    'level': 'error'
-                })
 
-                test_event_queues[test_case_id].put({
-                    'type': 'status',
-                    'data': 'failed'
-                })
+            # Check if this is a connection-related error
+            connection_errors = ['connection', 'socket', 'network', 'timeout', 'disconnected']
+            is_connection_error = any(err in error_msg.lower() for err in connection_errors)
+
+            if test_case_id in test_event_queues:
+                try:
+                    test_event_queues[test_case_id].put({
+                        'type': 'console',
+                        'data': f"{'Connection lost' if is_connection_error else 'Unexpected error'}: {error_msg}",
+                        'level': 'error'
+                    })
+
+                    test_event_queues[test_case_id].put({
+                        'type': 'status',
+                        'data': 'stopped' if is_connection_error else 'failed'
+                    })
+                except Exception:
+                    # If we can't even put to queue, connection is definitely lost
+                    is_connection_error = True
 
             # Update test result
-            if test_result:
-                test_result.status = "failed"
-                test_result.error_message = error_msg
-                test_result.end_time = datetime.datetime.utcnow()
-                db.session.commit()
+            try:
+                test_result = TestResult.query.get(test_result_id)
+                if test_result:
+                    test_result.status = "stopped" if is_connection_error else "failed"
+                    test_result.error_message = f"{'Connection to server lost during test execution' if is_connection_error else error_msg}"
+                    test_result.end_time = datetime.datetime.utcnow()
+                    db.session.commit()
+            except Exception as db_error:
+                print(f"Failed to update test result due to database error: {db_error}")
 
         finally:
-            # Mark test as not running
-            if test_case_id in test_execution_state:
-                test_execution_state[test_case_id]['running'] = False
+            # Mark test as not running and cleanup
+            try:
+                if test_case_id in test_execution_state:
+                    test_execution_state[test_case_id]['running'] = False
+
+                # Ensure test result is not left in running state
+                cleanup_running_test_result(test_result_id)
+            except Exception as cleanup_error:
+                print(f"Error during cleanup: {cleanup_error}")
+
+def cleanup_running_test_result(test_result_id):
+    """Ensure test result is not left in running state."""
+    try:
+        test_result = TestResult.query.get(test_result_id)
+        if test_result and test_result.status == "running":
+            # Check how long it's been running
+            if test_result.created_at:
+                time_diff = datetime.datetime.utcnow() - test_result.created_at
+                if time_diff.total_seconds() > 30:  # If running for more than 30 seconds without update
+                    test_result.status = "stopped"
+                    test_result.error_message = "Test execution stopped due to connection loss or timeout"
+                    test_result.end_time = datetime.datetime.utcnow()
+                    db.session.commit()
+                    print(f"Cleaned up stuck test result {test_result_id}")
+    except Exception as e:
+        print(f"Error cleaning up test result {test_result_id}: {e}")
+
+# Add periodic cleanup task
+def periodic_cleanup():
+    """Periodically clean up stuck test results."""
+    try:
+        # Find test results that have been running for too long
+        cutoff_time = datetime.datetime.utcnow() - datetime.timedelta(minutes=10)
+        stuck_results = TestResult.query.filter(
+            TestResult.status == "running",
+            TestResult.created_at < cutoff_time
+        ).all()
+
+        for result in stuck_results:
+            result.status = "stopped"
+            result.error_message = "Test execution stopped due to timeout"
+            result.end_time = datetime.datetime.utcnow()
+
+        if stuck_results:
+            db.session.commit()
+            print(f"Cleaned up {len(stuck_results)} stuck test results")
+
+    except Exception as e:
+        print(f"Error in periodic cleanup: {e}")
+
+# Schedule periodic cleanup (you might want to use a proper scheduler like APScheduler)
+import threading
+import time
+
+def cleanup_scheduler():
+    """Run periodic cleanup in background."""
+    while True:
+        time.sleep(300)  # Run every 5 minutes
+        with app.app_context():
+            periodic_cleanup()
+
+# Start cleanup scheduler in background thread
+cleanup_thread = threading.Thread(target=cleanup_scheduler, daemon=True)
+cleanup_thread.start()
 
 def execute_test_case(test_case_id, test_run_id, test_result_id):
     """Execute a single test case in a background thread."""

@@ -2,277 +2,569 @@
     {
         "action": "click",
         "selector": "#Username",
-        "timestamp": 1748496227537,
+        "timestamp": 1748500983517,
+        "elementInfo": {
+            "tagName": "INPUT",
+            "id": "Username",
+            "className": "form-control input-lg ng-tns-c813547932-0 ng-untouched ng-pristine ng-invalid",
+            "textContent": null
+        },
         "order": 1
     },
     {
         "action": "input",
         "selector": "#Username",
-        "value": "k",
-        "timestamp": 1748496228504,
+        "value": "K",
+        "timestamp": 1748500985528,
+        "elementInfo": {
+            "tagName": "INPUT",
+            "id": "Username",
+            "className": "form-control input-lg ng-tns-c813547932-0 ng-untouched ng-pristine ng-invalid",
+            "type": "text"
+        },
         "order": 2
     },
     {
         "action": "input",
         "selector": "#Username",
-        "value": "ku",
-        "timestamp": 1748496228701,
+        "value": "",
+        "timestamp": 1748500986344,
+        "elementInfo": {
+            "tagName": "INPUT",
+            "id": "Username",
+            "className": "form-control input-lg ng-tns-c813547932-0 ng-untouched ng-dirty ng-valid",
+            "type": "text"
+        },
         "order": 3
     },
     {
         "action": "input",
         "selector": "#Username",
-        "value": "kus",
-        "timestamp": 1748496228912,
+        "value": "k",
+        "timestamp": 1748500986828,
+        "elementInfo": {
+            "tagName": "INPUT",
+            "id": "Username",
+            "className": "form-control input-lg ng-tns-c813547932-0 ng-untouched ng-dirty ng-invalid",
+            "type": "text"
+        },
         "order": 4
     },
     {
         "action": "input",
         "selector": "#Username",
-        "value": "kush",
-        "timestamp": 1748496229264,
+        "value": "ku",
+        "timestamp": 1748500987077,
+        "elementInfo": {
+            "tagName": "INPUT",
+            "id": "Username",
+            "className": "form-control input-lg ng-tns-c813547932-0 ng-untouched ng-dirty ng-valid",
+            "type": "text"
+        },
         "order": 5
     },
     {
         "action": "input",
         "selector": "#Username",
-        "value": "kusha",
-        "timestamp": 1748496229428,
+        "value": "kus",
+        "timestamp": 1748500987493,
+        "elementInfo": {
+            "tagName": "INPUT",
+            "id": "Username",
+            "className": "form-control input-lg ng-tns-c813547932-0 ng-untouched ng-dirty ng-valid",
+            "type": "text"
+        },
         "order": 6
     },
     {
         "action": "input",
         "selector": "#Username",
-        "value": "kushal",
-        "timestamp": 1748496229670,
+        "value": "kush",
+        "timestamp": 1748500988391,
+        "elementInfo": {
+            "tagName": "INPUT",
+            "id": "Username",
+            "className": "form-control input-lg ng-tns-c813547932-0 ng-untouched ng-dirty ng-valid",
+            "type": "text"
+        },
         "order": 7
     },
     {
         "action": "input",
         "selector": "#Username",
-        "value": "kushal.",
-        "timestamp": 1748496230288,
+        "value": "kusha",
+        "timestamp": 1748500988530,
+        "elementInfo": {
+            "tagName": "INPUT",
+            "id": "Username",
+            "className": "form-control input-lg ng-tns-c813547932-0 ng-untouched ng-dirty ng-valid",
+            "type": "text"
+        },
         "order": 8
     },
     {
         "action": "input",
         "selector": "#Username",
-        "value": "kushal.j",
-        "timestamp": 1748496230629,
+        "value": "kushal",
+        "timestamp": 1748500989037,
+        "elementInfo": {
+            "tagName": "INPUT",
+            "id": "Username",
+            "className": "form-control input-lg ng-tns-c813547932-0 ng-untouched ng-dirty ng-valid",
+            "type": "text"
+        },
         "order": 9
     },
     {
         "action": "input",
         "selector": "#Username",
-        "value": "kushal.je",
-        "timestamp": 1748496230802,
+        "value": "kushal.",
+        "timestamp": 1748500989427,
+        "elementInfo": {
+            "tagName": "INPUT",
+            "id": "Username",
+            "className": "form-control input-lg ng-tns-c813547932-0 ng-untouched ng-dirty ng-valid",
+            "type": "text"
+        },
         "order": 10
     },
     {
         "action": "input",
         "selector": "#Username",
-        "value": "kushal.jet",
-        "timestamp": 1748496231066,
+        "value": "kushal.j",
+        "timestamp": 1748500990173,
+        "elementInfo": {
+            "tagName": "INPUT",
+            "id": "Username",
+            "className": "form-control input-lg ng-tns-c813547932-0 ng-untouched ng-dirty ng-valid",
+            "type": "text"
+        },
         "order": 11
     },
     {
         "action": "input",
         "selector": "#Username",
-        "value": "kushal.jett",
-        "timestamp": 1748496231250,
+        "value": "kushal.je",
+        "timestamp": 1748500990448,
+        "elementInfo": {
+            "tagName": "INPUT",
+            "id": "Username",
+            "className": "form-control input-lg ng-tns-c813547932-0 ng-untouched ng-dirty ng-valid",
+            "type": "text"
+        },
         "order": 12
     },
     {
         "action": "input",
         "selector": "#Username",
-        "value": "kushal.jetty",
-        "timestamp": 1748496231453,
+        "value": "kushal.jet",
+        "timestamp": 1748500990778,
+        "elementInfo": {
+            "tagName": "INPUT",
+            "id": "Username",
+            "className": "form-control input-lg ng-tns-c813547932-0 ng-untouched ng-dirty ng-valid",
+            "type": "text"
+        },
         "order": 13
     },
     {
         "action": "input",
         "selector": "#Username",
-        "value": "kushal.jetty@",
-        "timestamp": 1748496232852,
+        "value": "kushal.jett",
+        "timestamp": 1748500990991,
+        "elementInfo": {
+            "tagName": "INPUT",
+            "id": "Username",
+            "className": "form-control input-lg ng-tns-c813547932-0 ng-untouched ng-dirty ng-valid",
+            "type": "text"
+        },
         "order": 14
     },
     {
         "action": "input",
         "selector": "#Username",
-        "value": "kushal.jetty@t",
-        "timestamp": 1748496233306,
+        "value": "kushal.jetty",
+        "timestamp": 1748500992012,
+        "elementInfo": {
+            "tagName": "INPUT",
+            "id": "Username",
+            "className": "form-control input-lg ng-tns-c813547932-0 ng-untouched ng-dirty ng-valid",
+            "type": "text"
+        },
         "order": 15
     },
     {
         "action": "input",
         "selector": "#Username",
-        "value": "kushal.jetty@te",
-        "timestamp": 1748496233526,
+        "value": "kushal.jetty@",
+        "timestamp": 1748500993916,
+        "elementInfo": {
+            "tagName": "INPUT",
+            "id": "Username",
+            "className": "form-control input-lg ng-tns-c813547932-0 ng-untouched ng-dirty ng-valid",
+            "type": "text"
+        },
         "order": 16
     },
     {
         "action": "input",
         "selector": "#Username",
-        "value": "kushal.jetty@tea",
-        "timestamp": 1748496233819,
+        "value": "kushal.jetty@t",
+        "timestamp": 1748500994803,
+        "elementInfo": {
+            "tagName": "INPUT",
+            "id": "Username",
+            "className": "form-control input-lg ng-tns-c813547932-0 ng-untouched ng-dirty ng-valid",
+            "type": "text"
+        },
         "order": 17
     },
     {
         "action": "input",
         "selector": "#Username",
-        "value": "kushal.jetty@team",
-        "timestamp": 1748496234096,
+        "value": "kushal.jetty@te",
+        "timestamp": 1748500995878,
+        "elementInfo": {
+            "tagName": "INPUT",
+            "id": "Username",
+            "className": "form-control input-lg ng-tns-c813547932-0 ng-untouched ng-dirty ng-valid",
+            "type": "text"
+        },
         "order": 18
     },
     {
         "action": "input",
         "selector": "#Username",
-        "value": "kushal.jetty@teams",
-        "timestamp": 1748496234376,
+        "value": "kushal.jetty@tea",
+        "timestamp": 1748500996081,
+        "elementInfo": {
+            "tagName": "INPUT",
+            "id": "Username",
+            "className": "form-control input-lg ng-tns-c813547932-0 ng-untouched ng-dirty ng-valid",
+            "type": "text"
+        },
         "order": 19
     },
     {
         "action": "input",
         "selector": "#Username",
-        "value": "kushal.jetty@teamst",
-        "timestamp": 1748496234691,
+        "value": "kushal.jetty@team",
+        "timestamp": 1748500996781,
+        "elementInfo": {
+            "tagName": "INPUT",
+            "id": "Username",
+            "className": "form-control input-lg ng-tns-c813547932-0 ng-untouched ng-dirty ng-valid",
+            "type": "text"
+        },
         "order": 20
     },
     {
         "action": "input",
         "selector": "#Username",
-        "value": "kushal.jetty@teamstr",
-        "timestamp": 1748496234917,
+        "value": "kushal.jetty@teams",
+        "timestamp": 1748500996979,
+        "elementInfo": {
+            "tagName": "INPUT",
+            "id": "Username",
+            "className": "form-control input-lg ng-tns-c813547932-0 ng-untouched ng-dirty ng-valid",
+            "type": "text"
+        },
         "order": 21
     },
     {
         "action": "input",
         "selector": "#Username",
-        "value": "kushal.jetty@teamstre",
-        "timestamp": 1748496235120,
+        "value": "kushal.jetty@teamst",
+        "timestamp": 1748500997300,
+        "elementInfo": {
+            "tagName": "INPUT",
+            "id": "Username",
+            "className": "form-control input-lg ng-tns-c813547932-0 ng-untouched ng-dirty ng-valid",
+            "type": "text"
+        },
         "order": 22
     },
     {
         "action": "input",
         "selector": "#Username",
-        "value": "kushal.jetty@teamstrea",
-        "timestamp": 1748496235383,
+        "value": "kushal.jetty@teamstr",
+        "timestamp": 1748500997547,
+        "elementInfo": {
+            "tagName": "INPUT",
+            "id": "Username",
+            "className": "form-control input-lg ng-tns-c813547932-0 ng-untouched ng-dirty ng-valid",
+            "type": "text"
+        },
         "order": 23
     },
     {
         "action": "input",
         "selector": "#Username",
-        "value": "kushal.jetty@teamstream",
-        "timestamp": 1748496235668,
+        "value": "kushal.jetty@teamstre",
+        "timestamp": 1748500997810,
+        "elementInfo": {
+            "tagName": "INPUT",
+            "id": "Username",
+            "className": "form-control input-lg ng-tns-c813547932-0 ng-untouched ng-dirty ng-valid",
+            "type": "text"
+        },
         "order": 24
     },
     {
         "action": "input",
         "selector": "#Username",
-        "value": "kushal.jetty@teamstreamz",
-        "timestamp": 1748496235930,
+        "value": "kushal.jetty@teamstrea",
+        "timestamp": 1748500998102,
+        "elementInfo": {
+            "tagName": "INPUT",
+            "id": "Username",
+            "className": "form-control input-lg ng-tns-c813547932-0 ng-untouched ng-dirty ng-valid",
+            "type": "text"
+        },
         "order": 25
     },
     {
         "action": "input",
         "selector": "#Username",
-        "value": "kushal.jetty@teamstreamz.",
-        "timestamp": 1748496236648,
+        "value": "kushal.jetty@teamstream",
+        "timestamp": 1748500998366,
+        "elementInfo": {
+            "tagName": "INPUT",
+            "id": "Username",
+            "className": "form-control input-lg ng-tns-c813547932-0 ng-untouched ng-dirty ng-valid",
+            "type": "text"
+        },
         "order": 26
     },
     {
         "action": "input",
         "selector": "#Username",
-        "value": "kushal.jetty@teamstreamz.c",
-        "timestamp": 1748496236811,
+        "value": "kushal.jetty@teamstreamz",
+        "timestamp": 1748500998604,
+        "elementInfo": {
+            "tagName": "INPUT",
+            "id": "Username",
+            "className": "form-control input-lg ng-tns-c813547932-0 ng-untouched ng-dirty ng-valid",
+            "type": "text"
+        },
         "order": 27
     },
     {
         "action": "input",
         "selector": "#Username",
-        "value": "kushal.jetty@teamstreamz.co",
-        "timestamp": 1748496237031,
+        "value": "kushal.jetty@teamstreamz.",
+        "timestamp": 1748501001315,
+        "elementInfo": {
+            "tagName": "INPUT",
+            "id": "Username",
+            "className": "form-control input-lg ng-tns-c813547932-0 ng-untouched ng-dirty ng-valid",
+            "type": "text"
+        },
         "order": 28
     },
     {
         "action": "input",
         "selector": "#Username",
-        "value": "kushal.jetty@teamstreamz.com",
-        "timestamp": 1748496237306,
+        "value": "kushal.jetty@teamstreamz.c",
+        "timestamp": 1748501001474,
+        "elementInfo": {
+            "tagName": "INPUT",
+            "id": "Username",
+            "className": "form-control input-lg ng-tns-c813547932-0 ng-untouched ng-dirty ng-valid",
+            "type": "text"
+        },
         "order": 29
     },
     {
         "action": "input",
-        "selector": "#Password",
-        "value": "T",
-        "timestamp": 1748496239164,
+        "selector": "#Username",
+        "value": "kushal.jetty@teamstreamz.co",
+        "timestamp": 1748501001679,
+        "elementInfo": {
+            "tagName": "INPUT",
+            "id": "Username",
+            "className": "form-control input-lg ng-tns-c813547932-0 ng-untouched ng-dirty ng-valid",
+            "type": "text"
+        },
         "order": 30
     },
     {
         "action": "input",
-        "selector": "#Password",
-        "value": "Te",
-        "timestamp": 1748496239596,
+        "selector": "#Username",
+        "value": "kushal.jetty@teamstreamz.com",
+        "timestamp": 1748501001938,
+        "elementInfo": {
+            "tagName": "INPUT",
+            "id": "Username",
+            "className": "form-control input-lg ng-tns-c813547932-0 ng-untouched ng-dirty ng-valid",
+            "type": "text"
+        },
         "order": 31
     },
     {
-        "action": "input",
-        "selector": "#Password",
-        "value": "Tes",
-        "timestamp": 1748496240164,
+        "action": "change",
+        "selector": "#Username",
+        "value": "kushal.jetty@teamstreamz.com",
+        "timestamp": 1748501002653,
+        "elementInfo": {
+            "tagName": "INPUT",
+            "id": "Username",
+            "className": "form-control input-lg ng-tns-c813547932-0 ng-untouched ng-dirty ng-valid",
+            "type": "text"
+        },
         "order": 32
     },
     {
         "action": "input",
         "selector": "#Password",
-        "value": "Test",
-        "timestamp": 1748496240359,
+        "value": "T",
+        "timestamp": 1748501003854,
+        "elementInfo": {
+            "tagName": "INPUT",
+            "id": "Password",
+            "className": "form-control input-lg ng-tns-c813547932-0 ng-untouched ng-pristine ng-invalid",
+            "type": "password"
+        },
         "order": 33
     },
     {
         "action": "input",
         "selector": "#Password",
-        "value": "Test@",
-        "timestamp": 1748496240930,
+        "value": "Te",
+        "timestamp": 1748501004374,
+        "elementInfo": {
+            "tagName": "INPUT",
+            "id": "Password",
+            "className": "form-control input-lg ng-tns-c813547932-0 ng-untouched ng-dirty ng-valid",
+            "type": "password"
+        },
         "order": 34
     },
     {
         "action": "input",
         "selector": "#Password",
-        "value": "Test@1",
-        "timestamp": 1748496241406,
+        "value": "Tes",
+        "timestamp": 1748501004737,
+        "elementInfo": {
+            "tagName": "INPUT",
+            "id": "Password",
+            "className": "form-control input-lg ng-tns-c813547932-0 ng-untouched ng-dirty ng-valid",
+            "type": "password"
+        },
         "order": 35
     },
     {
         "action": "input",
         "selector": "#Password",
-        "value": "Test@12",
-        "timestamp": 1748496241737,
+        "value": "Test",
+        "timestamp": 1748501005156,
+        "elementInfo": {
+            "tagName": "INPUT",
+            "id": "Password",
+            "className": "form-control input-lg ng-tns-c813547932-0 ng-untouched ng-dirty ng-valid",
+            "type": "password"
+        },
         "order": 36
     },
     {
         "action": "input",
         "selector": "#Password",
-        "value": "Test@123",
-        "timestamp": 1748496242009,
+        "value": "Test@",
+        "timestamp": 1748501006085,
+        "elementInfo": {
+            "tagName": "INPUT",
+            "id": "Password",
+            "className": "form-control input-lg ng-tns-c813547932-0 ng-untouched ng-dirty ng-valid",
+            "type": "password"
+        },
         "order": 37
+    },
+    {
+        "action": "input",
+        "selector": "#Password",
+        "value": "Test@1",
+        "timestamp": 1748501006977,
+        "elementInfo": {
+            "tagName": "INPUT",
+            "id": "Password",
+            "className": "form-control input-lg ng-tns-c813547932-0 ng-untouched ng-dirty ng-valid",
+            "type": "password"
+        },
+        "order": 38
+    },
+    {
+        "action": "input",
+        "selector": "#Password",
+        "value": "Test@12",
+        "timestamp": 1748501007261,
+        "elementInfo": {
+            "tagName": "INPUT",
+            "id": "Password",
+            "className": "form-control input-lg ng-tns-c813547932-0 ng-untouched ng-dirty ng-valid",
+            "type": "password"
+        },
+        "order": 39
+    },
+    {
+        "action": "input",
+        "selector": "#Password",
+        "value": "Test@123",
+        "timestamp": 1748501007526,
+        "elementInfo": {
+            "tagName": "INPUT",
+            "id": "Password",
+            "className": "form-control input-lg ng-tns-c813547932-0 ng-untouched ng-dirty ng-valid",
+            "type": "password"
+        },
+        "order": 40
+    },
+    {
+        "action": "change",
+        "selector": "#Password",
+        "value": "Test@123",
+        "timestamp": 1748501009261,
+        "elementInfo": {
+            "tagName": "INPUT",
+            "id": "Password",
+            "className": "form-control input-lg ng-tns-c813547932-0 ng-untouched ng-dirty ng-valid",
+            "type": "password"
+        },
+        "order": 41
     },
     {
         "action": "click",
         "selector": ".btn.signin-btn.bg-primary.ng-tns-c813547932-0",
-        "timestamp": 1748496243730,
-        "order": 38
+        "timestamp": 1748501009406,
+        "elementInfo": {
+            "tagName": "BUTTON",
+            "id": null,
+            "className": "btn signin-btn bg-primary ng-tns-c813547932-0",
+            "textContent": "SIGN IN"
+        },
+        "order": 42
     },
     {
         "action": "click",
-        "selector": "span",
-        "timestamp": 1748496248385,
-        "order": 39
+        "selector": "span:contains(\"Content\")",
+        "timestamp": 1748501013376,
+        "elementInfo": {
+            "tagName": "SPAN",
+            "id": null,
+            "className": null,
+            "textContent": "Content"
+        },
+        "order": 43
     },
     {
         "action": "click",
-        "selector": "h5",
-        "timestamp": 1748496252821,
-        "order": 40
+        "selector": ".btn-ts.btn-ts-primary",
+        "timestamp": 1748501030776,
+        "elementInfo": {
+            "tagName": "BUTTON",
+            "id": null,
+            "className": "btn-ts btn-ts-primary",
+            "textContent": "Add Stream"
+        },
+        "order": 44
     }
 ]
