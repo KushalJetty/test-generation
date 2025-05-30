@@ -1,0 +1,6 @@
+# Dependency directories
+venv/
+
+**/__pycache__
+generated_tests/
+static/charts/

@@ -1,0 +1,21 @@
+{
+    "manifest_version": 2,
+    "name": "StreamzAI Test Recorder",
+    "version": "1.0",
+    "description": "Record browser actions for test case generation",
+    "permissions": [
+        "activeTab",
+        "https://test.teamstreamz.com/*"
+    ],
+    "content_scripts": [
+        {
+            "matches": ["https://test.teamstreamz.com/*"],
+            "js": ["js/recorder.js"],
+            "run_at": "document_end"
+        }
+    ],
+    "icons": {
+        "48": "icons/icon48.png",
+        "128": "icons/icon128.png"
+    }
+} 

@@ -1,0 +1,300 @@
+{% extends 'base.html' %}
+
+{% block title %}Reports - StreamzAI Test Generator{% endblock %}
+
+{% block header %}Test Reports{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Filter Results</h5>
+            </div>
+            <div class="card-body">
+                <form method="GET" action="{{ url_for('reports') }}" id="filterForm">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            {{ filter_form.project.label(class="form-label") }}
+                            {{ filter_form.project(class="form-select") }}
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            {{ filter_form.test_suite_id.label(class="form-label") }}
+                            {{ filter_form.test_suite_id(class="form-select") }}
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            {{ filter_form.status.label(class="form-label") }}
+                            {{ filter_form.status(class="form-select") }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            {{ filter_form.date_from.label(class="form-label") }}
+                            {{ filter_form.date_from(class="form-control", type="date") }}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            {{ filter_form.date_to.label(class="form-label") }}
+                            {{ filter_form.date_to(class="form-control", type="date") }}
+                        </div>
+                    </div>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-filter"></i> Apply Filters
+                        </button>
+                        <a href="{{ url_for('reports') }}" class="btn btn-outline-secondary">
+                            <i class="bi bi-x-circle"></i> Clear Filters
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Export Results</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('export_results') }}" id="exportForm">
+                    {{ export_form.hidden_tag() }}
+                    <div class="mb-3">
+                        {{ export_form.format.label(class="form-label") }}
+                        {{ export_form.format(class="form-select") }}
+                    </div>
+                    <div class="mb-3 form-check">
+                        {{ export_form.include_details(class="form-check-input") }}
+                        {{ export_form.include_details.label(class="form-check-label") }}
+                    </div>
+
+                    <!-- Hidden fields to pass current filter values -->
+                    {{ export_form.date_from(type="hidden", id="export_date_from") }}
+                    {{ export_form.date_to(type="hidden", id="export_date_to") }}
+                    {{ export_form.project_id(type="hidden", id="export_project_id") }}
+                    {{ export_form.test_suite_id(type="hidden", id="export_test_suite_id") }}
+                    {{ export_form.status(type="hidden", id="export_status") }}
+
+                    <div class="mb-3">
+                        <small class="text-muted">
+                            <i class="bi bi-info-circle"></i>
+                            Export will include only the filtered results currently displayed.
+                        </small>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-success">
+                            <i class="bi bi-download"></i> Export Filtered Results
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Results Summary</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="row text-center">
+                            <div class="col-md-3 mb-3">
+                                <div class="p-3 bg-light rounded">
+                                    <h3 class="text-primary">{{ summary.total }}</h3>
+                                    <p class="mb-0">Total</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <div class="p-3 bg-light rounded">
+                                    <h3 class="text-success">{{ summary.passed }}</h3>
+                                    <p class="mb-0">Passed</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <div class="p-3 bg-light rounded">
+                                    <h3 class="text-danger">{{ summary.failed }}</h3>
+                                    <p class="mb-0">Failed</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <div class="p-3 bg-light rounded">
+                                    <h3 class="text-warning">{{ summary.skipped + summary.error }}</h3>
+                                    <p class="mb-0">Other</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% if summary.total > 0 %}
+                        <div class="progress mt-3" style="height: 20px;">
+                            {% if summary.passed > 0 %}
+                            <div class="progress-bar bg-success" role="progressbar" style="width: {{ (summary.passed / summary.total * 100)|round }}%" aria-valuenow="{{ summary.passed }}" aria-valuemin="0" aria-valuemax="{{ summary.total }}">{{ summary.passed }}</div>
+                            {% endif %}
+                            {% if summary.failed > 0 %}
+                            <div class="progress-bar bg-danger" role="progressbar" style="width: {{ (summary.failed / summary.total * 100)|round }}%" aria-valuenow="{{ summary.failed }}" aria-valuemin="0" aria-valuemax="{{ summary.total }}">{{ summary.failed }}</div>
+                            {% endif %}
+                            {% if summary.skipped > 0 %}
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: {{ (summary.skipped / summary.total * 100)|round }}%" aria-valuenow="{{ summary.skipped }}" aria-valuemin="0" aria-valuemax="{{ summary.total }}">{{ summary.skipped }}</div>
+                            {% endif %}
+                            {% if summary.error > 0 %}
+                            <div class="progress-bar bg-secondary" role="progressbar" style="width: {{ (summary.error / summary.total * 100)|round }}%" aria-valuenow="{{ summary.error }}" aria-valuemin="0" aria-valuemax="{{ summary.total }}">{{ summary.error }}</div>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="col-md-4">
+                        {% if chart_path %}
+                        <img src="{{ url_for('static', filename=chart_path) }}" alt="Test Results Chart" class="img-fluid">
+                        {% else %}
+                        <div class="alert alert-info">
+                            <i class="bi bi-info-circle"></i> No chart available.
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Test Results</h5>
+            </div>
+            <div class="card-body">
+                {% if results %}
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Test Case</th>
+                                <th>Original File</th>
+                                <th>Language</th>
+                                <th>Status</th>
+                                <th>Execution Time</th>
+                                <th>Test Run</th>
+                                <th>Test Suite</th>
+                                <th>Project</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for result in results %}
+                            <tr>
+                                <td>{{ result.test_case.test_file_path }}</td>
+                                <td>{{ result.test_case.original_file_path }}</td>
+                                <td>{{ result.test_case.language }}</td>
+                                <td>
+                                    {% if result.status == 'passed' %}
+                                    <span class="badge bg-success">Passed</span>
+                                    {% elif result.status == 'failed' %}
+                                    <span class="badge bg-danger">Failed</span>
+                                    {% elif result.status == 'skipped' %}
+                                    <span class="badge bg-warning">Skipped</span>
+                                    {% elif result.status == 'error' %}
+                                    <span class="badge bg-secondary">Error</span>
+                                    {% else %}
+                                    <span class="badge bg-secondary">{{ result.status|capitalize }}</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ result.execution_time|round(3) if result.execution_time else 'N/A' }} s</td>
+                                <td>
+                                    <a href="{{ url_for('test_run_detail', run_id=result.test_run.id) }}">
+                                        {{ result.test_run.name }}
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="{{ url_for('test_suite_detail', suite_id=result.test_run.test_suite.id) }}">
+                                        {{ result.test_run.test_suite.name }}
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="{{ url_for('project_detail', project_id=result.test_run.test_suite.project.id) }}">
+                                        {{ result.test_run.test_suite.project.name }}
+                                    </a>
+                                </td>
+                                <td>{{ result.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="alert alert-info">
+                    <i class="bi bi-info-circle"></i> No test results found matching the filter criteria.
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Function to sync filter values to export form
+    function syncFilterValues() {
+        // Get current filter values
+        const projectFilter = document.querySelector('#project');
+        const testSuiteFilter = document.querySelector('#test_suite_id');
+        const statusFilter = document.querySelector('#status');
+        const dateFromFilter = document.querySelector('#date_from');
+        const dateToFilter = document.querySelector('#date_to');
+
+        // Set export form hidden fields
+        if (projectFilter) {
+            document.querySelector('#export_project_id').value = projectFilter.value || '';
+        }
+        if (testSuiteFilter) {
+            document.querySelector('#export_test_suite_id').value = testSuiteFilter.value || '';
+        }
+        if (statusFilter) {
+            document.querySelector('#export_status').value = statusFilter.value || '';
+        }
+        if (dateFromFilter) {
+            document.querySelector('#export_date_from').value = dateFromFilter.value || '';
+        }
+        if (dateToFilter) {
+            document.querySelector('#export_date_to').value = dateToFilter.value || '';
+        }
+    }
+
+    // Sync values on page load
+    syncFilterValues();
+
+    // Sync values when filter form changes
+    const filterForm = document.querySelector('#filterForm');
+    if (filterForm) {
+        filterForm.addEventListener('change', syncFilterValues);
+    }
+
+    // Update export button text based on active filters
+    function updateExportButtonText() {
+        const hasFilters = document.querySelector('#date_from').value ||
+                          document.querySelector('#date_to').value ||
+                          (document.querySelector('#project').value && document.querySelector('#project').value !== '0') ||
+                          (document.querySelector('#test_suite_id').value && document.querySelector('#test_suite_id').value !== '0') ||
+                          document.querySelector('#status').value;
+
+        const exportButton = document.querySelector('#exportForm button[type="submit"]');
+        if (hasFilters) {
+            exportButton.innerHTML = '<i class="bi bi-download"></i> Export Filtered Results';
+        } else {
+            exportButton.innerHTML = '<i class="bi bi-download"></i> Export All Results';
+        }
+    }
+
+    // Update button text on page load and filter changes
+    updateExportButtonText();
+    const filterForm = document.querySelector('#filterForm');
+    if (filterForm) {
+        filterForm.addEventListener('change', updateExportButtonText);
+    }
+});
+</script>
+{% endblock %}
