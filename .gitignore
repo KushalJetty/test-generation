@@ -6,3 +6,4 @@ generated_tests/
 static/charts/
 tests/
 instance/
+streamzai_generator.log
