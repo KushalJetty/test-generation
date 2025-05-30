@@ -1,6 +1,6 @@
 # StreamzAI Test Case Generator
 
-StreamzAI Test Case Generator is a powerful web application that automatically generates test cases for your project files using Google's Generative AI. It provides a user-friendly interface to manage projects, test suites, and test runs, with comprehensive reporting and visualization features.
+StreamzAI Test Case Generator is a powerful web application that generates test cases for your project files using Plawright Chromium Window. It provides a user-friendly interface to manage projects, test suites, and test runs, with comprehensive reporting and visualization features.
 
 ## Features
 
@@ -21,20 +21,26 @@ StreamzAI Test Case Generator is a powerful web application that automatically g
 ```bash
 pip install -r requirements.txt
 ```
+After installing all the dependencies install playwright chrome engines if you face any errors else not required to run the below command
+```bash
+playwright install
+```
 
 ## Environment Setup
 
-This application requires a Google AI API key to generate test cases. You can set it as an environment variable:
-
+This application is configured on python version 3.12.7
+create virtual environment using conda
 ```bash
 # On Windows
-set GOOGLE_API_KEY=your_google_api_key
+conda create -p venv python == 3.12.7
 
-# On macOS/Linux
-export GOOGLE_API_KEY=your_google_api_key
+```
+```bash
+# Activate venv using
+conda activate venv/
 ```
 
-Alternatively, you can provide it directly when running the application.
+
 
 ## Running the Application
 
@@ -92,36 +98,27 @@ The reports section provides visualizations and statistics about your test runs,
 
 You can also export test results to various formats for further analysis.
 
-## Command Line Usage
-
-In addition to the web interface, you can also use the command-line tool to generate test cases:
-
-```bash
-python streamzai_test_generator.py /path/to/your/project --api-key your_google_api_key
-```
-
-### Command Line Arguments
-
-- `project_path`: Path to the project directory (required)
-- `--api-key`: Google AI API key (if not set in environment variable)
-- `--verbose`, `-v`: Enable verbose logging
 
 ## Supported File Extensions
 
 - Python (.py)
-- JavaScript (.js)
-- TypeScript (.ts)
-- Java (.java)
-- C (.c)
-- C++ (.cpp)
-- C# (.cs)
-- Go (.go)
-- Ruby (.rb)
-- PHP (.php)
 
 ## Example Output
 
-The generator creates test files that mirror your project structure, along with a summary file containing information about the test generation process.
+```bash
+from playwright.async_api import async_playwright
+import asyncio
+
+async def test_recorded_actions():
+    async with async_playwright() as p:
+        browser = await p.chromium.launch(headless=False)
+        page = await browser.new_page()
+        await page.goto('https://www.wikipedia.org')
+        await page.click('main > nav:nth-of-type(1) > div:nth-of-type(1) > a > strong')
+        await page.click('.cdx-button.cdx-button--action-default.cdx-button--weight-normal.cdx-button--size-medium.cdx-button--framed.cdx-search-input__end-button')
+        await browser.close()
+asyncio.run(test_recorded_actions())
+```
 
 ## License
 
