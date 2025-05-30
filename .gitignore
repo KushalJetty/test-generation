@@ -1,2 +1,5 @@
-__pycache__/
+# Dependency directories
+venv/
+
+**/__pycache__
 generated_tests/
