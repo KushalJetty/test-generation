@@ -658,3 +658,26 @@ def serve_upload(filename):
 @test_runner.route('/reports/<path:filename>')
 def serve_report(filename):
     return send_from_directory(os.path.join('test_runner', 'reports'), filename) 
+
+@test_runner.route('/api/record/save', methods=['POST'])
+def save_recorded_test_case():
+    try:
+        data = request.get_json()
+        if not data or 'test_suite_id' not in data or 'test_case_name' not in data or 'steps' not in data:
+            return jsonify({'error': 'Missing required fields'}), 400
+
+        test_suite_id = str(data['test_suite_id'])
+        test_case_name = data['test_case_name']
+        steps = data['steps']
+
+        # Save the recorded steps as a JSON file in generated_tests/<suite_id>/recorded/
+        save_dir = os.path.join('generated_tests', test_suite_id, 'recorded')
+        os.makedirs(save_dir, exist_ok=True)
+        filename = f"{test_case_name.replace(' ', '_')}_input.json"
+        file_path = os.path.join(save_dir, filename)
+        with open(file_path, 'w', encoding='utf-8') as f:
+            json.dump({'test_suite_id': test_suite_id, 'test_case_name': test_case_name, 'steps': steps}, f, indent=2)
+
+        return jsonify({'success': True, 'message': 'Test case saved successfully', 'file': file_path})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500

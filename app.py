@@ -32,12 +32,37 @@ from test_runner.test_execution.reporter import TestReporter, generate_report
 # Initialize Flask app
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'streamzai-secret-key')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///streamzai.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///streamzai_new.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
+    'pool_timeout': 20,
+    'pool_recycle': -1,
+    'pool_pre_ping': True
+}
+
+# Configure logging
+import logging
+logging.basicConfig(level=logging.INFO)
+app.logger.setLevel(logging.INFO)
 
 # Initialize database
 db.init_app(app)
 migrate = Migrate(app, db)
+
+# Configure SQLite for better concurrency
+from sqlalchemy import event
+from sqlalchemy.engine import Engine
+import sqlite3
+
+@event.listens_for(Engine, "connect")
+def set_sqlite_pragma(dbapi_connection, connection_record):
+    if isinstance(dbapi_connection, sqlite3.Connection):
+        cursor = dbapi_connection.cursor()
+        # Set timeout for database locks
+        cursor.execute("PRAGMA busy_timeout=30000")
+        # Optimize for performance
+        cursor.execute("PRAGMA synchronous=NORMAL")
+        cursor.close()
 app.config['UPLOAD_FOLDER'] = 'uploads'
 app.config['SCREENSHOTS_FOLDER'] = 'static/screenshots'
 app.config['REPORTS_FOLDER'] = 'reports'
@@ -749,24 +774,6 @@ def create_test_suite(project_id=None):
             db.session.add(test_suite)
             db.session.commit()
 
-            # Initialize test generator
-            generator = StreamzAITestGenerator()
-
-            # Generate test cases
-            results = generator.generate_tests(project.path, os.path.join('generated_tests', str(test_suite.id)))
-
-            # Create test cases in database
-            for test_file in results.get('test_files', []):
-                if test_file['status'] == 'success':
-                    test_case = TestCase(
-                        name=os.path.basename(test_file['test_file']),
-                        description=f"Generated from {test_file['original_file']}",
-                        test_file_path=test_file['test_file'],
-                        test_suite_id=test_suite.id
-                    )
-                    db.session.add(test_case)
-
-            db.session.commit()
             flash('Test suite created successfully!', 'success')
             return redirect(url_for('test_suites'))
 
@@ -1504,55 +1511,111 @@ def save_continued_recording():
 def save_recorded_test():
     """Save a recorded test as a test case in the database."""
     try:
+        # Add detailed logging for debugging
+        app.logger.info("Received save request")
+
         data = request.get_json()
         if not data:
+            app.logger.error("No data provided in request")
             return jsonify({'error': 'No data provided'}), 400
+
+        app.logger.info(f"Request data keys: {list(data.keys())}")
 
         suite_id = data.get('suite_id')
         code = data.get('code')
         test_name = data.get('name', f"Recorded Test {datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}")
         test_description = data.get('description', '')
 
-        if not suite_id or not code:
-            return jsonify({'error': 'Missing required fields (suite_id, code)'}), 400
+        if not suite_id:
+            app.logger.error("Missing suite_id")
+            return jsonify({'error': 'Missing suite_id'}), 400
+
+        if not code:
+            app.logger.error("Missing code")
+            return jsonify({'error': 'Missing test code'}), 400
+
+        app.logger.info(f"Saving test case: {test_name} for suite: {suite_id}")
 
         # Get the test suite
-        test_suite = TestSuite.query.get_or_404(suite_id)
+        test_suite = TestSuite.query.filter_by(id=suite_id, active=True).first()
+        if not test_suite:
+            app.logger.error(f"Test suite not found: {suite_id}")
+            return jsonify({'error': f'Test suite with ID {suite_id} not found'}), 404
 
         # Create test file directory if it doesn't exist
         test_dir = os.path.join('generated_tests', str(suite_id), 'recorded')
         os.makedirs(test_dir, exist_ok=True)
+        app.logger.info(f"Created directory: {test_dir}")
 
         # Generate a unique filename
-        filename = f"{test_name.replace(' ', '_').lower()}.py"
+        safe_name = "".join(c for c in test_name if c.isalnum() or c in (' ', '-', '_')).rstrip()
+        filename = f"{safe_name.replace(' ', '_').lower()}.py"
         filepath = os.path.join(test_dir, filename)
 
+        # Ensure unique filename
+        counter = 1
+        original_filepath = filepath
+        while os.path.exists(filepath):
+            name_part = os.path.splitext(original_filepath)[0]
+            filepath = f"{name_part}_{counter}.py"
+            counter += 1
+
+        app.logger.info(f"Writing test file: {filepath}")
+
         # Write the code to the file
-        with open(filepath, 'w') as f:
-            f.write(code)
+        try:
+            with open(filepath, 'w', encoding='utf-8') as f:
+                f.write(code)
+        except Exception as file_error:
+            app.logger.error(f"Error writing file: {str(file_error)}")
+            return jsonify({'error': f'Failed to write test file: {str(file_error)}'}), 500
 
-        # Create a new test case in the database
-        test_case = TestCase(
-            name=test_name,
-            description=test_description or f"Recorded test for {test_suite.name}",
-            original_file_path="recorded",
-            test_file_path=filepath,
-            test_suite_id=suite_id
-        )
+        # Create a new test case in the database with retry logic
+        max_retries = 3
+        retry_count = 0
 
-        db.session.add(test_case)
-        db.session.commit()
+        while retry_count < max_retries:
+            try:
+                test_case = TestCase(
+                    name=test_name,
+                    description=test_description or f"Recorded test for {test_suite.name}",
+                    original_file_path=filepath,  # Use the actual file path instead of "recorded"
+                    test_file_path=filepath,
+                    test_suite_id=suite_id
+                )
 
-        return jsonify({
-            'status': 'success',
-            'message': 'Test case saved successfully',
-            'test_case_id': test_case.id,
-            'test_file': filepath
-        })
+                db.session.add(test_case)
+                db.session.flush()  # Get the ID without committing
+
+                app.logger.info(f"Created test case with ID: {test_case.id}")
+
+                db.session.commit()
+                app.logger.info("Database transaction committed successfully")
+
+                return jsonify({
+                    'status': 'success',
+                    'message': 'Test case saved successfully',
+                    'test_case_id': test_case.id,
+                    'test_file': filepath
+                })
+
+            except Exception as db_error:
+                retry_count += 1
+                app.logger.error(f"Database error (attempt {retry_count}/{max_retries}): {str(db_error)}")
+                db.session.rollback()
+
+                # If it's a database lock error and we have retries left, wait and try again
+                if "database is locked" in str(db_error).lower() and retry_count < max_retries:
+                    import time
+                    time.sleep(0.5 * retry_count)  # Exponential backoff
+                    continue
+                else:
+                    return jsonify({'error': f'Database error after {retry_count} attempts: {str(db_error)}'}), 500
 
     except Exception as e:
+        app.logger.error(f"Unexpected error in save_recorded_test: {str(e)}")
         db.session.rollback()
-        return jsonify({'error': str(e)}), 500
+        return jsonify({'error': f'Unexpected error: {str(e)}'}), 500
 
 async def clear_recording():
     global tracker
@@ -3053,9 +3116,9 @@ def cleanup_scheduler():
         with app.app_context():
             periodic_cleanup()
 
-# Start cleanup scheduler in background thread
-cleanup_thread = threading.Thread(target=cleanup_scheduler, daemon=True)
-cleanup_thread.start()
+# Start cleanup scheduler in background thread (disabled temporarily to resolve database lock issues)
+# cleanup_thread = threading.Thread(target=cleanup_scheduler, daemon=True)
+# cleanup_thread.start()
 
 def execute_test_case(test_case_id, test_run_id, test_result_id):
     """Execute a single test case in a background thread."""
@@ -3151,4 +3214,4 @@ cleanup_event_queues()
 
 # Main entry point
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=5000, use_reloader=False)

@@ -194,6 +194,13 @@ function setupRecorder(suiteId, options) {
             }
 
             try {
+                console.log('Attempting to save test case:', {
+                    suite_id: suiteId,
+                    name: testName,
+                    description: testDescription,
+                    codeLength: codeContent ? codeContent.length : 0
+                });
+
                 // Save to database
                 const response = await fetch('/api/record/save', {
                     method: 'POST',
@@ -208,7 +215,17 @@ function setupRecorder(suiteId, options) {
                     })
                 });
 
+                console.log('Response status:', response.status);
+                console.log('Response headers:', response.headers);
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error('HTTP error response:', errorText);
+                    throw new Error(`HTTP ${response.status}: ${errorText}`);
+                }
+
                 const saveResult = await response.json();
+                console.log('Save result:', saveResult);
 
                 if (saveResult.status === 'success') {
                     alert('Test case saved successfully!');
@@ -230,11 +247,29 @@ function setupRecorder(suiteId, options) {
                     // Automatically redirect to the test suite page
                     window.location.href = `/test-suite/${suiteId}`;
                 } else {
-                    alert(`Error saving test case: ${saveResult.error || 'Unknown error'}`);
+                    const errorMsg = saveResult.error || 'Unknown error';
+                    console.error('Save failed:', errorMsg);
+                    alert(`Error saving test case: ${errorMsg}`);
                 }
             } catch (err) {
                 console.error('Error saving file:', err);
-                alert('Error saving test case.');
+
+                // Provide more detailed error information
+                let errorMessage = 'Error saving test case.';
+                if (err.message) {
+                    errorMessage += ` Details: ${err.message}`;
+                }
+
+                // Check for specific error types
+                if (err.name === 'TypeError' && err.message.includes('fetch')) {
+                    errorMessage = 'Network error: Unable to connect to server. Please check your connection and try again.';
+                } else if (err.message.includes('HTTP 500')) {
+                    errorMessage = 'Server error: There was an internal server error. Please check the server logs.';
+                } else if (err.message.includes('HTTP 404')) {
+                    errorMessage = 'Error: The save endpoint was not found. Please check the server configuration.';
+                }
+
+                alert(errorMessage);
             }
         });
     });
