@@ -5,3 +5,4 @@ venv/
 generated_tests/
 static/charts/
 tests/
+instance/
