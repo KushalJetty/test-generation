@@ -136,6 +136,11 @@ class ActionTracker:
         self.new_steps = []  # Track only newly recorded steps
         self.recording_active = False
 
+        # Grouping mechanism for fill/type/input actions
+        self.action_buffer = {}  # selector -> action_data
+        self.buffer_timers = {}  # selector -> timer
+        self.buffer_timeout = 1.5  # seconds to wait before finalizing grouped action
+
     async def start_tracking(self):
         await self.page.expose_function("recordAction", self.record_action)
         await self.page.add_init_script(self.tracking_script())
@@ -145,6 +150,64 @@ class ActionTracker:
         if not self.recording_active:
             return
 
+        action_type = action.get('action', '').lower()
+        selector = action.get('selector', '')
+
+        # Handle grouping for fill/type/input actions
+        if action_type in ['fill', 'type', 'input'] and selector:
+            await self._handle_grouped_action(action)
+        else:
+            # For non-groupable actions (click, navigate, etc.), add immediately
+            await self._add_action_immediately(action)
+
+    async def _handle_grouped_action(self, action):
+        """Handle grouping of consecutive fill/type/input actions for the same selector."""
+        import asyncio
+
+        selector = action.get('selector', '')
+        action_type = action.get('action', '').lower()
+        value = action.get('value', '')
+
+        # Cancel existing timer for this selector if it exists
+        if selector in self.buffer_timers:
+            self.buffer_timers[selector].cancel()
+
+        # Update or create buffer entry for this selector
+        self.action_buffer[selector] = {
+            'action': action_type,
+            'selector': selector,
+            'value': value,
+            'timestamp': action.get('timestamp'),
+            'elementInfo': action.get('elementInfo')
+        }
+
+        # Set a timer to finalize this action after the timeout
+        self.buffer_timers[selector] = asyncio.create_task(
+            self._finalize_grouped_action_after_timeout(selector)
+        )
+
+    async def _finalize_grouped_action_after_timeout(self, selector):
+        """Finalize a grouped action after the timeout period."""
+        import asyncio
+
+        try:
+            await asyncio.sleep(self.buffer_timeout)
+
+            # If we reach here, the timeout expired, so finalize the action
+            if selector in self.action_buffer:
+                action_data = self.action_buffer.pop(selector)
+                await self._add_action_immediately(action_data)
+
+            # Clean up the timer reference
+            if selector in self.buffer_timers:
+                del self.buffer_timers[selector]
+
+        except asyncio.CancelledError:
+            # Timer was cancelled, which means a new action came in for this selector
+            pass
+
+    async def _add_action_immediately(self, action):
+        """Add an action to the steps list immediately."""
         # Add step order based on continuation point
         if self.continue_from_step is not None:
             action['order'] = self.continue_from_step + len(self.new_steps) + 1
@@ -160,6 +223,10 @@ class ActionTracker:
     def tracking_script(self):
         return """
             (() => {
+                // Input debouncing mechanism to group fill actions
+                const inputBuffers = new Map(); // element -> {timer, lastValue}
+                const INPUT_DEBOUNCE_DELAY = 1000; // 1 second delay to match backend timeout
+
                 function getSelector(el) {
                     // Priority 1: ID selector
                     if (el.id) return `#${el.id}`;
@@ -234,6 +301,21 @@ class ActionTracker:
                     return el.tagName.toLowerCase();
                 }
 
+                function recordInputAction(element, selector) {
+                    window.recordAction({
+                        action: "input",
+                        selector: selector,
+                        value: element.value,
+                        timestamp: Date.now(),
+                        elementInfo: {
+                            tagName: element.tagName,
+                            id: element.id || null,
+                            className: element.className || null,
+                            type: element.type || null
+                        }
+                    });
+                }
+
                 document.addEventListener('click', e => {
                     const selector = getSelector(e.target);
                     window.recordAction({
@@ -250,39 +332,63 @@ class ActionTracker:
                 }, true);
 
                 document.addEventListener('input', e => {
-                    const selector = getSelector(e.target);
-                    window.recordAction({
-                        action: "input",
-                        selector: selector,
-                        value: e.target.value,
-                        timestamp: Date.now(),
-                        elementInfo: {
-                            tagName: e.target.tagName,
-                            id: e.target.id || null,
-                            className: e.target.className || null,
-                            type: e.target.type || null
-                        }
+                    const element = e.target;
+                    const selector = getSelector(element);
+
+                    // Clear existing timer for this element
+                    if (inputBuffers.has(element)) {
+                        clearTimeout(inputBuffers.get(element).timer);
+                    }
+
+                    // Set new timer to record input after delay
+                    const timer = setTimeout(() => {
+                        recordInputAction(element, selector);
+                        inputBuffers.delete(element);
+                    }, INPUT_DEBOUNCE_DELAY);
+
+                    // Store timer and current value
+                    inputBuffers.set(element, {
+                        timer: timer,
+                        lastValue: element.value
                     });
                 }, true);
 
                 // Track additional interactions
                 document.addEventListener('change', e => {
                     if (['SELECT', 'INPUT'].includes(e.target.tagName)) {
-                        const selector = getSelector(e.target);
+                        const element = e.target;
+                        const selector = getSelector(element);
+
+                        // For change events, clear any pending input timer and record immediately
+                        if (inputBuffers.has(element)) {
+                            clearTimeout(inputBuffers.get(element).timer);
+                            inputBuffers.delete(element);
+                        }
+
                         window.recordAction({
-                            action: e.target.tagName === 'SELECT' ? "select" : "change",
+                            action: element.tagName === 'SELECT' ? "select" : "change",
                             selector: selector,
-                            value: e.target.value,
+                            value: element.value,
                             timestamp: Date.now(),
                             elementInfo: {
-                                tagName: e.target.tagName,
-                                id: e.target.id || null,
-                                className: e.target.className || null,
-                                type: e.target.type || null
+                                tagName: element.tagName,
+                                id: element.id || null,
+                                className: element.className || null,
+                                type: element.type || null
                             }
                         });
                     }
                 }, true);
+
+                // Flush all pending input actions when page is about to unload
+                window.addEventListener('beforeunload', () => {
+                    inputBuffers.forEach((buffer, element) => {
+                        clearTimeout(buffer.timer);
+                        const selector = getSelector(element);
+                        recordInputAction(element, selector);
+                    });
+                    inputBuffers.clear();
+                });
             })();
         """
 
@@ -314,9 +420,24 @@ class ActionTracker:
         """Get only the newly recorded steps."""
         return self.new_steps[:]
 
-    def stop_recording(self):
-        """Stop the recording process."""
+    async def stop_recording(self):
+        """Stop the recording process and finalize any pending grouped actions."""
         self.recording_active = False
+
+        # Finalize any pending grouped actions
+        await self._finalize_all_pending_actions()
+
+    async def _finalize_all_pending_actions(self):
+        """Finalize all pending grouped actions in the buffer."""
+        # Cancel all timers and finalize actions
+        for selector in list(self.buffer_timers.keys()):
+            if selector in self.buffer_timers:
+                self.buffer_timers[selector].cancel()
+                del self.buffer_timers[selector]
+
+            if selector in self.action_buffer:
+                action_data = self.action_buffer.pop(selector)
+                await self._add_action_immediately(action_data)
 
 def generate_code(steps):
     global recorded_url
@@ -1451,6 +1572,9 @@ def save_continued_recording():
         test_case_id = continuation_context['test_case_id']
         continue_from_step = continuation_context['continue_from_step']
 
+        # Finalize any pending grouped actions before getting new steps
+        run_async(tracker._finalize_all_pending_actions())
+
         # Get only the new steps
         new_steps = tracker.get_new_steps_only()
 
@@ -1475,12 +1599,15 @@ def save_continued_recording():
 
         # Add new steps to database
         for i, step_data in enumerate(new_steps):
+            # Generate meaningful description based on action type
+            description = _generate_step_description(step_data, i + 1)
+
             new_step = ActionStep(
                 action=step_data['action'],
                 selector=step_data.get('selector', ''),
                 value=step_data.get('value', ''),
                 order=continue_from_step + i + 1,
-                description=f"Continued recording step {i + 1}",
+                description=description,
                 test_case_id=test_case_id
             )
             db.session.add(new_step)
@@ -1506,6 +1633,25 @@ def save_continued_recording():
     except Exception as e:
         db.session.rollback()
         return jsonify({'error': str(e)}), 500
+
+def _generate_step_description(step_data, step_number):
+    """Generate a meaningful description for a step based on its action type."""
+    action = step_data.get('action', '').lower()
+    selector = step_data.get('selector', '')
+    value = step_data.get('value', '')
+
+    if action == 'click':
+        return f"Continued recording step {step_number}: Click on element '{selector}'"
+    elif action in ['fill', 'type', 'input']:
+        return f"Continued recording step {step_number}: Enter '{value}' into '{selector}'"
+    elif action == 'navigate':
+        return f"Continued recording step {step_number}: Navigate to '{value}'"
+    elif action == 'select':
+        return f"Continued recording step {step_number}: Select '{value}' from '{selector}'"
+    elif action == 'change':
+        return f"Continued recording step {step_number}: Change '{selector}' to '{value}'"
+    else:
+        return f"Continued recording step {step_number}: {action.title()} action"
 
 @app.route('/api/record/save', methods=['POST'])
 def save_recorded_test():
@@ -1703,6 +1849,9 @@ async def start_continue_recording_async(existing_steps, continue_from_step, tar
 
 async def stop_recording():
     global browser, playwright, tracker
+
+    # Stop the tracker and finalize any pending grouped actions
+    await tracker.stop_recording()
     tracker.save_steps()
 
     # For continuation recording, use combined steps
