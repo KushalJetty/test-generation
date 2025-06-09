@@ -1310,7 +1310,9 @@ def api_get_test_cases(suite_id):
             cases_data.append({
                 'id': case.id,
                 'name': case.name,
-                'description': case.description
+                'description': case.description,
+                'created_at': case.created_at.isoformat(),
+                'updated_at': case.updated_at.isoformat()
             })
         return jsonify({'test_cases': cases_data})
     except Exception as e:
@@ -2650,17 +2652,27 @@ def get_test_suites():
     except Exception as e:
         return jsonify({'status': 'error', 'error': str(e)}), 500
 
-@app.route('/api/test-suite/<int:suite_id>/test-cases', methods=['GET'])
-def get_test_cases_by_suite(suite_id):
-    """Get all test cases for a specific test suite."""
+@app.route('/api/test-suite/<int:suite_id>', methods=['GET'])
+def get_test_suite(suite_id):
+    """Get test suite information."""
     try:
-        test_cases = TestCase.query.filter_by(test_suite_id=suite_id, active=True).all()
+        test_suite = TestSuite.query.filter_by(id=suite_id, active=True).first()
+        if not test_suite:
+            return jsonify({'status': 'error', 'error': 'Test suite not found'}), 404
+
         return jsonify({
             'status': 'success',
-            'test_cases': [{'id': case.id, 'name': case.name} for case in test_cases]
+            'id': test_suite.id,
+            'name': test_suite.name,
+            'description': test_suite.description,
+            'project_id': test_suite.project_id,
+            'created_at': test_suite.created_at.isoformat(),
+            'updated_at': test_suite.updated_at.isoformat()
         })
     except Exception as e:
         return jsonify({'status': 'error', 'error': str(e)}), 500
+
+
 
 @app.route('/api/test-case/<int:case_id>/steps', methods=['GET'])
 def get_test_case_steps(case_id):

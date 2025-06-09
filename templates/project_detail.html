@@ -4,6 +4,11 @@
 
 {% block header %}Project: {{ project.name }}{% endblock %}
 
+{% block head %}
+<!-- Add test cases modal functionality -->
+<script src="{{ url_for('static', filename='js/test-cases-modal.js') }}"></script>
+{% endblock %}
+
 {% block extra_js %}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -28,8 +33,6 @@
         }
         {% endif %}
         {% endfor %}
-
-        // Run test buttons now use direct links to run_test_case page
     });
 </script>
 {% endblock %}
@@ -114,9 +117,13 @@
                                         <a href="{{ url_for('edit_test_suite', suite_id=test_suite.id) }}" class="btn btn-sm btn-primary">
                                             <i class="bi bi-pencil"></i>
                                         </a>
-                                        <a href="{{ url_for('run_test_suite', suite_id=test_suite.id) }}" class="btn btn-sm btn-success">
-                                            <i class="bi bi-play"></i>
-                                        </a>
+                                        <button type="button"
+                                                class="btn btn-sm btn-outline-success"
+                                                data-bs-toggle="tooltip"
+                                                title="View Test Cases"
+                                                onclick="openTestCasesModal('{{ test_suite.id }}', '{{ test_suite.name }}')">
+                                            <i class="bi bi-play-fill"></i>
+                                        </button>
                                         <button type="button"
                                                 class="btn btn-sm btn-danger"
                                                 data-bs-toggle="modal"
@@ -215,9 +222,13 @@
                                                     <a href="{{ url_for('test_case_detail', case_id=test_case.id) }}" class="btn btn-sm btn-info">
                                                         <i class="bi bi-eye"></i> View
                                                     </a>
-                                                    <a href="{{ url_for('run_test_case', case_id=test_case.id) }}" class="btn btn-sm btn-success">
-                                                        <i class="bi bi-play"></i> Run
-                                                    </a>
+                                                    <button type="button"
+                                                            class="btn btn-sm btn-outline-success"
+                                                            data-bs-toggle="tooltip"
+                                                            title="View Test Cases"
+                                                            onclick="openTestCasesModal('{{ test_suite.id }}', '{{ test_suite.name }}')">
+                                                        <i class="bi bi-play-fill"></i> Run
+                                                    </button>
                                                 </div>
                                             </td>
                                         </tr>
