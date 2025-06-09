@@ -10,6 +10,8 @@
 <!-- Add test runner scripts and styles -->
 <link rel="stylesheet" href="{{ url_for('static', filename='css/test-runner.css') }}">
 <script src="{{ url_for('static', filename='js/test-runner.js') }}" defer></script>
+<!-- Add import test case functionality -->
+<script src="{{ url_for('static', filename='js/import-test-case.js') }}" defer></script>
 {% endblock %}
 
 {% block content %}
@@ -29,7 +31,7 @@
                     <button type="button"
                             class="btn btn-sm btn-outline-secondary me-2"
                             data-bs-toggle="modal"
-                            data-bs-target="#importTestCaseModal"
+                            data-bs-target="#importTestCaseModal{{ test_suite.id }}"
                             title="Import Test Case">
                         <i class="bi bi-box-arrow-in-down"></i> Import Test Case
                     </button>
@@ -221,67 +223,10 @@
 {% include 'partials/record_modal.html' %}
 
 <!-- Import Test Case Modal -->
-<div class="modal fade" id="importTestCaseModal" tabindex="-1" aria-labelledby="importTestCaseModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="importTestCaseModalLabel">Import Test Case to {{ test_suite.name }}</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="alert alert-info">
-                    <i class="bi bi-info-circle"></i>
-                    <strong>Import Test Case:</strong> Select a test case from another test suite to import into this test suite.
-                </div>
+{% set import_modal_id = "importTestCaseModal" + test_suite.id|string %}
+{% set import_element_suffix = test_suite.id|string %}
+{% include 'partials/import_modal.html' %}
 
-                <form id="importTestCaseForm">
-                    <div class="mb-3">
-                        <label for="sourceTestSuite" class="form-label">Source Test Suite</label>
-                        <select class="form-select" id="sourceTestSuite" required>
-                            <option value="">Select a test suite...</option>
-                            <!-- Will be populated via AJAX -->
-                        </select>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="sourceTestCase" class="form-label">Source Test Case</label>
-                        <select class="form-select" id="sourceTestCase" required disabled>
-                            <option value="">Select a test case...</option>
-                            <!-- Will be populated via AJAX -->
-                        </select>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="newTestCaseName" class="form-label">New Test Case Name</label>
-                        <input type="text" class="form-control" id="newTestCaseName" placeholder="Enter name for the imported test case" required>
-                        <div class="form-text">The name for the new test case in this test suite</div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="newTestCaseDescription" class="form-label">Description (Optional)</label>
-                        <textarea class="form-control" id="newTestCaseDescription" rows="3" placeholder="Enter description for the imported test case"></textarea>
-                    </div>
-
-                    <div id="importPreview" class="mt-3" style="display: none;">
-                        <h6>Steps to Import:</h6>
-                        <div id="importStepsList" class="border rounded p-2 bg-light" style="max-height: 200px; overflow-y: auto;">
-                            <!-- Import preview will be displayed here -->
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" id="previewImportBtn" class="btn btn-info">
-                    <i class="bi bi-eye"></i> Preview
-                </button>
-                <button type="button" id="confirmImportBtn" class="btn btn-success" disabled>
-                    <i class="bi bi-box-arrow-in-down"></i> Import Test Case
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
 
 {% endblock %}
 
@@ -299,7 +244,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setupRecorder("{{ test_suite.id }}", {});
 
     // Setup import functionality
-    setupImportTestCase();
+    setupImportTestCase("{{ test_suite.id }}", {{ test_suite.id }});
 });
 </script>
 {% endblock %}
@@ -335,164 +280,7 @@ function deleteTestCase(testCaseId) {
     }
 }
 
-// Import Test Case functionality
-function setupImportTestCase() {
-    const sourceTestSuiteSelect = document.getElementById('sourceTestSuite');
-    const sourceTestCaseSelect = document.getElementById('sourceTestCase');
-    const previewImportBtn = document.getElementById('previewImportBtn');
-    const confirmImportBtn = document.getElementById('confirmImportBtn');
-    const importPreview = document.getElementById('importPreview');
-    const importStepsList = document.getElementById('importStepsList');
-    const newTestCaseName = document.getElementById('newTestCaseName');
 
-    // Load test suites when modal opens
-    document.getElementById('importTestCaseModal').addEventListener('show.bs.modal', function() {
-        loadTestSuites();
-    });
-
-    // Load test suites
-    function loadTestSuites() {
-        fetch('/api/test-suites')
-            .then(response => response.json())
-            .then(data => {
-                sourceTestSuiteSelect.innerHTML = '<option value="">Select a test suite...</option>';
-                data.test_suites.forEach(suite => {
-                    if (suite.id !== {{ test_suite.id }}) { // Exclude current test suite
-                        const option = document.createElement('option');
-                        option.value = suite.id;
-                        option.textContent = `${suite.name} (${suite.project_name})`;
-                        sourceTestSuiteSelect.appendChild(option);
-                    }
-                });
-            })
-            .catch(error => {
-                console.error('Error loading test suites:', error);
-                alert('Failed to load test suites');
-            });
-    }
-
-    // Load test cases when test suite is selected
-    sourceTestSuiteSelect.addEventListener('change', function() {
-        const suiteId = this.value;
-        sourceTestCaseSelect.innerHTML = '<option value="">Select a test case...</option>';
-        sourceTestCaseSelect.disabled = !suiteId;
-        importPreview.style.display = 'none';
-        confirmImportBtn.disabled = true;
-
-        if (suiteId) {
-            fetch(`/api/test-suite/${suiteId}/test-cases`)
-                .then(response => response.json())
-                .then(data => {
-                    data.test_cases.forEach(testCase => {
-                        const option = document.createElement('option');
-                        option.value = testCase.id;
-                        option.textContent = testCase.name;
-                        sourceTestCaseSelect.appendChild(option);
-                    });
-                })
-                .catch(error => {
-                    console.error('Error loading test cases:', error);
-                    alert('Failed to load test cases');
-                });
-        }
-    });
-
-    // Preview import
-    previewImportBtn.addEventListener('click', function() {
-        const sourceTestCaseId = sourceTestCaseSelect.value;
-        const testCaseName = newTestCaseName.value.trim();
-
-        if (!sourceTestCaseId) {
-            alert('Please select a test case to import');
-            return;
-        }
-
-        if (!testCaseName) {
-            alert('Please enter a name for the new test case');
-            return;
-        }
-
-        fetch(`/api/test-case/${sourceTestCaseId}/steps`)
-            .then(response => response.json())
-            .then(data => {
-                displayImportPreview(data.steps);
-                confirmImportBtn.disabled = false;
-            })
-            .catch(error => {
-                console.error('Error loading test case steps:', error);
-                alert('Failed to load test case steps');
-            });
-    });
-
-    // Display import preview
-    function displayImportPreview(steps) {
-        importStepsList.innerHTML = '';
-
-        if (steps.length === 0) {
-            importStepsList.innerHTML = '<p class="text-muted">No steps found in the selected test case.</p>';
-        } else {
-            steps.forEach((step, index) => {
-                const stepDiv = document.createElement('div');
-                stepDiv.className = 'border-bottom pb-2 mb-2';
-                stepDiv.innerHTML = `
-                    <div class="d-flex justify-content-between">
-                        <span><strong>Step ${index + 1}:</strong> ${step.action}</span>
-                        <small class="text-muted">${step.description || 'No description'}</small>
-                    </div>
-                    <div class="text-muted small">
-                        ${step.selector ? `Selector: ${step.selector}` : ''}
-                        ${step.value ? ` | Value: ${step.value}` : ''}
-                    </div>
-                `;
-                importStepsList.appendChild(stepDiv);
-            });
-        }
-
-        importPreview.style.display = 'block';
-    }
-
-    // Confirm import
-    confirmImportBtn.addEventListener('click', function() {
-        const sourceTestCaseId = sourceTestCaseSelect.value;
-        const testCaseName = newTestCaseName.value.trim();
-        const testCaseDescription = document.getElementById('newTestCaseDescription').value.trim();
-
-        if (!sourceTestCaseId || !testCaseName) {
-            alert('Please fill in all required fields');
-            return;
-        }
-
-        const importData = {
-            source_test_case_id: sourceTestCaseId,
-            name: testCaseName,
-            description: testCaseDescription,
-            target_test_suite_id: {{ test_suite.id }}
-        };
-
-        fetch('/api/test-suite/import-test-case', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(importData)
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success') {
-                alert('Test case imported successfully!');
-                // Close modal and reload page
-                bootstrap.Modal.getInstance(document.getElementById('importTestCaseModal')).hide();
-                window.location.reload();
-            } else {
-                alert(`Failed to import test case: ${data.error || 'Unknown error'}`);
-            }
-        })
-        .catch(error => {
-            console.error('Error importing test case:', error);
-            alert('An error occurred while importing the test case');
-        });
-    });
-}
 </script>
 
 <!-- Toast for loading indicator -->

@@ -1,0 +1,123 @@
+<!-- Import Test Case Modal Component -->
+<!--
+Parameters:
+- import_modal_id: Unique ID for the modal (required)
+- test_suite: Target test suite object (required)
+- import_element_suffix: Suffix for element IDs (optional, defaults to import_modal_id)
+-->
+
+{% set element_suffix = import_element_suffix or import_modal_id %}
+
+<div class="modal fade" id="{{ import_modal_id }}" tabindex="-1" aria-labelledby="{{ import_modal_id }}Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="{{ import_modal_id }}Label">
+                    <i class="bi bi-box-arrow-in-down"></i> Import Test Case to {{ test_suite.name }}
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-info">
+                    <i class="bi bi-info-circle"></i>
+                    <strong>Import Test Case:</strong> Select a test case from another test suite to import into this test suite.
+                </div>
+
+                <!-- Loading Indicator -->
+                <div id="loadingIndicator{{ element_suffix }}" class="text-center" style="display: none;">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-2">Loading data...</p>
+                </div>
+
+                <!-- Error Alert -->
+                <div id="errorAlert{{ element_suffix }}" class="alert alert-danger" style="display: none;">
+                    <i class="bi bi-exclamation-triangle"></i>
+                    <span id="errorMessage{{ element_suffix }}"></span>
+                </div>
+
+                <form id="importTestCaseForm{{ element_suffix }}">
+                    <div class="mb-3">
+                        <label for="sourceTestSuite{{ element_suffix }}" class="form-label">
+                            <i class="bi bi-collection"></i> Source Test Suite
+                        </label>
+                        <select class="form-select" id="sourceTestSuite{{ element_suffix }}" required>
+                            <option value="">Select a test suite...</option>
+                            <!-- Will be populated via AJAX -->
+                        </select>
+                        <div class="form-text">Choose the test suite containing the test case you want to import</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="sourceTestCase{{ element_suffix }}" class="form-label">
+                            <i class="bi bi-file-earmark-code"></i> Source Test Case
+                        </label>
+                        <select class="form-select" id="sourceTestCase{{ element_suffix }}" required disabled>
+                            <option value="">Select a test case...</option>
+                            <!-- Will be populated via AJAX -->
+                        </select>
+                        <div class="form-text">Choose the specific test case to import</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="newTestCaseName{{ element_suffix }}" class="form-label">
+                            <i class="bi bi-tag"></i> New Test Case Name <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" class="form-control" id="newTestCaseName{{ element_suffix }}" 
+                               placeholder="Enter name for the imported test case" required>
+                        <div class="form-text">The name for the new test case in this test suite</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="newTestCaseDescription{{ element_suffix }}" class="form-label">
+                            <i class="bi bi-card-text"></i> Description (Optional)
+                        </label>
+                        <textarea class="form-control" id="newTestCaseDescription{{ element_suffix }}" rows="3" 
+                                  placeholder="Enter description for the imported test case"></textarea>
+                    </div>
+
+                    <!-- Import Preview Section -->
+                    <div id="importPreview{{ element_suffix }}" class="mt-3" style="display: none;">
+                        <h6><i class="bi bi-eye"></i> Steps to Import:</h6>
+                        <div id="importStepsList{{ element_suffix }}" class="border rounded p-3 bg-light" 
+                             style="max-height: 250px; overflow-y: auto;">
+                            <!-- Import preview will be displayed here -->
+                        </div>
+                        <div class="mt-2">
+                            <small class="text-muted">
+                                <i class="bi bi-info-circle"></i> 
+                                These steps will be copied to the new test case
+                            </small>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="bi bi-x-circle"></i> Cancel
+                </button>
+                <button type="button" id="previewImportBtn{{ element_suffix }}" class="btn btn-info">
+                    <i class="bi bi-eye"></i> Preview
+                </button>
+                <button type="button" id="confirmImportBtn{{ element_suffix }}" class="btn btn-success" disabled>
+                    <i class="bi bi-box-arrow-in-down"></i> Import Test Case
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Success Toast -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="successToast{{ element_suffix }}" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <i class="bi bi-check-circle-fill text-success me-2"></i>
+            <strong class="me-auto">Success</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            Test case imported successfully!
+        </div>
+    </div>
+</div>
