@@ -2,83 +2,135 @@
     {
         "action": "navigate",
         "selector": null,
-        "value": "https://www.wikipedia.org/",
+        "value": "https://www.wikipedia.org",
         "order": 0,
-        "description": "Navigate to: https://www.wikipedia.org/"
+        "description": "Navigate to: https://www.wikipedia.org"
     },
     {
         "action": "click",
-        "selector": ".pure-button.pure-button-primary-progressive",
+        "selector": "main > nav:nth-of-type(1) > div:nth-of-type(1) > a > strong",
         "value": null,
         "order": 1,
-        "description": "Click on element: .pure-button.pure-button-primary-progressive"
-    },
-    {
-        "action": "click",
-        "selector": ".vector-toc-text",
-        "value": null,
-        "order": 2,
-        "description": "Click on element: .vector-toc-text"
-    },
-    {
-        "action": "click",
-        "selector": ".sprite.svg-search-icon",
-        "timestamp": 1749204340587,
-        "elementInfo": {
-            "tagName": "I",
-            "id": null,
-            "className": "sprite svg-search-icon",
-            "textContent": "Search"
-        },
-        "order": 3
+        "description": "Click on element: main > nav:nth-of-type(1) > div:nth-of-type(1) > a > strong"
     },
     {
         "action": "click",
         "selector": "#searchInput",
-        "timestamp": 1749204347736,
+        "value": null,
+        "order": 2,
+        "description": "Click on element: #searchInput"
+    },
+    {
+        "action": "click",
+        "selector": ".cdx-button.cdx-button--action-default.cdx-button--weight-normal.cdx-button--size-medium.cdx-button--framed.cdx-search-input__end-button",
+        "value": null,
+        "order": 3,
+        "description": "Click on element: .cdx-button.cdx-button--action-default.cdx-button--weight-normal.cdx-button--size-medium.cdx-button--framed.cdx-search-input__end-button"
+    },
+    {
+        "action": "fill",
+        "selector": "[name=\"search\"]",
+        "value": "kahgudbj",
+        "order": 4,
+        "description": "Enter 'kahgudbj' into [name=\"search\"]"
+    },
+    {
+        "action": "click",
+        "selector": "main > nav:nth-of-type(1) > div:nth-of-type(1) > a > strong",
+        "timestamp": 1749210767617,
+        "elementInfo": {
+            "tagName": "STRONG",
+            "id": null,
+            "className": null,
+            "textContent": "English"
+        },
+        "order": 5
+    },
+    {
+        "action": "click",
+        "selector": "#searchInput",
+        "timestamp": 1749210768348,
         "elementInfo": {
             "tagName": "INPUT",
             "id": "searchInput",
             "className": "cdx-text-input__input mw-searchInput",
             "textContent": null
         },
-        "order": 4
-    },
-    {
-        "action": "change",
-        "selector": "[name=\"search\"]",
-        "value": "hello",
-        "timestamp": 1749204349660,
-        "elementInfo": {
-            "tagName": "INPUT",
-            "id": null,
-            "className": "cdx-text-input__input cdx-text-input__input--has-value",
-            "type": "search"
-        },
-        "order": 5
+        "order": 6
     },
     {
         "action": "click",
         "selector": ".cdx-button.cdx-button--action-default.cdx-button--weight-normal.cdx-button--size-medium.cdx-button--framed.cdx-search-input__end-button",
-        "timestamp": 1749204349661,
+        "timestamp": 1749210768894,
         "elementInfo": {
             "tagName": "BUTTON",
             "id": null,
             "className": "cdx-button cdx-button--action-default cdx-button--weight-normal cdx-button--size-medium cdx-button--framed cdx-search-input__end-button",
             "textContent": "Search"
         },
-        "order": 6
+        "order": 7
+    },
+    {
+        "action": "change",
+        "selector": "#searchInput",
+        "value": "kahgudbj",
+        "timestamp": 1749210769875,
+        "elementInfo": {
+            "tagName": "INPUT",
+            "id": "searchInput",
+            "className": "cdx-text-input__input mw-searchInput",
+            "type": "search"
+        },
+        "order": 8
     },
     {
         "action": "click",
-        "selector": ".vector-toc-text",
-        "timestamp": 1749204351018,
+        "selector": "[name=\"search\"]",
+        "timestamp": 1749210781348,
         "elementInfo": {
-            "tagName": "DIV",
+            "tagName": "INPUT",
             "id": null,
-            "className": "vector-toc-text",
-            "textContent": "(Top)"
+            "className": "cdx-text-input__input cdx-text-input__input--has-value",
+            "textContent": null
         },
-        "order": 7
+        "order": 9
+    },
+    {
+        "action": "input",
+        "selector": "[name=\"search\"]",
+        "value": "",
+        "timestamp": 1749210783025,
+        "elementInfo": {
+            "tagName": "INPUT",
+            "id": null,
+            "className": "cdx-text-input__input",
+            "type": "search"
+        },
+        "order": 10
+    },
+    {
+        "action": "change",
+        "selector": "[name=\"search\"]",
+        "value": "kushal",
+        "timestamp": 1749210784859,
+        "elementInfo": {
+            "tagName": "INPUT",
+            "id": null,
+            "className": "cdx-text-input__input cdx-text-input__input--has-value",
+            "type": "search"
+        },
+        "order": 11
+    },
+    {
+        "action": "click",
+        "selector": ".cdx-button.cdx-button--action-default.cdx-button--weight-normal.cdx-button--size-medium.cdx-button--framed.cdx-search-input__end-button",
+        "timestamp": 1749210784860,
+        "elementInfo": {
+            "tagName": "BUTTON",
+            "id": null,
+            "className": "cdx-button cdx-button--action-default cdx-button--weight-normal cdx-button--size-medium cdx-button--framed cdx-search-input__end-button",
+            "textContent": "Search"
+        },
+        "order": 12
     }
 ]
