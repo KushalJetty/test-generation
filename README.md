@@ -1,4 +1,4 @@
-# StreamzAI Test Case Generator
+# StreamzAI Test Case Generator - Internship project
 
 StreamzAI Test Case Generator is a powerful web application that generates test cases for your project files using Plawright Chromium Window. It provides a user-friendly interface to manage projects, test suites, and test runs, with comprehensive reporting and visualization features.
 
